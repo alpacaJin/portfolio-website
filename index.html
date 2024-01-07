@@ -16,7 +16,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Klee+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Afacad" rel="stylesheet">
 
     <!-- Google Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
@@ -40,21 +40,33 @@
         }
     </style>
 
-    <!-- Board -->
+    <!--Lg, md, sm screens-->
     <style>
-        .board-container {
-            padding: 40px;
-            box-sizing: border-box;
-            min-height: 100vh;
+        @media (min-width: 992px) {
+            .pfp {
+                height: 100px;
+            }
         }
 
-        .board {
-            background-color: #2F3035;
-            height: 500px;
-            width: 100%;
-            padding: 40px;
-            border-radius: 10px;
+        @media (max-width: 991px) {
+            .pfp {
+                max-height: 90%;
+                height: 500px;
+            }
         }
+
+        @media (max-width: 414px) {
+            .pfp {
+                max-height: 90%;
+                height: 200px
+            }
+        }
+
+       .pfp {
+            height: auto;
+            border-radius: 40px;
+        }
+
     </style>
 </head>
 
@@ -62,9 +74,9 @@
     <!-- Header -->
     <div class="container-fluid px-3 mx-0 pt-2">
         <div class="row justify-content-evenly">
-            <div class="col-sm-1 col-md-1 col-lg-2 pt-2 text-center text-md-start" style="font-family: 'Klee One'; color: white; font-size: 1.3rem">Sandra Nguyen</div>
+            <div class="col-sm-1 col-md-1 col-lg-2 pt-2 text-center text-md-start" style="font-family: 'Afacad'; color: white; font-size: 1.3rem">Sandra Nguyen</div>
 
-            <div class="dropdown col-sm-1 col-md-1 col-lg-1 pt-2 text-center" style="font-family: 'Klee One'; color: white; font-size: 1.3rem">
+            <div class="dropdown col-sm-1 col-md-1 col-lg-1 pt-2 text-center" style="font-family: 'Afacad'; color: white; font-size: 1.3rem">
                 <button class="btn btn_orange dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Projects
                 </button>
@@ -73,31 +85,36 @@
                     <li><a class="dropdown-item" href="#">Hackathons</a></li>
                 </ul>
             </div>
-            <div class="col-sm-1 col-md-1 col-lg-1 pt-2 text-center" style="font-family: 'Klee One'; color: white; font-size: 1.3rem">Education</div>
-            <div class="col-sm-1 col-md-1 col-lg-1 pt-2 text-center" style="font-family: 'Klee One'; color: white; font-size: 1.3rem">Experience</div>
-            <div class="col-sm-1 col-md-1 col-lg-6 pt-2 text-center text-lg-end" style="font-family: 'Klee One'; color: white; font-size: 1.3rem">Contact Me</div>
+            <div class="col-sm-1 col-md-1 col-lg-1 pt-2 text-center" style="font-family: 'Afacad'; color: white; font-size: 1.3rem">Education</div>
+            <div class="col-sm-1 col-md-1 col-lg-1 pt-2 text-center" style="font-family: 'Afacad'; color: white; font-size: 1.3rem">Experience</div>
+            <div class="col-sm-1 col-md-1 col-lg-6 pt-2 text-center text-lg-end" style="font-family: 'Afacad'; color: white; font-size: 1.3rem">Contact Me</div>
         </div>
     </div>
 
     <!-- Sub Header -->
     <div class="container-fluid px-3 mx-0 pt-5">
-        <div class="row">
-            <div class="col-sm-3 col-md-3 col-lg-3 px-5 align-self-end text-center text-lg-start order-lg-1" style="font-family: 'Klee One'; color: white;">
+        <div class="row" style="padding-left: 10%; padding-right: 10%;">
+            <div class="col-sm-3 col-md-3 col-lg-3 px-0 align-self-end text-center text-lg-start" style="font-family: 'Afacad'; color: white;">
                 <span class="material-symbols-outlined">
                     arrow_downward_alt
                 </span>
             </div>
-            <div class="col-sm-5 col-md-3 col-lg-3 mx-5 pt-3 text-center text-lg-start order-lg-2" style="font-family: 'Klee One'; color: white; font-size: 1.5rem"
-            >Welcome! Get to know me through my projects and achievements.</div>
+
+            <div class="col-sm-5 col-md-3 col-lg-3 pt-3 text-center text-lg-start order-lg-last order-md-last order-sm-first" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
+                Welcome! Get to know me through my projects and achievements.</div>
         </div>
     </div>
 
     <!-- Bio -->
-    <div class="container-fluid pt-5">
-        <div class="row board-container">
-            <div class="board">
-                <img src="images/pfp.png">
+    <div class="container-fluid pt-5" style="padding-left: 10%; padding-right: 10%;">
+        <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 40px;">
+            <div class="col-lg-6 py-5">
+                <img class="img-fluid pfp" src="images/pfp.jpg">
+            </div>
+
+            <div class="col-lg-6 pt-5" style="font-family: 'Afacad'; color: white; font-size: 4rem">
                 <p>Sandra Nguyen</p>
+            </div>
             </div>
         </div>
     </div>
