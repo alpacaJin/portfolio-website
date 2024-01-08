@@ -17,9 +17,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Afacad" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=WindSong" rel="stylesheet">
 
     <!-- Google Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+
+    <!-- Font Awesoome Icons -->
+    <script src="https://kit.fontawesome.com/b4d50f2604.js" crossorigin="anonymous"></script>
 
     <title>Sandra Nguyen</title>
 
@@ -36,37 +40,89 @@
     <!-- Custom Orange -->
     <style>
         .btn_orange {
-            background-color: #F69538;
+            background-color: rgb(246, 149, 56, 0.9);
         }
     </style>
 
-    <!--Lg, md, sm screens-->
+    <!-- Media Querries -->
     <style>
+        /* Bio Pfp*/
         @media (min-width: 992px) {
             .pfp {
-                height: 100px;
+                margin-left: 60px;
+                max-height: 80%;
+                height: auto;
+                border-radius: 40px;
             }
         }
 
         @media (max-width: 991px) {
             .pfp {
+                margin-left: 20px;
                 max-height: 90%;
-                height: 500px;
+                height: auto;
+                border-radius: 40px;
             }
         }
 
         @media (max-width: 414px) {
             .pfp {
-                max-height: 90%;
-                height: 200px
+                margin-left: 20px;
+                max-height: 80%;
+                height: auto;
+                border-radius: 40px;
             }
         }
 
-       .pfp {
-            height: auto;
-            border-radius: 40px;
+        /* Bio Text */
+        @media (min-width: 992px) {
+            .text {
+                margin-left: 20px;
+                padding-right: 20px;
+            }
         }
 
+        @media (max-width: 991px) {
+            .text {
+                margin-left: 10px;
+                padding-right: 20px;
+            }
+        }
+
+        @media (max-width: 414px) {
+            .text {
+                margin-left: 20px;
+                margin-right: 20px;
+            }
+        }
+
+        /* School images */
+        @media (min-width: 992px) {
+            .campus {
+                margin-top: 20px;
+                margin-left: 10px;
+                padding-right: 20px;
+                border-radius: 40px;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .campus {
+                margin-top: 20px;
+                margin-left: 10px;
+                padding-right: 20px;
+                border-radius: 40px;
+            }
+        }
+
+        @media (max-width: 414px) {
+            .campus {
+                margin-top: 20px;
+                margin-left: 10px;
+                padding-right: 20px;
+                border-radius: 40px;
+            }
+        }
     </style>
 </head>
 
@@ -77,7 +133,7 @@
             <div class="col-sm-1 col-md-1 col-lg-2 pt-2 text-center text-md-start" style="font-family: 'Afacad'; color: white; font-size: 1.3rem">Sandra Nguyen</div>
 
             <div class="dropdown col-sm-1 col-md-1 col-lg-1 pt-2 text-center" style="font-family: 'Afacad'; color: white; font-size: 1.3rem">
-                <button class="btn btn_orange dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn btn_orange dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-family: 'Afacad'; color: white; font-size: 1rem">
                     Projects
                 </button>
                 <ul class="dropdown-menu">
@@ -100,29 +156,50 @@
                 </span>
             </div>
 
-            <div class="col-sm-5 col-md-3 col-lg-3 pt-3 text-center text-lg-start order-lg-last order-md-last order-sm-first" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
-                Welcome! Get to know me through my projects and achievements.</div>
+            <div class="col-sm-5 col-md-3 col-lg-3 pt-3 text-center text-lg-start order-lg-last order-md-last order-sm-firsth" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
+                Welcome! Get to know me through my projects and achievements.
+                <i class="fa-solid fa-fish mx-2" style="color: #F69538; font-size: 1.3rem;"></i>
+                </div>
         </div>
     </div>
 
     <!-- Bio -->
     <div class="container-fluid pt-5" style="padding-left: 10%; padding-right: 10%;">
         <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 40px;">
-            <div class="col-lg-6 py-5">
+            <div class="col-sm-5 col-md-5 col-lg-5 py-5">
                 <img class="img-fluid pfp" src="images/pfp.jpg">
             </div>
 
-            <div class="col-lg-6 pt-5" style="font-family: 'Afacad'; color: white; font-size: 4rem">
-                <p>Sandra Nguyen</p>
-            </div>
+            <div class="col-sm-6 col-md-6 col-lg-6 pt-5 text" style="font-family: 'Afacad'; color: white; font-size: 1.3rem">
+                <p>Hello I'm</p>
+                <div style="font-family: 'WindSong'; font-size: 3.5rem; font-weight: bold">
+                    <p>Sandra Nguyen</p>
+                </div>
+                <p>A 3rd-year computer science major at California State University, Fullerton, with experience in data science, machine learning, and cybersecurity. I am dedicated to building my technical skills by engaging with faculty-led research and building exploratory software projects that aim to challenge the issues of today.</p>
+                <p>As an Asian American woman in tech, I am a firm believer in organizations whose purpose is to support underrepresented groups and using my leadership roles to encourage my peers to transcend societal barriers.</p>
+                <a class="btn btn_orange btn-sm" href="Sandra_Nguyen_Cirriculum_Vitae.pdf" role="button" style="font-family: 'Afacad'; color: white; font-size: 1rem">My CV</a>
             </div>
         </div>
     </div>
  
-
     <!-- Experience -->
-    <experience>
-    </experience>
+    <div class="container-fluid pt-5" style="padding-left: 5%; padding-right: 10%;">
+        <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
+            <p>Experience</p>
+        </div>
+    </div>
+
+    <div class="container-fluid pt-5" style="padding-left: 10%; padding-right: 50%;">
+        <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 40px;">
+            <div class="col-12 pb-2">
+                <img class="img-fluid campus" src="images/csuf.jpg">
+            </div>
+
+            <div class="col-12 mx-2" style="font-family: 'Afacad'; color: white; font-size: 1.5rem; font-weight: bold">
+                <p>California State University, Fullerton</p>
+            </div>
+        </div>
+    </div>
 
     <!-- Research -->
     <research>
