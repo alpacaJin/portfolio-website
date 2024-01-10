@@ -8,7 +8,6 @@
     <meta name="author" content="Sandra Nguyen">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
     <!-- Bootstrap CSS Stylesheet -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" 
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -27,6 +26,7 @@
 
     <title>Sandra Nguyen</title>
 
+    <!-- Background -->
     <style>
         html,
         body {
@@ -74,7 +74,7 @@
             }
         }
 
-        /* Bio Text */
+        /* Bio */
         @media (min-width: 992px) {
             .text {
                 margin-left: 20px;
@@ -96,9 +96,10 @@
             }
         }
 
-        /* School images */
+        /* Education */
         @media (min-width: 992px) {
             .campus {
+                width: 1100px;
                 margin-top: 20px;
                 margin-left: 10px;
                 padding-right: 20px;
@@ -123,7 +124,91 @@
                 border-radius: 40px;
             }
         }
+
+        @media (max-width: 991px) {
+            .campus_div {
+                width: 100%;
+                margin-bottom: 20px;
+                padding-left: 10;
+                padding-right: 10; 
+            }
+        }
+
+        @media (max-width: 414px) {
+            .campus_div {
+                width: 100%;
+                margin-bottom: 20px;
+                padding-left: 10;
+                padding-right: 10; 
+            }
+        }
     </style>
+
+    <!-- Hackathons -->
+    <style>
+        body{margin-top:20px;}
+        .timeline-steps {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap
+        }
+
+        .timeline-steps .timeline-step {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            margin: 1rem
+        }
+
+        @media (min-width:768px) {
+            .timeline-steps .timeline-step:not(:last-child):after {
+                content: "";
+                display: block;
+                border-top: .25rem dotted #3b82f6;
+                width: 3.46rem;
+                position: absolute;
+                left: 7.5rem;
+                top: .3125rem
+            }
+            .timeline-steps .timeline-step:not(:first-child):before {
+                content: "";
+                display: block;
+                border-top: .25rem dotted #3b82f6;
+                width: 3.8125rem;
+                position: absolute;
+                right: 7.5rem;
+                top: .3125rem
+            }
+        }
+
+        .timeline-steps .timeline-content {
+            width: 10rem;
+            text-align: center
+        }
+
+        .timeline-steps .timeline-content .inner-circle {
+            border-radius: 1.5rem;
+            height: 1rem;
+            width: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #3b82f6
+        }
+
+        .timeline-steps .timeline-content .inner-circle:before {
+            content: "";
+            background-color: #3b82f6;
+            display: inline-block;
+            height: 3rem;
+            width: 3rem;
+            min-width: 3rem;
+            border-radius: 6.25rem;
+            opacity: .5
+        }
+    </style>
+
 </head>
 
 <body>
@@ -137,8 +222,10 @@
                     Projects
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Research</a></li>
                     <li><a class="dropdown-item" href="#">Hackathons</a></li>
+                    <li><a class="dropdown-item" href="#">Research</a></li>
+                    <li><a class="dropdown-item" href="#">Publications</a></li>
+                    <li><a class="dropdown-item" href="#">Awards</a></li>
                 </ul>
             </div>
             <div class="col-sm-1 col-md-1 col-lg-1 pt-2 text-center" style="font-family: 'Afacad'; color: white; font-size: 1.3rem">Education</div>
@@ -177,40 +264,219 @@
                 </div>
                 <p>A 3rd-year computer science major at California State University, Fullerton, with experience in data science, machine learning, and cybersecurity. I am dedicated to building my technical skills by engaging with faculty-led research and building exploratory software projects that aim to challenge the issues of today.</p>
                 <p>As an Asian American woman in tech, I am a firm believer in organizations whose purpose is to support underrepresented groups and using my leadership roles to encourage my peers to transcend societal barriers.</p>
-                <a class="btn btn_orange btn-sm" href="Sandra_Nguyen_Cirriculum_Vitae.pdf" role="button" style="font-family: 'Afacad'; color: white; font-size: 1rem">My CV</a>
+                <a class="btn btn_orange btn-sm" href="Sandra_Nguyen_Curriculum_Vitae.pdf" role="button" style="font-family: 'Afacad'; color: white; font-size: 1rem">My CV</a>
             </div>
         </div>
     </div>
  
+    <!-- Education -->
+    <div class="container-fluid pt-5" style="padding-left: 5%; padding-right: 5%;">
+        <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
+            <p>Education</p>
+        </div>
+    </div>
+
+    <div class="container-fluid pt-2" style="padding-left: 10%; padding-right: 10%;">
+        <div class="row justify-content-evenly">
+            <div class="col-5 campus_div">
+                <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 40px;">
+                    <div class="col-12 pb-3">
+                        <img class="img-fluid campus" src="images/csuf.jpg">
+                    </div>
+        
+                    <div class="col-12 mx-2" style="font-family: 'Afacad'; color: white; font-size: 1.5rem; font-weight: bold">
+                        <p>California State University, Fullerton</p>
+                        <div style="font-size: 1rem; font-style: italic">
+                            <p>Bachelor of Science in Computer Science</p>
+                        </div>
+                        <div class="col-12 pb-2" style= "padding-right: 5%; font-size: 1rem">
+                            <p>Relevant Coursework: Introduction to Machine Learning, Intro to Data Sci. & Big Data, Algorithm Engineering, Data Structures, Statistics Applied to Natural Sciences, Mathematical Structure</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-5 campus_div">
+                <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 40px;">
+                    <div class="col-12 pb-3">
+                        <img class="img-fluid campus" src="images/fv.jpg">
+                    </div>
+        
+                    <div class="col-12 mx-2" style="font-family: 'Afacad'; color: white; font-size: 1.5rem; font-weight: bold">
+                        <p>Fountain Valley High School</p>
+                        <div style="font-size: 1rem; font-style: italic">
+                            <p>Graduated Magna Cum Laude</p>
+                        </div>
+                        <div class="col-12 mb-5" style= "padding-right: 5%; font-size: 1rem">
+                            <p>Relevant Coursework: Relevant Coursework: AP Computer Science A, AP Calculus BC< AP English Literature and Composition</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Experience -->
-    <div class="container-fluid pt-5" style="padding-left: 5%; padding-right: 10%;">
+    <div class="container-fluid pt-5" style="padding-left: 5%; padding-right: 5%;">
         <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
             <p>Experience</p>
         </div>
     </div>
 
-    <div class="container-fluid pt-5" style="padding-left: 10%; padding-right: 50%;">
-        <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 40px;">
-            <div class="col-12 pb-2">
-                <img class="img-fluid campus" src="images/csuf.jpg">
-            </div>
+    <!-- Hackathons -->
+    <div class="container-fluid pt-5" style="padding-left: 5%; padding-right: 5%;">
+        <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
+            <p>Hackathons</p>
+        </div>
+    </div>
 
-            <div class="col-12 mx-2" style="font-family: 'Afacad'; color: white; font-size: 1.5rem; font-weight: bold">
-                <p>California State University, Fullerton</p>
+        <!-- Timeline -->
+    <div class="container">
+        <div class="row pt-2">
+            <div class="col">
+                <div class="timeline-steps aos-init aos-animate" data-aos="fade-up">
+                    <div class="timeline-step">
+                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-original-title="2003">
+                            <div class="inner-circle"></div>
+                            <p class="h6 mt-3 mb-1">2003</p>
+                            <p class="h6 text-muted mb-0 mb-lg-0">Favland Founded</p>
+                        </div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="And here's some amazing content. It's very engaging. Right?" data-original-title="2004">
+                            <div class="inner-circle"></div>
+                            <p class="h6 mt-3 mb-1">2004</p>
+                            <p class="h6 text-muted mb-0 mb-lg-0">Launched Trello</p>
+                        </div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="And here's some amazing content. It's very engaging. Right?" data-original-title="2005">
+                            <div class="inner-circle"></div>
+                            <p class="h6 mt-3 mb-1">2005</p>
+                            <p class="h6 text-muted mb-0 mb-lg-0">Launched Messanger</p>
+                        </div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="And here's some amazing content. It's very engaging. Right?" data-original-title="2010">
+                            <div class="inner-circle"></div>
+                            <p class="h6 mt-3 mb-1">2010</p>
+                            <p class="h6 text-muted mb-0 mb-lg-0">Open New Branch</p>
+                        </div>
+                    </div>
+                    <div class="timeline-step mb-0">
+                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="And here's some amazing content. It's very engaging. Right?" data-original-title="2020">
+                            <div class="inner-circle"></div>
+                            <p class="h6 mt-3 mb-1">2020</p>
+                            <p class="h6 text-muted mb-0 mb-lg-0">In Fortune 500</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid pt-2" style="padding-left: 5%; padding-right: 5%;">
+        <div class="row justify-content-evenly">
+            <div class="col-3 campus_div">
+                <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 40px;">
+                    <div class="col-12 pb-3">
+                        <img class="img-fluid campus" src="images/rheia.png">
+                    </div>
+        
+                    <div class="col-12 mx-2" style="font-family: 'Afacad'; color: white; font-size: 1.5rem; font-weight: bold">
+                        <p>Rheia</p>
+                        <!-- <div style="font-size: 1rem; font-style: italic">
+                            <p>Bachelor of Science in Computer Science</p>
+                        </div>
+                        <div class="col-12 pb-2" style= "padding-right: 5%; font-size: 1rem">
+                            <p>Relevant Coursework: Introduction to Machine Learning, Intro to Data Sci. & Big Data, Algorithm Engineering, Data Structures, Statistics Applied to Natural Sciences, Mathematical Structure</p>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-3 campus_div">
+                <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 40px;">
+                    <div class="col-12 pb-3">
+                        <img class="img-fluid campus" src="images/montrael.png">
+                    </div>
+        
+                    <div class="col-12 mx-2" style="font-family: 'Afacad'; color: white; font-size: 1.5rem; font-weight: bold">
+                        <p>Mischief in Montrael</p>
+                        <!-- <div style="font-size: 1rem; font-style: italic">
+                            <p>Graduated Magna Cum Laude</p>
+                        </div>
+                        <div class="col-12 mb-5" style= "padding-right: 5%; font-size: 1rem">
+                            <p>Relevant Coursework: Relevant Coursework: AP Computer Science A, AP Calculus BC< AP English Literature and Composition</p>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        
+            <div class="col-3 campus_div">
+                <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 40px;">
+                    <div class="col-12 pb-3">
+                        <img class="img-fluid campus" src="images/green.png">
+                    </div>
+        
+                    <div class="col-12 mx-2" style="font-family: 'Afacad'; color: white; font-size: 1.5rem; font-weight: bold">
+                        <p>Fully Green</p>
+                        <!-- <div style="font-size: 1rem; font-style: italic">
+                            <p>Bachelor of Science in Computer Science</p>
+                        </div>
+                        <div class="col-12 pb-2" style= "padding-right: 5%; font-size: 1rem">
+                            <p>Relevant Coursework: Introduction to Machine Learning, Intro to Data Sci. & Big Data, Algorithm Engineering, Data Structures, Statistics Applied to Natural Sciences, Mathematical Structure</p>
+                        </div> -->
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Research -->
-    <research>
-    </research>
+    <div class="container-fluid pt-5" style="padding-left: 5%; padding-right: 5%;">
+        <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
+            <p>Research</p>
+        </div>
+    </div>
 
-    <!-- Hackathons -->
-    <hackathons>
-    </hackathons>
+    <!-- Publications -->
+    <div class="container-fluid pt-5" style="padding-left: 5%; padding-right: 5%;">
+        <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
+            <p>Publications</p>
+        </div>
+    </div>
+
+    <!-- Awards -->
+    <div class="container-fluid pt-5" style="padding-left: 5%; padding-right: 5%;">
+        <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
+            <p>Awards</p>
+        </div>
+    </div>
+
+    
 
     <!-- Footer -->
+    <div class="container">
+        <div class="row">
+            <div class="btn-toolbar justify-content-center" role="toolbar">
+                <a href="mailto:sandra.nguyen9@csu.fullerton.edu">
+                    <em class="fa-solid fa-envelope mx-2" style="color: white; font-size: 1.3rem;"></em> 
+                </a>
+                <a href="http://www.linkedin.com/in/sandra-nguyen9"> 
+                    <em class="fa-brands fa-linkedin mx-2" style="color: white; font-size: 1.3rem;"></em>
+                </a>
+                <a href="https://github.com/alpacaJin"> 
+                    <em class="fa-brands fa-github mx-2" style="color: white; font-size: 1.3rem;"></em>
+                </a>
+            </div>
+        </div>
+    </div>
+
     <footer>
+        <div class="d-flex py-2 justify-content-center" style="color: white; font-size: 1rem;">
+            Designed & made with ♡ by Sandra Nguyen @2024
+        </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
