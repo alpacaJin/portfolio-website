@@ -39,89 +39,143 @@
 
     <!-- Custom Orange -->
     <style>
-        .btn_orange {
+        .outline-orange {
+            border-color: rgb(246, 149, 56, 0.9);
+            border-radius: 30px;
+        }
+
+        .outline-orange:hover {
             background-color: rgb(246, 149, 56, 0.9);
+            color: rgb(246, 149, 56, 0.9);
+        }
+
+        .static-orange {
+            border-color: rgb(246, 149, 56, 0.9);
+            border-radius: 30px;
+        }
+
+        .static-orange:hover {
+            border-color: rgb(246, 149, 56, 0.9);
+        }
+
+    </style>
+
+    <!-- Sub Header -->
+    <style>
+        @media (min-width: 992px) {
+            .responsive-sub {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (min-width: 576px) {
+            .responsive-sub {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 575px) {
+            .responsive-sub {
+                font-size: 1rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .responsive-sub-row {
+                justify-content: left;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .responsive-sub-row {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .responsive-arrow {
+                order: 1;
+            }
         }
     </style>
 
-    <!-- Media Querries -->
+    <!-- Bio -->
     <style>
-        /* Bio Pfp*/
-        @media (min-width: 992px) {
-            .pfp {
-                margin-left: 60px;
-                max-height: 80%;
-                height: auto;
-                border-radius: 40px;
+        /* Pfp */
+        @media (min-width: 576px) {
+            .responsive-pfp {
+                width: 40%;
+                height: 100%;
+                max-width: 373px;
+                max-height: 497px;
+                margin-top: 5%;
+                margin-bottom: 5%;
+                padding-left: 0%;
+                padding-right: 0%;
             }
         }
 
-        @media (max-width: 991px) {
-            .pfp {
-                margin-left: 20px;
-                max-height: 90%;
-                height: auto;
-                border-radius: 40px;
+        @media (max-width: 575px) {
+            .responsive-pfp {
+                width: 80%;
+                max-height: 60%;
+                margin-top: 10%;
+                margin-bottom: 5%;
+                padding-left: 0%;
+                padding-right: 0%;
+            }
+        }
+ 
+        /* Text */
+        @media (min-width: 576px) {
+            .responsive-text {
+                font-size: 1rem;
+                padding: 5%;
             }
         }
 
-        @media (max-width: 414px) {
-            .pfp {
-                margin-left: 20px;
-                max-height: 80%;
-                height: auto;
-                border-radius: 40px;
+        @media (max-width: 575px) {
+            .responsive-text {
+                font-size: 1rem;
+                padding: 10%;
             }
         }
 
-        /* Bio */
-        @media (min-width: 992px) {
-            .text {
-                margin-left: 20px;
-                padding-right: 20px;
+        /* Name */
+        @media (min-width: 576px) {
+            .responsive-name {
+                font-size: 3rem;
             }
         }
 
-        @media (max-width: 991px) {
-            .text {
-                margin-left: 10px;
-                padding-right: 20px;
-            }
-        }
-
-        @media (max-width: 414px) {
-            .text {
-                margin-left: 20px;
-                margin-right: 20px;
+        @media (max-width: 575px) {
+            .responsive-name {
+                font-size: 2rem;
             }
         }
 
         /* Education */
         @media (min-width: 992px) {
             .campus {
-                width: 1100px;
-                margin-top: 20px;
-                margin-left: 10px;
-                padding-right: 20px;
-                border-radius: 40px;
+                margin-right: 2rem;
+                margin-top: 1rem;
+                border-radius: 30px;
             }
         }
 
         @media (max-width: 991px) {
             .campus {
-                margin-top: 20px;
-                margin-left: 10px;
-                padding-right: 20px;
-                border-radius: 40px;
+                margin-right: 2rem;
+                margin-top: 1rem;
+                border-radius: 30px;
             }
         }
 
         @media (max-width: 414px) {
             .campus {
-                margin-top: 20px;
-                margin-left: 10px;
-                padding-right: 20px;
-                border-radius: 40px;
+                margin-right: 2rem;
+                margin-top: 1rem;
+                border-radius: 30px;
             }
         }
 
@@ -158,48 +212,41 @@
             display: flex;
             flex-direction: column;
             position: relative;
-            margin: 1rem
+            margin: 3.5rem
         }
 
         @media (min-width:768px) {
             .timeline-steps .timeline-step:not(:last-child):after {
                 content: "";
                 display: block;
-                border-top: .25rem dotted #3b82f6;
-                width: 3.46rem;
+                border-top: .25rem dotted rgb(246, 149, 56, 0.9);
+                width: 12.1rem;
                 position: absolute;
                 left: 7.5rem;
-                top: .3125rem
-            }
-            .timeline-steps .timeline-step:not(:first-child):before {
-                content: "";
-                display: block;
-                border-top: .25rem dotted #3b82f6;
-                width: 3.8125rem;
-                position: absolute;
-                right: 7.5rem;
                 top: .3125rem
             }
         }
 
         .timeline-steps .timeline-content {
             width: 10rem;
-            text-align: center
+            text-align: center;
+            color: white;
+            font-family: 'Afacad'
         }
 
         .timeline-steps .timeline-content .inner-circle {
-            border-radius: 1.5rem;
-            height: 1rem;
-            width: 1rem;
+            border-radius: 1rem;
+            height: 0.8rem;
+            width: 0.8rem;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background-color: #3b82f6
+            background-color: rgb(246, 149, 56, 0.9)
         }
 
         .timeline-steps .timeline-content .inner-circle:before {
             content: "";
-            background-color: #3b82f6;
+            background-color: rgb(246, 149, 56, 0.9);
             display: inline-block;
             height: 3rem;
             width: 3rem;
@@ -209,16 +256,23 @@
         }
     </style>
 
+    <!-- Research -->
+    <style>
+        .empty-div {
+            width: 30px;
+        }
+    </style>
+
 </head>
 
 <body>
     <!-- Header -->
     <div class="container-fluid px-3 mx-0 pt-2">
-        <div class="row justify-content-evenly">
-            <div class="col-sm-1 col-md-1 col-lg-2 pt-2 text-center text-md-start" style="font-family: 'Afacad'; color: white; font-size: 1.3rem">Sandra Nguyen</div>
+        <div class="row responsive-sub justify-content-evenly" style="font-family: 'Afacad'; color: white;">
+            <div class="col-sm-1 col-md-1 col-lg-2 pt-2 text-center text-md-start">Sandra Nguyen</div>
 
-            <div class="dropdown col-sm-1 col-md-1 col-lg-1 pt-2 text-center" style="font-family: 'Afacad'; color: white; font-size: 1.3rem">
-                <button class="btn btn_orange dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-family: 'Afacad'; color: white; font-size: 1rem">
+            <div class="dropdown col-sm-1 col-md-1 col-lg-1 pt-2 text-center">
+                <button class="btn outline-orange dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-family: 'Afacad'; color: white;">
                     Projects
                 </button>
                 <ul class="dropdown-menu">
@@ -228,43 +282,42 @@
                     <li><a class="dropdown-item" href="#">Awards</a></li>
                 </ul>
             </div>
-            <div class="col-sm-1 col-md-1 col-lg-1 pt-2 text-center" style="font-family: 'Afacad'; color: white; font-size: 1.3rem">Education</div>
-            <div class="col-sm-1 col-md-1 col-lg-1 pt-2 text-center" style="font-family: 'Afacad'; color: white; font-size: 1.3rem">Experience</div>
-            <div class="col-sm-1 col-md-1 col-lg-6 pt-2 text-center text-lg-end" style="font-family: 'Afacad'; color: white; font-size: 1.3rem">Contact Me</div>
+            <div class="col-sm-1 col-md-1 col-lg-1 pt-2 text-center">Education</div>
+            <div class="col-sm-1 col-md-1 col-lg-1 pt-2 text-center">Experience</div>
+            <div class="col-sm-1 col-md-1 col-lg-6 pt-2 text-center text-lg-end">Contact Me</div>
         </div>
     </div>
 
     <!-- Sub Header -->
     <div class="container-fluid px-3 mx-0 pt-5">
-        <div class="row" style="padding-left: 10%; padding-right: 10%;">
-            <div class="col-sm-3 col-md-3 col-lg-3 px-0 align-self-end text-center text-lg-start" style="font-family: 'Afacad'; color: white;">
+        <div class="row responsive-sub-row" style="padding-left: 10%; padding-right: 10%;">
+            <div class="responsive-arrow col-sm-3 col-md-3 col-lg-3 px-0 align-self-end text-center text-lg-start" style="font-family: 'Afacad'; color: white;">
                 <span class="material-symbols-outlined">
                     arrow_downward_alt
                 </span>
             </div>
 
-            <div class="col-sm-5 col-md-3 col-lg-3 pt-3 text-center text-lg-start order-lg-last order-md-last order-sm-firsth" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
-                Welcome! Get to know me through my projects and achievements.
-                <i class="fa-solid fa-fish mx-2" style="color: #F69538; font-size: 1.3rem;"></i>
-                </div>
+            <div class="col-md-3 col-lg-3 text-center text-lg-start" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
+                <p class="responsive-sub pt-2 mx-0">Welcome! Get to know me through my projects and achievements. 🐡</p>
+            </div>
         </div>
     </div>
 
     <!-- Bio -->
     <div class="container-fluid pt-5" style="padding-left: 10%; padding-right: 10%;">
-        <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 40px;">
-            <div class="col-sm-5 col-md-5 col-lg-5 py-5">
-                <img class="img-fluid pfp" src="images/pfp.jpg">
-            </div>
+        <div class="row justify-content-center" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px;">
+            <img class="img-fluid responsive-pfp col-sm-5 col-md-5 col-lg-4" src="images/pfp.jpg" style="border-radius: 30px;">
 
-            <div class="col-sm-6 col-md-6 col-lg-6 pt-5 text" style="font-family: 'Afacad'; color: white; font-size: 1.3rem">
+            <div class="col-sm-6 col-md-6 col-lg-6 responsive-text" style="font-family: 'Afacad'; color: white;">
                 <p>Hello I'm</p>
-                <div style="font-family: 'WindSong'; font-size: 3.5rem; font-weight: bold">
+                <div class="responsive-name" style="font-family: 'WindSong'; font-weight: bold">
                     <p>Sandra Nguyen</p>
                 </div>
                 <p>A 3rd-year computer science major at California State University, Fullerton, with experience in data science, machine learning, and cybersecurity. I am dedicated to building my technical skills by engaging with faculty-led research and building exploratory software projects that aim to challenge the issues of today.</p>
                 <p>As an Asian American woman in tech, I am a firm believer in organizations whose purpose is to support underrepresented groups and using my leadership roles to encourage my peers to transcend societal barriers.</p>
-                <a class="btn btn_orange btn-sm" href="Sandra_Nguyen_Curriculum_Vitae.pdf" role="button" style="font-family: 'Afacad'; color: white; font-size: 1rem">My CV</a>
+                <div class="pt-2">
+                    <a class="btn outline-orange btn-sm" href="Sandra_Nguyen_Curriculum_Vitae.pdf" role="button" style="font-family: 'Afacad'; color: white; font-size: 1rem; width: 10rem;">Curriculum Vitae</a>
+                </div>
             </div>
         </div>
     </div>
@@ -279,13 +332,13 @@
     <div class="container-fluid pt-2" style="padding-left: 10%; padding-right: 10%;">
         <div class="row justify-content-evenly">
             <div class="col-5 campus_div">
-                <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 40px;">
+                <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; width: 80%; margin: auto">
                     <div class="col-12 pb-3">
                         <img class="img-fluid campus" src="images/csuf.jpg">
                     </div>
         
-                    <div class="col-12 mx-2" style="font-family: 'Afacad'; color: white; font-size: 1.5rem; font-weight: bold">
-                        <p>California State University, Fullerton</p>
+                    <div class="col-12 mx-2" style="font-family: 'Afacad'; color: white; font-size: 1.5rem;">
+                        <p><b>California State University, Fullerton</b></p>
                         <div style="font-size: 1rem; font-style: italic">
                             <p>Bachelor of Science in Computer Science</p>
                         </div>
@@ -297,18 +350,18 @@
             </div>
             
             <div class="col-5 campus_div">
-                <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 40px;">
+                <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; width: 80%; margin: auto;">
                     <div class="col-12 pb-3">
                         <img class="img-fluid campus" src="images/fv.jpg">
                     </div>
         
-                    <div class="col-12 mx-2" style="font-family: 'Afacad'; color: white; font-size: 1.5rem; font-weight: bold">
-                        <p>Fountain Valley High School</p>
+                    <div class="col-12 mx-2" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
+                        <p><b>Fountain Valley High School</b></p>
                         <div style="font-size: 1rem; font-style: italic">
                             <p>Graduated Magna Cum Laude</p>
                         </div>
                         <div class="col-12 mb-5" style= "padding-right: 5%; font-size: 1rem">
-                            <p>Relevant Coursework: Relevant Coursework: AP Computer Science A, AP Calculus BC< AP English Literature and Composition</p>
+                            <p>Relevant Coursework: Relevant Coursework: AP Computer Science A, AP Calculus BC, AP English Literature and Composition</p>
                         </div>
                     </div>
                 </div>
@@ -330,44 +383,30 @@
         </div>
     </div>
 
-        <!-- Timeline -->
+    <!-- Timeline -->
     <div class="container">
-        <div class="row pt-2">
+        <div class="row pt-2 pb-2">
             <div class="col">
                 <div class="timeline-steps aos-init aos-animate" data-aos="fade-up">
                     <div class="timeline-step">
                         <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-original-title="2003">
                             <div class="inner-circle"></div>
-                            <p class="h6 mt-3 mb-1">2003</p>
-                            <p class="h6 text-muted mb-0 mb-lg-0">Favland Founded</p>
+                            <p class="h6 mt-3 mb-1">June 22-23, 2023</p>
+                            <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Tech Solutions to Reduce Sexualy Transmitted Infections Hackathon @ National Academy of Medicine</p>
                         </div>
                     </div>
                     <div class="timeline-step">
                         <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="And here's some amazing content. It's very engaging. Right?" data-original-title="2004">
                             <div class="inner-circle"></div>
-                            <p class="h6 mt-3 mb-1">2004</p>
-                            <p class="h6 text-muted mb-0 mb-lg-0">Launched Trello</p>
+                            <p class="h6 mt-3 mb-1">April 15-16, 2023</p>
+                            <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Embark Datathon @ UCI</p>
                         </div>
                     </div>
                     <div class="timeline-step">
                         <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="And here's some amazing content. It's very engaging. Right?" data-original-title="2005">
                             <div class="inner-circle"></div>
-                            <p class="h6 mt-3 mb-1">2005</p>
-                            <p class="h6 text-muted mb-0 mb-lg-0">Launched Messanger</p>
-                        </div>
-                    </div>
-                    <div class="timeline-step">
-                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="And here's some amazing content. It's very engaging. Right?" data-original-title="2010">
-                            <div class="inner-circle"></div>
-                            <p class="h6 mt-3 mb-1">2010</p>
-                            <p class="h6 text-muted mb-0 mb-lg-0">Open New Branch</p>
-                        </div>
-                    </div>
-                    <div class="timeline-step mb-0">
-                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="And here's some amazing content. It's very engaging. Right?" data-original-title="2020">
-                            <div class="inner-circle"></div>
-                            <p class="h6 mt-3 mb-1">2020</p>
-                            <p class="h6 text-muted mb-0 mb-lg-0">In Fortune 500</p>
+                            <p class="h6 mt-3 mb-1">April 8-9, 2023</p>
+                            <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Fullyhacks Hackathon @ CSUF</p>
                         </div>
                     </div>
                 </div>
@@ -378,55 +417,67 @@
     <div class="container-fluid pt-2" style="padding-left: 5%; padding-right: 5%;">
         <div class="row justify-content-evenly">
             <div class="col-3 campus_div">
-                <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 40px;">
+                <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px;">
                     <div class="col-12 pb-3">
                         <img class="img-fluid campus" src="images/rheia.png">
                     </div>
         
-                    <div class="col-12 mx-2" style="font-family: 'Afacad'; color: white; font-size: 1.5rem; font-weight: bold">
-                        <p>Rheia</p>
-                        <!-- <div style="font-size: 1rem; font-style: italic">
-                            <p>Bachelor of Science in Computer Science</p>
+                    <div class="col-12 mx-2" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
+                        <p><b>Rheia</b></p>
+
+                        <div class="col-12 py-0 pb-3">
+                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Python</button>
+                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Scikit-learn</button>
+                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Flask</button>
                         </div>
-                        <div class="col-12 pb-2" style= "padding-right: 5%; font-size: 1rem">
-                            <p>Relevant Coursework: Introduction to Machine Learning, Intro to Data Sci. & Big Data, Algorithm Engineering, Data Structures, Statistics Applied to Natural Sciences, Mathematical Structure</p>
-                        </div> -->
+
+                        <div class="col-12 mb-2 py-2" style= "padding-right: 5%; font-size: 1rem">
+                            <p>Novel solution to STI early intervention and contact tracing with data-driven healthcare application.</p>
+                        </div>      
                     </div>
                 </div>
             </div>
             
             <div class="col-3 campus_div">
-                <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 40px;">
+                <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px">
                     <div class="col-12 pb-3">
-                        <img class="img-fluid campus" src="images/montrael.png">
+                        <img class="img-fluid campus" src="images/montreal.png">
                     </div>
         
-                    <div class="col-12 mx-2" style="font-family: 'Afacad'; color: white; font-size: 1.5rem; font-weight: bold">
-                        <p>Mischief in Montrael</p>
-                        <!-- <div style="font-size: 1rem; font-style: italic">
-                            <p>Graduated Magna Cum Laude</p>
+                    <div class="col-12 mx-2" style="font-family: 'Afacad'; color: white; font-size: 1.5rem;">
+                        <p><b>Mischief in Montreal</b></p>
+
+                        <div class="col-12 py-0 pb-3">
+                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Keras</button>
+                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Scikit-learn</button>
+                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">TensorFlow</button>
                         </div>
-                        <div class="col-12 mb-5" style= "padding-right: 5%; font-size: 1rem">
-                            <p>Relevant Coursework: Relevant Coursework: AP Computer Science A, AP Calculus BC< AP English Literature and Composition</p>
-                        </div> -->
+
+                        <div class="col-12 mb-2 py-2" style= "padding-right: 5%; font-size: 1rem">
+                            <p>Thorough data analytics & machine learning approach for developing policies in Montreal criminal landscape.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         
             <div class="col-3 campus_div">
-                <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 40px;">
+                <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px;">
                     <div class="col-12 pb-3">
                         <img class="img-fluid campus" src="images/green.png">
                     </div>
         
-                    <div class="col-12 mx-2" style="font-family: 'Afacad'; color: white; font-size: 1.5rem; font-weight: bold">
-                        <p>Fully Green</p>
-                        <!-- <div style="font-size: 1rem; font-style: italic">
-                            <p>Bachelor of Science in Computer Science</p>
+                    <div class="col-12 mx-2" style="font-family: 'Afacad'; color: white; font-size: 1.5rem;">
+                        <p><b>Fully Green</b></p>
+                        
+                        <div class="col-12 py-0 pb-3">
+                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Java</button>
+                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Android Studio</button>
+                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Scikit-learn</button>
                         </div>
-                        <div class="col-12 pb-2" style= "padding-right: 5%; font-size: 1rem">
-                            <p>Relevant Coursework: Introduction to Machine Learning, Intro to Data Sci. & Big Data, Algorithm Engineering, Data Structures, Statistics Applied to Natural Sciences, Mathematical Structure</p>
-                        </div> -->
+
+                        <div class="col-12 mb-2 py-2" style= "padding-right: 5%; font-size: 1rem">
+                            <p>AI-powered image recognition assistance with recycling mobile app.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -437,6 +488,150 @@
     <div class="container-fluid pt-5" style="padding-left: 5%; padding-right: 5%;">
         <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
             <p>Research</p>
+        </div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="container">
+        <div class="row pt-2 pb-2">
+            <div class="col">
+                <div class="timeline-steps aos-init aos-animate" data-aos="fade-up">
+                    <div class="timeline-step">
+                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-original-title="2003">
+                            <div class="inner-circle"></div>
+                            <p class="h6 mt-3 mb-1">March 2023 - Present</p>
+                            <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Digital Learning Lab @ UCI</p>
+                        </div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-original-title="2003">
+                            <div class="inner-circle"></div>
+                            <p class="h6 mt-3 mb-1">June 2023 - August 2023</p>
+                            <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">SoCal Data Science Program @ UCI</p>
+                        </div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="And here's some amazing content. It's very engaging. Right?" data-original-title="2004">
+                            <div class="inner-circle"></div>
+                            <p class="h6 mt-3 mb-1">August 2022 - May 2023</p>
+                            <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">ASSURE-US @ CSUF</p>
+                        </div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="And here's some amazing content. It's very engaging. Right?" data-original-title="2005">
+                            <div class="inner-circle"></div>
+                            <p class="h6 mt-3 mb-1">May 2022 - July 2022</p>
+                            <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">ASSURE-US SRE @ CSUF</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid pt-2" style="padding-left: 5%; padding-right: 5%;">
+        <div class="row justify-content-evenly">
+            <div class="col-3 campus_div">
+                <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px;">
+                    <div class="col-12 pb-3">
+                        <img class="img-fluid campus" src="images/pho.png">
+                    </div>
+        
+                    <div class="col-12 mx-2" style="font-family: 'Afacad'; color: white; font-size: 1.5rem;">
+                        <p><b>Phocrastination: A Game-Based Approach to Assessing and Classifying Academic Procrastination in College Students</b></p>
+
+                        <div class="col-12 py-0 pb-3">
+                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">C#</button>
+                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Unity</button>
+                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">SVM</button>
+                        </div>
+
+                        <div class="col-12 mb-2 py-2" style= "padding-right: 5%; font-size: 1rem">
+                            <p>Exploratory classification of real-world academic procrastination through simulating student learning environments.</p>
+                        </div>      
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-3 campus_div">
+                <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px;">
+                    <div class="col-12 pb-3">
+                        <img class="img-fluid campus" src="images/ad.png">
+                    </div>
+        
+                    <div class="col-12 mx-2" style="font-family: 'Afacad'; color: white; font-size: 1.5rem;">
+                        <p><b>Data Science Analysis of Malicious Ads and Threat Detection Automation for Cybersecurity Progress</b></p>
+
+                        <div class="col-12 py-0 pb-3">
+                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">BeautifulSoup</button>
+                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Random Forest</button>
+                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Streamlit</button>
+                        </div>
+
+                        <div class="col-12 mb-2 py-2" style= "padding-right: 5%; font-size: 1rem">
+                            <p>A novel approach to automating the analysis of malicious content on the internet to protect users against ad fraud.</p>
+                        </div>      
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-3 campus_div">
+                <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px;">
+                    <div class="col-12 pb-3">
+                        <img class="img-fluid campus" src="images/montrael.png">
+                    </div>
+        
+                    <div class="col-12 mx-2" style="font-family: 'Afacad'; color: white; font-size: 1.5rem;">
+                        <p><b>Hippocampal Ensembles Represent Sequential Relationships Among an Extended Sequence of Nonspatial Events</b></p>
+
+                        <div class="col-12 py-0 pb-3">
+                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Keras</button>
+                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Scikit-learn</button>
+                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">TensorFlow</button>
+                        </div>
+
+                        <div class="col-12 mb-2 py-2" style= "padding-right: 5%; font-size: 1rem">
+                            <p>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        <div class="row pt-5 px-0 justify-content-evenly">
+            <div class="col-3 campus_div">
+                <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px;">
+                    <div class="col-12 pb-3">
+                        <img class="img-fluid campus" src="images/.png">
+                    </div>
+        
+                    <div class="col-12 mx-2" style="font-family: 'Afacad'; color: white; font-size: 1.5rem;">
+                        <p><b>Data Science Analysis of Malicious Ads and Threat Detection Automation for Cybersecurity Progress</b></p>
+                        
+                        <div class="col-12 py-0 pb-3">
+                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Java</button>
+                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Android Studio</button>
+                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Scikit-learn</button>
+                        </div>
+
+                        <div class="col-12 mb-2 py-2" style= "padding-right: 5%; font-size: 1rem">
+                            <p>AI-powered image recognition assistance with recycling mobile app.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empty divs -->
+            <div class="col-3 campus_div">
+                <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 40px;">
+                    <div class="empty-div"></div>
+                </div>
+            </div>
+
+            <div class="col-3 campus_div">
+                <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 40px;">
+                    <div class="empty-div"></div>
+                </div>
+            </div>
         </div>
     </div>
 
