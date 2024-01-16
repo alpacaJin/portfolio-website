@@ -37,8 +37,9 @@
         }
     </style>
 
-    <!-- Custom Orange -->
+    <!-- Custom colors -->
     <style>
+        /* Orange */
         .outline-orange {
             border-color: rgb(246, 149, 56, 0.9);
             border-radius: 30px;
@@ -57,6 +58,9 @@
         .static-orange:hover {
             border-color: rgb(246, 149, 56, 0.9);
         }
+
+        /* Blue */
+        
 
     </style>
 
@@ -227,13 +231,13 @@
 
         /* Div */
         @media (min-width: 576px) {
-            .responsive-card {
-                width: 80%;
+            .responsive-card_edu {
+                width: 60%;
             }
         }
 
         @media (max-width: 575px) {
-            .responsive-card {
+            .responsive-card_edu {
                width: 100%;
             }
         }
@@ -246,7 +250,7 @@
         .timeline-steps {
             display: flex;
             justify-content: center;
-            flex-wrap: wrap
+            flex-wrap: wrap;
         }
 
         .timeline-steps .timeline-step {
@@ -254,7 +258,7 @@
             display: flex;
             flex-direction: column;
             position: relative;
-            margin: 3.5rem
+            margin: 3.5rem;
         }
 
         /* Small */
@@ -284,7 +288,7 @@
                 width: 12.1rem;
                 position: absolute;
                 left: 7.5rem;
-                top: .3125rem
+                top: .3125rem;
             }
         }
 
@@ -292,7 +296,7 @@
             width: 10rem;
             text-align: center;
             color: white;
-            font-family: 'Afacad'
+            font-family: 'Afacad';
         }
 
         .timeline-steps .timeline-content .inner-circle {
@@ -302,7 +306,7 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background-color: rgb(246, 149, 56, 0.9)
+            background-color: rgb(246, 149, 56, 0.9);
         }
 
         .timeline-steps .timeline-content .inner-circle:before {
@@ -313,7 +317,20 @@
             width: 3rem;
             min-width: 3rem;
             border-radius: 6.25rem;
-            opacity: .5
+            opacity: .5;
+        }
+
+        /* Div */
+        @media (min-width: 576px) {
+            .responsive-card {
+                width: 80%;
+            }
+        }
+
+        @media (max-width: 575px) {
+            .responsive-card {
+               width: 100%;
+            }
         }
     </style>
 
@@ -324,6 +341,125 @@
         }
     </style>
 
+    <!-- Publications -->
+    <style>
+        /* Image */
+        @media (min-width: 992px) {
+            .logo {
+                margin-right: 5%;
+                margin-left: 5%;
+                margin-top: 10%;
+                margin-bottom: 10%;
+                width: 80%;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .logo {
+                margin-right: 5%;
+                margin-left: 5%;
+                margin-top: 3%;
+                width: 50%;
+            }
+        }
+
+        @media (max-width: 414px) {
+            .logo {
+                margin-right: 5%;
+                margin-left: 5%;
+                margin-top: 3%;
+                width: 50%;
+            }
+        }
+
+        /* Div */
+        @media (min-width: 576px) {
+            .responsive-card_pub {
+                width: 50%;
+            }
+        }
+
+        @media (max-width: 575px) {
+            .responsive-card_pub {
+               width: 100%;
+            }
+        }
+
+        /* Timeline 2 */
+        body{margin-top:20px;}
+        .timeline-steps2 {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .timeline-steps2 .timeline-step2 {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            margin: 3.5rem;
+        }
+
+        /* Small */
+        @media (max-width: 575px) {
+            .timeline-steps2 .timeline-step2 {
+                margin: 1rem;
+            }
+        }
+
+        /* Medium */
+        @media (min-width:768px) {
+            .timeline-steps2 .timeline-step2:not(:last-child):after {
+                content: "";
+                display: block;
+                position: absolute;
+                left: 7.5rem;
+                top: .3125rem;
+            }
+        }
+
+        /* Large */
+        @media (min-width:1200px) {
+            .timeline-steps2 .timeline-step2:not(:last-child):after {
+                content: "";
+                display: block;
+                border-top: .25rem dotted rgb(9, 106, 199, 0.9);
+                width: 12.1rem;
+                position: absolute;
+                left: 7.5rem;
+                top: .3125rem;
+            }
+        }
+
+        .timeline-steps2 .timeline-content2 {
+            width: 10rem;
+            text-align: center;
+            color: white;
+            font-family: 'Afacad';
+        }
+
+        .timeline-steps2 .timeline-content2 .inner-circle2 {
+            border-radius: 1rem;
+            height: 0.8rem;
+            width: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgb(9, 106, 199, 0.9);
+        }
+
+        .timeline-steps2 .timeline-content2 .inner-circle2:before {
+            content: "";
+            background-color: rgb(9, 106, 199, 0.9);
+            display: inline-block;
+            height: 3rem;
+            width: 3rem;
+            min-width: 3rem;
+            border-radius: 6.25rem;
+            opacity: .5;
+        }
+    </style>
 </head>
 
 <body>
@@ -366,7 +502,7 @@
 
     <!-- Bio -->
     <div class="container-fluid pt-5" style="padding-left: 10%; padding-right: 10%;">
-        <div class="row justify-content-center" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px;">
+        <div class="row justify-content-center" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; width: 79%; margin: auto;">
             <img class="img-fluid responsive-pfp col-sm-5 col-md-5 col-lg-4" src="images/pfp.jpg" style="border-radius: 30px;">
 
             <div class="col-sm-6 col-md-6 col-lg-6 responsive-text" style="font-family: 'Afacad'; color: white;">
@@ -392,36 +528,36 @@
 
     <div class="container-fluid pt-2" style="padding-left: 5%; padding-right: 5%;">
         <div class="row justify-content-center">
-            <div class="col-5 campus_div">
-                <div class="row responsive-card" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto">
+            <div class="col-4 campus_div">
+                <div class="row responsive-card_edu" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
                     <div class="col-12 pb-3">
                         <img class="img-fluid campus" src="images/csuf.jpg">
                     </div>
         
                     <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
                         <p><b>California State University, Fullerton</b></p>
-                        <div style="font-size: 1rem; font-style: italic">
+                        <div style="font-style: italic">
                             <p>Bachelor of Science in Computer Science</p>
                         </div>
-                        <div class="col-12 pb-2 responsive-caption" style= "padding-right: 5%; font-size: 1rem">
+                        <div class="col-12 pb-2 responsive-caption" style= "padding-right: 5%;">
                             <p>Relevant Coursework: Introduction to Machine Learning, Intro to Data Sci. & Big Data, Algorithm Engineering, Data Structures, Statistics Applied to Natural Sciences, Mathematical Structure</p>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="col-5 campus_div">
-                <div class="row responsive-card" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto;">
+            <div class="col-4 campus_div">
+                <div class="row responsive-card_edu" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
                     <div class="col-12 pb-3">
                         <img class="img-fluid campus" src="images/fv.jpg">
                     </div>
         
-                    <div class="col-12 mx-2" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
+                    <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
                         <p><b>Fountain Valley High School</b></p>
-                        <div style="font-size: 1rem; font-style: italic">
+                        <div style="font-style: italic">
                             <p>Graduated Magna Cum Laude</p>
                         </div>
-                        <div class="col-12 mb-5" style= "padding-right: 5%; font-size: 1rem">
+                        <div class="col-12 mb-5 responsive-caption" style= "padding-right: 5%;">
                             <p>Relevant Coursework: Relevant Coursework: AP Computer Science A, AP Calculus BC, AP English Literature and Composition</p>
                         </div>
                     </div>
@@ -450,21 +586,21 @@
             <div class="col">
                 <div class="timeline-steps aos-init aos-animate" data-aos="fade-up">
                     <div class="timeline-step">
-                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-original-title="2003">
+                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
                             <div class="inner-circle"></div>
                             <p class="h6 mt-3 mb-1">June 22-23, 2023</p>
                             <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Tech Solutions to Reduce Sexualy Transmitted Infections Hackathon @ National Academy of Medicine</p>
                         </div>
                     </div>
                     <div class="timeline-step">
-                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="And here's some amazing content. It's very engaging. Right?" data-original-title="2004">
+                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
                             <div class="inner-circle"></div>
                             <p class="h6 mt-3 mb-1">April 15-16, 2023</p>
                             <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Embark Datathon @ UCI</p>
                         </div>
                     </div>
                     <div class="timeline-step">
-                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="And here's some amazing content. It's very engaging. Right?" data-original-title="2005">
+                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
                             <div class="inner-circle"></div>
                             <p class="h6 mt-3 mb-1">April 8-9, 2023</p>
                             <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Fullyhacks Hackathon @ CSUF</p>
@@ -478,7 +614,7 @@
     <div class="container-fluid pt-2" style="padding-left: 5%; padding-right: 5%;">
         <div class="row pb-2 justify-content-center">
             <div class="col-3 campus_div">
-                <div class="row responsive-card" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto;">
+                <div class="row responsive-card" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
                     <div class="col-12 pb-3">
                         <img class="img-fluid campus" src="images/rheia.png">
                     </div>
@@ -500,7 +636,7 @@
             </div>
             
             <div class="col-3 campus_div">
-                <div class="row responsive-card" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto;">
+                <div class="row responsive-card" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
                     <div class="col-12 pb-3">
                         <img class="img-fluid campus" src="images/montreal.png">
                     </div>
@@ -522,7 +658,7 @@
             </div>
         
             <div class="col-3 campus_div">
-                <div class="row responsive-card" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto;">
+                <div class="row responsive-card" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
                     <div class="col-12 pb-3">
                         <img class="img-fluid campus" src="images/green.png">
                     </div>
@@ -558,28 +694,28 @@
             <div class="col">
                 <div class="timeline-steps aos-init aos-animate" data-aos="fade-up">
                     <div class="timeline-step">
-                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-original-title="2003">
+                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
                             <div class="inner-circle"></div>
                             <p class="h6 mt-3 mb-1">March 2023 - Present</p>
                             <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Digital Learning Lab @ UCI</p>
                         </div>
                     </div>
                     <div class="timeline-step">
-                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-original-title="2003">
+                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
                             <div class="inner-circle"></div>
                             <p class="h6 mt-3 mb-1">June 2023 - August 2023</p>
                             <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">SoCal Data Science Program @ UCI</p>
                         </div>
                     </div>
                     <div class="timeline-step">
-                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="And here's some amazing content. It's very engaging. Right?" data-original-title="2004">
+                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
                             <div class="inner-circle"></div>
                             <p class="h6 mt-3 mb-1">August 2022 - May 2023</p>
                             <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">ASSURE-US @ CSUF</p>
                         </div>
                     </div>
                     <div class="timeline-step">
-                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="And here's some amazing content. It's very engaging. Right?" data-original-title="2005">
+                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
                             <div class="inner-circle"></div>
                             <p class="h6 mt-3 mb-1">May 2022 - July 2022</p>
                             <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">ASSURE-US SRE @ CSUF</p>
@@ -591,9 +727,9 @@
     </div>
 
     <div class="container-fluid pt-2" style="padding-left: 5%; padding-right: 5%;">
-        <div class="row pb-2 justify-content-center">
+        <div class="row pb-4 justify-content-center">
             <div class="col-3 campus_div">
-                <div class="row responsive-card" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto;">
+                <div class="row responsive-card" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
                     <div class="col-12 pb-3">
                         <img class="img-fluid campus" src="images/pho.png">
                     </div>
@@ -615,7 +751,7 @@
             </div>
 
             <div class="col-3 campus_div">
-                <div class="row responsive-card" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto;">
+                <div class="row responsive-card" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
                     <div class="col-12 pb-3">
                         <img class="img-fluid campus" src="images/ad.png">
                     </div>
@@ -637,7 +773,7 @@
             </div>
             
             <div class="col-3 campus_div">
-                <div class="row responsive-card" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto;">
+                <div class="row responsive-card" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
                     <div class="col-12 pb-3">
                         <img class="img-fluid campus" src="images/rat.png">
                     </div>
@@ -661,7 +797,7 @@
         
         <div class="row px-0 justify-content-center">
             <div class="col-3 campus_div">
-                <div class="row responsive-card" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto;">
+                <div class="row responsive-card" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
                     <div class="col-12 pb-3">
                         <img class="img-fluid campus" src="images/job.png">
                     </div>
@@ -704,6 +840,74 @@
         </div>
     </div>
 
+    <!-- Timeline -->
+    <div class="container">
+        <div class="row pt-2 pb-2">
+            <div class="col">
+                <div class="timeline-steps2 aos-init aos-animate" data-aos="fade-up">
+                    <div class="timeline-step2">
+                        <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
+                            <div class="inner-circle2"></div>
+                            <p class="h6 mt-3 mb-1">July 2023</p>
+                            <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">San Francisco, CA</p>
+                        </div>
+                    </div>                    
+                    <div class="timeline-step2">
+                        <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
+                            <div class="inner-circle2"></div>
+                            <p class="h6 mt-3 mb-1">March 2023</p>
+                            <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Las Vegas, NV</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid pt-2" style="padding-left: 5%; padding-right: 5%;">
+        <div class="row pb-4 justify-content-evenly">
+            <div class="col-12 campus_div mb-3">
+                <div class="row responsive-card_pub justify-content-center" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+                    <div class="col-sm-12 col-lg-3 pb-3 text-center">
+                        <img class="img-fluid logo" src="images/ccwc.png">
+                    </div>
+        
+                    <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white;">
+                        <p><b>Data Science Analysis of Malicious Ads and Threat Detection Automation for Cybersecurity Progress</b></p>
+
+                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                            <p><i>2023 IEEE 13th Annual Computing and Communication Workshop and Conference (CCWC)</i></p>
+                        </div>
+                        
+                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                            <p>Author & Presenter</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 campus_div mb-3">
+                <div class="row responsive-card_pub justify-content-center" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+                    <div class="col-sm-12 col-lg-3 pb-3 text-center">
+                        <img class="img-fluid logo" src="images/ahfe.png">
+                    </div>
+        
+                    <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white; padding-top: 10%">
+                        <p><b>Improving Internet Advertising Using Click-Through Rate Prediction</b></p>
+
+                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                            <p><i>14th International Conference on Applied Human Factors and Ergonomics (AHFE 2023)</i></p>
+                        </div>
+                        
+                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                            <p>Co-Author</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Awards -->
     <div class="container-fluid pt-5" style="padding-left: 5%; padding-right: 5%;">
         <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
@@ -711,30 +915,106 @@
         </div>
     </div>
 
-    
+    <!-- Timeline -->
+    <div class="container">
+        <div class="row pt-2 pb-2">
+            <div class="col">
+                <div class="timeline-steps2 aos-init aos-animate" data-aos="fade-up">
+                    <div class="timeline-step2">
+                        <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
+                            <div class="inner-circle2"></div>
+                            <p class="h6 mt-3 mb-1">July 2023</p>
+                            <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">San Francisco, CA</p>
+                        </div>
+                    </div>                    
+                    <div class="timeline-step2">
+                        <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
+                            <div class="inner-circle2"></div>
+                            <p class="h6 mt-3 mb-1">March 2023</p>
+                            <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Las Vegas, NV</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid pt-2" style="padding-left: 5%; padding-right: 5%;">
+        <div class="row pb-4 justify-content-evenly">
+            <div class="col-12 campus_div mb-3">
+                <div class="row responsive-card_pub justify-content-center" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+                    <div class="col-sm-12 col-lg-3 pb-3 text-center">
+                        <img class="img-fluid logo" src="images/uroc.png">
+                    </div>
+        
+                    <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white;">
+                        <p><b>UROC Fellowship Award</b></p>
+
+                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                            <p><i>Awarded $5,000 grant to conduct and present research at annual research symposium</i></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 campus_div mb-3">
+                <div class="row responsive-card_pub justify-content-center" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+                    <div class="col-sm-12 col-lg-3 pb-3 text-center">
+                        <img class="img-fluid logo" src="images/awt.jpg">
+                    </div>
+        
+                    <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white; padding-top: 10%">
+                        <p><b>Advancing Women in Technology Scholarship</b></p>
+
+                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                            <p>Awarded $7,500 grant to further education in the technology field</p>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 campus_div mb-3">
+                <div class="row responsive-card_pub justify-content-center" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+                    <div class="col-sm-12 col-lg-3 pb-3 text-center">
+                        <img class="img-fluid logo" src="images/adv.jpg">
+                    </div>
+        
+                    <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white; padding-top: 10%">
+                        <p><b>STEM Advantage</b></p>
+
+                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                            <p>Awarded $2,400 grant to attend classes full-time and graduate with less student debt</p>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <div class="container">
         <div class="row">
             <div class="btn-toolbar justify-content-center" role="toolbar">
                 <a href="mailto:sandra.nguyen9@csu.fullerton.edu">
-                    <em class="fa-solid fa-envelope mx-2" style="color: white; font-size: 1.3rem;"></em> 
+                    <em class="fa-solid fa-envelope mx-2" style="color: white; font-size: 1.5rem;"></em> 
                 </a>
                 <a href="http://www.linkedin.com/in/sandra-nguyen9"> 
-                    <em class="fa-brands fa-linkedin mx-2" style="color: white; font-size: 1.3rem;"></em>
+                    <em class="fa-brands fa-linkedin mx-2" style="color: white; font-size: 1.5rem;"></em>
                 </a>
                 <a href="https://github.com/alpacaJin"> 
-                    <em class="fa-brands fa-github mx-2" style="color: white; font-size: 1.3rem;"></em>
+                    <em class="fa-brands fa-github mx-2" style="color: white; font-size: 1.5rem;"></em>
                 </a>
             </div>
         </div>
     </div>
 
-    <footer>
-        <div class="d-flex py-2 justify-content-center" style="color: white; font-size: 1rem;">
+    <div class="container-fluid ">
+        <div class="row py-2 justify-content-center responsive-sub " style="color: white;">
             Designed & made with ♡ by Sandra Nguyen @2024
         </div>
-    </footer>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
