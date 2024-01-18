@@ -219,20 +219,20 @@
 
         @media (min-width: 576px) {
             .responsive-title {
-                font-size: 1.5rem;
+                font-size: 1.3rem;
             }
         }
 
         @media (max-width: 575px) {
             .responsive-title {
-                font-size: 1.5rem;
+                font-size: 1.3rem;
             }
         }
 
         /* Div */
         @media (min-width: 576px) {
             .responsive-card_edu {
-                width: 60%;
+                width: 80%;
             }
         }
 
@@ -460,6 +460,41 @@
             opacity: .5;
         }
     </style>
+
+    <!-- Awards -->
+    <style>
+        /* Image */
+        @media (min-width: 992px) {
+            .logo2 {
+                margin-right: 5%;
+                margin-left: 5%;
+                margin-top: 10%;
+                margin-bottom: 10%;
+                padding-top: 5%;
+                width: 80%;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .logo2 {
+                margin-right: 5%;
+                margin-left: 5%;
+                margin-top: 3%;
+                padding-top: 5%;
+                width: 50%;
+            }
+        }
+
+        @media (max-width: 414px) {
+            .logo2 {
+                margin-right: 5%;
+                margin-left: 5%;
+                margin-top: 3%;
+                padding-top: 5%;
+                width: 50%;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -487,7 +522,7 @@
 
     <!-- Sub Header -->
     <div class="container-fluid px-3 mx-0 pt-5">
-        <div class="row responsive-sub-row" style="padding-left: 10%; padding-right: 10%;">
+        <div class="row responsive-sub-row" style="padding-left: 18%; padding-right: 10%;">
             <div class="responsive-arrow col-sm-3 col-md-3 col-lg-3 px-0 align-self-end text-center text-lg-start" style="font-family: 'Afacad'; color: white;">
                 <span class="material-symbols-outlined">
                     arrow_downward_alt
@@ -520,7 +555,7 @@
     </div>
  
     <!-- Education -->
-    <div class="container-fluid pt-5" style="padding-left: 5%; padding-right: 5%;">
+    <div class="container-fluid pt-5" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
         <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
             <p>Education</p>
         </div>
@@ -528,15 +563,15 @@
 
     <div class="container-fluid pt-2" style="padding-left: 5%; padding-right: 5%;">
         <div class="row justify-content-center">
-            <div class="col-4 campus_div">
-                <div class="row responsive-card_edu" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
-                    <div class="col-12 pb-3">
+            <div class="col-3 campus_div">
+                <div class="row responsive-card_edu align-content-start" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+                    <div class="col-12 pb-3 align-self-start">
                         <img class="img-fluid campus" src="images/csuf.jpg">
                     </div>
         
                     <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
                         <p><b>California State University, Fullerton</b></p>
-                        <div style="font-style: italic">
+                        <div class="responsive-caption" style="font-style: italic">
                             <p>Bachelor of Science in Computer Science</p>
                         </div>
                         <div class="col-12 pb-2 responsive-caption" style= "padding-right: 5%;">
@@ -546,15 +581,15 @@
                 </div>
             </div>
             
-            <div class="col-4 campus_div">
-                <div class="row responsive-card_edu" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
-                    <div class="col-12 pb-3">
+            <div class="col-3 campus_div">
+                <div class="row responsive-card_edu align-content-start" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+                    <div class="col-12 pb-3 align-self-start">
                         <img class="img-fluid campus" src="images/fv.jpg">
                     </div>
         
-                    <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
+                    <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
                         <p><b>Fountain Valley High School</b></p>
-                        <div style="font-style: italic">
+                        <div class="responsive-caption" style="font-style: italic">
                             <p>Graduated Magna Cum Laude</p>
                         </div>
                         <div class="col-12 mb-5 responsive-caption" style= "padding-right: 5%;">
@@ -567,14 +602,14 @@
     </div>
 
     <!-- Experience -->
-    <div class="container-fluid pt-5" style="padding-left: 5%; padding-right: 5%;">
+    <div class="container-fluid pt-5" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
         <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
             <p>Experience</p>
         </div>
     </div>
 
     <!-- Hackathons -->
-    <div class="container-fluid pt-5" style="padding-left: 5%; padding-right: 5%;">
+    <div class="container-fluid pt-5" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
         <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
             <p>Hackathons</p>
         </div>
@@ -614,8 +649,8 @@
     <div class="container-fluid pt-2" style="padding-left: 5%; padding-right: 5%;">
         <div class="row pb-2 justify-content-center">
             <div class="col-3 campus_div">
-                <div class="row responsive-card" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
-                    <div class="col-12 pb-3">
+                <div class="row responsive-card align-content-start" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+                    <div class="col-12 pb-3 align-self-start">
                         <img class="img-fluid campus" src="images/rheia.png">
                     </div>
         
@@ -636,8 +671,8 @@
             </div>
             
             <div class="col-3 campus_div">
-                <div class="row responsive-card" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
-                    <div class="col-12 pb-3">
+                <div class="row responsive-card align-content-start" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+                    <div class="col-12 pb-3 align-self-start">
                         <img class="img-fluid campus" src="images/montreal.png">
                     </div>
         
@@ -658,8 +693,8 @@
             </div>
         
             <div class="col-3 campus_div">
-                <div class="row responsive-card" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
-                    <div class="col-12 pb-3">
+                <div class="row responsive-card align-content-start" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+                    <div class="col-12 pb-3 align-self-start">
                         <img class="img-fluid campus" src="images/green.png">
                     </div>
         
@@ -682,7 +717,7 @@
     </div>
 
     <!-- Research -->
-    <div class="container-fluid pt-5" style="padding-left: 5%; padding-right: 5%;">
+    <div class="container-fluid pt-5" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
         <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
             <p>Research</p>
         </div>
@@ -729,8 +764,8 @@
     <div class="container-fluid pt-2" style="padding-left: 5%; padding-right: 5%;">
         <div class="row pb-4 justify-content-center">
             <div class="col-3 campus_div">
-                <div class="row responsive-card" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
-                    <div class="col-12 pb-3">
+                <div class="row responsive-card align-content-start" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+                    <div class="col-12 pb-3 align-self-start">
                         <img class="img-fluid campus" src="images/pho.png">
                     </div>
         
@@ -751,8 +786,8 @@
             </div>
 
             <div class="col-3 campus_div">
-                <div class="row responsive-card" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
-                    <div class="col-12 pb-3">
+                <div class="row responsive-card align-content-start" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+                    <div class="col-12 pb-3 align-self-start">
                         <img class="img-fluid campus" src="images/ad.png">
                     </div>
         
@@ -773,8 +808,8 @@
             </div>
             
             <div class="col-3 campus_div">
-                <div class="row responsive-card" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
-                    <div class="col-12 pb-3">
+                <div class="row responsive-card align-content-start" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+                    <div class="col-12 pb-3 align-self-start">
                         <img class="img-fluid campus" src="images/rat.png">
                     </div>
         
@@ -797,8 +832,8 @@
         
         <div class="row px-0 justify-content-center">
             <div class="col-3 campus_div">
-                <div class="row responsive-card" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
-                    <div class="col-12 pb-3">
+                <div class="row responsive-card align-content-start" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+                    <div class="col-12 pb-3 align-self-start">
                         <img class="img-fluid campus" src="images/job.png">
                     </div>
         
@@ -834,7 +869,7 @@
     </div>
 
     <!-- Publications -->
-    <div class="container-fluid pt-5" style="padding-left: 5%; padding-right: 5%;">
+    <div class="container-fluid pt-5" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
         <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
             <p>Publications</p>
         </div>
@@ -909,7 +944,7 @@
     </div>
 
     <!-- Awards -->
-    <div class="container-fluid pt-5" style="padding-left: 5%; padding-right: 5%;">
+    <div class="container-fluid pt-5" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
         <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
             <p>Awards</p>
         </div>
@@ -923,15 +958,29 @@
                     <div class="timeline-step2">
                         <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
                             <div class="inner-circle2"></div>
-                            <p class="h6 mt-3 mb-1">July 2023</p>
-                            <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">San Francisco, CA</p>
+                            <p class="h6 mt-3 mb-1">Junary 2024</p>
+                            <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Computing Research Association (CRA) Education</p>
                         </div>
                     </div>                    
                     <div class="timeline-step2">
                         <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
                             <div class="inner-circle2"></div>
+                            <p class="h6 mt-3 mb-1">November 2023</p>
+                            <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">CSUF Undergraduate Research and Opportunity Center (UROC)</p>
+                        </div>
+                    </div>
+                    <div class="timeline-step2">
+                        <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
+                            <div class="inner-circle2"></div>
+                            <p class="h6 mt-3 mb-1">May 2023</p>
+                            <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">STEM Advantage</p>
+                        </div>
+                    </div>
+                    <div class="timeline-step2">
+                        <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
+                            <div class="inner-circle2"></div>
                             <p class="h6 mt-3 mb-1">March 2023</p>
-                            <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Las Vegas, NV</p>
+                            <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Advancing Women in Technology (AWT)</p>
                         </div>
                     </div>
                 </div>
@@ -940,11 +989,27 @@
     </div>
 
     <div class="container-fluid pt-2" style="padding-left: 5%; padding-right: 5%;">
-        <div class="row pb-4 justify-content-evenly">
+        <div class="row justify-content-evenly">
             <div class="col-12 campus_div mb-3">
                 <div class="row responsive-card_pub justify-content-center" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
                     <div class="col-sm-12 col-lg-3 pb-3 text-center">
-                        <img class="img-fluid logo" src="images/uroc.png">
+                        <img class="img-fluid logo2" src="images/cra.png">
+                    </div>
+        
+                    <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white;">
+                        <p><b>Outstanding Undergraduate Researcher Award (URA)</b></p>
+
+                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                            <p><i>Awarded Honorable Mention for demonstrating outstanding potential in computing research</i></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12 campus_div mb-3">
+                <div class="row responsive-card_pub justify-content-center" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+                    <div class="col-sm-12 col-lg-3 pb-3 text-center">
+                        <img class="img-fluid logo2" src="images/uroc.png">
                     </div>
         
                     <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white;">
@@ -960,14 +1025,14 @@
             <div class="col-12 campus_div mb-3">
                 <div class="row responsive-card_pub justify-content-center" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
                     <div class="col-sm-12 col-lg-3 pb-3 text-center">
-                        <img class="img-fluid logo" src="images/awt.jpg">
+                        <img class="img-fluid logo2" src="images/adv.jpg">
                     </div>
         
                     <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white; padding-top: 10%">
-                        <p><b>Advancing Women in Technology Scholarship</b></p>
+                        <p><b>STEM Advantage Scholarship</b></p>
 
                         <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
-                            <p>Awarded $7,500 grant to further education in the technology field</p>
+                            <p>Awarded $2,400 grant to attend classes full-time and graduate with less student debt</p>
                         </div>
                         </div>
                     </div>
@@ -977,14 +1042,14 @@
             <div class="col-12 campus_div mb-3">
                 <div class="row responsive-card_pub justify-content-center" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
                     <div class="col-sm-12 col-lg-3 pb-3 text-center">
-                        <img class="img-fluid logo" src="images/adv.jpg">
+                        <img class="img-fluid logo2" src="images/awt.jpg">
                     </div>
         
                     <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white; padding-top: 10%">
-                        <p><b>STEM Advantage</b></p>
+                        <p><b>AWT Scholarship</b></p>
 
                         <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
-                            <p>Awarded $2,400 grant to attend classes full-time and graduate with less student debt</p>
+                            <p>Awarded $7,500 grant to further education in the technology field</p>
                         </div>
                         </div>
                     </div>
@@ -994,7 +1059,7 @@
     </div>
 
     <!-- Footer -->
-    <div class="container">
+    <div class="container" style="padding-top: 5%;">
         <div class="row">
             <div class="btn-toolbar justify-content-center" role="toolbar">
                 <a href="mailto:sandra.nguyen9@csu.fullerton.edu">
