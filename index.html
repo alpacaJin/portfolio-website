@@ -157,6 +157,19 @@
                 font-size: 2rem;
             }
         }
+
+        /* Div */
+        @media (min-width: 576px) {
+            .responsive-card-bio {
+                width: 79%;
+            }
+        }
+
+        @media (max-width: 575px) {
+            .responsive-card-bio {
+               width: 100%;
+            }
+        }
     </style>
 
     <!-- Education -->
@@ -231,13 +244,83 @@
 
         /* Div */
         @media (min-width: 576px) {
-            .responsive-card_edu {
+            .responsive-card-edu {
                 width: 80%;
             }
         }
 
         @media (max-width: 575px) {
-            .responsive-card_edu {
+            .responsive-card-edu {
+               width: 100%;
+            }
+        }
+    </style>
+
+    <!-- Experience -->
+    <style>
+        /* Image */
+        @media (min-width: 992px) {
+            .work {
+                margin-right: 2rem;
+                margin-left: 1rem;
+                margin-top: 3rem;
+                margin-bottom: 3rem;                
+                border-radius: 30px;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .work {
+                margin-right: 1rem;
+                margin-left: 1rem;
+                margin-top: 2rem;
+                margin-bottom: 2rem;  
+                border-radius: 30px;
+                width: 80%;
+                height: auto;
+            }
+        }
+
+        @media (max-width: 414px) {
+            .work {
+                margin-right: 1rem;
+                margin-left: 1rem;
+                margin-top: 2rem;
+                margin-bottom: 2rem; 
+                border-radius: 30px;
+            }
+        }
+
+
+        /* Carousel controls */
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 7%;
+            font-size: 1rem;
+            color: rgb(246, 149, 56, 0.9);
+        }
+
+        .carousel-control-prev-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='orange' viewBox='0 0 24 24'%3e%3cpath d='M15.41 7.66L10.83 12l4.58 4.34L14 18l-6-6 6-6z'/%3e%3c/svg%3e");
+            width: 2em;
+            height: 2em;
+        }
+
+        .carousel-control-next-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='orange' viewBox='0 0 24 24'%3e%3cpath d='M8.59 16.34L13.17 12 8.59 7.66 10 6.25l6 6-6 6z'/%3e%3c/svg%3e");
+            width: 2em;
+            height: 2em;
+        }
+
+        /* Div */
+        @media (min-width: 576px) {
+            .responsive-card-exp {
+                width: 50%;
+            }
+        }
+
+        @media (max-width: 575px) {
+            .responsive-card-exp {
                width: 100%;
             }
         }
@@ -374,13 +457,13 @@
 
         /* Div */
         @media (min-width: 576px) {
-            .responsive-card_pub {
+            .responsive-card-pub {
                 width: 50%;
             }
         }
 
         @media (max-width: 575px) {
-            .responsive-card_pub {
+            .responsive-card-pub {
                width: 100%;
             }
         }
@@ -530,14 +613,14 @@
             </div>
 
             <div class="col-md-3 col-lg-3 text-center text-lg-start" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
-                <p class="responsive-sub pt-2 mx-0">Welcome! Get to know me through my projects and achievements. 🐡</p>
+                <p class="responsive-sub pt-2 mx-0">Welcome! Get to know me through my projects and achievements. 🐟</p>
             </div>
         </div>
     </div>
 
     <!-- Bio -->
     <div class="container-fluid pt-5" style="padding-left: 10%; padding-right: 10%;">
-        <div class="row justify-content-center" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; width: 79%; margin: auto;">
+        <div class="row justify-content-center responsive-card-bio" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto;">
             <img class="img-fluid responsive-pfp col-sm-5 col-md-5 col-lg-4" src="images/pfp.jpg" style="border-radius: 30px;">
 
             <div class="col-sm-6 col-md-6 col-lg-6 responsive-text" style="font-family: 'Afacad'; color: white;">
@@ -564,7 +647,7 @@
     <div class="container-fluid pt-2" style="padding-left: 5%; padding-right: 5%;">
         <div class="row justify-content-center">
             <div class="col-3 campus_div">
-                <div class="row responsive-card_edu align-content-start" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+                <div class="row responsive-card-edu align-content-start" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
                     <div class="col-12 pb-3 align-self-start">
                         <img class="img-fluid campus" src="images/csuf.jpg">
                     </div>
@@ -582,7 +665,7 @@
             </div>
             
             <div class="col-3 campus_div">
-                <div class="row responsive-card_edu align-content-start" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+                <div class="row responsive-card-edu align-content-start" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
                     <div class="col-12 pb-3 align-self-start">
                         <img class="img-fluid campus" src="images/fv.jpg">
                     </div>
@@ -605,6 +688,99 @@
     <div class="container-fluid pt-5" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
         <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
             <p>Experience</p>
+        </div>
+    </div>
+
+    <!-- Carousel -->
+    <div class="container-fluid pt-2" style="padding-left: 5%; padding-right: 5%;">
+        <div class="row justify-content-center">
+            <div class="col-6 responsive-card-exp">
+                <div id="expCarousel" class="carousel slide" data-bs-ride="false">
+                    <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+                        <div class="carousel-indicators px-0 mx-0">
+                            <button type="button" data-bs-target="#expCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#expCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#expCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        </div>
+                        
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="row justify-content-evenly">
+                                    <div class="col-3">
+                                        <img class="img-fluid work" src="images/wicse.png">
+                                    </div>
+
+                                    <div class="col-8" style="padding-top: 5%; padding-bottom: 5%;">
+                                        <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
+                                            <p><b>Community Tutor & Student Assistant</b></p>
+                                            <div class="responsive-caption" style="font-style: italic">
+                                                <p>August 2022 - Present</p>
+                                            </div>
+                                            <div class="col-12 pb-4 responsive-caption" style= "padding-right: 5%;">
+                                                <p>🪝 Co-organizing weekly in-person workshops, panels, and luncheons to empower 1500+ women in their computer science and engineering careers with opportunities for both professional and personal development</p>
+                                                <p>🪝 Spearheading web development efforts for the annual ECS Diversity & Leadership Summit, designed to support students in navigating the implications of AI on leadership and diversity from an industry standpoint</p>
+                                                <p>🪝 Motivating peers and reinforcing efficient programming strategies through collaborative instruction in intro to computer science and mathematical structures courses to enhance student learning and career success</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="carousel-item">
+                                <div class="row justify-content-evenly">
+                                    <div class="col-3">
+                                        <img class="img-fluid work" src="images/%.jpg">
+                                    </div>
+
+                                    <div class="col-8" style="padding-top: 5%; padding-bottom: 5%;">
+                                        <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
+                                            <p><b>Campus Director & Associate Program Lead</b></p>
+                                            <div class="responsive-caption" style="font-style: italic">
+                                                <p>August 2022 - Present</p>
+                                            </div>
+                                            <div class="col-12 pb-2 responsive-caption" style= "padding-right: 5%;">
+                                                <p>🪝 Leading a team on campus to coordinate with six CS & ENGR departments to collect anonymous survey data on student culture, learning environment, sense of belonging, and microagressions in their computer science (and related fields) community</p>
+                                                <p>🪝 Fostering cross-collaboration with 12+ campus directors throughout the country to ensure the success of new year campaigns, prioritizing data-driven advocacy in the nonprofit space</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="carousel-item">
+                                <div class="row justify-content-evenly">
+                                    <div class="col-3">
+                                        <img class="img-fluid work" src="images/cic.jpg">
+                                    </div>
+
+                                    <div class="col-8" style="padding-top: 5%; padding-bottom: 5%;">
+                                        <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
+                                            <p><b>Peer Mentor</b></p>
+                                            <div class="responsive-caption" style="font-style: italic">
+                                                <p>June 2023 - Present</p>
+                                            </div>
+                                            <div class="col-12 pb-2 responsive-caption" style= "padding-right: 5%;">
+                                                <p>🪝 Peer advising 100+ students from local community colleges in their respective data science and pairs trading summer research projects</p>
+                                                <p>🪝 Guiding female freshmen and transfer students in adjusting to their academic environments via goal-setting strategies and problem solving methods</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="carousel-control-prev" type="button" data-bs-target="#expCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </button>
+
+                        <button class="carousel-control-next" type="button" data-bs-target="#expCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -788,28 +964,6 @@
             <div class="col-3 campus_div">
                 <div class="row responsive-card align-content-start" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
                     <div class="col-12 pb-3 align-self-start">
-                        <img class="img-fluid campus" src="images/ad.png">
-                    </div>
-        
-                    <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
-                        <p><b>Data Science Analysis of Malicious Ads and Threat Detection Automation for Cybersecurity Progress</b></p>
-
-                        <div class="col-12 py-0 pb-3">
-                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">BeautifulSoup</button>
-                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Random Forest</button>
-                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Streamlit</button>
-                        </div>
-
-                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
-                            <p>Novel approach to automating the analysis of malicious content on the internet to protect users against Google ad fraud.</p>
-                        </div>      
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-3 campus_div">
-                <div class="row responsive-card align-content-start" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
-                    <div class="col-12 pb-3 align-self-start">
                         <img class="img-fluid campus" src="images/rat.png">
                     </div>
         
@@ -825,6 +979,28 @@
                         <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
                             <p>Data science & statistics-informed analysis of neuronal activity from a rodent-based odor experiment to determine hippocampal involvement in temporal event organization.</p>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-3 campus_div">
+                <div class="row responsive-card align-content-start" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+                    <div class="col-12 pb-3 align-self-start">
+                        <img class="img-fluid campus" src="images/ad.png">
+                    </div>
+        
+                    <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
+                        <p><b>Data Science Analysis of Malicious Ads and Threat Detection Automation for Cybersecurity Progress</b></p>
+
+                        <div class="col-12 py-0 pb-3">
+                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">BeautifulSoup</button>
+                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Random Forest</button>
+                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Streamlit</button>
+                        </div>
+
+                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                            <p>Novel approach to automating the analysis of malicious content on the internet to protect users against Google ad fraud.</p>
+                        </div>      
                     </div>
                 </div>
             </div>
@@ -902,7 +1078,7 @@
     <div class="container-fluid pt-2" style="padding-left: 5%; padding-right: 5%;">
         <div class="row pb-4 justify-content-evenly">
             <div class="col-12 campus_div mb-3">
-                <div class="row responsive-card_pub justify-content-center" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+                <div class="row responsive-card-pub justify-content-center" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
                     <div class="col-sm-12 col-lg-3 pb-3 text-center">
                         <img class="img-fluid logo" src="images/ccwc.png">
                     </div>
@@ -922,7 +1098,7 @@
             </div>
 
             <div class="col-12 campus_div mb-3">
-                <div class="row responsive-card_pub justify-content-center" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+                <div class="row responsive-card-pub justify-content-center" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
                     <div class="col-sm-12 col-lg-3 pb-3 text-center">
                         <img class="img-fluid logo" src="images/ahfe.png">
                     </div>
@@ -991,7 +1167,7 @@
     <div class="container-fluid pt-2" style="padding-left: 5%; padding-right: 5%;">
         <div class="row justify-content-evenly">
             <div class="col-12 campus_div mb-3">
-                <div class="row responsive-card_pub justify-content-center" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+                <div class="row responsive-card-pub justify-content-center" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
                     <div class="col-sm-12 col-lg-3 pb-3 text-center">
                         <img class="img-fluid logo2" src="images/cra.png">
                     </div>
@@ -1007,7 +1183,7 @@
             </div>
             
             <div class="col-12 campus_div mb-3">
-                <div class="row responsive-card_pub justify-content-center" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+                <div class="row responsive-card-pub justify-content-center" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
                     <div class="col-sm-12 col-lg-3 pb-3 text-center">
                         <img class="img-fluid logo2" src="images/uroc.png">
                     </div>
@@ -1023,7 +1199,7 @@
             </div>
 
             <div class="col-12 campus_div mb-3">
-                <div class="row responsive-card_pub justify-content-center" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+                <div class="row responsive-card-pub justify-content-center" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
                     <div class="col-sm-12 col-lg-3 pb-3 text-center">
                         <img class="img-fluid logo2" src="images/adv.jpg">
                     </div>
@@ -1040,7 +1216,7 @@
             </div>
 
             <div class="col-12 campus_div mb-3">
-                <div class="row responsive-card_pub justify-content-center" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+                <div class="row responsive-card-pub justify-content-center" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
                     <div class="col-sm-12 col-lg-3 pb-3 text-center">
                         <img class="img-fluid logo2" src="images/awt.jpg">
                     </div>
@@ -1059,17 +1235,17 @@
     </div>
 
     <!-- Footer -->
-    <div class="container" style="padding-top: 5%;">
+    <div class="container" style="padding-top: 3%;">
         <div class="row">
             <div class="btn-toolbar justify-content-center" role="toolbar">
                 <a href="mailto:sandra.nguyen9@csu.fullerton.edu">
-                    <em class="fa-solid fa-envelope mx-2" style="color: white; font-size: 1.5rem;"></em> 
+                    <em class="fa-solid fa-envelope mx-2" style="color: white; font-size: 2rem;"></em> 
                 </a>
                 <a href="http://www.linkedin.com/in/sandra-nguyen9"> 
-                    <em class="fa-brands fa-linkedin mx-2" style="color: white; font-size: 1.5rem;"></em>
+                    <em class="fa-brands fa-linkedin mx-2" style="color: white; font-size: 2rem;"></em>
                 </a>
                 <a href="https://github.com/alpacaJin"> 
-                    <em class="fa-brands fa-github mx-2" style="color: white; font-size: 1.5rem;"></em>
+                    <em class="fa-brands fa-github mx-2" style="color: white; font-size: 2rem;"></em>
                 </a>
             </div>
         </div>
