@@ -58,10 +58,15 @@
         .static-orange:hover {
             border-color: rgb(246, 149, 56, 0.9);
         }
+    </style>
 
-        /* Blue */
-        
-
+    <!-- Tag & Cards-->
+    <style>
+        a {
+            text-decoration: none;
+            scroll-behavior: smooth;
+            cursor: pointer;
+        }
     </style>
 
     <!-- Sub Header -->
@@ -202,7 +207,7 @@
         @media (max-width: 991px) {
             .campus_div {
                 width: 100%;
-                margin-bottom: 20px;
+                padding-bottom: 5%;
                 padding-left: 10;
                 padding-right: 10; 
             }
@@ -211,10 +216,43 @@
         @media (max-width: 414px) {
             .campus_div {
                 width: 100%;
-                margin-bottom: 20px;
+                padding-bottom: 5%;
                 padding-left: 10;
                 padding-right: 10; 
             }
+        }
+
+        @media (max-width: 991px) {
+            .campus_div2 {
+                width: 100%;
+                padding-left: 10;
+                padding-right: 10; 
+            }
+        }
+
+        @media (max-width: 414px) {
+            .campus_div2 {
+                width: 100%;
+                padding-left: 10;
+                padding-right: 10; 
+            }
+        }
+
+        /* Hover */
+        .campus_div:hover {
+            transform: scale(1.05);
+            transition: all 0.5s ease;
+        }
+
+        /* Hover */
+        .campus_div2:hover {
+            transform: scale(1.05);
+            transition: all 0.5s ease;
+        }
+
+        .timeline.hover {
+            transform: scale(1.1);
+            transition: all 0.5s ease;
         }
 
         /* Text */
@@ -591,15 +629,22 @@
                     Projects
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Hackathons</a></li>
-                    <li><a class="dropdown-item" href="#">Research</a></li>
-                    <li><a class="dropdown-item" href="#">Publications</a></li>
-                    <li><a class="dropdown-item" href="#">Awards</a></li>
+                    <li><a class="dropdown-item" href="#hackathons">Hackathons</a></li>
+                    <li><a class="dropdown-item" href="#research">Research</a></li>
+                    <li><a class="dropdown-item" href="#publications">Publications</a></li>
+                    <li><a class="dropdown-item" href="#awards">Awards</a></li>
                 </ul>
             </div>
-            <div class="col-sm-1 col-md-1 col-lg-1 pt-2 text-center">Education</div>
-            <div class="col-sm-1 col-md-1 col-lg-1 pt-2 text-center">Experience</div>
-            <div class="col-sm-1 col-md-1 col-lg-6 pt-2 text-center text-lg-end">Contact Me</div>
+
+            <div class="col-sm-1 col-md-1 col-lg-1 pt-2 text-center">
+                <a href="#education" style="font-family: 'Afacad'; color: white;">Education</a>
+            </div>
+            <div class="col-sm-1 col-md-1 col-lg-1 pt-2 text-center">
+                <a href="#experience" style="font-family: 'Afacad'; color: white;">Experience</a>
+            </div>
+            <div class="col-sm-1 col-md-1 col-lg-6 pt-2 text-center text-lg-end">
+                <a href="#contact-me" style="font-family: 'Afacad'; color: white;">Contact Me</a>
+            </div>
         </div>
     </div>
 
@@ -631,14 +676,14 @@
                 <p>A 3rd-year computer science major at California State University, Fullerton, with experience in data science, machine learning, and cybersecurity. I am dedicated to building my technical skills by engaging with faculty-led research and building exploratory software projects that aim to challenge the issues of today.</p>
                 <p>As an Asian American woman in tech, I am a firm believer in organizations whose purpose is to support underrepresented groups and using my leadership roles to encourage my peers to transcend societal barriers.</p>
                 <div class="pt-2">
-                    <a class="btn outline-orange btn-sm" href="Sandra_Nguyen_Curriculum_Vitae.pdf" role="button" style="font-family: 'Afacad'; color: white; font-size: 1rem; width: 10rem;">Curriculum Vitae</a>
+                    <a class="btn outline-orange btn-sm" href="pdfs/Sandra_Nguyen_Curriculum_Vitae.pdf" role="button" style="font-family: 'Afacad'; color: white; font-size: 1rem; width: 10rem;" target="_blank">Curriculum Vitae</a>
                 </div>
             </div>
         </div>
     </div>
  
     <!-- Education -->
-    <div class="container-fluid pt-5" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
+    <div id="education" class="container-fluid pt-5" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
         <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
             <p>Education</p>
         </div>
@@ -646,8 +691,8 @@
 
     <div class="container-fluid pt-2" style="padding-left: 5%; padding-right: 5%;">
         <div class="row justify-content-center">
-            <div class="col-3 campus_div">
-                <div class="row responsive-card-edu align-content-start" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+            <div class="col-3 campus_div" onclick="window.open('https://www.fullerton.edu/', '_blank');" style="cursor: pointer;">
+                <div class="row responsive-card-edu align-content-start" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px;">
                     <div class="col-12 pb-3 align-self-start">
                         <img class="img-fluid campus" src="images/csuf.jpg">
                     </div>
@@ -664,7 +709,7 @@
                 </div>
             </div>
             
-            <div class="col-3 campus_div">
+            <div class="col-3 campus_div" onclick="window.open('https://www.fvhs.com/', '_blank');" style="cursor: pointer;">
                 <div class="row responsive-card-edu align-content-start" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
                     <div class="col-12 pb-3 align-self-start">
                         <img class="img-fluid campus" src="images/fv.jpg">
@@ -685,7 +730,7 @@
     </div>
 
     <!-- Experience -->
-    <div class="container-fluid pt-5" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
+    <div id="experience" class="container-fluid pt-5" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
         <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
             <p>Experience</p>
         </div>
@@ -706,7 +751,7 @@
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <div class="row justify-content-evenly">
-                                    <div class="col-3">
+                                    <div class="col-3" onclick="window.open('https://www.fullerton.edu/ecs/wicse/', '_blank');" style="cursor: pointer;">
                                         <img class="img-fluid work" src="images/wicse.png">
                                     </div>
 
@@ -718,7 +763,7 @@
                                             </div>
                                             <div class="col-12 pb-4 responsive-caption" style= "padding-right: 5%;">
                                                 <p>🪝 Co-organizing weekly in-person workshops, panels, and luncheons to empower 1500+ women in their computer science and engineering careers with opportunities for both professional and personal development</p>
-                                                <p>🪝 Spearheading web development efforts for the annual ECS Diversity & Leadership Summit, designed to support students in navigating the implications of AI on leadership and diversity from an industry standpoint</p>
+                                                <p>🪝 Spearheading web development efforts for the annual <span onclick="window.location.href='https://sites.google.com/view/ecsdls/home';" style="cursor: pointer; color: rgb(246, 149, 56, 0.9)">ECS Diversity & Leadership Summit</span>, designed to support students in navigating the implications of AI on leadership and diversity from an industry standpoint</p>
                                                 <p>🪝 Motivating peers and reinforcing efficient programming strategies through collaborative instruction in intro to computer science and mathematical structures courses to enhance student learning and career success</p>
                                             </div>
                                         </div>
@@ -728,7 +773,7 @@
 
                             <div class="carousel-item">
                                 <div class="row justify-content-evenly">
-                                    <div class="col-3">
+                                    <div class="col-3" onclick="window.open('https://www.percentageproject.org/', '_blank');" style="cursor: pointer;">
                                         <img class="img-fluid work" src="images/%.jpg">
                                     </div>
 
@@ -749,7 +794,7 @@
 
                             <div class="carousel-item">
                                 <div class="row justify-content-evenly">
-                                    <div class="col-3">
+                                    <div class="col-3" onclick="window.open('https://www.fullerton.edu/ecs/cicpcubed/index.php', '_blank');" style="cursor: pointer;">
                                         <img class="img-fluid work" src="images/cic.jpg">
                                     </div>
 
@@ -785,7 +830,7 @@
     </div>
 
     <!-- Hackathons -->
-    <div class="container-fluid pt-5" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
+    <div id="hackathons" class="container-fluid pt-5" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
         <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
             <p>Hackathons</p>
         </div>
@@ -798,23 +843,29 @@
                 <div class="timeline-steps aos-init aos-animate" data-aos="fade-up">
                     <div class="timeline-step">
                         <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div class="inner-circle"></div>
-                            <p class="h6 mt-3 mb-1">June 22-23, 2023</p>
-                            <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Tech Solutions to Reduce Sexualy Transmitted Infections Hackathon @ National Academy of Medicine</p>
+                            <div id="hack-1" class="timeline">
+                                <div class="inner-circle"></div>
+                                <p class="h6 mt-3 mb-1">June 22-23, 2023</p>
+                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Tech Solutions to Reduce Sexualy Transmitted Infections Hackathon @ National Academy of Medicine</p>    
+                            </div>
                         </div>
                     </div>
                     <div class="timeline-step">
                         <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div class="inner-circle"></div>
-                            <p class="h6 mt-3 mb-1">April 15-16, 2023</p>
-                            <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Embark Datathon @ UCI</p>
+                            <div id="hack-2" class="timeline">
+                                <div class="inner-circle"></div>
+                                <p class="h6 mt-3 mb-1">April 15-16, 2023</p>
+                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Embark Datathon @ UCI</p>
+                            </div>
                         </div>
                     </div>
                     <div class="timeline-step">
                         <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div class="inner-circle"></div>
-                            <p class="h6 mt-3 mb-1">April 8-9, 2023</p>
-                            <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Fullyhacks Hackathon @ CSUF</p>
+                            <div id="hack-3" class="timeline">
+                                <div class="inner-circle"></div>
+                                <p class="h6 mt-3 mb-1">April 8-9, 2023</p>
+                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Fullyhacks Hackathon @ CSUF</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -824,7 +875,7 @@
 
     <div class="container-fluid pt-2" style="padding-left: 5%; padding-right: 5%;">
         <div class="row pb-2 justify-content-center">
-            <div class="col-3 campus_div">
+            <div class="col-3 campus_div" data-timeline-id="hack-1" onclick="window.open('https://deepnote.com/workspace/dtw-599cab8f-9ce0-4077-9ff1-ca65f303664e/project/DTW-f5f0b150-de2c-4cc7-9b95-d4778c8e2160/notebook/ML%20Proj-6128f0b892ff4aa0b7652f124a20bac2', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="cursor: pointer;">
                 <div class="row responsive-card align-content-start" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
                     <div class="col-12 pb-3 align-self-start">
                         <img class="img-fluid campus" src="images/rheia.png">
@@ -846,7 +897,7 @@
                 </div>
             </div>
             
-            <div class="col-3 campus_div">
+            <div class="col-3 campus_div" data-timeline-id="hack-2" onclick="window.open('https://devpost.com/software/mischief-in-montreal', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="cursor: pointer;">
                 <div class="row responsive-card align-content-start" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
                     <div class="col-12 pb-3 align-self-start">
                         <img class="img-fluid campus" src="images/montreal.png">
@@ -868,7 +919,7 @@
                 </div>
             </div>
         
-            <div class="col-3 campus_div">
+            <div class="col-3 campus_div" data-timeline-id="hack-3" onclick="window.open('https://github.com/fooledyouonce/FH_2023_TECS', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="cursor: pointer;">
                 <div class="row responsive-card align-content-start" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
                     <div class="col-12 pb-3 align-self-start">
                         <img class="img-fluid campus" src="images/green.png">
@@ -893,7 +944,7 @@
     </div>
 
     <!-- Research -->
-    <div class="container-fluid pt-5" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
+    <div id="research" class="container-fluid pt-5" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
         <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
             <p>Research</p>
         </div>
@@ -938,8 +989,8 @@
     </div>
 
     <div class="container-fluid pt-2" style="padding-left: 5%; padding-right: 5%;">
-        <div class="row pb-4 justify-content-center">
-            <div class="col-3 campus_div">
+        <div class="row justify-content-center">
+            <div class="col-3 campus_div" onclick="window.open('https://www.canva.com/design/DAF0YChll3g/wlt1i57FaB1lEia5-O_0OA/view?utm_content=DAF0YChll3g&utm_campaign=designshare&utm_medium=link&utm_source=editor', '_blank');" style="cursor: pointer;">
                 <div class="row responsive-card align-content-start" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
                     <div class="col-12 pb-3 align-self-start">
                         <img class="img-fluid campus" src="images/pho.png">
@@ -961,7 +1012,7 @@
                 </div>
             </div>
 
-            <div class="col-3 campus_div">
+            <div class="col-3 campus_div" onclick="window.open('pdfs/Rat-Poster.pdf', '_blank');" style="cursor: pointer;">
                 <div class="row responsive-card align-content-start" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
                     <div class="col-12 pb-3 align-self-start">
                         <img class="img-fluid campus" src="images/rat.png">
@@ -983,7 +1034,7 @@
                 </div>
             </div>
 
-            <div class="col-3 campus_div">
+            <div class="col-3 pb-0 campus_div" onclick="window.open('pdfs/Ad-Poster.pdf', '_blank');" style="cursor: pointer;">
                 <div class="row responsive-card align-content-start" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
                     <div class="col-12 pb-3 align-self-start">
                         <img class="img-fluid campus" src="images/ad.png">
@@ -1006,8 +1057,8 @@
             </div>
         </div>
         
-        <div class="row px-0 justify-content-center">
-            <div class="col-3 campus_div">
+        <div class="row px-0 pt-5 justify-content-center">
+            <div class="col-3 campus_div2" onclick="window.open('https://docs.google.com/presentation/d/e/2PACX-1vTnE7UZyXSipadZj8svvPqye-VYFhrQzS0CD64-_STG9TZyR7ApPPs-XeJh8kkoVHpkdheNgWaljkoE/pub?start=false&loop=false&delayms=3000', '_blank');" style="cursor: pointer;">
                 <div class="row responsive-card align-content-start" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
                     <div class="col-12 pb-3 align-self-start">
                         <img class="img-fluid campus" src="images/job.png">
@@ -1030,13 +1081,13 @@
             </div>
 
             <!-- Empty divs -->
-            <div class="col-3 campus_div">
+            <div class="col-3 campus_div2" style="cursor: default;">
                 <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 40px;">
                     <div class="empty-div"></div>
                 </div>
             </div>
 
-            <div class="col-3 campus_div">
+            <div class="col-3 campus_div2" style="cursor: default;">
                 <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 40px;">
                     <div class="empty-div"></div>
                 </div>
@@ -1045,7 +1096,7 @@
     </div>
 
     <!-- Publications -->
-    <div class="container-fluid pt-5" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
+    <div id="publications" class="container-fluid pt-5" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
         <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
             <p>Publications</p>
         </div>
@@ -1056,6 +1107,13 @@
         <div class="row pt-2 pb-2">
             <div class="col">
                 <div class="timeline-steps2 aos-init aos-animate" data-aos="fade-up">
+                    <div class="timeline-step2">
+                        <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
+                            <div class="inner-circle2"></div>
+                            <p class="h6 mt-3 mb-1">April, 2025</p>
+                            <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Yokohama, Japan</p>
+                        </div>
+                    </div>
                     <div class="timeline-step2">
                         <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
                             <div class="inner-circle2"></div>
@@ -1076,30 +1134,37 @@
     </div>
 
     <div class="container-fluid pt-2" style="padding-left: 5%; padding-right: 5%;">
-        <div class="row pb-4 justify-content-evenly">
-            <div class="col-12 campus_div mb-3">
+        <div class="row pb-2 justify-content-evenly">
+            <div class="col-12 campus_div mb-4">
                 <div class="row responsive-card-pub justify-content-center" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
-                    <div class="col-sm-12 col-lg-3 pb-3 text-center">
-                        <img class="img-fluid logo" src="images/ccwc.png">
+                    <div class="col-sm-12 col-lg-3 pb-3 text-center" onclick="window.open('https://chi2025.acm.org/', '_blank');" style="cursor: pointer;">
+                        <img class="img-fluid logo" src="images/chi.png">
                     </div>
         
-                    <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white;">
-                        <p><b>Data Science Analysis of Malicious Ads and Threat Detection Automation for Cybersecurity Progress</b></p>
+                    <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white; cursor: pointer;">
+                        <p><b>Phocrastination: A Game-Based Approach to Assessing and Classifying Academic Procrastination in College Students</b></p>
 
                         <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
-                            <p><i>2023 IEEE 13th Annual Computing and Communication Workshop and Conference (CCWC)</i></p>
+                            <p><i>2025 ACM Computer Human Interaction (CHI)</i></p>
+                            <p>Expected Author & Presenter</p>
+                        </div>
+
+                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                            <p><i>2024 National Conference on Undergraduate Research (NCUR)</i></p>
+                            <p>Expected Presenter</p>
                         </div>
                         
                         <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
-                            <p>Author & Presenter</p>
+                            <p><i>2023 Southern California Conference for Undergraduate Research (SCCUR)</i></p>
+                            <p>Presenter</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-12 campus_div mb-3">
+            <div class="col-12 campus_div mb-4" onclick="window.open('https://openaccess.cms-conferences.org/publications/book/978-1-958651-70-4/article/978-1-958651-70-4_8', '_blank');" style="cursor: pointer;">
                 <div class="row responsive-card-pub justify-content-center" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
-                    <div class="col-sm-12 col-lg-3 pb-3 text-center">
+                    <div class="col-sm-12 col-lg-3 pb-3 text-center" onclick="window.open('https://ahfe.org/', '_blank');" style="cursor: pointer;">
                         <img class="img-fluid logo" src="images/ahfe.png">
                     </div>
         
@@ -1108,10 +1173,29 @@
 
                         <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
                             <p><i>14th International Conference on Applied Human Factors and Ergonomics (AHFE 2023)</i></p>
+                            <p>Co-Author</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 campus_div mb-4" onclick="window.open('https://ieeexplore.ieee.org/document/10099325', '_blank');" style="cursor: pointer;">
+                <div class="row responsive-card-pub justify-content-center" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+                    <div class="col-sm-12 col-lg-3 pb-3 text-center" onclick="window.open('https://ieee-ccwc.org/', '_blank');" style="cursor: pointer;">
+                        <img class="img-fluid logo" src="images/ccwc.png">
+                    </div>
+        
+                    <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white;">
+                        <p><b>Data Science Analysis of Malicious Ads and Threat Detection Automation for Cybersecurity Progress</b></p>
+
+                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                            <p><i>2023 IEEE 13th Annual Computing and Communication Workshop and Conference (CCWC)</i></p>
+                            <p>Author & Presenter</p>
                         </div>
                         
                         <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
-                            <p>Co-Author</p>
+                            <p><i>2022 Southern California Conference for Undergraduate Research (SCCUR)</i></p>
+                            <p>Presenter</p>
                         </div>
                     </div>
                 </div>
@@ -1120,7 +1204,7 @@
     </div>
 
     <!-- Awards -->
-    <div class="container-fluid pt-5" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
+    <div id="awards" class="container-fluid pt-5" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
         <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
             <p>Awards</p>
         </div>
@@ -1166,9 +1250,9 @@
 
     <div class="container-fluid pt-2" style="padding-left: 5%; padding-right: 5%;">
         <div class="row justify-content-evenly">
-            <div class="col-12 campus_div mb-3">
+            <div class="col-12 campus_div mb-4" onclick="window.open('https://cra.org/crn/2024/01/outstanding-undergraduate-research-awards-winners-announcement/', '_blank');" style="cursor: pointer;">
                 <div class="row responsive-card-pub justify-content-center" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
-                    <div class="col-sm-12 col-lg-3 pb-3 text-center">
+                    <div class="col-sm-12 col-lg-3 pb-3 text-center" onclick="window.open('https://cra.org/crae/', '_blank');" style="cursor: pointer;">
                         <img class="img-fluid logo2" src="images/cra.png">
                     </div>
         
@@ -1176,35 +1260,35 @@
                         <p><b>Outstanding Undergraduate Researcher Award (URA)</b></p>
 
                         <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
-                            <p><i>Awarded Honorable Mention for demonstrating outstanding potential in computing research</i></p>
+                            <p>Awarded Honorable Mention for demonstrating outstanding potential in computing research</p>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="col-12 campus_div mb-3">
+            <div class="col-12 campus_div mb-4">
                 <div class="row responsive-card-pub justify-content-center" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
-                    <div class="col-sm-12 col-lg-3 pb-3 text-center">
+                    <div class="col-sm-12 col-lg-3 pb-3 text-center" onclick="window.open('https://cra.org/crn/2024/01/outstanding-undergraduate-research-awards-winners-announcement/', '_blank');" style="cursor: pointer;">
                         <img class="img-fluid logo2" src="images/uroc.png">
                     </div>
         
-                    <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white;">
+                    <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white; cursor: pointer;">
                         <p><b>UROC Fellowship Award</b></p>
 
                         <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
-                            <p><i>Awarded $5,000 grant to conduct and present research at annual research symposium</i></p>
+                            <p>Awarded $5,000 grant to conduct and present research at annual research symposium</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-12 campus_div mb-3">
+            <div class="col-12 campus_div mb-4">
                 <div class="row responsive-card-pub justify-content-center" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
-                    <div class="col-sm-12 col-lg-3 pb-3 text-center">
+                    <div class="col-sm-12 col-lg-3 pb-3 text-center" onclick="window.open('https://stemadvantage.org/', '_blank');" style="cursor: pointer;">
                         <img class="img-fluid logo2" src="images/adv.jpg">
                     </div>
         
-                    <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white; padding-top: 10%">
+                    <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white; cursor: pointer;">
                         <p><b>STEM Advantage Scholarship</b></p>
 
                         <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
@@ -1215,13 +1299,13 @@
                 </div>
             </div>
 
-            <div class="col-12 campus_div mb-3">
+            <div class="col-12 campus_div mb-4" onclick="window.open('https://awtca.org/2023/06/8268/', '_blank');" style="cursor: pointer;">
                 <div class="row responsive-card-pub justify-content-center" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
-                    <div class="col-sm-12 col-lg-3 pb-3 text-center">
+                    <div class="col-sm-12 col-lg-3 pb-3 text-center" onclick="window.open('https://awtca.org/', '_blank');" style="cursor: pointer;">
                         <img class="img-fluid logo2" src="images/awt.jpg">
                     </div>
         
-                    <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white; padding-top: 10%">
+                    <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white;">
                         <p><b>AWT Scholarship</b></p>
 
                         <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
@@ -1235,7 +1319,7 @@
     </div>
 
     <!-- Footer -->
-    <div class="container" style="padding-top: 3%;">
+    <div id="contact-me" class="container" style="padding-top: 3%;">
         <div class="row">
             <div class="btn-toolbar justify-content-center" role="toolbar">
                 <a href="mailto:sandra.nguyen9@csu.fullerton.edu">
@@ -1251,11 +1335,21 @@
         </div>
     </div>
 
-    <div class="container-fluid ">
-        <div class="row py-2 justify-content-center responsive-sub " style="color: white;">
+    <div class="container-fluid">
+        <div class="row py-2 mx-0 pb-4 justify-content-center responsive-sub " style="color: white;">
             Designed & made with ♡ by Sandra Nguyen @2024
         </div>
     </div>
+
+    <!-- Hover synchronization -->
+    <script>
+        function handleHover(card) {
+            const timelineId = card.getAttribute("data-timeline-id");
+            const timelineStep = document.getElementById(timelineId);
+    
+            timelineStep.classList.toggle("hover");
+        }
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
