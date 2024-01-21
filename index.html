@@ -302,8 +302,9 @@
                 margin-right: 2rem;
                 margin-left: 1rem;
                 margin-top: 3rem;
-                margin-bottom: 3rem;                
+                margin-bottom: 3rem;
                 border-radius: 30px;
+                width: 90%;
             }
         }
 
@@ -314,21 +315,9 @@
                 margin-top: 2rem;
                 margin-bottom: 2rem;  
                 border-radius: 30px;
-                width: 80%;
-                height: auto;
+                width: 90%;
             }
         }
-
-        @media (max-width: 414px) {
-            .work {
-                margin-right: 1rem;
-                margin-left: 1rem;
-                margin-top: 2rem;
-                margin-bottom: 2rem; 
-                border-radius: 30px;
-            }
-        }
-
 
         /* Carousel controls */
         .carousel-control-prev,
@@ -467,28 +456,21 @@
         /* Image */
         @media (min-width: 992px) {
             .logo {
-                margin-right: 5%;
-                margin-left: 5%;
-                margin-top: 10%;
-                margin-bottom: 10%;
-                width: 80%;
+                margin-right: 2rem;
+                margin-left: 1rem;
+                margin-top: 2rem;
+                margin-bottom: 2rem;
+                border-radius: 30px;
+                width: 50%;
             }
         }
 
         @media (max-width: 991px) {
             .logo {
-                margin-right: 5%;
-                margin-left: 5%;
-                margin-top: 3%;
-                width: 50%;
-            }
-        }
-
-        @media (max-width: 414px) {
-            .logo {
-                margin-right: 5%;
-                margin-left: 5%;
-                margin-top: 3%;
+                margin-right: 1rem;
+                margin-left: 1rem;
+                margin-top: 2rem;
+                border-radius: 30px;
                 width: 50%;
             }
         }
@@ -581,41 +563,6 @@
             opacity: .5;
         }
     </style>
-
-    <!-- Awards -->
-    <style>
-        /* Image */
-        @media (min-width: 992px) {
-            .logo2 {
-                margin-right: 5%;
-                margin-left: 5%;
-                margin-top: 10%;
-                margin-bottom: 10%;
-                padding-top: 5%;
-                width: 80%;
-            }
-        }
-
-        @media (max-width: 991px) {
-            .logo2 {
-                margin-right: 5%;
-                margin-left: 5%;
-                margin-top: 3%;
-                padding-top: 5%;
-                width: 50%;
-            }
-        }
-
-        @media (max-width: 414px) {
-            .logo2 {
-                margin-right: 5%;
-                margin-left: 5%;
-                margin-top: 3%;
-                padding-top: 5%;
-                width: 50%;
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -658,7 +605,7 @@
             </div>
 
             <div class="col-md-3 col-lg-3 text-center text-lg-start" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
-                <p class="responsive-sub pt-2 mx-0">Welcome! Get to know me through my projects and achievements. 🐟</p>
+                <p class="responsive-sub pt-2 mx-0">Welcome! Get to know me through my projects and achievements. 🐡</p>
             </div>
         </div>
     </div>
@@ -691,8 +638,8 @@
 
     <div class="container-fluid pt-2" style="padding-left: 5%; padding-right: 5%;">
         <div class="row justify-content-center">
-            <div class="col-3 campus_div" onclick="window.open('https://www.fullerton.edu/', '_blank');" style="cursor: pointer;">
-                <div class="row responsive-card-edu align-content-start" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px;">
+            <div class="col-3">
+                <div class="row campus_div responsive-card-edu align-content-start" onclick="window.open('https://www.fullerton.edu/', '_blank');" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
                     <div class="col-12 pb-3 align-self-start">
                         <img class="img-fluid campus" src="images/csuf.jpg">
                     </div>
@@ -709,10 +656,10 @@
                 </div>
             </div>
             
-            <div class="col-3 campus_div" onclick="window.open('https://www.fvhs.com/', '_blank');" style="cursor: pointer;">
-                <div class="row responsive-card-edu align-content-start" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+            <div class="col-3">
+                <div class="row campus_div responsive-card-edu align-content-start" onclick="window.open('https://www.fvhs.com/', '_blank');" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
                     <div class="col-12 pb-3 align-self-start">
-                        <img class="img-fluid campus" src="images/fv.jpg">
+                        <img class="img-fluid campus" src="images/fv.jpg" style="width: 120%;">
                     </div>
         
                     <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
@@ -750,7 +697,7 @@
                         
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <div class="row justify-content-evenly">
+                                <div class="row justify-content-center">
                                     <div class="col-3" onclick="window.open('https://www.fullerton.edu/ecs/wicse/', '_blank');" style="cursor: pointer;">
                                         <img class="img-fluid work" src="images/wicse.png">
                                     </div>
@@ -772,7 +719,7 @@
                             </div>
 
                             <div class="carousel-item">
-                                <div class="row justify-content-evenly">
+                                <div class="row justify-content-center">
                                     <div class="col-3" onclick="window.open('https://www.percentageproject.org/', '_blank');" style="cursor: pointer;">
                                         <img class="img-fluid work" src="images/%.jpg">
                                     </div>
@@ -793,7 +740,7 @@
                             </div>
 
                             <div class="carousel-item">
-                                <div class="row justify-content-evenly">
+                                <div class="row justify-content-center">
                                     <div class="col-3" onclick="window.open('https://www.fullerton.edu/ecs/cicpcubed/index.php', '_blank');" style="cursor: pointer;">
                                         <img class="img-fluid work" src="images/cic.jpg">
                                     </div>
@@ -875,8 +822,8 @@
 
     <div class="container-fluid pt-2" style="padding-left: 5%; padding-right: 5%;">
         <div class="row pb-2 justify-content-center">
-            <div class="col-3 campus_div" data-timeline-id="hack-1" onclick="window.open('https://deepnote.com/workspace/dtw-599cab8f-9ce0-4077-9ff1-ca65f303664e/project/DTW-f5f0b150-de2c-4cc7-9b95-d4778c8e2160/notebook/ML%20Proj-6128f0b892ff4aa0b7652f124a20bac2', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="cursor: pointer;">
-                <div class="row responsive-card align-content-start" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+            <div class="col-3">
+                <div class="row campus_div responsive-card align-content-start" data-timeline-id="hack-1" onclick="window.open('https://deepnote.com/workspace/dtw-599cab8f-9ce0-4077-9ff1-ca65f303664e/project/DTW-f5f0b150-de2c-4cc7-9b95-d4778c8e2160/notebook/ML%20Proj-6128f0b892ff4aa0b7652f124a20bac2', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
                     <div class="col-12 pb-3 align-self-start">
                         <img class="img-fluid campus" src="images/rheia.png">
                     </div>
@@ -897,8 +844,8 @@
                 </div>
             </div>
             
-            <div class="col-3 campus_div" data-timeline-id="hack-2" onclick="window.open('https://devpost.com/software/mischief-in-montreal', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="cursor: pointer;">
-                <div class="row responsive-card align-content-start" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+            <div class="col-3">
+                <div class="row campus_div responsive-card align-content-start" data-timeline-id="hack-2" onclick="window.open('https://devpost.com/software/mischief-in-montreal', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
                     <div class="col-12 pb-3 align-self-start">
                         <img class="img-fluid campus" src="images/montreal.png">
                     </div>
@@ -919,8 +866,8 @@
                 </div>
             </div>
         
-            <div class="col-3 campus_div" data-timeline-id="hack-3" onclick="window.open('https://github.com/fooledyouonce/FH_2023_TECS', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="cursor: pointer;">
-                <div class="row responsive-card align-content-start" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+            <div class="col-3">
+                <div class="row campus_div responsive-card align-content-start" data-timeline-id="hack-3" onclick="window.open('https://github.com/fooledyouonce/FH_2023_TECS', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)"  style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
                     <div class="col-12 pb-3 align-self-start">
                         <img class="img-fluid campus" src="images/green.png">
                     </div>
@@ -957,30 +904,38 @@
                 <div class="timeline-steps aos-init aos-animate" data-aos="fade-up">
                     <div class="timeline-step">
                         <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div class="inner-circle"></div>
-                            <p class="h6 mt-3 mb-1">March 2023 - Present</p>
-                            <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Digital Learning Lab @ UCI</p>
+                            <div id="research-1" class="timeline">
+                                <div class="inner-circle"></div>
+                                <p class="h6 mt-3 mb-1">March 2023 - Present</p>
+                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Digital Learning Lab @ UCI</p>
+                            </div>
                         </div>
                     </div>
                     <div class="timeline-step">
                         <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div class="inner-circle"></div>
-                            <p class="h6 mt-3 mb-1">June 2023 - August 2023</p>
-                            <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">SoCal Data Science Program @ UCI</p>
+                            <div id="research-2" class="timeline">
+                                <div class="inner-circle"></div>
+                                <p class="h6 mt-3 mb-1">June 2023 - August 2023</p>
+                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">SoCal Data Science Program @ UCI</p>
+                            </div>
                         </div>
                     </div>
                     <div class="timeline-step">
                         <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div class="inner-circle"></div>
-                            <p class="h6 mt-3 mb-1">August 2022 - May 2023</p>
-                            <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">ASSURE-US @ CSUF</p>
+                            <div id="research-3" class="timeline">
+                                <div class="inner-circle"></div>
+                                <p class="h6 mt-3 mb-1">August 2022 - May 2023</p>
+                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">ASSURE-US @ CSUF</p>
+                            </div>
                         </div>
                     </div>
                     <div class="timeline-step">
                         <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div class="inner-circle"></div>
-                            <p class="h6 mt-3 mb-1">May 2022 - July 2022</p>
-                            <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">ASSURE-US SRE @ CSUF</p>
+                            <div id="research-4" class="timeline">
+                                <div class="inner-circle"></div>
+                                <p class="h6 mt-3 mb-1">May 2022 - July 2022</p>
+                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">ASSURE-US SRE @ CSUF</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -990,8 +945,8 @@
 
     <div class="container-fluid pt-2" style="padding-left: 5%; padding-right: 5%;">
         <div class="row justify-content-center">
-            <div class="col-3 campus_div" onclick="window.open('https://www.canva.com/design/DAF0YChll3g/wlt1i57FaB1lEia5-O_0OA/view?utm_content=DAF0YChll3g&utm_campaign=designshare&utm_medium=link&utm_source=editor', '_blank');" style="cursor: pointer;">
-                <div class="row responsive-card align-content-start" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+            <div class="col-3">
+                <div class="row campus_div responsive-card align-content-start" data-timeline-id="research-1" onclick="window.open('https://www.canva.com/design/DAF0YChll3g/wlt1i57FaB1lEia5-O_0OA/view?utm_content=DAF0YChll3g&utm_campaign=designshare&utm_medium=link&utm_source=editor', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
                     <div class="col-12 pb-3 align-self-start">
                         <img class="img-fluid campus" src="images/pho.png">
                     </div>
@@ -1012,10 +967,10 @@
                 </div>
             </div>
 
-            <div class="col-3 campus_div" onclick="window.open('pdfs/Rat-Poster.pdf', '_blank');" style="cursor: pointer;">
-                <div class="row responsive-card align-content-start" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+            <div class="col-3">
+                <div class="row campus_div responsive-card align-content-start" data-timeline-id="research-2" onclick="window.open('pdfs/Rat-Poster.pdf', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)"  style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
                     <div class="col-12 pb-3 align-self-start">
-                        <img class="img-fluid campus" src="images/rat.png">
+                        <img class="img-fluid campus" src="images/rat.png" style="width: 110%;">
                     </div>
         
                     <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
@@ -1034,10 +989,10 @@
                 </div>
             </div>
 
-            <div class="col-3 pb-0 campus_div" onclick="window.open('pdfs/Ad-Poster.pdf', '_blank');" style="cursor: pointer;">
-                <div class="row responsive-card align-content-start" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+            <div class="col-3 pb-0">
+                <div class="row campus_div responsive-card align-content-start" data-timeline-id="research-3" onclick="window.open('pdfs/Ad-Poster.pdf', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
                     <div class="col-12 pb-3 align-self-start">
-                        <img class="img-fluid campus" src="images/ad.png">
+                        <img class="img-fluid campus" src="images/ad.png" style="width: 110%;">
                     </div>
         
                     <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
@@ -1058,10 +1013,10 @@
         </div>
         
         <div class="row px-0 pt-5 justify-content-center">
-            <div class="col-3 campus_div2" onclick="window.open('https://docs.google.com/presentation/d/e/2PACX-1vTnE7UZyXSipadZj8svvPqye-VYFhrQzS0CD64-_STG9TZyR7ApPPs-XeJh8kkoVHpkdheNgWaljkoE/pub?start=false&loop=false&delayms=3000', '_blank');" style="cursor: pointer;">
-                <div class="row responsive-card align-content-start" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+            <div class="col-3">
+                <div class="row campus_div2 responsive-card align-content-start" data-timeline-id="research-4" onclick="window.open('https://docs.google.com/presentation/d/e/2PACX-1vTnE7UZyXSipadZj8svvPqye-VYFhrQzS0CD64-_STG9TZyR7ApPPs-XeJh8kkoVHpkdheNgWaljkoE/pub?start=false&loop=false&delayms=3000', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
                     <div class="col-12 pb-3 align-self-start">
-                        <img class="img-fluid campus" src="images/job.png">
+                        <img class="img-fluid campus" src="images/job.png" style="width: 110%;">
                     </div>
         
                     <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
@@ -1109,23 +1064,29 @@
                 <div class="timeline-steps2 aos-init aos-animate" data-aos="fade-up">
                     <div class="timeline-step2">
                         <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div class="inner-circle2"></div>
-                            <p class="h6 mt-3 mb-1">April, 2025</p>
-                            <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Yokohama, Japan</p>
+                            <div id="publications-1" class="timeline">
+                                <div class="inner-circle2"></div>
+                                <p class="h6 mt-3 mb-1">April, 2025</p>
+                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Yokohama, Japan</p>
+                            </div>
                         </div>
                     </div>
                     <div class="timeline-step2">
                         <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div class="inner-circle2"></div>
-                            <p class="h6 mt-3 mb-1">July 2023</p>
-                            <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">San Francisco, CA</p>
+                            <div id="publications-2" class="timeline">
+                                <div class="inner-circle2"></div>
+                                <p class="h6 mt-3 mb-1">July 2023</p>
+                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">San Francisco, CA</p>
+                            </div>
                         </div>
                     </div>                    
                     <div class="timeline-step2">
                         <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div class="inner-circle2"></div>
-                            <p class="h6 mt-3 mb-1">March 2023</p>
-                            <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Las Vegas, NV</p>
+                            <div id="publications-3" class="timeline">
+                                <div class="inner-circle2"></div>
+                                <p class="h6 mt-3 mb-1">March 2023</p>
+                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Las Vegas, NV</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1135,8 +1096,8 @@
 
     <div class="container-fluid pt-2" style="padding-left: 5%; padding-right: 5%;">
         <div class="row pb-2 justify-content-evenly">
-            <div class="col-12 campus_div mb-4">
-                <div class="row responsive-card-pub justify-content-center" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+            <div class="col-12 mb-4">
+                <div class="row campus_div2 responsive-card-pub justify-content-center" data-timeline-id="publications-1" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
                     <div class="col-sm-12 col-lg-3 pb-3 text-center" onclick="window.open('https://chi2025.acm.org/', '_blank');" style="cursor: pointer;">
                         <img class="img-fluid logo" src="images/chi.png">
                     </div>
@@ -1162,8 +1123,8 @@
                 </div>
             </div>
 
-            <div class="col-12 campus_div mb-4" onclick="window.open('https://openaccess.cms-conferences.org/publications/book/978-1-958651-70-4/article/978-1-958651-70-4_8', '_blank');" style="cursor: pointer;">
-                <div class="row responsive-card-pub justify-content-center" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+            <div class="col-12 mb-4">
+                <div class="row campus_div2 responsive-card-pub justify-content-center" data-timeline-id="publications-2" onclick="window.open('https://openaccess.cms-conferences.org/publications/book/978-1-958651-70-4/article/978-1-958651-70-4_8', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
                     <div class="col-sm-12 col-lg-3 pb-3 text-center" onclick="window.open('https://ahfe.org/', '_blank');" style="cursor: pointer;">
                         <img class="img-fluid logo" src="images/ahfe.png">
                     </div>
@@ -1179,8 +1140,8 @@
                 </div>
             </div>
 
-            <div class="col-12 campus_div mb-4" onclick="window.open('https://ieeexplore.ieee.org/document/10099325', '_blank');" style="cursor: pointer;">
-                <div class="row responsive-card-pub justify-content-center" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+            <div class="col-12 mb-4">
+                <div class="row campus_div2 responsive-card-pub justify-content-center" data-timeline-id="publications-3" onclick="window.open('https://ieeexplore.ieee.org/document/10099325', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
                     <div class="col-sm-12 col-lg-3 pb-3 text-center" onclick="window.open('https://ieee-ccwc.org/', '_blank');" style="cursor: pointer;">
                         <img class="img-fluid logo" src="images/ccwc.png">
                     </div>
@@ -1217,30 +1178,38 @@
                 <div class="timeline-steps2 aos-init aos-animate" data-aos="fade-up">
                     <div class="timeline-step2">
                         <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div class="inner-circle2"></div>
-                            <p class="h6 mt-3 mb-1">Junary 2024</p>
-                            <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Computing Research Association (CRA) Education</p>
+                            <div id="awards-1" class="timeline">
+                                <div class="inner-circle2"></div>
+                                <p class="h6 mt-3 mb-1">Junary 2024</p>
+                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Computing Research Association (CRA) Education</p>
+                            </div>
                         </div>
                     </div>                    
                     <div class="timeline-step2">
                         <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div class="inner-circle2"></div>
-                            <p class="h6 mt-3 mb-1">November 2023</p>
-                            <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">CSUF Undergraduate Research and Opportunity Center (UROC)</p>
+                            <div id="awards-2" class="timeline">
+                                <div class="inner-circle2"></div>
+                                <p class="h6 mt-3 mb-1">November 2023</p>
+                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">CSUF Undergraduate Research and Opportunity Center (UROC)</p>
+                            </div>
                         </div>
                     </div>
                     <div class="timeline-step2">
                         <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div class="inner-circle2"></div>
-                            <p class="h6 mt-3 mb-1">May 2023</p>
-                            <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">STEM Advantage</p>
+                            <div id="awards-3" class="timeline">
+                                <div class="inner-circle2"></div>
+                                <p class="h6 mt-3 mb-1">May 2023</p>
+                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">STEM Advantage</p>
+                            </div>
                         </div>
                     </div>
                     <div class="timeline-step2">
                         <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div class="inner-circle2"></div>
-                            <p class="h6 mt-3 mb-1">March 2023</p>
-                            <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Advancing Women in Technology (AWT)</p>
+                            <div id="awards-4" class="timeline">
+                                <div class="inner-circle2"></div>
+                                <p class="h6 mt-3 mb-1">March 2023</p>
+                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Advancing Women in Technology (AWT)</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1250,10 +1219,10 @@
 
     <div class="container-fluid pt-2" style="padding-left: 5%; padding-right: 5%;">
         <div class="row justify-content-evenly">
-            <div class="col-12 campus_div mb-4" onclick="window.open('https://cra.org/crn/2024/01/outstanding-undergraduate-research-awards-winners-announcement/', '_blank');" style="cursor: pointer;">
-                <div class="row responsive-card-pub justify-content-center" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+            <div class="col-12 mb-4">
+                <div class="row campus_div2 responsive-card-pub justify-content-center" data-timeline-id="awards-1" onclick="window.open('https://cra.org/crn/2024/01/outstanding-undergraduate-research-awards-winners-announcement/', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
                     <div class="col-sm-12 col-lg-3 pb-3 text-center" onclick="window.open('https://cra.org/crae/', '_blank');" style="cursor: pointer;">
-                        <img class="img-fluid logo2" src="images/cra.png">
+                        <img class="img-fluid logo" src="images/cra.png">
                     </div>
         
                     <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white;">
@@ -1266,10 +1235,10 @@
                 </div>
             </div>
             
-            <div class="col-12 campus_div mb-4">
-                <div class="row responsive-card-pub justify-content-center" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
-                    <div class="col-sm-12 col-lg-3 pb-3 text-center" onclick="window.open('https://cra.org/crn/2024/01/outstanding-undergraduate-research-awards-winners-announcement/', '_blank');" style="cursor: pointer;">
-                        <img class="img-fluid logo2" src="images/uroc.png">
+            <div class="col-12  mb-4">
+                <div class="row campus_div2 responsive-card-pub justify-content-center" data-timeline-id="awards-2" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+                    <div class="col-sm-12 col-lg-3 pb-3 text-center" onclick="window.open('https://cra.org/crn/2024/01/outstanding-undergraduate-research-awards-winners-announcement/', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="cursor: pointer;">
+                        <img class="img-fluid logo" src="images/uroc.png">
                     </div>
         
                     <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white; cursor: pointer;">
@@ -1282,10 +1251,10 @@
                 </div>
             </div>
 
-            <div class="col-12 campus_div mb-4">
-                <div class="row responsive-card-pub justify-content-center" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+            <div class="col-12 mb-4">
+                <div class="row campus_div2 responsive-card-pub justify-content-center" data-timeline-id="awards-3" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
                     <div class="col-sm-12 col-lg-3 pb-3 text-center" onclick="window.open('https://stemadvantage.org/', '_blank');" style="cursor: pointer;">
-                        <img class="img-fluid logo2" src="images/adv.jpg">
+                        <img class="img-fluid logo" src="images/adv.jpg">
                     </div>
         
                     <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white; cursor: pointer;">
@@ -1299,10 +1268,10 @@
                 </div>
             </div>
 
-            <div class="col-12 campus_div mb-4" onclick="window.open('https://awtca.org/2023/06/8268/', '_blank');" style="cursor: pointer;">
-                <div class="row responsive-card-pub justify-content-center" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+            <div class="col-12 mb-4">
+                <div class="row campus_div2 responsive-card-pub justify-content-center" data-timeline-id="awards-4" onclick="window.open('https://awtca.org/2023/06/8268/', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)"  style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
                     <div class="col-sm-12 col-lg-3 pb-3 text-center" onclick="window.open('https://awtca.org/', '_blank');" style="cursor: pointer;">
-                        <img class="img-fluid logo2" src="images/awt.jpg">
+                        <img class="img-fluid logo" src="images/awt.jpg">
                     </div>
         
                     <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white;">
