@@ -101,10 +101,6 @@
                 overflow: hidden;
             }
         }
-
-        #fish-video {
-            transition: opacity 1s ease-in-out;
-        }
     </style>
 
     <!-- Custom colors -->
@@ -1459,35 +1455,24 @@
             // Hide all videos initially
             videos.forEach(function(video) {
                 video.style.display = 'none';
-                video.style.opacity = 0;
             });
-
+        
             // Randomly select an index
             var randomIndex = Math.floor(Math.random() * videos.length);
 
             // Show the randomly selected video w/ fade-in effect
             videos[randomIndex].style.display = 'block';
-            setTimeout(function() {
-                videos[randomIndex].style.opacity = 1;
-            }, 10);
-
-            videos[randomIndex].style.opacity = 0;
 
             // Add an event listener to play the next video when current video ends
             videos[randomIndex].addEventListener('ended', function() {
-                // Hide the current video w/ fade-out effect
-                setTimeout(function() {
-                    videos[randomIndex].style.display = 'none';
-                }, 1000);
+                // Hide the current video
+                videos[randomIndex].style.opacity = 0;
                 
                 // Calculate the index of the next video
                 var nextIndex = (randomIndex + 1) % videos.length;
 
                 // Show next video w/ fade-in effect
                 videos[nextIndex].style.display = 'block';
-                setTimeout(function() {
-                    videos[nextIndex].style.opacity = 1;
-                }, 10);
 
                 videos[nextIndex].play();
             });
