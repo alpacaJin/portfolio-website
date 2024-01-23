@@ -101,6 +101,10 @@
                 overflow: hidden;
             }
         }
+
+        #fish-video {
+            transition: opacity 1s ease-in-out;
+        }
     </style>
 
     <!-- Custom colors -->
@@ -406,6 +410,12 @@
         }
 
         /* Div */
+        @media (min-width: 992px) {
+            .responsive-card-exp {
+                width: 50%;
+            }
+        }
+
         @media (min-width: 576px) {
             .responsive-card-exp {
                 width: 50%;
@@ -746,7 +756,7 @@
         </div>
     </div>
 
-    <div class="container-fluid pt-2" style="padding-left: 5%; padding-right: 5%;">
+    <div class="container-fluid pt-5" style="padding-left: 5%; padding-right: 5%;">
         <div class="row justify-content-center">
             <div class="col-sm-8 col-md-5 col-lg-3 mb-4">
                 <div class="row campus_div responsive-card-edu align-content-start" onclick="window.open('https://www.fullerton.edu/', '_blank');" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
@@ -794,7 +804,7 @@
     </div>
 
     <!-- Carousel -->
-    <div class="container-fluid pt-2" style="padding-left: 5%; padding-right: 5%;">
+    <div class="container-fluid pt-5" style="padding-left: 5%; padding-right: 5%;">
         <div class="row justify-content-center">
             <div class="col-sm-12 col-lg-6 responsive-card-exp">
                 <div id="expCarousel" class="carousel slide" data-bs-ride="false">
@@ -931,7 +941,7 @@
     </div>
 
     <div class="container-fluid pt-2" style="padding-left: 5%; padding-right: 5%;">
-        <div class="row pb-2 justify-content-center">
+        <div class="row justify-content-center">
             <div class="col-sm-12 col-md-8 col-lg-3 mb-4">
                 <div class="row campus_div responsive-card align-content-start" data-timeline-id="hack-1" onclick="window.open('https://deepnote.com/workspace/dtw-599cab8f-9ce0-4077-9ff1-ca65f303664e/project/DTW-f5f0b150-de2c-4cc7-9b95-d4778c8e2160/notebook/ML%20Proj-6128f0b892ff4aa0b7652f124a20bac2', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
                     <div class="col-12 pb-3 align-self-start">
@@ -976,7 +986,7 @@
                 </div>
             </div>
         
-            <div class="col-sm-12 col-md-8 col-lg-3">
+            <div class="col-sm-12 col-md-8 col-lg-3 mb-4">
                 <div class="row campus_div responsive-card align-content-start" data-timeline-id="hack-3" onclick="window.open('https://github.com/fooledyouonce/FH_2023_TECS', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)"  style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
                     <div class="col-12 pb-3 align-self-start">
                         <img class="img-fluid campus" src="images/green.png">
@@ -1099,7 +1109,7 @@
                 </div>
             </div>
 
-            <div class="col-sm-12 col-md-8 col-lg-3 pb-0">
+            <div class="col-sm-12 col-md-8 col-lg-3 mb-4 pb-0">
                 <div class="row campus_div responsive-card align-content-start" data-timeline-id="research-3" onclick="window.open('pdfs/Ad-Poster.pdf', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
                     <div class="col-12 pb-3 align-self-start">
                         <img class="img-fluid campus" src="images/ad.png" style="width: 110%;">
@@ -1122,9 +1132,9 @@
             </div>
         </div>
         
-        <div class="row px-0 pt-4 justify-content-center">
-            <div class="col-sm-12 col-md-8 col-lg-3 mb-3">
-                <div class="row campus_div2 responsive-card align-content-start" data-timeline-id="research-4" onclick="window.open('https://docs.google.com/presentation/d/e/2PACX-1vTnE7UZyXSipadZj8svvPqye-VYFhrQzS0CD64-_STG9TZyR7ApPPs-XeJh8kkoVHpkdheNgWaljkoE/pub?start=false&loop=false&delayms=3000', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
+        <div class="row px-0 justify-content-center">
+            <div class="col-sm-12 col-md-8 col-lg-3">
+                <div class="row campus_div responsive-card align-content-start" data-timeline-id="research-4" onclick="window.open('https://docs.google.com/presentation/d/e/2PACX-1vTnE7UZyXSipadZj8svvPqye-VYFhrQzS0CD64-_STG9TZyR7ApPPs-XeJh8kkoVHpkdheNgWaljkoE/pub?start=false&loop=false&delayms=3000', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
                     <div class="col-12 pb-3 align-self-start">
                         <img class="img-fluid campus" src="images/job.png" style="width: 110%;">
                     </div>
@@ -1146,13 +1156,13 @@
             </div>
 
             <!-- Empty divs -->
-            <div class="col-3 campus_div2" style="cursor: default;">
+            <div class="col-3 campus_div" style="cursor: default;">
                 <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 40px;">
                     <div class="empty-div"></div>
                 </div>
             </div>
 
-            <div class="col-3 campus_div2" style="cursor: default;">
+            <div class="col-3 campus_div" style="cursor: default;">
                 <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 40px;">
                     <div class="empty-div"></div>
                 </div>
@@ -1441,33 +1451,45 @@
             // Get all video elements with the id "fish-video"
             var videos = document.querySelectorAll('#fish-video');
 
+            // Preload next videos
+            videos.forEach(function(video) {
+                video.load();
+            });
+
             // Hide all videos initially
             videos.forEach(function(video) {
                 video.style.display = 'none';
+                video.style.opacity = 0;
             });
 
             // Randomly select an index
             var randomIndex = Math.floor(Math.random() * videos.length);
 
-            // Show the randomly selected video
+            // Show the randomly selected video w/ fade-in effect
             videos[randomIndex].style.display = 'block';
+            setTimeout(function() {
+                videos[randomIndex].style.opacity = 1;
+            }, 10);
 
-            // Reset
-            videos[randomIndex].currentTime = 0;
+            videos[randomIndex].style.opacity = 0;
 
             // Add an event listener to play the next video when current video ends
             videos[randomIndex].addEventListener('ended', function() {
-                // Hide the current video
-                videos[randomIndex].style.display = 'none';
-
-                // Reset
-                videos[randomIndex].currentTime = 0;
-
+                // Hide the current video w/ fade-out effect
+                setTimeout(function() {
+                    videos[randomIndex].style.display = 'none';
+                }, 1000);
+                
                 // Calculate the index of the next video
                 var nextIndex = (randomIndex + 1) % videos.length;
 
-                // Show next video
+                // Show next video w/ fade-in effect
                 videos[nextIndex].style.display = 'block';
+                setTimeout(function() {
+                    videos[nextIndex].style.opacity = 1;
+                }, 10);
+
+                videos[nextIndex].play();
             });
         }
 
