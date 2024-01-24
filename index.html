@@ -166,12 +166,6 @@
                 justify-content: center;
             }
         }
-
-        @media (max-width: 767px) {
-            .responsive-arrow {
-                order: 1;
-            }
-        }
     </style>
 
     <!-- Bio -->
@@ -635,11 +629,49 @@
             opacity: .5;
         }
     </style>
+
+    <!-- Footer -->
+    <style>
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-25px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .empty-space {
+            height: 7vh;
+            position: relative;
+        }
+        
+        .responsive-arrow {
+            animation: bounce 1s infinite;
+            height: 10vh;
+            position: relative;
+        }
+
+        @media (min-width: 992px) {
+            .responsive-logo {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .responsive-logo {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
     <!-- Header -->
-    <div class="container-fluid px-3 mx-0 pt-2" style="z-index: 1;">
+    <div id="header" class="container-fluid px-3 mx-0 pt-2" style="z-index: 1;">
         <div class="row responsive-sub justify-content-evenly" style="font-family: 'Afacad'; color: white;">
             <div class="col-sm-1 col-md-1 col-lg-2 pt-2 text-center text-md-start">Sandra Nguyen</div>
 
@@ -1129,7 +1161,7 @@
         </div>
         
         <div class="row px-0 justify-content-center">
-            <div class="col-sm-12 col-md-8 col-lg-3">
+            <div class="col-sm-12 col-md-8 col-lg-3 mb-4">
                 <div class="row campus_div responsive-card align-content-start" data-timeline-id="research-4" onclick="window.open('https://docs.google.com/presentation/d/e/2PACX-1vTnE7UZyXSipadZj8svvPqye-VYFhrQzS0CD64-_STG9TZyR7ApPPs-XeJh8kkoVHpkdheNgWaljkoE/pub?start=false&loop=false&delayms=3000', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
                     <div class="col-12 pb-3 align-self-start">
                         <img class="img-fluid campus" src="images/job.png" style="width: 110%;">
@@ -1403,30 +1435,50 @@
         </div>
     </div>
 
-    <!-- License -->
-    <div class="responsive-caption text-center" style="padding-top: 5%;">
-        <a href="https://www.vecteezy.com/members/narit-omd536190" target="_blank_" style="font-family: 'Afacad'; color: white;">Stock videos bjy Narit Bualuang on Vecteezy</a>
+    <!-- Sub-footer -->
+    <div class="empty-space"><!-- --></div>
+
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-1">
+                <!--  -->
+            </div>
+
+            <!-- License -->
+            <div class=" col-10 responsive-caption text-center">
+                <a href="https://www.vecteezy.com/members/narit-omd536190" target="_blank_" style="font-family: 'Afacad'; color: white;">Stock videos by Narit Bualuang on Vecteezy</a>
+            </div>
+
+            <!-- Arrow up -->
+            <div class="col-1 responsive-arrow text-center">
+                <a href="#header" style= "font-family: 'Afacad'; color: #6d6d6d;">
+                    <span class="material-symbols-outlined">
+                        keyboard_double_arrow_up
+                    </span>
+                </a>
+            </div>
+        </div>
     </div>
 
     <!-- Footer -->
-    <div id="contact-me" class="container" style="padding-top: 5%;">
+    <div id="contact-me" class="container">
         <div class="row">
             <div class="btn-toolbar justify-content-center" role="toolbar">
                 <a href="mailto:sandra.nguyen9@csu.fullerton.edu" target="_blank">
-                    <em class="fa-solid fa-envelope mx-2" style="color: white; font-size: 2rem;"></em> 
+                    <em class="responsive-logo fa-solid fa-envelope mx-2" style="color: white;"></em> 
                 </a>
                 <a href="http://www.linkedin.com/in/sandra-nguyen9" target="_blank"> 
-                    <em class="fa-brands fa-linkedin mx-2" style="color: white; font-size: 2rem;"></em>
+                    <em class="responsive-logo fa-brands fa-linkedin mx-2" style="color: white;"></em>
                 </a>
                 <a href="https://github.com/alpacaJin" target="_blank">
-                    <em class="fa-brands fa-github mx-2" style="color: white; font-size: 2rem;"></em>
+                    <em class="responsive-logo fa-brands fa-github mx-2" style="color: white;"></em>
                 </a>
             </div>
         </div>
     </div>
 
     <div class="container-fluid">
-        <div class="row py-2 mx-0 pb-4 justify-content-center responsive-sub " style="color: white;">
+        <div class="row py-2 mx-0 pb-4 text-center justify-content-center responsive-sub " style="color: white;">
             Designed & made with ♡ by Sandra Nguyen @2024
         </div>
     </div>
