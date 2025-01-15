@@ -101,10 +101,6 @@
                 overflow: hidden;
             }
         }
-
-        #fish-video {
-            transition: opacity 1s ease-in-out;
-        }
     </style>
 
     <!-- Custom colors -->
@@ -168,12 +164,6 @@
         @media (max-width: 767px) {
             .responsive-sub-row {
                 justify-content: center;
-            }
-        }
-
-        @media (max-width: 767px) {
-            .responsive-arrow {
-                order: 1;
             }
         }
     </style>
@@ -444,7 +434,7 @@
             display: flex;
             flex-direction: column;
             position: relative;
-            margin: 3.5rem;
+            margin: 3.5rem 2rem;
         }
 
         /* Small */
@@ -460,7 +450,7 @@
                 content: "";
                 display: block;
                 position: absolute;
-                left: 7.5rem;
+                left: 5.5rem;
                 top: .3125rem;
             }
         }
@@ -471,9 +461,9 @@
                 content: "";
                 display: block;
                 border-top: .25rem dotted rgb(246, 149, 56, 0.9);
-                width: 12.1rem;
+                width: 10rem;
                 position: absolute;
-                left: 7.5rem;
+                left: 7rem;
                 top: .3125rem;
             }
         }
@@ -577,7 +567,7 @@
             display: flex;
             flex-direction: column;
             position: relative;
-            margin: 3.5rem;
+            margin: 3.5rem 2rem;
         }
 
         /* Small */
@@ -593,7 +583,7 @@
                 content: "";
                 display: block;
                 position: absolute;
-                left: 7.5rem;
+                left: 5.5rem;
                 top: .3125rem;
             }
         }
@@ -604,9 +594,9 @@
                 content: "";
                 display: block;
                 border-top: .25rem dotted rgb(9, 106, 199, 0.9);
-                width: 12.1rem;
+                width: 10rem;
                 position: absolute;
-                left: 7.5rem;
+                left: 7rem;
                 top: .3125rem;
             }
         }
@@ -639,11 +629,49 @@
             opacity: .5;
         }
     </style>
+
+    <!-- Footer -->
+    <style>
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-25px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .empty-space {
+            height: 7vh;
+            position: relative;
+        }
+        
+        .responsive-arrow {
+            animation: bounce 1s infinite;
+            height: 10vh;
+            position: relative;
+        }
+
+        @media (min-width: 992px) {
+            .responsive-logo {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .responsive-logo {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
     <!-- Header -->
-    <div class="container-fluid px-3 mx-0 pt-2" style="z-index: 1;">
+    <div id="header" class="container-fluid px-3 mx-0 pt-2" style="z-index: 1;">
         <div class="row responsive-sub justify-content-evenly" style="font-family: 'Afacad'; color: white;">
             <div class="col-sm-1 col-md-1 col-lg-2 pt-2 text-center text-md-start">Sandra Nguyen</div>
 
@@ -653,6 +681,7 @@
                 </button>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="#hackathons">Hackathons</a></li>
+                    <li><a class="dropdown-item" href="#project">Projects</a></li>
                     <li><a class="dropdown-item" href="#research">Research</a></li>
                     <li><a class="dropdown-item" href="#publications">Publications</a></li>
                     <li><a class="dropdown-item" href="#awards">Awards</a></li>
@@ -819,7 +848,7 @@
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <div class="row justify-content-center">
-                                    <div class="col-3" onclick="window.open('https://www.fullerton.edu/ecs/wicse/', '_blank');" style="cursor: pointer;">
+                                    <div class="col-3" onclick="window.open('https://redditinc.com/careers', '_blank');" style="cursor: pointer;">
                                         <img class="img-fluid work" src="images/reddit.png">
                                     </div>
 
@@ -919,6 +948,89 @@
         </div>
     </div>
 
+    <!-- Projects -->
+    <div id="project" class="container-fluid pt-5" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
+        <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
+            <p>Projects</p>
+        </div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="container">
+        <div class="row pt-2 pb-2">
+            <div class="col">
+                <div class="timeline-steps aos-init aos-animate" data-aos="fade-up">
+                    <div class="timeline-step">
+                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
+                            <div id="project-1" class="timeline">
+                                <div class="inner-circle"></div>
+                                <p class="h6 mt-3 mb-1">May 2024 - August 2024</p>
+                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Security, Privacy, and Compliance Engineering (SPACE) @ Reddit</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
+                            <div id="project-2" class="timeline">
+                                <div class="inner-circle"></div>
+                                <p class="h6 mt-3 mb-1">February 2024 - May 2024</p>
+                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Theta Tau @ CSUF</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid pt-2" style="padding-left: 5%; padding-right: 5%;">
+        <div class="row justify-content-center">
+            <div class="col-sm-12 col-md-8 col-lg-3 mb-4">
+                <div class="row campus_div responsive-card align-content-start" data-timeline-id="project-1" onclick="window.open('pdfs/Malicious-Link-Fingerprint.png', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
+                    <div class="col-12 pb-3 align-self-start">
+                        <img class="img-fluid campus" src="images/mlf.png">
+                    </div>
+        
+                    <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
+                        <p><b>Malicious Link Fingerprint</b></p>
+
+                        <div class="col-12 py-0 pb-3">
+                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Apache Airflow</button>
+                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">PostgreSQL</button>
+                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">AWS EC2</button>
+                        </div>
+
+                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                            <p>Real-time detection and scoring of malicious links coupled with novel fingerprinting methodology on dynamic content for safeguarding Reddit Ads. </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-sm-12 col-md-8 col-lg-3 mb-4">
+                <div class="row campus_div responsive-card align-content-start" data-timeline-id="project-2" onclick="window.open('https://github.com/alpacaJin/mu-rc-car', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
+                    <div class="col-12 pb-3 align-self-start">
+                        <img class="img-fluid campus" src="images/rc.png">
+                    </div>
+        
+                    <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
+                        <p><b>Lightning MuQueen Remote-Controlled Car</b></p>
+
+                        <div class="col-12 py-0 pb-3">
+                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Arduino Uno</button>
+                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Bluetooth RX/TX</button>
+                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">DC/Servo Motors</button>
+                        </div>
+
+                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                            <p>Arduino-powered RC car with motor management, steering, speed control, and Bluetooth communication and mechanical assembly.</p>
+                        </div>      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Hackathons -->
     <div id="hackathons" class="container-fluid pt-5" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
         <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
@@ -931,6 +1043,24 @@
         <div class="row pt-2 pb-2">
             <div class="col">
                 <div class="timeline-steps aos-init aos-animate" data-aos="fade-up">
+                    <div class="timeline-step">
+                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
+                            <div id="hack-4" class="timeline">
+                                <div class="inner-circle"></div>
+                                <p class="h6 mt-3 mb-1">February 24-25, 2024</p>
+                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">FullyHacks Hackathon @ CSUF</p>    
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
+                            <div id="hack-5" class="timeline">
+                                <div class="inner-circle"></div>
+                                <p class="h6 mt-3 mb-1">February 16-18, 2024</p>
+                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">TreeHacks Hackathon @ Stanford</p>    
+                            </div>
+                        </div>
+                    </div>
                     <div class="timeline-step">
                         <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
                             <div id="hack-1" class="timeline">
@@ -954,7 +1084,7 @@
                             <div id="hack-3" class="timeline">
                                 <div class="inner-circle"></div>
                                 <p class="h6 mt-3 mb-1">April 8-9, 2023</p>
-                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Fullyhacks Hackathon @ CSUF</p>
+                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">FullyHacks Hackathon @ CSUF</p>
                             </div>
                         </div>
                     </div>
@@ -965,6 +1095,54 @@
 
     <div class="container-fluid pt-2" style="padding-left: 5%; padding-right: 5%;">
         <div class="row justify-content-center">
+            <div class="col-sm-12 col-md-8 col-lg-3 mb-4">
+                <div class="row campus_div responsive-card align-content-start" data-timeline-id="hack-4" onclick="window.open('https://github.com/alpacaJin/lumi-s-quest', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)"  style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
+                    <div class="col-12 pb-3 align-self-start">
+                        <img class="img-fluid campus" src="images/lumi.png">
+                    </div>
+        
+                    <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
+                        <p><b>Lumi's Quest: Revival</b></p>
+                        
+                        <div class="col-12 py-0 pb-3">
+                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">C#</button>
+                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Unity</button>
+                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">WebGL</button>
+                        </div>
+
+                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                            <p>Coral reef conservation brought to life through an immersive 2D adventure & quiz game.</p>
+                        </div>
+                        
+                        <div class="col-12 py-0 pb-3" style="font-family: 'Afacad'; color: rgb(242,187,28);; font-size: 0.8rem">
+                            Winner of Cool Game Project
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12 col-md-8 col-lg-3 mb-4">
+                <div class="row campus_div responsive-card align-content-start" data-timeline-id="hack-5" onclick="window.open('https://devpost.com/software/evergreen-13zy87', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)"  style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
+                    <div class="col-12 pb-3 align-self-start">
+                        <img class="img-fluid campus" src="images/evergreen.png">
+                    </div>
+        
+                    <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
+                        <p><b>Evergreen</b></p>
+                        
+                        <div class="col-12 py-0 pb-3">
+                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">FastAPI</button>
+                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Node.js</button>
+                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">SQLite</button>
+                        </div>
+
+                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                            <p>Gamification for equitable access to CS education, featuring AI-driven, customized learning paths.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
             <div class="col-sm-12 col-md-8 col-lg-3 mb-4">
                 <div class="row campus_div responsive-card align-content-start" data-timeline-id="hack-1" onclick="window.open('https://deepnote.com/workspace/dtw-599cab8f-9ce0-4077-9ff1-ca65f303664e/project/DTW-f5f0b150-de2c-4cc7-9b95-d4778c8e2160/notebook/ML%20Proj-6128f0b892ff4aa0b7652f124a20bac2', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
                     <div class="col-12 pb-3 align-self-start">
@@ -986,7 +1164,9 @@
                     </div>
                 </div>
             </div>
-            
+        </div>
+
+        <div class="row px-0 justify-content-center">
             <div class="col-sm-12 col-md-8 col-lg-3 mb-4">
                 <div class="row campus_div responsive-card align-content-start" data-timeline-id="hack-2" onclick="window.open('https://devpost.com/software/mischief-in-montreal', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
                     <div class="col-12 pb-3 align-self-start">
@@ -1002,8 +1182,15 @@
                             <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">TensorFlow</button>
                         </div>
 
-                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                        <div class="col-12 mb-2 py-2 responsive-caption" style="padding-right: 5%;">
                             <p>Thorough data analytics & machine learning approach for developing policies in Montreal criminal landscape.</p>
+                        </div>
+
+                        <div class="col-12 py-0 pb-1" style="font-family: 'Afacad'; color: rgb(242,187,28);; font-size: 0.8rem">
+                            Winner of Best Overall
+                        </div>
+                        <div class="col-12 py-0 pb-3" style="font-family: 'Afacad'; color: rgb(242,187,28);; font-size: 0.8rem">
+                            Winner of People's Choice
                         </div>
                     </div>
                 </div>
@@ -1027,7 +1214,18 @@
                         <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
                             <p>AI-powered image recognition assistance with recycling mobile app.</p>
                         </div>
+
+                        <div class="col-12 py-0 pb-1" style="font-family: 'Afacad'; color: rgb(242,187,28);; font-size: 0.8rem">
+                            Winner of Best Mobile App
+                        </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- Empty divs -->
+            <div class="col-3 campus_div" style="cursor: default;">
+                <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 40px;">
+                    <div class="empty-div"></div>
                 </div>
             </div>
         </div>
@@ -1049,14 +1247,23 @@
                         <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
                             <div id="research-1" class="timeline">
                                 <div class="inner-circle"></div>
-                                <p class="h6 mt-3 mb-1">March 2023 - Present</p>
-                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Digital Learning Lab @ UCI</p>
+                                <p class="h6 mt-3 mb-1">January 2024 - Dec 2024</p>
+                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Senior Capstone Project @ CSUF</p>
                             </div>
                         </div>
                     </div>
                     <div class="timeline-step">
                         <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
                             <div id="research-2" class="timeline">
+                                <div class="inner-circle"></div>
+                                <p class="h6 mt-3 mb-1">March 2023 - May 2024</p>
+                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Digital Learning Lab @ UCI</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
+                            <div id="research-3" class="timeline">
                                 <div class="inner-circle"></div>
                                 <p class="h6 mt-3 mb-1">June 2023 - August 2023</p>
                                 <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">SoCal Data Science Program @ UCI</p>
@@ -1065,7 +1272,7 @@
                     </div>
                     <div class="timeline-step">
                         <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div id="research-3" class="timeline">
+                            <div id="research-4" class="timeline">
                                 <div class="inner-circle"></div>
                                 <p class="h6 mt-3 mb-1">August 2022 - May 2023</p>
                                 <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">ASSURE-US @ CSUF</p>
@@ -1074,10 +1281,10 @@
                     </div>
                     <div class="timeline-step">
                         <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div id="research-4" class="timeline">
+                            <div id="research-5" class="timeline">
                                 <div class="inner-circle"></div>
                                 <p class="h6 mt-3 mb-1">May 2022 - July 2022</p>
-                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">ASSURE-US SRE @ CSUF</p>
+                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">ASSURE-US @ CSUF</p>
                             </div>
                         </div>
                     </div>
@@ -1089,7 +1296,33 @@
     <div class="container-fluid pt-2" style="padding-left: 5%; padding-right: 5%;">
         <div class="row justify-content-center">
             <div class="col-sm-12 col-md-8 col-lg-3 mb-4">
-                <div class="row campus_div responsive-card align-content-start" data-timeline-id="research-1" onclick="window.open('https://www.canva.com/design/DAF0YChll3g/wlt1i57FaB1lEia5-O_0OA/view?utm_content=DAF0YChll3g&utm_campaign=designshare&utm_medium=link&utm_source=editor', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
+                <div class="row campus_div responsive-card align-content-start" data-timeline-id="research-1" onclick="window.open('pdfs/capstone.pdf', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
+                    <div class="col-12 pb-3 align-self-start">
+                        <img class="img-fluid campus" src="images/lightbox.png">
+                    </div>
+        
+                    <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
+                        <p><b>LightBox XAI</b></p>
+
+                        <div class="col-12 py-0 pb-3">
+                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">SHAP</button>
+                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Lime</button>
+                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">GPT-3</button>
+                        </div>
+
+                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                            <p>Exploratory XAI initiative integrating novel methodologies, visualizations, and real-time LLM explanations to demystify the decision-making processes of AI models.</p>
+                        </div>   
+                        
+                        <div class="col-12 py-0 pb-3" style="font-family: 'Afacad'; color: rgb(242,187,28);; font-size: 0.8rem">
+                            Marc Velasco
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-sm-12 col-md-8 col-lg-3 mb-4">
+                <div class="row campus_div responsive-card align-content-start" data-timeline-id="research-2" onclick="window.open('https://www.canva.com/design/DAF0YChll3g/wlt1i57FaB1lEia5-O_0OA/view?utm_content=DAF0YChll3g&utm_campaign=designshare&utm_medium=link&utm_source=editor', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
                     <div class="col-12 pb-3 align-self-start">
                         <img class="img-fluid campus" src="images/pho.png">
                     </div>
@@ -1105,13 +1338,17 @@
 
                         <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
                             <p>Exploratory classification of real-world academic procrastination through game-based simulation of student learning environments.</p>
-                        </div>      
+                        </div>
+                        
+                        <div class="col-12 py-0 pb-3" style="font-family: 'Afacad'; color: rgb(242,187,28);; font-size: 0.8rem">
+                            Dr. Doina Bein, Dr. June Ahn
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="col-sm-12 col-md-8 col-lg-3 mb-4">
-                <div class="row campus_div responsive-card align-content-start" data-timeline-id="research-2" onclick="window.open('pdfs/Rat-Poster.pdf', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)"  style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
+                <div class="row campus_div responsive-card align-content-start" data-timeline-id="research-3" onclick="window.open('pdfs/Rat-Poster.pdf', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)"  style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
                     <div class="col-12 pb-3 align-self-start">
                         <img class="img-fluid campus" src="images/rat.png" style="width: 110%;">
                     </div>
@@ -1128,12 +1365,18 @@
                         <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
                             <p>Data science & statistics-informed analysis of neuronal activity from a rodent-based odor experiment to determine hippocampal involvement in temporal event organization.</p>
                         </div>
+
+                        <div class="col-12 py-0 pb-3" style="font-family: 'Afacad'; color: rgb(242,187,28);; font-size: 0.8rem">
+                            Dr. Babak Shahbaba
+                        </div>
                     </div>
                 </div>
             </div>
-
+        </div>
+        
+        <div class="row px-0 justify-content-center">
             <div class="col-sm-12 col-md-8 col-lg-3 mb-4 pb-0">
-                <div class="row campus_div responsive-card align-content-start" data-timeline-id="research-3" onclick="window.open('pdfs/Ad-Poster.pdf', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
+                <div class="row campus_div responsive-card align-content-start" data-timeline-id="research-4" onclick="window.open('pdfs/Ad-Poster.pdf', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
                     <div class="col-12 pb-3 align-self-start">
                         <img class="img-fluid campus" src="images/ad.png" style="width: 110%;">
                     </div>
@@ -1149,15 +1392,17 @@
 
                         <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
                             <p>Novel approach to automating the analysis of malicious content on the internet to protect users against Google ad fraud.</p>
-                        </div>      
+                        </div>
+                        
+                        <div class="col-12 py-0 pb-3" style="font-family: 'Afacad'; color: rgb(242,187,28);; font-size: 0.8rem">
+                            Dr. Doina Bein
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        
-        <div class="row px-0 justify-content-center">
-            <div class="col-sm-12 col-md-8 col-lg-3">
-                <div class="row campus_div responsive-card align-content-start" data-timeline-id="research-4" onclick="window.open('https://docs.google.com/presentation/d/e/2PACX-1vTnE7UZyXSipadZj8svvPqye-VYFhrQzS0CD64-_STG9TZyR7ApPPs-XeJh8kkoVHpkdheNgWaljkoE/pub?start=false&loop=false&delayms=3000', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
+            
+            <div class="col-sm-12 col-md-8 col-lg-3 mb-4">
+                <div class="row campus_div responsive-card align-content-start" data-timeline-id="research-5" onclick="window.open('https://docs.google.com/presentation/d/e/2PACX-1vTnE7UZyXSipadZj8svvPqye-VYFhrQzS0CD64-_STG9TZyR7ApPPs-XeJh8kkoVHpkdheNgWaljkoE/pub?start=false&loop=false&delayms=3000', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
                     <div class="col-12 pb-3 align-self-start">
                         <img class="img-fluid campus" src="images/job.png" style="width: 110%;">
                     </div>
@@ -1174,17 +1419,15 @@
                         <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
                             <p>End-to-end Scikit-learn workflow on 18k real/fake job postings from 2020 to predict legitimacy.</p>
                         </div>
+
+                        <div class="col-12 py-0 pb-3" style="font-family: 'Afacad'; color: rgb(242,187,28);; font-size: 0.8rem">
+                            Dr. Doina Bein
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Empty divs -->
-            <div class="col-3 campus_div" style="cursor: default;">
-                <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 40px;">
-                    <div class="empty-div"></div>
-                </div>
-            </div>
-
             <div class="col-3 campus_div" style="cursor: default;">
                 <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 40px;">
                     <div class="empty-div"></div>
@@ -1323,14 +1566,32 @@
                         <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
                             <div id="awards-1" class="timeline">
                                 <div class="inner-circle2"></div>
-                                <p class="h6 mt-3 mb-1">Junary 2024</p>
+                                <p class="h6 mt-3 mb-1">December 2024</p>
+                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Edwards Lifesciences</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-step2">
+                        <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
+                            <div id="awards-2" class="timeline">
+                                <div class="inner-circle2"></div>
+                                <p class="h6 mt-3 mb-1">March 2024</p>
+                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Southern California for Undergraduate Research (SCCUR)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-step2">
+                        <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
+                            <div id="awards-3" class="timeline">
+                                <div class="inner-circle2"></div>
+                                <p class="h6 mt-3 mb-1">January 2024</p>
                                 <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Computing Research Association (CRA) Education</p>
                             </div>
                         </div>
                     </div>                    
                     <div class="timeline-step2">
                         <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div id="awards-2" class="timeline">
+                            <div id="awards-4" class="timeline">
                                 <div class="inner-circle2"></div>
                                 <p class="h6 mt-3 mb-1">November 2023</p>
                                 <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">CSUF Undergraduate Research and Opportunity Center (UROC)</p>
@@ -1339,7 +1600,7 @@
                     </div>
                     <div class="timeline-step2">
                         <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div id="awards-3" class="timeline">
+                            <div id="awards-5" class="timeline">
                                 <div class="inner-circle2"></div>
                                 <p class="h6 mt-3 mb-1">May 2023</p>
                                 <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">STEM Advantage</p>
@@ -1348,7 +1609,7 @@
                     </div>
                     <div class="timeline-step2">
                         <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div id="awards-4" class="timeline">
+                            <div id="awards-6" class="timeline">
                                 <div class="inner-circle2"></div>
                                 <p class="h6 mt-3 mb-1">March 2023</p>
                                 <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Advancing Women in Technology (AWT)</p>
@@ -1363,7 +1624,40 @@
     <div class="container-fluid pt-2" style="padding-left: 5%; padding-right: 5%;">
         <div class="row justify-content-evenly">
             <div class="col-12 mb-4">
-                <div class="row campus_div2 responsive-card-pub justify-content-center" data-timeline-id="awards-1" onclick="window.open('https://cra.org/crn/2024/01/outstanding-undergraduate-research-awards-winners-announcement/', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
+                <div class="row campus_div2 responsive-card-pub justify-content-center" data-timeline-id="awards-1" onclick="window.open('https://www.sccur.org/whitney-travel-award', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
+                    <div class="col-sm-12 col-lg-3 pb-3 text-center" onclick="window.open('https://www.edwards.com/', '_blank');" style="cursor: pointer;">
+                        <img class="img-fluid logo" src="images/edwards.png">
+                    </div>
+        
+                    <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white;">
+                        <p><b>Edwards Lifesciences Scholar</b></p>
+
+                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                            <p>Awarded recognition for exceptional student leadership in WiCSE</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        <div class="row justify-content-evenly">
+            <div class="col-12 mb-4">
+                <div class="row campus_div2 responsive-card-pub justify-content-center" data-timeline-id="awards-2" onclick="window.open('https://www.sccur.org/whitney-travel-award', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
+                    <div class="col-sm-12 col-lg-3 pb-3 text-center" onclick="window.open('https://www.sccur.org/', '_blank');" style="cursor: pointer;">
+                        <img class="img-fluid logo" src="images/whitney.png">
+                    </div>
+        
+                    <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white;">
+                        <p><b>William M. Whitney, Ph.D. Travel Award</b></p>
+
+                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                            <p>Awarded $500 to support student travel to NCUR</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 mb-4">
+                <div class="row campus_div2 responsive-card-pub justify-content-center" data-timeline-id="awards-3" onclick="window.open('https://cra.org/crn/2024/01/outstanding-undergraduate-research-awards-winners-announcement/', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
                     <div class="col-sm-12 col-lg-3 pb-3 text-center" onclick="window.open('https://cra.org/crae/', '_blank');" style="cursor: pointer;">
                         <img class="img-fluid logo" src="images/cra.png">
                     </div>
@@ -1379,7 +1673,7 @@
             </div>
             
             <div class="col-12 mb-4">
-                <div class="row campus_div2 responsive-card-pub justify-content-center" data-timeline-id="awards-2" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+                <div class="row campus_div2 responsive-card-pub justify-content-center" data-timeline-id="awards-4" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
                     <div class="col-sm-12 col-lg-3 pb-3 text-center" onclick="window.open('https://cra.org/crn/2024/01/outstanding-undergraduate-research-awards-winners-announcement/', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="cursor: pointer;">
                         <img class="img-fluid logo" src="images/uroc.png">
                     </div>
@@ -1395,7 +1689,7 @@
             </div>
 
             <div class="col-12 mb-4">
-                <div class="row campus_div2 responsive-card-pub justify-content-center" data-timeline-id="awards-3" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+                <div class="row campus_div2 responsive-card-pub justify-content-center" data-timeline-id="awards-5" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
                     <div class="col-sm-12 col-lg-3 pb-3 text-center" onclick="window.open('https://stemadvantage.org/', '_blank');" style="cursor: pointer;">
                         <img class="img-fluid logo" src="images/adv.jpg">
                     </div>
@@ -1404,7 +1698,7 @@
                         <p><b>STEM Advantage Scholarship</b></p>
 
                         <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
-                            <p>Awarded $2,400 grant to attend classes full-time and graduate with less student debt</p>
+                            <p>Awarded $3,750 grant to attend classes full-time and graduate with less student debt</p>
                         </div>
                         </div>
                     </div>
@@ -1412,7 +1706,7 @@
             </div>
 
             <div class="col-12 mb-4">
-                <div class="row campus_div2 responsive-card-pub justify-content-center" data-timeline-id="awards-4" onclick="window.open('https://awtca.org/2023/06/8268/', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)"  style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
+                <div class="row campus_div2 responsive-card-pub justify-content-center" data-timeline-id="awards-6" onclick="window.open('https://awtca.org/2023/06/8268/', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)"  style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
                     <div class="col-sm-12 col-lg-3 pb-3 text-center" onclick="window.open('https://awtca.org/', '_blank');" style="cursor: pointer;">
                         <img class="img-fluid logo" src="images/awt.jpg">
                     </div>
@@ -1430,31 +1724,51 @@
         </div>
     </div>
 
-    <!-- License -->
-    <div class="responsive-caption text-center" style="padding-top: 5%;">
-        <a href="https://www.vecteezy.com/members/narit-omd536190" target="_blank_" style="font-family: 'Afacad'; color: white;">Stock videos bjy Narit Bualuang on Vecteezy</a>
+    <!-- Sub-footer -->
+    <div class="empty-space"><!-- --></div>
+
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-1">
+                <!--  -->
+            </div>
+
+            <!-- License -->
+            <div class=" col-10 responsive-caption text-center">
+                <a href="https://www.vecteezy.com/members/narit-omd536190" target="_blank_" style="font-family: 'Afacad'; color: white;">Stock videos by Narit Bualuang on Vecteezy</a>
+            </div>
+
+            <!-- Arrow up -->
+            <div class="col-1 responsive-arrow text-center">
+                <a href="#header" style= "font-family: 'Afacad'; color: #6d6d6d;">
+                    <span class="material-symbols-outlined">
+                        keyboard_double_arrow_up
+                    </span>
+                </a>
+            </div>
+        </div>
     </div>
 
     <!-- Footer -->
-    <div id="contact-me" class="container" style="padding-top: 5%;">
+    <div id="contact-me" class="container">
         <div class="row">
             <div class="btn-toolbar justify-content-center" role="toolbar">
                 <a href="mailto:sandra.nguyen9@csu.fullerton.edu" target="_blank">
-                    <em class="fa-solid fa-envelope mx-2" style="color: white; font-size: 2rem;"></em> 
+                    <em class="responsive-logo fa-solid fa-envelope mx-2" style="color: white;"></em> 
                 </a>
                 <a href="http://www.linkedin.com/in/sandra-nguyen9" target="_blank"> 
-                    <em class="fa-brands fa-linkedin mx-2" style="color: white; font-size: 2rem;"></em>
+                    <em class="responsive-logo fa-brands fa-linkedin mx-2" style="color: white;"></em>
                 </a>
                 <a href="https://github.com/alpacaJin" target="_blank">
-                    <em class="fa-brands fa-github mx-2" style="color: white; font-size: 2rem;"></em>
+                    <em class="responsive-logo fa-brands fa-github mx-2" style="color: white;"></em>
                 </a>
             </div>
         </div>
     </div>
 
     <div class="container-fluid">
-        <div class="row py-2 mx-0 pb-4 justify-content-center responsive-sub " style="color: white;">
-            Designed & made with ♡ by Sandra Nguyen @2024
+        <div class="row py-2 mx-0 pb-4 text-center justify-content-center responsive-sub " style="color: white;">
+            Designed & made with ♡ by Sandra Nguyen @2025
         </div>
     </div>
 
@@ -1482,35 +1796,24 @@
             // Hide all videos initially
             videos.forEach(function(video) {
                 video.style.display = 'none';
-                video.style.opacity = 0;
             });
-
+        
             // Randomly select an index
             var randomIndex = Math.floor(Math.random() * videos.length);
 
             // Show the randomly selected video w/ fade-in effect
             videos[randomIndex].style.display = 'block';
-            setTimeout(function() {
-                videos[randomIndex].style.opacity = 1;
-            }, 10);
-
-            videos[randomIndex].style.opacity = 0;
 
             // Add an event listener to play the next video when current video ends
             videos[randomIndex].addEventListener('ended', function() {
-                // Hide the current video w/ fade-out effect
-                setTimeout(function() {
-                    videos[randomIndex].style.display = 'none';
-                }, 1000);
+                // Hide the current video
+                videos[randomIndex].style.opacity = 0;
                 
                 // Calculate the index of the next video
                 var nextIndex = (randomIndex + 1) % videos.length;
 
                 // Show next video w/ fade-in effect
                 videos[nextIndex].style.display = 'block';
-                setTimeout(function() {
-                    videos[nextIndex].style.opacity = 1;
-                }, 10);
 
                 videos[nextIndex].play();
             });
