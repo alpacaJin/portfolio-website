@@ -34,10 +34,29 @@
     <style>
         html,
         body {
+            scroll-snap-type: y proximity;
             height: 100%;
+            scroll-behavior: smooth;
+            transition: all 0.8s ease-in-out;
+            overflow-y: hidden;
             margin: 0;
             padding: 0;
             background-color: black;
+        }
+
+        /* Snap scroll */
+        .snap-section {
+            height: 100vh;
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            scroll-snap-align: start;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            overflow: hidden !important;
+            z-index: 5;
         }
 
         /* Empty space */
@@ -75,6 +94,8 @@
                 width: 70%;
                 height: 70%;
                 overflow: hidden;
+                z-index: 0;
+                pointer-events: none;
             }
         }
 
@@ -87,6 +108,8 @@
                 width: 100%;
                 height: 100%;
                 overflow: hidden;
+                z-index: 0;
+                pointer-events: none;
             }
         }
 
@@ -99,7 +122,18 @@
                 width: 100%;
                 height: 100%;
                 overflow: hidden;
+                z-index: 0;
+                pointer-events: none;
             }
+        }
+
+        /* Video scope */
+        #Sub-header,
+        #projects,
+        #Sub-footer {
+            position: relative;
+            overflow: hidden;       /* prevents video from leaking outside */
+            z-index: 0;
         }
     </style>
 
@@ -165,6 +199,27 @@
             .responsive-sub-row {
                 justify-content: center;
             }
+        }
+    </style>
+
+    <!-- Fish videos -->
+    <style>
+        video#fish-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            z-index: -1; /* Stay behind all content */
+            pointer-events: none; /* Don't block clicks */
+        }
+
+        #fish-video.active {
+            opacity: 1;
+        }
+
+        #fish-video.inactive {
+            opacity: 0;
         }
     </style>
 
@@ -350,6 +405,37 @@
         @media (max-width: 575px) {
             .responsive-card-edu {
                width: 100%;
+            }
+        }
+    </style>
+
+    <!-- Projects -->
+    <style>
+        /* Click Fish Video */
+        @media (min-width: 992px) {
+            #click-fish {
+                position: absolute;
+                width: 400px;
+                bottom: 70%;
+                left: -300px;
+            }
+        }
+
+        @media (max-width: 991px) {
+            #click-fish {
+                position: absolute;
+                width: 300px;
+                bottom: 80%;
+                left: -300px;
+            }
+        }
+
+        @media (max-width: 575px) {
+            #click-fish {
+                position: absolute;
+                width: 100%;
+                bottom: 70%;
+                left: -300px;
             }
         }
     </style>
@@ -666,12 +752,43 @@
                 font-size: 1.5rem;
             }
         }
+
+        /* Initial hidden state */
+        #contact-me.section-float-in {
+            opacity: 0;
+            transform: translateY(60px);
+            pointer-events: none;
+            transition: none;
+        }
+
+        /* When observer adds this class */
+        #contact-me.section-float-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+            transition: opacity 0.8s ease, transform 0.8s ease; /* Only apply on enter */
+        }
     </style>
+
+    <!-- Section float in -->
+    <style>
+        .section-float-in {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+            will-change: opacity, transform;
+        }
+
+        .section-float-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style> 
 </head>
 
 <body>
     <!-- Header -->
-    <div id="header" class="container-fluid px-3 mx-0 pt-2" style="z-index: 1;">
+    <header id="header" class="container-fluid px-3 mx-0 pt-2" style="position: fixed; z-index: 5;">
         <div class="row responsive-sub justify-content-evenly" style="font-family: 'Afacad'; color: white;">
             <div class="col-sm-1 col-md-1 col-lg-2 pt-2 text-center text-md-start">Sandra Nguyen</div>
 
@@ -679,9 +796,9 @@
                 <button class="btn outline-orange dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-family: 'Afacad'; color: white;">
                     Projects
                 </button>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu" style="position: relative; z-index: 6;">
                     <li><a class="dropdown-item" href="#hackathons">Hackathons</a></li>
-                    <li><a class="dropdown-item" href="#project">Projects</a></li>
+                    <li><a class="dropdown-item" href="#projects">Projects</a></li>
                     <li><a class="dropdown-item" href="#research">Research</a></li>
                     <li><a class="dropdown-item" href="#publications">Publications</a></li>
                     <li><a class="dropdown-item" href="#awards">Awards</a></li>
@@ -695,1106 +812,1185 @@
                 <a href="#experience" style="font-family: 'Afacad'; color: white;">Experience</a>
             </div>
             <div class="col-sm-1 col-md-1 col-lg-6 pt-2 text-center text-lg-end">
-                <a href="#contact-me" style="font-family: 'Afacad'; color: white;">Contact Me</a>
+                <a href="#Sub-footer" style="font-family: 'Afacad'; color: white;">Contact Me</a>
             </div>
         </div>
-    </div>
+    </header>
 
     <!-- Sub Header -->
-    <div class="container-fluid px-3 mx-0 pt-5">
-        <div class="row responsive-sub-row fish-space" style="padding-left: 18%; padding-right: 10%;">
-            <div class="col-md-12 col-lg-12 text-start text-lg-start" style="font-family: 'Afacad'; color: white; font-size: 1.5rem; padding-top: 20%;">
-                <p class="resposnvie-sub ">Hello I'm</p>
-                <div class="responsive-name" style="font-family: 'WindSong'; font-weight: bold">
-                    <p>Sandra Nguyen</p>
+    <section id="Sub-header" class="snap-section">
+        <div class="container-fluid px-3 mx-0 pt-5" style="z-index: 3;">
+            <div class="row responsive-sub-row fish-space" style="padding-left: 18%; padding-right: 10%;">
+                <div class="col-md-12 col-lg-12 text-start text-lg-start" style="font-family: 'Afacad'; color: white; font-size: 1.5rem; padding-top: 20%;">
+                    <p class="resposnvie-sub ">Hello I'm</p>
+                    <div class="responsive-name" style="font-family: 'WindSong'; font-weight: bold">
+                        <p>Sandra Nguyen</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Fish -->
-    <div class="fish-container">
-        <video id="fish-video" playsinline autoplay muted width="100%" height="100%">
-            <source src="movies/betta-1-1.mp4" type="video/mp4">
-            Sorry, the fish are in hiding! (your browser does not support the video tag)
-        </video>
-        <video id="fish-video" playsinline autoplay muted width="100%" height="100%">
-            <source src="movies/betta-1-2.mp4" type="video/mp4">
-            Sorry, the fish are in hiding! (your browser does not support the video tag)
-        </video>
-        <video id="fish-video" playsinline autoplay muted width="100%" height="100%">
-            <source src="movies/betta-1-3.mp4" type="video/mp4">
-            Sorry, the fish are in hiding! (your browser does not support the video tag)
-        </video>
-        
-        <video id="fish-video" playsinline autoplay muted width="100%" height="100%">
-            <source src="movies/betta-2-1.mp4" type="video/mp4">
-            Sorry, the fish are in hiding! (your browser does not support the video tag)
-        </video>
-        <video id="fish-video" playsinline autoplay muted width="100%" height="100%">
-            <source src="movies/betta-2-2.mp4" type="video/mp4">
-            Sorry, the fish are in hiding! (your browser does not support the video tag)
-        </video>
-        <video id="fish-video" playsinline autoplay muted width="100%" height="100%">
-            <source src="movies/betta-2-3.mp4" type="video/mp4">
-            Sorry, the fish are in hiding! (your browser does not support the video tag)
-        </video>
+        <!-- Fish -->
+        <div class="fish-container" style="position: absolute; z-index: 0">
+            <video id="fish-video" class="inctive" playsinline autoplay muted preload="auto" width="100%" height="100%">
+                <source src="movies/betta-1-1.mp4" type="video/mp4">
+                Sorry, the fish are in hiding! (your browser does not support the video tag)
+            </video>
+            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
+                <source src="movies/betta-1-2.mp4" type="video/mp4">
+                Sorry, the fish are in hiding! (your browser does not support the video tag)
+            </video>
+            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
+                <source src="movies/betta-1-3.mp4" type="video/mp4">
+                Sorry, the fish are in hiding! (your browser does not support the video tag)
+            </video>
+            
+            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
+                <source src="movies/betta-2-1.mp4" type="video/mp4">
+                Sorry, the fish are in hiding! (your browser does not support the video tag)
+            </video>
+            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
+                <source src="movies/betta-2-2.mp4" type="video/mp4">
+                Sorry, the fish are in hiding! (your browser does not support the video tag)
+            </video>
+            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
+                <source src="movies/betta-2-3.mp4" type="video/mp4">
+                Sorry, the fish are in hiding! (your browser does not support the video tag)
+            </video>
 
-        <video id="fish-video" playsinline autoplay muted width="100%" height="100%">
-            <source src="movies/betta-3-1.mp4" type="video/mp4">
-            Sorry, the fish are in hiding! (your browser does not support the video tag)
-        </video>
-        <video id="fish-video" playsinline autoplay muted width="100%" height="100%">
-            <source src="movies/betta-3-2.mp4" type="video/mp4">
-            Sorry, the fish are in hiding! (your browser does not support the video tag)
-        </video>
-        <video id="fish-video" playsinline autoplay muted width="100%" height="100%">
-            <source src="movies/betta-3-3.mp4" type="video/mp4">
-            Sorry, the fish are in hiding! (your browser does not support the video tag)
-        </video>
+            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
+                <source src="movies/betta-3-1.mp4" type="video/mp4">
+                Sorry, the fish are in hiding! (your browser does not support the video tag)
+            </video>
+            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
+                <source src="movies/betta-3-2.mp4" type="video/mp4">
+                Sorry, the fish are in hiding! (your browser does not support the video tag)
+            </video>
+            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
+                <source src="movies/betta-3-3.mp4" type="video/mp4">
+                Sorry, the fish are in hiding! (your browser does not support the video tag)
+            </video>
 
-        <video id="fish-video" playsinline autoplay muted width="100%" height="100%">
-            <source src="movies/gold-1.mp4" type="video/mp4">
-            Sorry, the fish are in hiding! (your browser does not support the video tag)
-        </video>
-    </div>
+            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
+                <source src="movies/gold-1.mp4" type="video/mp4">
+                Sorry, the fish are in hiding! (your browser does not support the video tag)
+            </video>
+        </div>
+    </section>
 
     <!-- Bio -->
-    <div class="container-fluid pt-5" style="padding-left: 10%; padding-right: 10%;">
-        <div class="row justify-content-center responsive-card-bio" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto;">
-            <img class="img-fluid responsive-pfp col-sm-5 col-md-5 col-lg-4" src="images/pfp.jpg" style="border-radius: 30px;">
+    <section id="bio" class="snap-section">
+        <div class="container-fluid section-float-in" style="padding-left: 10%; padding-right: 10%;">
+            <div class="row justify-content-center responsive-card-bio" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto;">
+                <img class="img-fluid responsive-pfp col-sm-5 col-md-5 col-lg-4" src="images/pfp.jpg" style="border-radius: 30px;">
 
-            <div class="col-sm-6 col-md-6 col-lg-6 responsive-text" style="font-family: 'Afacad'; color: white;">
-                <p>Hello I'm</p>
-                <div class="responsive-name" style="font-family: 'WindSong'; font-weight: bold">
-                    <p>Sandra Nguyen</p>
-                </div>
-                <p>I'm a recent graduate from California State University, Fullerton, where I majored in Computer Science and honed my skills in data science, machine learning, and cybersecurity. My academic journey has been dedicated to faculty-led research and developing exploratory software projects that challenges today's complex challenges.</p>
-                <p>As an Asian American woman in tech, I am passionate about supporting and leading initiatives for underrepresented groups. Through my leadership roles, I strive to inspire my peers to transcend societal barriers and pursue their ambitions fearlessly.</p>
-                <div class="pt-2">
-                    <a class="btn outline-orange btn-sm" href="pdfs/Sandra_Nguyen_Resume_2025.pdf" role="button" style="font-family: 'Afacad'; color: white; font-size: 1rem; width: 6rem;" target="_blank">Resume</a>
+                <div class="col-sm-6 col-md-6 col-lg-6 responsive-text" style="font-family: 'Afacad'; color: white;">
+                    <p>Hello I'm</p>
+                    <div class="responsive-name" style="font-family: 'WindSong'; font-weight: bold">
+                        <p>Sandra Nguyen</p>
+                    </div>
+                    <p>I'm a recent graduate from California State University, Fullerton, where I majored in Computer Science and honed my skills in data science, machine learning, and cybersecurity. My academic journey has been dedicated to faculty-led research and developing exploratory software projects that challenges today's complex challenges.</p>
+                    <p>As an Asian American woman in tech, I am passionate about supporting and leading initiatives for underrepresented groups. Through my leadership roles, I strive to inspire my peers to transcend societal barriers and pursue their ambitions fearlessly.</p>
+                    <div class="pt-2">
+                        <a class="btn outline-orange btn-sm" href="pdfs/Sandra_Nguyen_Resume_2025.pdf" role="button" style="font-family: 'Afacad'; color: white; font-size: 1rem; width: 6rem;" target="_blank">Resume</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
  
     <!-- Education -->
-    <div id="education" class="container-fluid pt-5" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
-        <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
-            <p>Education</p>
-        </div>
-    </div>
-
-    <div class="container-fluid pt-5" style="padding-left: 5%; padding-right: 5%;">
-        <div class="row justify-content-center">
-            <div class="col-sm-8 col-md-5 col-lg-3 mb-4">
-                <div class="row campus_div responsive-card-edu align-content-start" onclick="window.open('https://www.fullerton.edu/', '_blank');" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
-                    <div class="col-12 pb-3 align-self-start">
-                        <img class="img-fluid campus" src="images/csuf.jpg">
-                    </div>
-        
-                    <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
-                        <p><b>California State University, Fullerton</b></p>
-                        <div class="responsive-caption" style="font-style: italic">
-                            <p>Bachelor of Science in Computer Science</p>
-                        </div>
-                        <div class="col-12 pb-2 responsive-caption" style= "padding-right: 5%;">
-                            <p>Relevant Coursework: Artificial Intelligence, Introduction to Machine Learning, Intro to Data Sci. & Big Data, Cybersecurity Fnd. And Prncp., File Structure & Database, Algorithm Engineering, Data Structures, Statistics Applied to Natural Sciences, Mathematical Structure</p>
-                        </div>
-                    </div>
-                </div>
+    <section id="education" class="snap-section" style="position: relative; z-index: 5;">
+        <div class="container-fluid section-float-in" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
+            <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
+                <p>Education</p>
             </div>
+        </div>
+    
+        <div class="container-fluid pt-5 section-float-in" style="padding-left: 5%; padding-right: 5%;">
+            <div class="row justify-content-center">
+                <div class="col-sm-8 col-md-5 col-lg-3 mb-4">
+                    <div class="row campus_div responsive-card-edu align-content-start" onclick="window.open('https://www.fullerton.edu/', '_blank');" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
+                        <div class="col-12 pb-3 align-self-start">
+                            <img class="img-fluid campus" src="images/csuf.jpg">
+                        </div>
             
-            <div class="col-sm-8 col-md-5 col-lg-3 mb-4">
-                <div class="row campus_div responsive-card-edu align-content-start" onclick="window.open('https://www.fvhs.com/', '_blank');" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
-                    <div class="col-12 pb-3 align-self-start">
-                        <img class="img-fluid campus" src="images/fv.jpg" style="width: 120%;">
-                    </div>
-        
-                    <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
-                        <p><b>Fountain Valley High School</b></p>
-                        <div class="responsive-caption" style="font-style: italic">
-                            <p>Graduated Magna Cum Laude</p>
+                        <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
+                            <p><b>California State University, Fullerton</b></p>
+                            <div class="responsive-caption" style="font-style: italic">
+                                <p>Bachelor of Science in Computer Science</p>
+                            </div>
+                            <div class="col-12 pb-2 responsive-caption" style= "padding-right: 5%;">
+                                <p>Relevant Coursework: Artificial Intelligence, Introduction to Machine Learning, Intro to Data Sci. & Big Data, Cybersecurity Fnd. And Prncp., File Structure & Database, Algorithm Engineering, Data Structures, Statistics Applied to Natural Sciences, Mathematical Structure</p>
+                            </div>
                         </div>
-                        <div class="col-12 mb-5 responsive-caption" style= "padding-right: 5%;">
-                            <p>Relevant Coursework: Relevant Coursework: AP Computer Science A, AP Calculus BC, AP English Literature and Composition</p>
+                    </div>
+                </div>
+                
+                <div class="col-sm-8 col-md-5 col-lg-3 mb-4">
+                    <div class="row campus_div responsive-card-edu align-content-start" onclick="window.open('https://www.fvhs.com/', '_blank');" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
+                        <div class="col-12 pb-3 align-self-start">
+                            <img class="img-fluid campus" src="images/fv.jpg" style="width: 120%;">
+                        </div>
+            
+                        <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
+                            <p><b>Fountain Valley High School</b></p>
+                            <div class="responsive-caption" style="font-style: italic">
+                                <p>Graduated Magna Cum Laude</p>
+                            </div>
+                            <div class="col-12 mb-5 responsive-caption" style= "padding-right: 5%;">
+                                <p>Relevant Coursework: Relevant Coursework: AP Computer Science A, AP Calculus BC, AP English Literature and Composition</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
     <!-- Experience -->
-    <div id="experience" class="container-fluid pt-5" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
-        <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
-            <p>Experience</p>
+    <section id="experience" class="snap-section">
+        <div class="container-fluid pt-5 section-float-in" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
+            <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
+                <p>Experience</p>
+            </div>
         </div>
-    </div>
 
-    <!-- Carousel -->
-    <div class="container-fluid pt-5" style="padding-left: 5%; padding-right: 5%;">
-        <div class="row justify-content-center">
-            <div class="col-sm-12 col-lg-6 responsive-card-exp">
-                <div id="expCarousel" class="carousel slide" data-bs-ride="false">
-                    <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
-                        <div class="carousel-indicators px-0 mx-0">
-                            <button type="button" data-bs-target="#expCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                            <button type="button" data-bs-target="#expCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                            <button type="button" data-bs-target="#expCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                            <button type="button" data-bs-target="#expCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
-                            <button type="button" data-bs-target="#expCarousel" data-bs-slide-to="4" aria-label="Slide 4"></button>
-                            <button type="button" data-bs-target="#expCarousel" data-bs-slide-to="5" aria-label="Slide 4"></button>
+        <!-- Carousel -->
+        <div class="container-fluid pt-5 section-float-in" style="padding-left: 5%; padding-right: 5%;">
+            <div class="row justify-content-center">
+                <div class="col-sm-12 col-lg-6 responsive-card-exp">
+                    <div id="expCarousel" class="carousel slide" data-bs-ride="false">
+                        <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+                            <div class="carousel-indicators px-0 mx-0">
+                                <button type="button" data-bs-target="#expCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#expCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                <button type="button" data-bs-target="#expCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                <button type="button" data-bs-target="#expCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                                <button type="button" data-bs-target="#expCarousel" data-bs-slide-to="4" aria-label="Slide 4"></button>
+                                <button type="button" data-bs-target="#expCarousel" data-bs-slide-to="5" aria-label="Slide 4"></button>
+                            </div>
+
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <div class="row justify-content-center">
+                                        <div class="col-3" onclick="window.open('https://redditinc.com/careers', '_blank');" style="cursor: pointer;">
+                                            <img class="img-fluid work" src="images/reddit.png">
+                                        </div>
+
+                                        <div class="col-8" style="padding-top: 5%; padding-bottom: 5%;">
+                                            <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
+                                                <p><b>Information Security Engineering Intern</b></p>
+                                                <div class="responsive-caption" style="font-style: italic">
+                                                    <p>May 2024 - August 2024</p>
+                                                </div>
+                                                <div class="col-12 pb-4 responsive-caption" style= "padding-right: 5%;">
+                                                    <p>🪝 Created a sophisticated 4-engine prototype to webscrape URL content, implement an SVM model with 98% accuracy that detects and scores malicious links in real-time, abstract third-party affiliate data, and fingerprint evolving webpage content</p>
+                                                    <p>🪝 Utilized Apache Airflow for ETL, automated API ingestion, and a blend of AWS EC2, PostgreSQL, Pypeteer, and Scikit-Learn to safeguard <span onclick="window.open('https://ads.reddit.com/', '_blank');" style="cursor: pointer; color: rgb(246, 149, 56, 0.9)">Reddit Ads</span> against cloaking redirection and 3rd-party modification</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="carousel-item">
+                                    <div class="row justify-content-center">
+                                        <div class="col-3" onclick="window.open('https://www.fullerton.edu/ecs/wicse/', '_blank');" style="cursor: pointer;">
+                                            <img class="img-fluid work" src="images/wicse.png">
+                                        </div>
+
+                                        <div class="col-8" style="padding-top: 5%; padding-bottom: 5%;">
+                                            <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
+                                                <p><b>Community Tutor & Student Assistant</b></p>
+                                                <div class="responsive-caption" style="font-style: italic">
+                                                    <p>August 2022 - December 2024</p>
+                                                </div>
+                                                <div class="col-12 pb-4 responsive-caption" style= "padding-right: 5%;">
+                                                    <p>🪝 Co-organized and led weekly virtual and in-person professional development workshops, socials, industry panels, and Dean's luncheons to empower 1500+ women in their computer science and engineering careers with opportunities for both professional and personal development</p>
+                                                    <p>🪝 Spearheaded web development efforts for the annual <span onclick="window.open('https://sites.google.com/view/ecsdls/home', '_blank');" style="cursor: pointer; color: rgb(246, 149, 56, 0.9)">ECS Diversity & Leadership Summit</span>, designed to support students in navigating the implications of AI on leadership and diversity from an industry standpoint</p>
+                                                    <p>🪝 Motivated peers and reinforced efficient programming strategies through collaborative instruction in intro to computer science and mathematical structures courses to enhance student learning and career success</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="carousel-item">
+                                    <div class="row justify-content-center">
+                                        <div class="col-3" onclick="window.open('https://www.percentageproject.org/', '_blank');" style="cursor: pointer;">
+                                            <img class="img-fluid work" src="images/percentage.jpg">
+                                        </div>
+
+                                        <div class="col-8" style="padding-top: 5%; padding-bottom: 5%;">
+                                            <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
+                                                <p><b>Campus Director & Associate Program Lead</b></p>
+                                                <div class="responsive-caption" style="font-style: italic">
+                                                    <p>August 2022 - May 2024</p>
+                                                </div>
+                                                <div class="col-12 pb-2 responsive-caption" style= "padding-right: 5%;">
+                                                    <p>🪝 Led a team on campus to coordinate with six CS & ENGR departments to collect anonymous survey data on student culture, learning environment, sense of belonging, and microagressions in their computer science (and related fields) community</p>
+                                                    <p>🪝 Fostered cross-collaboration with 12+ campus directors throughout the country to ensure the success of new year campaigns, prioritizing data-driven advocacy in the nonprofit space</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="carousel-item">
+                                    <div class="row justify-content-center">
+                                        <div class="col-3" onclick="window.open('https://www.socaldata.science/home', '_blank');" style="cursor: pointer;">
+                                            <img class="img-fluid work" src="images/cic.jpg">
+                                        </div>
+
+                                        <div class="col-8" style="padding-top: 5%; padding-bottom: 5%;">
+                                            <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
+                                                <p><b>Peer Mentor</b></p>
+                                                <div class="responsive-caption" style="font-style: italic">
+                                                    <p>June 2023 - December 2024</p>
+                                                </div>
+                                                <div class="col-12 pb-2 responsive-caption" style= "padding-right: 5%;">
+                                                    <p>🪝 Peer advised 100+ students from local community colleges in their respective data science and pairs trading summer research projects</p>
+                                                    <p>🪝 1:1 mentored female freshmen and transfer students in adjusting to their academic environments via goal-setting strategies and problem solving methods</p>
+                                                    <p>🪝 Co-hosted workshops on topics like overcoming imposter syndrome, mastering professional networking, and enhancing soft skills to empower students professionally</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="carousel-item">
+                                    <div class="row justify-content-center">
+                                        <div class="col-3" onclick="window.open('https://www.fullerton.edu/uroc/', '_blank');" style="cursor: pointer;">
+                                            <img class="img-fluid work" src="images/uroc.jpg">
+                                        </div>
+
+                                        <div class="col-8" style="padding-top: 5%; padding-bottom: 5%;">
+                                            <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
+                                                <p><b>Research Assistant</b></p>
+                                                <div class="responsive-caption" style="font-style: italic">
+                                                    <p>January 2024 - May 2024</p>
+                                                </div>
+                                                <div class="col-12 pb-2 responsive-caption" style= "padding-right: 5%;">
+                                                    <p>🪝 Selected for a competitive semester-long fellowship program to train in research methodologies and execute projects under the guidance of a faculty mentor</p>
+                                                    <p>🪝 Implemented a rigorous learning analytics design process, developed the game on Unity, conducted a pilot study of 80 participants, and achieved predictive validity</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="carousel-item">
+                                    <div class="row justify-content-center">
+                                        <div class="col-3" onclick="window.open('https://www.fullerton.edu/ecs/cicpcubed/index.php', '_blank');" style="cursor: pointer;">
+                                            <img class="img-fluid work" src="images/nsf.png">
+                                        </div>
+
+                                        <div class="col-8" style="padding-top: 5%; padding-bottom: 5%;">
+                                            <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
+                                                <p><b>Research Fellow</b></p>
+                                                <div class="responsive-caption" style="font-style: italic">
+                                                    <p>January 2023 - August 2023</p>
+                                                </div>
+                                                <div class="col-12 pb-2 responsive-caption" style= "padding-right: 5%;">
+                                                    <p>🪝 Selected as a fellow for the NSF-funded Harnessing the Data Revolution Data Science Corps program, focusing on training STEM students in data analysis, scientific communication, and applying real-world data science approaches through academic and industry collaborations</p>
+                                                    <p>🪝 Conducted research analyzing neuronal activity in rodents to study the hippocampus' role in non-spatial temporal events, using statistical tests and multinomial logistic regression to decode neuron ensemble activity during odor presentations, revealing a strong association with temporal organization</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="carousel-control-prev" type="button" data-bs-target="#expCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </button>
+
+                            <button class="carousel-control-next" type="button" data-bs-target="#expCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </button>
                         </div>
-
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <div class="row justify-content-center">
-                                    <div class="col-3" onclick="window.open('https://redditinc.com/careers', '_blank');" style="cursor: pointer;">
-                                        <img class="img-fluid work" src="images/reddit.png">
-                                    </div>
-
-                                    <div class="col-8" style="padding-top: 5%; padding-bottom: 5%;">
-                                        <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
-                                            <p><b>Information Security Engineering Intern</b></p>
-                                            <div class="responsive-caption" style="font-style: italic">
-                                                <p>May 2024 - August 2024</p>
-                                            </div>
-                                            <div class="col-12 pb-4 responsive-caption" style= "padding-right: 5%;">
-                                                <p>🪝 Created a sophisticated 4-engine prototype to webscrape URL content, implement an SVM model with 98% accuracy that detects and scores malicious links in real-time, abstract third-party affiliate data, and fingerprint evolving webpage content</p>
-                                                <p>🪝 Utilized Apache Airflow for ETL, automated API ingestion, and a blend of AWS EC2, PostgreSQL, Pypeteer, and Scikit-Learn to safeguard <span onclick="window.open('https://ads.reddit.com/', '_blank');" style="cursor: pointer; color: rgb(246, 149, 56, 0.9)">Reddit Ads</span> against cloaking redirection and 3rd-party modification</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="carousel-item">
-                                <div class="row justify-content-center">
-                                    <div class="col-3" onclick="window.open('https://www.fullerton.edu/ecs/wicse/', '_blank');" style="cursor: pointer;">
-                                        <img class="img-fluid work" src="images/wicse.png">
-                                    </div>
-
-                                    <div class="col-8" style="padding-top: 5%; padding-bottom: 5%;">
-                                        <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
-                                            <p><b>Community Tutor & Student Assistant</b></p>
-                                            <div class="responsive-caption" style="font-style: italic">
-                                                <p>August 2022 - December 2024</p>
-                                            </div>
-                                            <div class="col-12 pb-4 responsive-caption" style= "padding-right: 5%;">
-                                                <p>🪝 Co-organized and led weekly virtual and in-person professional development workshops, socials, industry panels, and Dean's luncheons to empower 1500+ women in their computer science and engineering careers with opportunities for both professional and personal development</p>
-                                                <p>🪝 Spearheaded web development efforts for the annual <span onclick="window.open('https://sites.google.com/view/ecsdls/home', '_blank');" style="cursor: pointer; color: rgb(246, 149, 56, 0.9)">ECS Diversity & Leadership Summit</span>, designed to support students in navigating the implications of AI on leadership and diversity from an industry standpoint</p>
-                                                <p>🪝 Motivated peers and reinforced efficient programming strategies through collaborative instruction in intro to computer science and mathematical structures courses to enhance student learning and career success</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="carousel-item">
-                                <div class="row justify-content-center">
-                                    <div class="col-3" onclick="window.open('https://www.percentageproject.org/', '_blank');" style="cursor: pointer;">
-                                        <img class="img-fluid work" src="images/percentage.jpg">
-                                    </div>
-
-                                    <div class="col-8" style="padding-top: 5%; padding-bottom: 5%;">
-                                        <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
-                                            <p><b>Campus Director & Associate Program Lead</b></p>
-                                            <div class="responsive-caption" style="font-style: italic">
-                                                <p>August 2022 - May 2024</p>
-                                            </div>
-                                            <div class="col-12 pb-2 responsive-caption" style= "padding-right: 5%;">
-                                                <p>🪝 Led a team on campus to coordinate with six CS & ENGR departments to collect anonymous survey data on student culture, learning environment, sense of belonging, and microagressions in their computer science (and related fields) community</p>
-                                                <p>🪝 Fostered cross-collaboration with 12+ campus directors throughout the country to ensure the success of new year campaigns, prioritizing data-driven advocacy in the nonprofit space</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="carousel-item">
-                                <div class="row justify-content-center">
-                                    <div class="col-3" onclick="window.open('https://www.socaldata.science/home', '_blank');" style="cursor: pointer;">
-                                        <img class="img-fluid work" src="images/cic.jpg">
-                                    </div>
-
-                                    <div class="col-8" style="padding-top: 5%; padding-bottom: 5%;">
-                                        <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
-                                            <p><b>Peer Mentor</b></p>
-                                            <div class="responsive-caption" style="font-style: italic">
-                                                <p>June 2023 - December 2024</p>
-                                            </div>
-                                            <div class="col-12 pb-2 responsive-caption" style= "padding-right: 5%;">
-                                                <p>🪝 Peer advised 100+ students from local community colleges in their respective data science and pairs trading summer research projects</p>
-                                                <p>🪝 1:1 mentored female freshmen and transfer students in adjusting to their academic environments via goal-setting strategies and problem solving methods</p>
-                                                <p>🪝 Co-hosted workshops on topics like overcoming imposter syndrome, mastering professional networking, and enhancing soft skills to empower students professionally</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="carousel-item">
-                                <div class="row justify-content-center">
-                                    <div class="col-3" onclick="window.open('https://www.fullerton.edu/uroc/', '_blank');" style="cursor: pointer;">
-                                        <img class="img-fluid work" src="images/uroc.jpg">
-                                    </div>
-
-                                    <div class="col-8" style="padding-top: 5%; padding-bottom: 5%;">
-                                        <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
-                                            <p><b>Research Assistant</b></p>
-                                            <div class="responsive-caption" style="font-style: italic">
-                                                <p>January 2024 - May 2024</p>
-                                            </div>
-                                            <div class="col-12 pb-2 responsive-caption" style= "padding-right: 5%;">
-                                                <p>🪝 Selected for a competitive semester-long fellowship program to train in research methodologies and execute projects under the guidance of a faculty mentor</p>
-                                                <p>🪝 Implemented a rigorous learning analytics design process, developed the game on Unity, conducted a pilot study of 80 participants, and achieved predictive validity</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="carousel-item">
-                                <div class="row justify-content-center">
-                                    <div class="col-3" onclick="window.open('https://www.fullerton.edu/ecs/cicpcubed/index.php', '_blank');" style="cursor: pointer;">
-                                        <img class="img-fluid work" src="images/nsf.png">
-                                    </div>
-
-                                    <div class="col-8" style="padding-top: 5%; padding-bottom: 5%;">
-                                        <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
-                                            <p><b>Research Fellow</b></p>
-                                            <div class="responsive-caption" style="font-style: italic">
-                                                <p>January 2023 - August 2023</p>
-                                            </div>
-                                            <div class="col-12 pb-2 responsive-caption" style= "padding-right: 5%;">
-                                                <p>🪝 Selected as a fellow for the NSF-funded Harnessing the Data Revolution Data Science Corps program, focusing on training STEM students in data analysis, scientific communication, and applying real-world data science approaches through academic and industry collaborations</p>
-                                                <p>🪝 Conducted research analyzing neuronal activity in rodents to study the hippocampus' role in non-spatial temporal events, using statistical tests and multinomial logistic regression to decode neuron ensemble activity during odor presentations, revealing a strong association with temporal organization</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button class="carousel-control-prev" type="button" data-bs-target="#expCarousel" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </button>
-
-                        <button class="carousel-control-next" type="button" data-bs-target="#expCarousel" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
     <!-- Projects -->
-    <div id="project" class="container-fluid pt-5" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
-        <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
-            <p>Projects</p>
+    <section id="projects" class="snap-section">
+        <div class="container-fluid pt-5 section-float-in" style="padding-left: 18%; padding-right: 10%; margin-top: 1%; z-index: 3;">
+            <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
+                <p>Projects</p>
+            </div>
         </div>
-    </div>
 
-    <!-- Timeline -->
-    <div class="container">
-        <div class="row pt-2 pb-2">
-            <div class="col">
-                <div class="timeline-steps aos-init aos-animate" data-aos="fade-up">
-                    <div class="timeline-step">
-                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div id="project-1" class="timeline">
-                                <div class="inner-circle"></div>
-                                <p class="h6 mt-3 mb-1">May 2024 - August 2024</p>
-                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Security, Privacy, and Compliance Engineering (SPACE) @ Reddit</p>
+        <!-- Timeline -->
+        <div class="container section-float-in" style="z-index: 3;">
+            <div class="row pt-2 pb-2">
+                <div class="col">
+                    <div class="timeline-steps aos-init aos-animate" data-aos="fade-up">
+                        <div class="timeline-step">
+                            <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
+                                <div id="project-1" class="timeline">
+                                    <div class="inner-circle"></div>
+                                    <p class="h6 mt-3 mb-1">May 2024 - August 2024</p>
+                                    <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Security, Privacy, and Compliance Engineering (SPACE) @ Reddit</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="timeline-step">
-                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div id="project-2" class="timeline">
-                                <div class="inner-circle"></div>
-                                <p class="h6 mt-3 mb-1">February 2024 - May 2024</p>
-                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Theta Tau @ CSUF</p>
+                        <div class="timeline-step">
+                            <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
+                                <div id="project-2" class="timeline">
+                                    <div class="inner-circle"></div>
+                                    <p class="h6 mt-3 mb-1">February 2024 - May 2024</p>
+                                    <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Theta Tau @ CSUF</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="container-fluid pt-2" style="padding-left: 5%; padding-right: 5%;">
-        <div class="row justify-content-center">
-            <div class="col-sm-12 col-md-8 col-lg-3 mb-4">
-                <div class="row campus_div responsive-card align-content-start" data-timeline-id="project-1" onclick="window.open('pdfs/Malicious-Link-Fingerprint.png', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
-                    <div class="col-12 pb-3 align-self-start">
-                        <img class="img-fluid campus" src="images/mlf.png">
-                    </div>
-        
-                    <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
-                        <p><b>Malicious Link Fingerprint</b></p>
-
-                        <div class="col-12 py-0 pb-3">
-                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Apache Airflow</button>
-                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">PostgreSQL</button>
-                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">AWS EC2</button>
+        <div class="container-fluid pt-2 section-float-in" style="padding-left: 5%; padding-right: 5%; z-index: 3;">
+            <div class="row justify-content-center">
+                <div class="col-sm-12 col-md-8 col-lg-3 mb-4">
+                    <div class="row campus_div responsive-card align-content-start" data-timeline-id="project-1" onclick="window.open('pdfs/Malicious-Link-Fingerprint.png', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
+                        <div class="col-12 pb-3 align-self-start">
+                            <img class="img-fluid campus" src="images/mlf.png">
                         </div>
-
-                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
-                            <p>Real-time detection and scoring of malicious links coupled with novel fingerprinting methodology on dynamic content for safeguarding Reddit Ads. </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
             
-            <div class="col-sm-12 col-md-8 col-lg-3 mb-4">
-                <div class="row campus_div responsive-card align-content-start" data-timeline-id="project-2" onclick="window.open('https://github.com/alpacaJin/mu-rc-car', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
-                    <div class="col-12 pb-3 align-self-start">
-                        <img class="img-fluid campus" src="images/rc.png">
-                    </div>
-        
-                    <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
-                        <p><b>Lightning MuQueen Remote-Controlled Car</b></p>
+                        <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
+                            <p><b>Malicious Link Fingerprint</b></p>
 
-                        <div class="col-12 py-0 pb-3">
-                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Arduino Uno</button>
-                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Bluetooth RX/TX</button>
-                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">DC/Servo Motors</button>
+                            <div class="col-12 py-0 pb-3">
+                                <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Apache Airflow</button>
+                                <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">PostgreSQL</button>
+                                <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">AWS EC2</button>
+                            </div>
+
+                            <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                                <p>Real-time detection and scoring of malicious links coupled with novel fingerprinting methodology on dynamic content for safeguarding Reddit Ads. </p>
+                            </div>
                         </div>
+                    </div>
+                </div>
+                
+                <div class="col-sm-12 col-md-8 col-lg-3 mb-4">
+                    <div class="row campus_div responsive-card align-content-start" data-timeline-id="project-2" onclick="window.open('https://github.com/alpacaJin/mu-rc-car', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
+                        <div class="col-12 pb-3 align-self-start">
+                            <img class="img-fluid campus" src="images/rc.png">
+                        </div>
+            
+                        <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
+                            <p><b>Lightning MuQueen Remote-Controlled Car</b></p>
 
-                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
-                            <p>Arduino-powered RC car with motor management, steering, speed control, and Bluetooth communication and mechanical assembly.</p>
-                        </div>      
+                            <div class="col-12 py-0 pb-3">
+                                <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Arduino Uno</button>
+                                <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Bluetooth RX/TX</button>
+                                <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">DC/Servo Motors</button>
+                            </div>
+
+                            <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                                <p>Arduino-powered RC car with motor management, steering, speed control, and Bluetooth communication and mechanical assembly.</p>
+                            </div>      
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+
+        <!-- Fish -->
+        <video id="click-fish" playsinline autoplay muted preload="auto" style="
+            position: absolute;
+            transition: transform 4s ease-in-out;
+            pointer-events: auto;
+            cursor: pointer;
+            z-index: 5;
+        ">      
+            <source src="movies/gold-1.webm" type="video/webm">
+            Sorry, the fish are in hiding! (your browser does not support the video tag)
+        </video>
+    </section>   
 
     <!-- Hackathons -->
-    <div id="hackathons" class="container-fluid pt-5" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
-        <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
-            <p>Hackathons</p>
-        </div>
-    </div>
-
-    <!-- Timeline -->
-    <div class="container">
-        <div class="row pt-2 pb-2">
-            <div class="col">
-                <div class="timeline-steps aos-init aos-animate" data-aos="fade-up">
-                    <div class="timeline-step">
-                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div id="hack-4" class="timeline">
-                                <div class="inner-circle"></div>
-                                <p class="h6 mt-3 mb-1">February 24-25, 2024</p>
-                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">FullyHacks Hackathon @ CSUF</p>    
-                            </div>
-                        </div>
-                    </div>
-                    <div class="timeline-step">
-                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div id="hack-5" class="timeline">
-                                <div class="inner-circle"></div>
-                                <p class="h6 mt-3 mb-1">February 16-18, 2024</p>
-                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">TreeHacks Hackathon @ Stanford</p>    
-                            </div>
-                        </div>
-                    </div>
-                    <div class="timeline-step">
-                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div id="hack-1" class="timeline">
-                                <div class="inner-circle"></div>
-                                <p class="h6 mt-3 mb-1">June 22-23, 2023</p>
-                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Tech Solutions to Reduce Sexualy Transmitted Infections Hackathon @ National Academy of Medicine</p>    
-                            </div>
-                        </div>
-                    </div>
-                    <div class="timeline-step">
-                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div id="hack-2" class="timeline">
-                                <div class="inner-circle"></div>
-                                <p class="h6 mt-3 mb-1">April 15-16, 2023</p>
-                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Embark Datathon @ UCI</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="timeline-step">
-                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div id="hack-3" class="timeline">
-                                <div class="inner-circle"></div>
-                                <p class="h6 mt-3 mb-1">April 8-9, 2023</p>
-                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">FullyHacks Hackathon @ CSUF</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <section id="hackathons" class="snap-section">
+        <div class="container-fluid pt-5 section-float-in" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
+            <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
+                <p>Hackathons</p>
             </div>
         </div>
-    </div>
 
-    <div class="container-fluid pt-2" style="padding-left: 5%; padding-right: 5%;">
-        <div class="row justify-content-center">
-            <div class="col-sm-12 col-md-8 col-lg-3 mb-4">
-                <div class="row campus_div responsive-card align-content-start" data-timeline-id="hack-4" onclick="window.open('https://github.com/alpacaJin/lumi-s-quest', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)"  style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
-                    <div class="col-12 pb-3 align-self-start">
-                        <img class="img-fluid campus" src="images/lumi.png">
-                    </div>
-        
-                    <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
-                        <p><b>Lumi's Quest: Revival</b></p>
-                        
-                        <div class="col-12 py-0 pb-3">
-                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">C#</button>
-                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Unity</button>
-                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">WebGL</button>
+        <!-- Timeline -->
+        <div class="container section-float-in">
+            <div class="row pt-2 pb-2">
+                <div class="col">
+                    <div class="timeline-steps aos-init aos-animate" data-aos="fade-up">
+                        <div class="timeline-step">
+                            <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
+                                <div id="hack-4" class="timeline">
+                                    <div class="inner-circle"></div>
+                                    <p class="h6 mt-3 mb-1">February 24-25, 2024</p>
+                                    <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">FullyHacks Hackathon @ CSUF</p>    
+                                </div>
+                            </div>
                         </div>
-
-                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
-                            <p>Coral reef conservation brought to life through an immersive 2D adventure & quiz game.</p>
+                        <div class="timeline-step">
+                            <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
+                                <div id="hack-5" class="timeline">
+                                    <div class="inner-circle"></div>
+                                    <p class="h6 mt-3 mb-1">February 16-18, 2024</p>
+                                    <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">TreeHacks Hackathon @ Stanford</p>    
+                                </div>
+                            </div>
                         </div>
-                        
-                        <div class="col-12 py-0 pb-3" style="font-family: 'Afacad'; color: rgb(242,187,28);; font-size: 0.8rem">
-                            Winner of Cool Game Project
+                        <div class="timeline-step">
+                            <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
+                                <div id="hack-1" class="timeline">
+                                    <div class="inner-circle"></div>
+                                    <p class="h6 mt-3 mb-1">June 22-23, 2023</p>
+                                    <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Tech Solutions to Reduce Sexualy Transmitted Infections Hackathon @ National Academy of Medicine</p>    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-step">
+                            <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
+                                <div id="hack-2" class="timeline">
+                                    <div class="inner-circle"></div>
+                                    <p class="h6 mt-3 mb-1">April 15-16, 2023</p>
+                                    <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Embark Datathon @ UCI</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-step">
+                            <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
+                                <div id="hack-3" class="timeline">
+                                    <div class="inner-circle"></div>
+                                    <p class="h6 mt-3 mb-1">April 8-9, 2023</p>
+                                    <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">FullyHacks Hackathon @ CSUF</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="col-sm-12 col-md-8 col-lg-3 mb-4">
-                <div class="row campus_div responsive-card align-content-start" data-timeline-id="hack-5" onclick="window.open('https://devpost.com/software/evergreen-13zy87', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)"  style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
-                    <div class="col-12 pb-3 align-self-start">
-                        <img class="img-fluid campus" src="images/evergreen.png">
-                    </div>
-        
-                    <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
-                        <p><b>Evergreen</b></p>
-                        
-                        <div class="col-12 py-0 pb-3">
-                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">FastAPI</button>
-                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Node.js</button>
-                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">SQLite</button>
+        <div class="container-fluid pt-2 section-float-in" style="padding-left: 5%; padding-right: 5%;">
+            <div class="row justify-content-center">
+                <div class="col-sm-12 col-md-8 col-lg-3 mb-4">
+                    <div class="row campus_div responsive-card align-content-start" data-timeline-id="hack-4" onclick="window.open('https://github.com/alpacaJin/lumi-s-quest', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)"  style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
+                        <div class="col-12 pb-3 align-self-start">
+                            <img class="img-fluid campus" src="images/lumi.png">
                         </div>
-
-                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
-                            <p>Gamification for equitable access to CS education, featuring AI-driven, customized learning paths.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
             
-            <div class="col-sm-12 col-md-8 col-lg-3 mb-4">
-                <div class="row campus_div responsive-card align-content-start" data-timeline-id="hack-1" onclick="window.open('https://deepnote.com/workspace/dtw-599cab8f-9ce0-4077-9ff1-ca65f303664e/project/DTW-f5f0b150-de2c-4cc7-9b95-d4778c8e2160/notebook/ML%20Proj-6128f0b892ff4aa0b7652f124a20bac2', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
-                    <div class="col-12 pb-3 align-self-start">
-                        <img class="img-fluid campus" src="images/rheia.png">
-                    </div>
-        
-                    <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
-                        <p><b>Rheia</b></p>
+                        <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
+                            <p><b>Lumi's Quest: Revival</b></p>
+                            
+                            <div class="col-12 py-0 pb-3">
+                                <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">C#</button>
+                                <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Unity</button>
+                                <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">WebGL</button>
+                            </div>
 
-                        <div class="col-12 py-0 pb-4">
-                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Python</button>
-                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Scikit-learn</button>
-                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Flask</button>
+                            <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                                <p>Coral reef conservation brought to life through an immersive 2D adventure & quiz game.</p>
+                            </div>
+                            
+                            <div class="col-12 py-0 pb-3" style="font-family: 'Afacad'; color: rgb(242,187,28);; font-size: 0.8rem">
+                                Winner of Cool Game Project
+                            </div>
                         </div>
+                    </div>
+                </div>
 
-                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
-                            <p>Novel solution to STI early intervention and contact tracing with data-driven healthcare application.</p>
-                        </div>      
+                <div class="col-sm-12 col-md-8 col-lg-3 mb-4">
+                    <div class="row campus_div responsive-card align-content-start" data-timeline-id="hack-5" onclick="window.open('https://devpost.com/software/evergreen-13zy87', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)"  style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
+                        <div class="col-12 pb-3 align-self-start">
+                            <img class="img-fluid campus" src="images/evergreen.png">
+                        </div>
+            
+                        <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
+                            <p><b>Evergreen</b></p>
+                            
+                            <div class="col-12 py-0 pb-3">
+                                <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">FastAPI</button>
+                                <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Node.js</button>
+                                <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">SQLite</button>
+                            </div>
+
+                            <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                                <p>Gamification for equitable access to CS education, featuring AI-driven, customized learning paths.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-sm-12 col-md-8 col-lg-3 mb-4">
+                    <div class="row campus_div responsive-card align-content-start" data-timeline-id="hack-1" onclick="window.open('https://deepnote.com/workspace/dtw-599cab8f-9ce0-4077-9ff1-ca65f303664e/project/DTW-f5f0b150-de2c-4cc7-9b95-d4778c8e2160/notebook/ML%20Proj-6128f0b892ff4aa0b7652f124a20bac2', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
+                        <div class="col-12 pb-3 align-self-start">
+                            <img class="img-fluid campus" src="images/rheia.png">
+                        </div>
+            
+                        <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
+                            <p><b>Rheia</b></p>
+
+                            <div class="col-12 py-0 pb-4">
+                                <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Python</button>
+                                <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Scikit-learn</button>
+                                <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Flask</button>
+                            </div>
+
+                            <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                                <p>Novel solution to STI early intervention and contact tracing with data-driven healthcare application.</p>
+                            </div>      
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row px-0 justify-content-center">
+                <div class="col-sm-12 col-md-8 col-lg-3 mb-4">
+                    <div class="row campus_div responsive-card align-content-start" data-timeline-id="hack-2" onclick="window.open('https://devpost.com/software/mischief-in-montreal', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
+                        <div class="col-12 pb-3 align-self-start">
+                            <img class="img-fluid campus" src="images/montreal.png">
+                        </div>
+            
+                        <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
+                            <p><b>Mischief in Montreal</b></p>
+
+                            <div class="col-12 py-0 pb-3">
+                                <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Keras</button>
+                                <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Scikit-learn</button>
+                                <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">TensorFlow</button>
+                            </div>
+
+                            <div class="col-12 mb-2 py-2 responsive-caption" style="padding-right: 5%;">
+                                <p>Thorough data analytics & machine learning approach for developing policies in Montreal criminal landscape.</p>
+                            </div>
+
+                            <div class="col-12 py-0 pb-1" style="font-family: 'Afacad'; color: rgb(242,187,28);; font-size: 0.8rem">
+                                Winner of Best Overall
+                            </div>
+                            <div class="col-12 py-0 pb-3" style="font-family: 'Afacad'; color: rgb(242,187,28);; font-size: 0.8rem">
+                                Winner of People's Choice
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="col-sm-12 col-md-8 col-lg-3 mb-4">
+                    <div class="row campus_div responsive-card align-content-start" data-timeline-id="hack-3" onclick="window.open('https://github.com/fooledyouonce/FH_2023_TECS', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)"  style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
+                        <div class="col-12 pb-3 align-self-start">
+                            <img class="img-fluid campus" src="images/green.png">
+                        </div>
+            
+                        <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
+                            <p><b>Fully Green</b></p>
+                            
+                            <div class="col-12 py-0 pb-3">
+                                <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Java</button>
+                                <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Android Studio</button>
+                                <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Scikit-learn</button>
+                            </div>
+
+                            <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                                <p>AI-powered image recognition assistance with recycling mobile app.</p>
+                            </div>
+
+                            <div class="col-12 py-0 pb-1" style="font-family: 'Afacad'; color: rgb(242,187,28);; font-size: 0.8rem">
+                                Winner of Best Mobile App
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Empty divs -->
+                <div class="col-3 campus_div" style="cursor: default;">
+                    <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 40px;">
+                        <div class="empty-div"></div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="row px-0 justify-content-center">
-            <div class="col-sm-12 col-md-8 col-lg-3 mb-4">
-                <div class="row campus_div responsive-card align-content-start" data-timeline-id="hack-2" onclick="window.open('https://devpost.com/software/mischief-in-montreal', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
-                    <div class="col-12 pb-3 align-self-start">
-                        <img class="img-fluid campus" src="images/montreal.png">
-                    </div>
-        
-                    <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
-                        <p><b>Mischief in Montreal</b></p>
-
-                        <div class="col-12 py-0 pb-3">
-                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Keras</button>
-                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Scikit-learn</button>
-                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">TensorFlow</button>
-                        </div>
-
-                        <div class="col-12 mb-2 py-2 responsive-caption" style="padding-right: 5%;">
-                            <p>Thorough data analytics & machine learning approach for developing policies in Montreal criminal landscape.</p>
-                        </div>
-
-                        <div class="col-12 py-0 pb-1" style="font-family: 'Afacad'; color: rgb(242,187,28);; font-size: 0.8rem">
-                            Winner of Best Overall
-                        </div>
-                        <div class="col-12 py-0 pb-3" style="font-family: 'Afacad'; color: rgb(242,187,28);; font-size: 0.8rem">
-                            Winner of People's Choice
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-            <div class="col-sm-12 col-md-8 col-lg-3 mb-4">
-                <div class="row campus_div responsive-card align-content-start" data-timeline-id="hack-3" onclick="window.open('https://github.com/fooledyouonce/FH_2023_TECS', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)"  style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
-                    <div class="col-12 pb-3 align-self-start">
-                        <img class="img-fluid campus" src="images/green.png">
-                    </div>
-        
-                    <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
-                        <p><b>Fully Green</b></p>
-                        
-                        <div class="col-12 py-0 pb-3">
-                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Java</button>
-                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Android Studio</button>
-                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Scikit-learn</button>
-                        </div>
-
-                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
-                            <p>AI-powered image recognition assistance with recycling mobile app.</p>
-                        </div>
-
-                        <div class="col-12 py-0 pb-1" style="font-family: 'Afacad'; color: rgb(242,187,28);; font-size: 0.8rem">
-                            Winner of Best Mobile App
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Empty divs -->
-            <div class="col-3 campus_div" style="cursor: default;">
-                <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 40px;">
-                    <div class="empty-div"></div>
-                </div>
-            </div>
-        </div>
-    </div>
+    </section>
 
     <!-- Research -->
-    <div id="research" class="container-fluid pt-5" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
-        <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
-            <p>Research</p>
+    <section id="research" class="snap-section">
+        <div class="container-fluid pt-5 section-float-in" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
+            <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
+                <p>Research</p>
+            </div>
         </div>
-    </div>
 
-    <!-- Timeline -->
-    <div class="container">
-        <div class="row pt-2 pb-2">
-            <div class="col">
-                <div class="timeline-steps aos-init aos-animate" data-aos="fade-up">
-                    <div class="timeline-step">
-                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div id="research-1" class="timeline">
-                                <div class="inner-circle"></div>
-                                <p class="h6 mt-3 mb-1">January 2024 - Dec 2024</p>
-                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Senior Capstone Project @ CSUF</p>
+        <!-- Timeline -->
+        <div class="container section-float-in">
+            <div class="row pt-2 pb-2">
+                <div class="col">
+                    <div class="timeline-steps aos-init aos-animate" data-aos="fade-up">
+                        <div class="timeline-step">
+                            <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
+                                <div id="research-1" class="timeline">
+                                    <div class="inner-circle"></div>
+                                    <p class="h6 mt-3 mb-1">January 2024 - Dec 2024</p>
+                                    <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Senior Capstone Project @ CSUF</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="timeline-step">
-                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div id="research-2" class="timeline">
-                                <div class="inner-circle"></div>
-                                <p class="h6 mt-3 mb-1">March 2023 - May 2024</p>
-                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Digital Learning Lab @ UCI</p>
+                        <div class="timeline-step">
+                            <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
+                                <div id="research-2" class="timeline">
+                                    <div class="inner-circle"></div>
+                                    <p class="h6 mt-3 mb-1">March 2023 - May 2024</p>
+                                    <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Digital Learning Lab @ UCI</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="timeline-step">
-                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div id="research-3" class="timeline">
-                                <div class="inner-circle"></div>
-                                <p class="h6 mt-3 mb-1">June 2023 - August 2023</p>
-                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">SoCal Data Science Program @ UCI</p>
+                        <div class="timeline-step">
+                            <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
+                                <div id="research-3" class="timeline">
+                                    <div class="inner-circle"></div>
+                                    <p class="h6 mt-3 mb-1">June 2023 - August 2023</p>
+                                    <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">SoCal Data Science Program @ UCI</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="timeline-step">
-                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div id="research-4" class="timeline">
-                                <div class="inner-circle"></div>
-                                <p class="h6 mt-3 mb-1">August 2022 - May 2023</p>
-                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">ASSURE-US @ CSUF</p>
+                        <div class="timeline-step">
+                            <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
+                                <div id="research-4" class="timeline">
+                                    <div class="inner-circle"></div>
+                                    <p class="h6 mt-3 mb-1">August 2022 - May 2023</p>
+                                    <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">ASSURE-US @ CSUF</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="timeline-step">
-                        <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div id="research-5" class="timeline">
-                                <div class="inner-circle"></div>
-                                <p class="h6 mt-3 mb-1">May 2022 - July 2022</p>
-                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">ASSURE-US @ CSUF</p>
+                        <div class="timeline-step">
+                            <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
+                                <div id="research-5" class="timeline">
+                                    <div class="inner-circle"></div>
+                                    <p class="h6 mt-3 mb-1">May 2022 - July 2022</p>
+                                    <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">ASSURE-US @ CSUF</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="container-fluid pt-2" style="padding-left: 5%; padding-right: 5%;">
-        <div class="row justify-content-center">
-            <div class="col-sm-12 col-md-8 col-lg-3 mb-4">
-                <div class="row campus_div responsive-card align-content-start" data-timeline-id="research-1" onclick="window.open('pdfs/Capstone.pdf', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
-                    <div class="col-12 pb-3 align-self-start">
-                        <img class="img-fluid campus" src="images/lightbox.png">
-                    </div>
-        
-                    <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
-                        <p><b>LightBox XAI</b></p>
-
-                        <div class="col-12 py-0 pb-3">
-                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">SHAP</button>
-                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Lime</button>
-                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">GPT-3</button>
+        <div class="container-fluid pt-2 section-float-in" style="padding-left: 5%; padding-right: 5%;">
+            <div class="row justify-content-center">
+                <div class="col-sm-12 col-md-8 col-lg-3 mb-4">
+                    <div class="row campus_div responsive-card align-content-start" data-timeline-id="research-1" onclick="window.open('pdfs/Capstone.pdf', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
+                        <div class="col-12 pb-3 align-self-start">
+                            <img class="img-fluid campus" src="images/lightbox.png">
                         </div>
+            
+                        <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
+                            <p><b>LightBox XAI</b></p>
 
-                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
-                            <p>Exploratory XAI initiative integrating novel methodologies, visualizations, and real-time LLM explanations to demystify the decision-making processes of AI models.</p>
-                        </div>   
-                        
-                        <div class="col-12 py-0 pb-3" style="font-family: 'Afacad'; color: rgb(242,187,28);; font-size: 0.8rem">
-                            Marc Velasco
+                            <div class="col-12 py-0 pb-3">
+                                <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">SHAP</button>
+                                <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Lime</button>
+                                <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">GPT-3</button>
+                            </div>
+
+                            <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                                <p>Exploratory XAI initiative integrating novel methodologies, visualizations, and real-time LLM explanations to demystify the decision-making processes of AI models.</p>
+                            </div>   
+                            
+                            <div class="col-12 py-0 pb-3" style="font-family: 'Afacad'; color: rgb(242,187,28);; font-size: 0.8rem">
+                                Marc Velasco
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-sm-12 col-md-8 col-lg-3 mb-4">
+                    <div class="row campus_div responsive-card align-content-start" data-timeline-id="research-2" onclick="window.open('https://www.canva.com/design/DAF0YChll3g/wlt1i57FaB1lEia5-O_0OA/view?utm_content=DAF0YChll3g&utm_campaign=designshare&utm_medium=link&utm_source=editor', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
+                        <div class="col-12 pb-3 align-self-start">
+                            <img class="img-fluid campus" src="images/pho.png">
+                        </div>
+            
+                        <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
+                            <p><b>Phocrastination: A Game-Based Approach to Assessing and Classifying Academic Procrastination in College Students</b></p>
+
+                            <div class="col-12 py-0 pb-3">
+                                <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">C#</button>
+                                <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Unity</button>
+                                <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Support Vector Machine</button>
+                            </div>
+
+                            <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                                <p>Exploratory classification of real-world academic procrastination through game-based simulation of student learning environments.</p>
+                            </div>
+                            
+                            <div class="col-12 py-0 pb-3" style="font-family: 'Afacad'; color: rgb(242,187,28);; font-size: 0.8rem">
+                                Dr. Doina Bein, Dr. June Ahn
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-8 col-lg-3 mb-4">
+                    <div class="row campus_div responsive-card align-content-start" data-timeline-id="research-3" onclick="window.open('pdfs/Rat-Poster.pdf', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)"  style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
+                        <div class="col-12 pb-3 align-self-start">
+                            <img class="img-fluid campus" src="images/rat.png" style="width: 110%;">
+                        </div>
+            
+                        <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
+                            <p><b>Hippocampal Ensembles Represent Sequential Relationships Among an Extended Sequence of Nonspatial Events</b></p>
+
+                            <div class="col-12 py-0 pb-3">
+                                <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Python</button>
+                                <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Bootstrapping</button>
+                                <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Multinomial Logistic Regression</button>
+                            </div>
+
+                            <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                                <p>Data science & statistics-informed analysis of neuronal activity from a rodent-based odor experiment to determine hippocampal involvement in temporal event organization.</p>
+                            </div>
+
+                            <div class="col-12 py-0 pb-3" style="font-family: 'Afacad'; color: rgb(242,187,28);; font-size: 0.8rem">
+                                Dr. Babak Shahbaba
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="col-sm-12 col-md-8 col-lg-3 mb-4">
-                <div class="row campus_div responsive-card align-content-start" data-timeline-id="research-2" onclick="window.open('https://www.canva.com/design/DAF0YChll3g/wlt1i57FaB1lEia5-O_0OA/view?utm_content=DAF0YChll3g&utm_campaign=designshare&utm_medium=link&utm_source=editor', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
-                    <div class="col-12 pb-3 align-self-start">
-                        <img class="img-fluid campus" src="images/pho.png">
-                    </div>
-        
-                    <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
-                        <p><b>Phocrastination: A Game-Based Approach to Assessing and Classifying Academic Procrastination in College Students</b></p>
-
-                        <div class="col-12 py-0 pb-3">
-                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">C#</button>
-                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Unity</button>
-                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Support Vector Machine</button>
+            <div class="row px-0 justify-content-center">
+                <div class="col-sm-12 col-md-8 col-lg-3 mb-4 pb-0">
+                    <div class="row campus_div responsive-card align-content-start" data-timeline-id="research-4" onclick="window.open('pdfs/Ad-Poster.pdf', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
+                        <div class="col-12 pb-3 align-self-start">
+                            <img class="img-fluid campus" src="images/ad.png" style="width: 110%;">
                         </div>
-
-                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
-                            <p>Exploratory classification of real-world academic procrastination through game-based simulation of student learning environments.</p>
-                        </div>
-                        
-                        <div class="col-12 py-0 pb-3" style="font-family: 'Afacad'; color: rgb(242,187,28);; font-size: 0.8rem">
-                            Dr. Doina Bein, Dr. June Ahn
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-12 col-md-8 col-lg-3 mb-4">
-                <div class="row campus_div responsive-card align-content-start" data-timeline-id="research-3" onclick="window.open('pdfs/Rat-Poster.pdf', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)"  style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
-                    <div class="col-12 pb-3 align-self-start">
-                        <img class="img-fluid campus" src="images/rat.png" style="width: 110%;">
-                    </div>
-        
-                    <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
-                        <p><b>Hippocampal Ensembles Represent Sequential Relationships Among an Extended Sequence of Nonspatial Events</b></p>
-
-                        <div class="col-12 py-0 pb-3">
-                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Python</button>
-                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Bootstrapping</button>
-                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Multinomial Logistic Regression</button>
-                        </div>
-
-                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
-                            <p>Data science & statistics-informed analysis of neuronal activity from a rodent-based odor experiment to determine hippocampal involvement in temporal event organization.</p>
-                        </div>
-
-                        <div class="col-12 py-0 pb-3" style="font-family: 'Afacad'; color: rgb(242,187,28);; font-size: 0.8rem">
-                            Dr. Babak Shahbaba
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="row px-0 justify-content-center">
-            <div class="col-sm-12 col-md-8 col-lg-3 mb-4 pb-0">
-                <div class="row campus_div responsive-card align-content-start" data-timeline-id="research-4" onclick="window.open('pdfs/Ad-Poster.pdf', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
-                    <div class="col-12 pb-3 align-self-start">
-                        <img class="img-fluid campus" src="images/ad.png" style="width: 110%;">
-                    </div>
-        
-                    <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
-                        <p><b>Data Science Analysis of Malicious Ads and Threat Detection Automation for Cybersecurity Progress</b></p>
-
-                        <div class="col-12 py-0 pb-3">
-                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">BeautifulSoup</button>
-                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Random Forest</button>
-                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Streamlit</button>
-                        </div>
-
-                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
-                            <p>Novel approach to automating the analysis of malicious content on the internet to protect users against Google ad fraud.</p>
-                        </div>
-                        
-                        <div class="col-12 py-0 pb-3" style="font-family: 'Afacad'; color: rgb(242,187,28);; font-size: 0.8rem">
-                            Dr. Doina Bein
-                        </div>
-                    </div>
-                </div>
-            </div>
             
-            <div class="col-sm-12 col-md-8 col-lg-3 mb-4">
-                <div class="row campus_div responsive-card align-content-start" data-timeline-id="research-5" onclick="window.open('https://docs.google.com/presentation/d/e/2PACX-1vTnE7UZyXSipadZj8svvPqye-VYFhrQzS0CD64-_STG9TZyR7ApPPs-XeJh8kkoVHpkdheNgWaljkoE/pub?start=false&loop=false&delayms=3000', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
-                    <div class="col-12 pb-3 align-self-start">
-                        <img class="img-fluid campus" src="images/job.png" style="width: 110%;">
-                    </div>
-        
-                    <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
-                        <p><b>Data Science Analysis on Real/Fake Job Postings</b></p>
-                        
-                        <div class="col-12 py-0 pb-3">
-                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Pandas</button>
-                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Gaussian Mixture</button>
-                            <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Silhouette Score</button>
-                        </div>
+                        <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
+                            <p><b>Data Science Analysis of Malicious Ads and Threat Detection Automation for Cybersecurity Progress</b></p>
 
-                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
-                            <p>End-to-end Scikit-learn workflow on 18k real/fake job postings from 2020 to predict legitimacy.</p>
-                        </div>
+                            <div class="col-12 py-0 pb-3">
+                                <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">BeautifulSoup</button>
+                                <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Random Forest</button>
+                                <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Streamlit</button>
+                            </div>
 
-                        <div class="col-12 py-0 pb-3" style="font-family: 'Afacad'; color: rgb(242,187,28);; font-size: 0.8rem">
-                            Dr. Doina Bein
+                            <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                                <p>Novel approach to automating the analysis of malicious content on the internet to protect users against Google ad fraud.</p>
+                            </div>
+                            
+                            <div class="col-12 py-0 pb-3" style="font-family: 'Afacad'; color: rgb(242,187,28);; font-size: 0.8rem">
+                                Dr. Doina Bein
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                
+                <div class="col-sm-12 col-md-8 col-lg-3 mb-4">
+                    <div class="row campus_div responsive-card align-content-start" data-timeline-id="research-5" onclick="window.open('https://docs.google.com/presentation/d/e/2PACX-1vTnE7UZyXSipadZj8svvPqye-VYFhrQzS0CD64-_STG9TZyR7ApPPs-XeJh8kkoVHpkdheNgWaljkoE/pub?start=false&loop=false&delayms=3000', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
+                        <div class="col-12 pb-3 align-self-start">
+                            <img class="img-fluid campus" src="images/job.png" style="width: 110%;">
+                        </div>
+            
+                        <div class="col-12 mx-2 responsive-title" style="font-family: 'Afacad'; color: white;">
+                            <p><b>Data Science Analysis on Real/Fake Job Postings</b></p>
+                            
+                            <div class="col-12 py-0 pb-3">
+                                <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Pandas</button>
+                                <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Gaussian Mixture</button>
+                                <button class="btn btn-sm static-orange" type="button" style="font-family: 'Afacad'; color: white; font-size: 0.8rem">Silhouette Score</button>
+                            </div>
 
-            <!-- Empty divs -->
-            <div class="col-3 campus_div" style="cursor: default;">
-                <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 40px;">
-                    <div class="empty-div"></div>
+                            <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                                <p>End-to-end Scikit-learn workflow on 18k real/fake job postings from 2020 to predict legitimacy.</p>
+                            </div>
+
+                            <div class="col-12 py-0 pb-3" style="font-family: 'Afacad'; color: rgb(242,187,28);; font-size: 0.8rem">
+                                Dr. Doina Bein
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Empty divs -->
+                <div class="col-3 campus_div" style="cursor: default;">
+                    <div class="row" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 40px;">
+                        <div class="empty-div"></div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
     <!-- Publications -->
-    <div id="publications" class="container-fluid pt-5" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
-        <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
-            <p>Publications</p>
-        </div>
-    </div>
-
-    <!-- Timeline -->
-    <div class="container">
-        <div class="row pt-2 pb-2">
-            <div class="col">
-                <div class="timeline-steps2 aos-init aos-animate" data-aos="fade-up">
-                    <div class="timeline-step2">
-                        <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div id="publications-1" class="timeline">
-                                <div class="inner-circle2"></div>
-                                <p class="h6 mt-3 mb-1">April, 2025</p>
-                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Yokohama, Japan</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="timeline-step2">
-                        <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div id="publications-2" class="timeline">
-                                <div class="inner-circle2"></div>
-                                <p class="h6 mt-3 mb-1">July 2023</p>
-                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">San Francisco, CA</p>
-                            </div>
-                        </div>
-                    </div>                    
-                    <div class="timeline-step2">
-                        <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div id="publications-3" class="timeline">
-                                <div class="inner-circle2"></div>
-                                <p class="h6 mt-3 mb-1">March 2023</p>
-                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Las Vegas, NV</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <section id="publications" class="snap-section">
+        <div class="container-fluid pt-5 section-float-in" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
+            <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
+                <p>Publications</p>
             </div>
         </div>
-    </div>
 
-    <div class="container-fluid pt-2" style="padding-left: 5%; padding-right: 5%;">
-        <div class="row pb-2 justify-content-evenly">
-            <div class="col-12 mb-4">
-                <div class="row campus_div2 responsive-card-pub justify-content-center" data-timeline-id="publications-1" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
-                    <div class="col-sm-12 col-lg-3 pb-3 text-center" onclick="window.open('https://chi2025.acm.org/', '_blank');" style="cursor: pointer;">
-                        <img class="img-fluid logo" src="images/chi.png">
-                    </div>
-        
-                    <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white; cursor: pointer;">
-                        <p><b>Phocrastination: A Game-Based Approach to Assessing and Classifying Academic Procrastination in College Students</b></p>
-
-                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
-                            <p><i>2025 ACM Computer Human Interaction (CHI)</i></p>
-                            <p>Expected Author & Presenter</p>
+        <!-- Timeline -->
+        <div class="container section-float-in">
+            <div class="row pt-2 pb-2">
+                <div class="col">
+                    <div class="timeline-steps2 aos-init aos-animate" data-aos="fade-up">
+                        <div class="timeline-step2">
+                            <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
+                                <div id="publications-1" class="timeline">
+                                    <div class="inner-circle2"></div>
+                                    <p class="h6 mt-3 mb-1">April, 2025</p>
+                                    <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Yokohama, Japan</p>
+                                </div>
+                            </div>
                         </div>
-
-                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
-                            <p><i>2024 National Conference on Undergraduate Research (NCUR)</i></p>
-                            <p>Presenter</p>
-                        </div>
-                        
-                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
-                            <p><i>2023 Southern California Conference for Undergraduate Research (SCCUR)</i></p>
-                            <p>Presenter</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 mb-4">
-                <div class="row campus_div2 responsive-card-pub justify-content-center" data-timeline-id="publications-2" onclick="window.open('https://openaccess.cms-conferences.org/publications/book/978-1-958651-70-4/article/978-1-958651-70-4_8', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
-                    <div class="col-sm-12 col-lg-3 pb-3 text-center" onclick="window.open('https://ahfe.org/', '_blank');" style="cursor: pointer;">
-                        <img class="img-fluid logo" src="images/ahfe.png">
-                    </div>
-        
-                    <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white; padding-top: 10%">
-                        <p><b>Improving Internet Advertising Using Click-Through Rate Prediction</b></p>
-
-                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
-                            <p><i>14th International Conference on Applied Human Factors and Ergonomics (AHFE 2023)</i></p>
-                            <p>Co-Author</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12">
-                <div class="row campus_div2 responsive-card-pub justify-content-center" data-timeline-id="publications-3" onclick="window.open('https://ieeexplore.ieee.org/document/10099325', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
-                    <div class="col-sm-12 col-lg-3 pb-3 text-center" onclick="window.open('https://ieee-ccwc.org/', '_blank');" style="cursor: pointer;">
-                        <img class="img-fluid logo" src="images/ccwc.png">
-                    </div>
-        
-                    <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white;">
-                        <p><b>Data Science Analysis of Malicious Ads and Threat Detection Automation for Cybersecurity Progress</b></p>
-
-                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
-                            <p><i>2023 IEEE 13th Annual Computing and Communication Workshop and Conference (CCWC)</i></p>
-                            <p>Author & Presenter</p>
-                        </div>
-                        
-                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
-                            <p><i>2022 Southern California Conference for Undergraduate Research (SCCUR)</i></p>
-                            <p>Presenter</p>
+                        <div class="timeline-step2">
+                            <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
+                                <div id="publications-2" class="timeline">
+                                    <div class="inner-circle2"></div>
+                                    <p class="h6 mt-3 mb-1">July 2023</p>
+                                    <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">San Francisco, CA</p>
+                                </div>
+                            </div>
+                        </div>                    
+                        <div class="timeline-step2">
+                            <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
+                                <div id="publications-3" class="timeline">
+                                    <div class="inner-circle2"></div>
+                                    <p class="h6 mt-3 mb-1">March 2023</p>
+                                    <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Las Vegas, NV</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+
+        <div class="container-fluid pt-2 section-float-in" style="padding-left: 5%; padding-right: 5%;">
+            <div class="row pb-2 justify-content-evenly">
+                <div class="col-12 mb-4">
+                    <div class="row campus_div2 responsive-card-pub justify-content-center" data-timeline-id="publications-1" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+                        <div class="col-sm-12 col-lg-3 pb-3 text-center" onclick="window.open('https://chi2025.acm.org/', '_blank');" style="cursor: pointer;">
+                            <img class="img-fluid logo" src="images/chi.png">
+                        </div>
+            
+                        <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white; cursor: pointer;">
+                            <p><b>Phocrastination: A Game-Based Approach to Assessing and Classifying Academic Procrastination in College Students</b></p>
+
+                            <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                                <p><i>2025 ACM Computer Human Interaction (CHI)</i></p>
+                                <p>Expected Author & Presenter</p>
+                            </div>
+
+                            <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                                <p><i>2024 National Conference on Undergraduate Research (NCUR)</i></p>
+                                <p>Presenter</p>
+                            </div>
+                            
+                            <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                                <p><i>2023 Southern California Conference for Undergraduate Research (SCCUR)</i></p>
+                                <p>Presenter</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 mb-4">
+                    <div class="row campus_div2 responsive-card-pub justify-content-center" data-timeline-id="publications-2" onclick="window.open('https://openaccess.cms-conferences.org/publications/book/978-1-958651-70-4/article/978-1-958651-70-4_8', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
+                        <div class="col-sm-12 col-lg-3 pb-3 text-center" onclick="window.open('https://ahfe.org/', '_blank');" style="cursor: pointer;">
+                            <img class="img-fluid logo" src="images/ahfe.png">
+                        </div>
+            
+                        <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white; padding-top: 10%">
+                            <p><b>Improving Internet Advertising Using Click-Through Rate Prediction</b></p>
+
+                            <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                                <p><i>14th International Conference on Applied Human Factors and Ergonomics (AHFE 2023)</i></p>
+                                <p>Co-Author</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="row campus_div2 responsive-card-pub justify-content-center" data-timeline-id="publications-3" onclick="window.open('https://ieeexplore.ieee.org/document/10099325', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
+                        <div class="col-sm-12 col-lg-3 pb-3 text-center" onclick="window.open('https://ieee-ccwc.org/', '_blank');" style="cursor: pointer;">
+                            <img class="img-fluid logo" src="images/ccwc.png">
+                        </div>
+            
+                        <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white;">
+                            <p><b>Data Science Analysis of Malicious Ads and Threat Detection Automation for Cybersecurity Progress</b></p>
+
+                            <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                                <p><i>2023 IEEE 13th Annual Computing and Communication Workshop and Conference (CCWC)</i></p>
+                                <p>Author & Presenter</p>
+                            </div>
+                            
+                            <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                                <p><i>2022 Southern California Conference for Undergraduate Research (SCCUR)</i></p>
+                                <p>Presenter</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Awards -->
-    <div id="awards" class="container-fluid pt-5" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
-        <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
-            <p>Awards</p>
-        </div>
-    </div>
-
-    <!-- Timeline -->
-    <div class="container">
-        <div class="row pt-2 pb-2">
-            <div class="col">
-                <div class="timeline-steps2 aos-init aos-animate" data-aos="fade-up">
-                    <div class="timeline-step2">
-                        <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div id="awards-1" class="timeline">
-                                <div class="inner-circle2"></div>
-                                <p class="h6 mt-3 mb-1">December 2024</p>
-                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Edwards Lifesciences</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="timeline-step2">
-                        <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div id="awards-2" class="timeline">
-                                <div class="inner-circle2"></div>
-                                <p class="h6 mt-3 mb-1">March 2024</p>
-                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Southern California for Undergraduate Research (SCCUR)</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="timeline-step2">
-                        <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div id="awards-3" class="timeline">
-                                <div class="inner-circle2"></div>
-                                <p class="h6 mt-3 mb-1">January 2024</p>
-                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Computing Research Association (CRA) Education</p>
-                            </div>
-                        </div>
-                    </div>                    
-                    <div class="timeline-step2">
-                        <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div id="awards-4" class="timeline">
-                                <div class="inner-circle2"></div>
-                                <p class="h6 mt-3 mb-1">November 2023</p>
-                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">CSUF Undergraduate Research and Opportunity Center (UROC)</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="timeline-step2">
-                        <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div id="awards-5" class="timeline">
-                                <div class="inner-circle2"></div>
-                                <p class="h6 mt-3 mb-1">May 2023</p>
-                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">STEM Advantage</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="timeline-step2">
-                        <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
-                            <div id="awards-6" class="timeline">
-                                <div class="inner-circle2"></div>
-                                <p class="h6 mt-3 mb-1">March 2023</p>
-                                <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Advancing Women in Technology (AWT)</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <section id="awards" class="snap-section">
+        <div class="container-fluid pt-5 section-float-in" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
+            <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
+                <p>Awards</p>
             </div>
         </div>
-    </div>
 
-    <div class="container-fluid pt-2" style="padding-left: 5%; padding-right: 5%;">
-        <div class="row justify-content-evenly">
-            <div class="col-12 mb-4">
-                <div class="row campus_div2 responsive-card-pub justify-content-center" data-timeline-id="awards-1" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
-                    <div class="col-sm-12 col-lg-3 pb-3 text-center" onclick="window.open('https://www.edwards.com/', '_blank');" style="cursor: pointer;">
-                        <img class="img-fluid logo" src="images/edwards.png">
-                    </div>
-        
-                    <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white;">
-                        <p><b>Edwards Lifesciences Scholar</b></p>
-
-                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
-                            <p>Awarded recognition for exceptional student leadership in WiCSE</p>
+        <!-- Timeline -->
+        <div class="container section-float-in">
+            <div class="row pt-2 pb-2">
+                <div class="col">
+                    <div class="timeline-steps2 aos-init aos-animate" data-aos="fade-up">
+                        <div class="timeline-step2">
+                            <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
+                                <div id="awards-1" class="timeline">
+                                    <div class="inner-circle2"></div>
+                                    <p class="h6 mt-3 mb-1">December 2024</p>
+                                    <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Edwards Lifesciences</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-step2">
+                            <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
+                                <div id="awards-2" class="timeline">
+                                    <div class="inner-circle2"></div>
+                                    <p class="h6 mt-3 mb-1">March 2024</p>
+                                    <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Southern California for Undergraduate Research (SCCUR)</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-step2">
+                            <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
+                                <div id="awards-3" class="timeline">
+                                    <div class="inner-circle2"></div>
+                                    <p class="h6 mt-3 mb-1">January 2024</p>
+                                    <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Computing Research Association (CRA) Education</p>
+                                </div>
+                            </div>
+                        </div>                    
+                        <div class="timeline-step2">
+                            <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
+                                <div id="awards-4" class="timeline">
+                                    <div class="inner-circle2"></div>
+                                    <p class="h6 mt-3 mb-1">November 2023</p>
+                                    <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">CSUF Undergraduate Research and Opportunity Center (UROC)</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-step2">
+                            <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
+                                <div id="awards-5" class="timeline">
+                                    <div class="inner-circle2"></div>
+                                    <p class="h6 mt-3 mb-1">May 2023</p>
+                                    <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">STEM Advantage</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-step2">
+                            <div class="timeline-content2" data-toggle="popover" data-trigger="hover" data-placement="top">
+                                <div id="awards-6" class="timeline">
+                                    <div class="inner-circle2"></div>
+                                    <p class="h6 mt-3 mb-1">March 2023</p>
+                                    <p class="h6 mb-0 mb-lg-0" style="color: #6d6d6d">Advancing Women in Technology (AWT)</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        
-        <div class="row justify-content-evenly">
-            <div class="col-12 mb-4">
-                <div class="row campus_div2 responsive-card-pub justify-content-center" data-timeline-id="awards-2" onclick="window.open('https://www.sccur.org/whitney-travel-award', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
-                    <div class="col-sm-12 col-lg-3 pb-3 text-center" onclick="window.open('https://www.sccur.org/', '_blank');" style="cursor: pointer;">
-                        <img class="img-fluid logo" src="images/whitney.png">
-                    </div>
-        
-                    <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white;">
-                        <p><b>William M. Whitney, Ph.D. Travel Award</b></p>
+        </div>
 
-                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
-                            <p>Awarded $500 to support student travel to NCUR</p>
+        <div class="container-fluid pt-2 section-float-in" style="padding-left: 5%; padding-right: 5%;">
+            <div class="row justify-content-evenly">
+                <div class="col-12 mb-4">
+                    <div class="row campus_div2 responsive-card-pub justify-content-center" data-timeline-id="awards-1" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
+                        <div class="col-sm-12 col-lg-3 pb-3 text-center" onclick="window.open('https://www.edwards.com/', '_blank');" style="cursor: pointer;">
+                            <img class="img-fluid logo" src="images/edwards.png">
                         </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 mb-4">
-                <div class="row campus_div2 responsive-card-pub justify-content-center" data-timeline-id="awards-3" onclick="window.open('https://cra.org/crn/2024/01/outstanding-undergraduate-research-awards-winners-announcement/', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
-                    <div class="col-sm-12 col-lg-3 pb-3 text-center" onclick="window.open('https://cra.org/crae/', '_blank');" style="cursor: pointer;">
-                        <img class="img-fluid logo" src="images/cra.png">
-                    </div>
-        
-                    <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white;">
-                        <p><b>Outstanding Undergraduate Researcher Award (URA)</b></p>
-
-                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
-                            <p>Awarded Honorable Mention for demonstrating outstanding potential in computing research</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
             
-            <div class="col-12 mb-4">
-                <div class="row campus_div2 responsive-card-pub justify-content-center" data-timeline-id="awards-4" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
-                    <div class="col-sm-12 col-lg-3 pb-3 text-center" onclick="window.open('https://cra.org/crn/2024/01/outstanding-undergraduate-research-awards-winners-announcement/', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="cursor: pointer;">
-                        <img class="img-fluid logo" src="images/uroc.jpg">
-                    </div>
-        
-                    <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white; cursor: pointer;">
-                        <p><b>UROC Fellowship Award</b></p>
+                        <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white;">
+                            <p><b>Edwards Lifesciences Scholar</b></p>
 
-                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
-                            <p>Awarded $5,000 grant to conduct and present research at annual research symposium</p>
+                            <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                                <p>Awarded recognition for exceptional student leadership in WiCSE</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="col-12 mb-4">
-                <div class="row campus_div2 responsive-card-pub justify-content-center" data-timeline-id="awards-5" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
-                    <div class="col-sm-12 col-lg-3 pb-3 text-center" onclick="window.open('https://stemadvantage.org/', '_blank');" style="cursor: pointer;">
-                        <img class="img-fluid logo" src="images/adv.jpg">
-                    </div>
-        
-                    <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white; cursor: pointer;">
-                        <p><b>STEM Advantage Scholarship</b></p>
-
-                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
-                            <p>Awarded $3,750 grant to attend classes full-time and graduate with less student debt</p>
+            
+            <div class="row justify-content-evenly">
+                <div class="col-12 mb-4">
+                    <div class="row campus_div2 responsive-card-pub justify-content-center" data-timeline-id="awards-2" onclick="window.open('https://www.sccur.org/whitney-travel-award', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
+                        <div class="col-sm-12 col-lg-3 pb-3 text-center" onclick="window.open('https://www.sccur.org/', '_blank');" style="cursor: pointer;">
+                            <img class="img-fluid logo" src="images/whitney.png">
                         </div>
+            
+                        <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white;">
+                            <p><b>William M. Whitney, Ph.D. Travel Award</b></p>
+
+                            <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                                <p>Awarded $500 to support student travel to NCUR</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-12 mb-4">
-                <div class="row campus_div2 responsive-card-pub justify-content-center" data-timeline-id="awards-6" onclick="window.open('https://awtca.org/2023/06/8268/', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)"  style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
-                    <div class="col-sm-12 col-lg-3 pb-3 text-center" onclick="window.open('https://awtca.org/', '_blank');" style="cursor: pointer;">
-                        <img class="img-fluid logo" src="images/awt.jpg">
-                    </div>
-        
-                    <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white;">
-                        <p><b>AWT Scholarship</b></p>
-
-                        <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
-                            <p>Awarded $7,500 grant to further education in the technology field</p>
+                <div class="col-12 mb-4">
+                    <div class="row campus_div2 responsive-card-pub justify-content-center" data-timeline-id="awards-3" onclick="window.open('https://cra.org/crn/2024/01/outstanding-undergraduate-research-awards-winners-announcement/', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
+                        <div class="col-sm-12 col-lg-3 pb-3 text-center" onclick="window.open('https://cra.org/crae/', '_blank');" style="cursor: pointer;">
+                            <img class="img-fluid logo" src="images/cra.png">
                         </div>
+            
+                        <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white;">
+                            <p><b>Outstanding Undergraduate Researcher Award (URA)</b></p>
+
+                            <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                                <p>Awarded Honorable Mention for demonstrating outstanding potential in computing research</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-12 mb-4">
+                    <div class="row campus_div2 responsive-card-pub justify-content-center" data-timeline-id="awards-4" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+                        <div class="col-sm-12 col-lg-3 pb-3 text-center" onclick="window.open('https://cra.org/crn/2024/01/outstanding-undergraduate-research-awards-winners-announcement/', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="cursor: pointer;">
+                            <img class="img-fluid logo" src="images/uroc.jpg">
+                        </div>
+            
+                        <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white; cursor: pointer;">
+                            <p><b>UROC Fellowship Award</b></p>
+
+                            <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                                <p>Awarded $5,000 grant to conduct and present research at annual research symposium</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 mb-4">
+                    <div class="row campus_div2 responsive-card-pub justify-content-center" data-timeline-id="awards-5" onmouseover="handleHover(this)" onmouseout="handleHover(this)" style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%;">
+                        <div class="col-sm-12 col-lg-3 pb-3 text-center" onclick="window.open('https://stemadvantage.org/', '_blank');" style="cursor: pointer;">
+                            <img class="img-fluid logo" src="images/adv.jpg">
+                        </div>
+            
+                        <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white; cursor: pointer;">
+                            <p><b>STEM Advantage Scholarship</b></p>
+
+                            <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                                <p>Awarded $3,750 grant to attend classes full-time and graduate with less student debt</p>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 mb-4">
+                    <div class="row campus_div2 responsive-card-pub justify-content-center" data-timeline-id="awards-6" onclick="window.open('https://awtca.org/2023/06/8268/', '_blank');" onmouseover="handleHover(this)" onmouseout="handleHover(this)"  style="background-color: rgba(47, 48, 53, 0.5); border-radius: 30px; margin: auto; height: 100%; cursor: pointer;">
+                        <div class="col-sm-12 col-lg-3 pb-3 text-center" onclick="window.open('https://awtca.org/', '_blank');" style="cursor: pointer;">
+                            <img class="img-fluid logo" src="images/awt.jpg">
+                        </div>
+            
+                        <div class="col-sm-12 col-lg-7 mx-2 mt-2 responsive-title pt-3" style="font-family: 'Afacad'; color: white;">
+                            <p><b>AWT Scholarship</b></p>
+
+                            <div class="col-12 mb-2 py-2 responsive-caption" style= "padding-right: 5%;">
+                                <p>Awarded $7,500 grant to further education in the technology field</p>
+                            </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Sub-footer -->
-    <div class="empty-space"><!-- --></div>
+    <!-- Sub Footer -->
+    <section id="Sub-footer" class="snap-section">
+        <div class="empty-space"><!-- --></div>
 
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-1">
-                <!--  -->
-            </div>
+        <div class="container-fluid section-float-in" style="z-index: 3;">
+            <div class="row justify-content-center">
+                <div class="col-1">
+                    <!--  -->
+                </div>
 
-            <!-- License -->
-            <div class=" col-10 responsive-caption text-center">
-                <a href="https://www.vecteezy.com/members/narit-omd536190" target="_blank_" style="font-family: 'Afacad'; color: white;">Stock videos by Narit Bualuang on Vecteezy</a>
-            </div>
+                <!-- License -->
+                <div class=" col-10 responsive-title text-center">
+                    <a href="https://www.vecteezy.com/members/narit-omd536190" target="_blank_" style="font-family: 'Afacad'; color: white;">Stock videos by Narit Bualuang on Vecteezy</a>
+                </div>
 
-            <!-- Arrow up -->
-            <div class="col-1 responsive-arrow text-center">
-                <a href="#header" style= "font-family: 'Afacad'; color: #6d6d6d;">
-                    <span class="material-symbols-outlined">
-                        keyboard_double_arrow_up
-                    </span>
-                </a>
+                <!-- Arrow up -->
+                <div class="col-1 responsive-arrow text-center">
+                    <a href="#Sub-header" style= "font-family: 'Afacad'; color: #6d6d6d;">
+                        <span class="material-symbols-outlined">
+                            keyboard_double_arrow_up
+                        </span>
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
+        
+        <!-- Fish -->
+        <div class="fish-container" style="position: absolute; z-index: 0">
+            <video id="fish-video" class="inctive" playsinline autoplay muted preload="auto" width="100%" height="100%">
+                <source src="movies/betta-1-1.mp4" type="video/mp4">
+                Sorry, the fish are in hiding! (your browser does not support the video tag)
+            </video>
+            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
+                <source src="movies/betta-1-2.mp4" type="video/mp4">
+                Sorry, the fish are in hiding! (your browser does not support the video tag)
+            </video>
+            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
+                <source src="movies/betta-1-3.mp4" type="video/mp4">
+                Sorry, the fish are in hiding! (your browser does not support the video tag)
+            </video>
+            
+            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
+                <source src="movies/betta-2-1.mp4" type="video/mp4">
+                Sorry, the fish are in hiding! (your browser does not support the video tag)
+            </video>
+            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
+                <source src="movies/betta-2-2.mp4" type="video/mp4">
+                Sorry, the fish are in hiding! (your browser does not support the video tag)
+            </video>
+            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
+                <source src="movies/betta-2-3.mp4" type="video/mp4">
+                Sorry, the fish are in hiding! (your browser does not support the video tag)
+            </video>
 
+            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
+                <source src="movies/betta-3-1.mp4" type="video/mp4">
+                Sorry, the fish are in hiding! (your browser does not support the video tag)
+            </video>
+            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
+                <source src="movies/betta-3-2.mp4" type="video/mp4">
+                Sorry, the fish are in hiding! (your browser does not support the video tag)
+            </video>
+            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
+                <source src="movies/betta-3-3.mp4" type="video/mp4">
+                Sorry, the fish are in hiding! (your browser does not support the video tag)
+            </video>
+
+            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
+                <source src="movies/gold-1.mp4" type="video/mp4">
+                Sorry, the fish are in hiding! (your browser does not support the video tag)
+            </video>
+        </div>
+    </section>
+            
     <!-- Footer -->
-    <div id="contact-me" class="container">
+    <div id="contact-me" class="container-fluid section-float-in" style="position: fixed; bottom: 2vh; text-align: center;">
         <div class="row">
             <div class="btn-toolbar justify-content-center" role="toolbar">
                 <a href="mailto:sandra.nguyen9@csu.fullerton.edu" target="_blank">
@@ -1808,13 +2004,11 @@
                 </a>
             </div>
         </div>
-    </div>
-
-    <div class="container-fluid">
+    
         <div class="row py-2 mx-0 pb-4 text-center justify-content-center responsive-sub " style="color: white;">
             Designed & made with ♡ by Sandra Nguyen @2025
         </div>
-    </div>
+    </div>    
 
     <!-- Hover synchronization -->
     <script>
@@ -1828,43 +2022,217 @@
 
     <!-- Randomize play -->
     <script>
-        function playRandomVideo() {
-            // Get all video elements with the id "fish-video"
-            var videos = document.querySelectorAll('#fish-video');
+        const videos = document.querySelectorAll('#fish-video');
+        let current = 0;
+        let hasEndedNaturally = false;
+    
+        function playNextVideo() {
+            // Clean up current
+            videos[current].classList.remove('active');
+            videos[current].classList.add('inactive');
+            videos[current].pause();
+            videos[current].currentTime = 0;
 
-            // Preload next videos
-            videos.forEach(function(video) {
-                video.load();
-            });
+            // Pick next (not same)
+            let next;
+            do {
+                next = Math.floor(Math.random() * videos.length);
+            } while (next === current);
 
-            // Hide all videos initially
-            videos.forEach(function(video) {
-                video.style.display = 'none';
-            });
-        
-            // Randomly select an index
-            var randomIndex = Math.floor(Math.random() * videos.length);
+            const nextVideo = videos[next];
+            current = next;
 
-            // Show the randomly selected video w/ fade-in effect
-            videos[randomIndex].style.display = 'block';
+            // Activate next
+            nextVideo.classList.remove('inactive');
+            nextVideo.classList.add('active');
+            let hasEndedNaturally = false;
+            nextVideo.play();
 
-            // Add an event listener to play the next video when current video ends
-            videos[randomIndex].addEventListener('ended', function() {
-                // Hide the current video
-                videos[randomIndex].style.opacity = 0;
-                
-                // Calculate the index of the next video
-                var nextIndex = (randomIndex + 1) % videos.length;
-
-                // Show next video w/ fade-in effect
-                videos[nextIndex].style.display = 'block';
-
-                videos[nextIndex].play();
-            });
+            // Schedule fade out if duration known
+            if (nextVideo.duration && !isNaN(nextVideo.duration)) {
+                scheduleFadeOut(nextVideo);
+            } else {
+                nextVideo.addEventListener('loadedmetadata', () => {
+                    scheduleFadeOut(nextVideo);
+                }, { once: true });
+            }
         }
 
-        // Call the function every 4 seconds
-        setInterval(playRandomVideo, 4000);
+        function scheduleFadeOut(video) {
+            if (video._fadeTimeout) clearTimeout(video._fadeTimeout);
+
+            const duration = video.duration;
+            if (!duration || isNaN(duration)) return;
+
+            video._fadeTimeout = setTimeout(() => {
+                video.classList.remove('active');
+                video.classList.add('inactive');
+            }, (duration - 0.8) * 1000);
+        }
+
+        // Init
+        videos[current].classList.add('active');
+        videos[current].play();
+        videos[current].addEventListener('loadedmetadata', () => {
+            scheduleFadeOut(videos[current]);
+        }, { once: true });
+
+        // Only allow one call on video end
+        videos.forEach((video, i) => {
+            video.addEventListener('ended', () => {
+                if (i === current) playNextVideo();
+            });
+        });
+    </script>    
+
+    <!-- Float in -->
+    <script>
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    const el = entry.target;
+                    if (entry.isIntersecting) {
+                        el.classList.add("visible");
+                        el.classList.remove("faded-out");
+                    } else {
+                        el.classList.remove("visible");
+                        el.classList.add("faded-out");
+                    }
+                });
+            },
+            {
+                threshold: 0.4,                // triggers closer to center of screen
+                rootMargin: "0px 0px -10% 0px" // don't trigger too early
+            }
+        );
+
+        document.querySelectorAll(".section-float-in").forEach((el) => {
+            observer.observe(el);
+        });
+    </script>
+
+    <!-- Scroll controller -->
+    <script>
+        let isScrolling = false;
+
+        function getCurrentSectionIndex(sections) {
+        return Array.from(sections).findIndex((section) => {
+            const rect = section.getBoundingClientRect();
+            return rect.top >= -10 && rect.top < window.innerHeight;
+        });
+        }
+
+        function scrollToSection(direction) {
+        const sections = document.querySelectorAll(".snap-section");
+        const current = getCurrentSectionIndex(sections);
+        if (direction === 'down' && current < sections.length - 1) {
+            sections[current + 1].scrollIntoView({ behavior: "smooth" });
+        } else if (direction === 'up' && current > 0) {
+            sections[current - 1].scrollIntoView({ behavior: "smooth" });
+        }
+        }
+
+        window.addEventListener("wheel", (e) => {
+        if (isScrolling) return;
+        isScrolling = true;
+        scrollToSection(e.deltaY > 0 ? 'down' : 'up');
+        setTimeout(() => (isScrolling = false), 1000);
+        });
+
+        window.addEventListener("keydown", (e) => {
+        if (isScrolling) return;
+        if (e.key === "ArrowDown" || e.key === "PageDown") {
+            isScrolling = true;
+            scrollToSection('down');
+            setTimeout(() => (isScrolling = false), 1000);
+        } else if (e.key === "ArrowUp" || e.key === "PageUp") {
+            isScrolling = true;
+            scrollToSection('up');
+            setTimeout(() => (isScrolling = false), 1000);
+        }
+        });
+    </script>
+
+    <!-- Footer visibility -->
+    <script>
+        const footer = document.getElementById("contact-me");
+        const subFooter = document.getElementById("Sub-footer");
+
+        const observer2 = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    footer.classList.add("visible");
+                } else {
+                    footer.classList.remove("visible");
+                }
+            });
+        }, {
+            threshold: 0.5
+        });
+
+        observer2.observe(subFooter);
+    </script>
+
+    <!-- Click fish -->
+    <script>
+        const fish = document.getElementById("click-fish");
+        const targetCards = [document.getElementById("experience")];
+        let fadeTimeout;
+        let hasAnimated = false;
+
+        function startFishVideoClean() {
+            fish.pause();               // Make sure it’s stopped
+            fish.currentTime = 0;       // Jump to start
+            fish.load();                // Optional: ensures frame gets flushed
+            void fish.offsetWidth;      // Force reflow for good measure
+            fish.play();                // Now play cleanly
+        }
+
+        function scheduleFadeOut2(duration = 8) {
+            clearTimeout(fadeTimeout);
+            
+            // Step 1: Fade out just before the video ends
+            fadeTimeout = setTimeout(() => {
+                fish.style.opacity = 0;
+
+                // Step 2: After fade is fully done, reset position *while invisible*
+                setTimeout(() => {
+                    fish.style.transition = "none"; // temporarily disable transition
+                    fish.style.transform = "translateX(0) translateY(0) scale(1)";
+                    void fish.offsetWidth; // force reflow
+                    fish.style.transition = "transform 8s ease-in-out, opacity 1s ease-out"; // re-enable
+                }, 1000); // after opacity transition ends (1s)
+            }, 2550);
+        }
+
+        // Trigger fish swim
+        function animateClickFish() {
+            // Cancel any previous reset
+            clearTimeout(fadeTimeout);
+            startFishVideoClean();
+            
+            // Reset & show fish
+            fish.style.transition = "none";
+            fish.style.transform = "translateX(0)";
+            fish.style.opacity = 1;
+            void fish.offsetWidth; // force reflow
+
+            fish.style.transition = "transform 4s ease-in-out, opacity 1s ease-out";
+            fish.style.transform = "translateX(1000px)";
+
+            fish.addEventListener("loadedmetadata", () => {
+                scheduleFadeOut2(fish.duration || 8);
+            }, { once: true });
+        }
+
+        // Scroll observer
+        const observer3 = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) animateClickFish();
+            });
+        }, { threshold: 0.5 });
+
+        targetCards.forEach(card => observer3.observe(card));
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
