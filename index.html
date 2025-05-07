@@ -197,7 +197,7 @@
         .dropdown-content {
             display: none;
             position: absolute;
-            top: 120%;
+            top: 105%;
             left: 50%;
             transform: translateX(-50%);
             min-width: 120px; /* box width */
@@ -367,6 +367,31 @@
 
     <!-- Bio -->
     <style>
+        .intro-text, .bio-card {
+            color: white;
+            font-size: 1.8rem;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 1s ease;
+            padding: 15vh 10vw 10vh;
+            font-family: 'Afacad';
+            text-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+        }
+
+        @media (max-width: 575px) {
+            .intro-text {
+                font-size: 1.2
+            }
+        }
+
+        .fade-in {
+            opacity: 1;
+        }
+
+        .fade-out {
+            opacity: 0;
+        }
+
         /* Pfp */
         @media (min-width: 576px) {
             .responsive-pfp {
@@ -911,7 +936,7 @@
         /* Initial hidden state */
         #contact-me.section-float-in {
             opacity: 0;
-            transform: translateY(60px);
+            transform: translateY(80px);
             pointer-events: none;
             transition: none;
         }
@@ -929,7 +954,7 @@
     <style>
         .section-float-in {
             opacity: 0;
-            transform: translateY(60px);
+            transform: translateY(80px);
             transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
             will-change: opacity, transform;
         }
@@ -975,7 +1000,7 @@
 
     <!-- Sub Header -->
     <section id="Sub-header" class="snap-section">
-        <div class="container-fluid px-3 mx-0 pt-5" style="z-index: 3;">
+        <div class="container-fluid px-3 mx-0 pt-5 section-float-in" style="z-index: 3;">
             <div class="row responsive-sub-row fish-space" style="padding-left: 18%; padding-right: 10%;">
                 <div class="col-md-12 col-lg-12 text-start text-lg-start" style="font-family: 'Afacad'; color: white; font-size: 1.5rem; padding-top: 20%;">
                     <p class="resposnvie-sub">Hello I'm</p>
@@ -1042,7 +1067,8 @@
 
     <!-- Bio -->
     <section id="bio" class="snap-section">
-        <div class="container-fluid section-float-in" style="padding-left: 10%; padding-right: 10%;">
+        <div id="introText" class="intro-text section-float-in">Like a betta drawn by curiosity, I find my way — welcome to my story.</div>
+        <div id="bioCard" class="container-fluid section-float-in" style="display: none; padding-left: 10%; padding-right: 10%;">
             <div class="row justify-content-center responsive-card-bio card-neu" style="border-radius: 30px; margin: auto;">
                 <img class="img-fluid responsive-pfp col-sm-5 col-md-5 col-lg-4" src="images/pfp2.jpeg" style="border-radius: 30px; opacity: 0.8">
 
@@ -1052,7 +1078,7 @@
                         <p>Sandra Nguyen</p>
                     </div>
                     <p>By day, I'm an Information Security Engineer building user trust and defense systems — off the clock, you'll find me tending to my fish and chasing candid photos of real life.</p>
-                    <p>I'm a recent graduate from Cal State Fullerton, where I dedicated myself to Computer Science and faculty-led research that challenged the complex issues of today.</p>
+                    <p>I'm a recent graduate from Cal State Fullerton, where I dedicated myself to Computer Science and faculty-led research that challenged the nuanced issues of malvertising and academic procrastination.</p>
                     <p>As an Asian American woman in tech, I'm driven to inspire and mentor my peers to pursue their ambitions fearlessly.</p>
                     <div class="resume" style="padding-top: 25px;">
                         <a class="glass-btn" href="pdfs/Sandra_Nguyen_Resume_2025.pdf" role="button" style="font-family: 'Afacad'; color: white; font-size: 1rem; width: 6rem;" target="_blank">Resume</a>
@@ -2190,6 +2216,41 @@
         dropdownWrapper.addEventListener('mouseleave', () => {
             dropdownMenu.style.display = 'none';
         });
+    </script>
+
+    <!-- Subline fade-in -->
+    <script>
+        const intro = document.getElementById('introText');
+        const bio = document.getElementById('bioCard');
+        const bioSection = document.getElementById('bio');
+        let hasPlayed = false;
+
+        const observer4 = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !hasPlayed) {
+                    hasPlayed = true;
+
+                    // Fade in intro
+                    intro.classList.add('fade-in');
+
+                    // After 2.5s, fade out intro and show bio
+                    setTimeout(() => {
+                        intro.classList.remove('fade-in');
+                        intro.classList.add('fade-out');
+
+                        setTimeout(() => {
+                            intro.style.display = 'none';
+                            bio.style.display = 'block';
+                            requestAnimationFrame(() => bio.classList.add('fade-in'));
+                        }, 1000); // Wait for fade-out
+                    }, 3000);
+                }
+            });
+        }, {
+            threshold: 0.5 // Play when ~50% of bio section is in view
+        });
+
+        observer4.observe(bioSection);
     </script>
 
     <!-- Hover synchronization -->
