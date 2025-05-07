@@ -160,6 +160,88 @@
         }
     </style>
 
+    <!-- Dropdown menu -->
+    <style>
+        .custom-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            background: rgba(255, 255, 255, 0.05);
+            min-width: 130px;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 32px;
+            color: white;
+            /* Adjust spacing */
+            padding: 4px 24px 6px 24px; /* Top | Right | Bottom | Left */
+            margin-top: -4px; /* Pulls button up slightly to align */
+            font-family: 'Afacad';
+            font-size: 1.2rem;
+            cursor: pointer;
+            text-decoration: none;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease-in-out;
+            padding-bottom: 10px;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #ff914d; /* accent orange */
+            box-shadow: 0 0 12px #ff914d88; /* match glass-btn glow */
+            transform: scale(1.05);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 120%;
+            left: 50%;
+            transform: translateX(-50%);
+            min-width: 120px; /* box width */
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            z-index: 6;
+            list-style: none;
+            margin: 0;
+            padding: 0.5rem 0;
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 6px 12px;;
+            font-size: 1rem;
+            text-decoration: none;
+            display: block;
+            font-family: 'Afacad';
+            transition: background 0.2s ease;
+        }
+
+        @media (max-width: 575px) {
+            .dropdown-btn {
+                font-size: 1rem;
+                min-width: 80px;
+            }
+
+            .responsive-content {
+                min-width: 20px;
+                padding: 0.3rem 0;
+            }
+        }
+
+        .dropdown-content a:hover {
+            transform: scale(1.02);
+            box-shadow:
+                0 8px 24px rgba(0, 0, 0, 0.4),                /* outer soft shadow */
+                inset 0 0 12px rgba(255, 255, 255, 0.08),     /* glow from within */
+                inset 0 0 8px rgba(0, 0, 0, 0.3)
+        }
+    </style>
+
     <!-- Tag & Cards-->
     <style>
         a {
@@ -184,6 +266,46 @@
                 0 8px 24px rgba(0, 0, 0, 0.4),                /* outer soft shadow */
                 inset 0 0 12px rgba(255, 255, 255, 0.08),     /* glow from within */
                 inset 0 0 8px rgba(0, 0, 0, 0.3)
+        }
+    </style>
+
+    <!-- Buttons -->
+    <style>
+        .glass-btn {
+            font-family: 'Afacad', sans-serif;
+            font-size: 1rem;
+            padding: 0.5rem 1.5rem;
+            border-radius: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            text-decoration: none;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease-in-out;
+            padding-bottom: 15px;
+        }
+
+        .glass-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #ff914d; /* your orange accent */
+            box-shadow: 0 0 12px #ff914d88;
+            transform: scale(1.05);
+        }
+    </style>
+
+    <!-- Header -->
+    <style>
+        @media (max-width: 768px) {
+            .nav-item {
+                margin-right: 3rem;
+            }
+        }
+
+        @media (max-width: 575px) {
+            .nav-item {
+                margin-right: 0.75rem;
+            }
         }
     </style>
 
@@ -827,27 +949,26 @@
                 <a href="#Sub-header" style="font-family: 'Afacad'; color: white;">Sandra Nguyen</a>
             </div>
 
-            <div class="dropdown col-sm-1 col-md-1 col-lg-1 pt-2 text-center">
-                <button class="btn outline-orange dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-family: 'Afacad'; color: white;">
-                    Projects
-                </button>
-                <ul class="dropdown-menu" style="position: relative; z-index: 6;">
-                    <li><a class="dropdown-item" href="#hackathons">Hackathons</a></li>
-                    <li><a class="dropdown-item" href="#projects">Projects</a></li>
-                    <li><a class="dropdown-item" href="#research">Research</a></li>
-                    <li><a class="dropdown-item" href="#publications">Publications</a></li>
-                    <li><a class="dropdown-item" href="#awards">Awards</a></li>
+            <div id="customDropdown" class="custom-dropdown col-sm-1 col-md-1 col-lg-2 pt-2 text-center">
+                <button id="dropdownToggle" class="dropdown-btn">
+                    Projects <span style="margin-left: 4px;">▾</span>
+                <ul id="dropdownMenu" class="dropdown-content responsive-content">
+                    <li><a href="#hackathons">Hackathons</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#research">Research</a></li>
+                    <li><a href="#publications">Publications</a></li>
+                    <li><a href="#awards">Awards</a></li>
                 </ul>
             </div>
 
             <div class="col-sm-1 col-md-1 col-lg-1 pt-2 text-center">
-                <a href="#education" style="font-family: 'Afacad'; color: white;">Education</a>
+                <a class="nav-item" href="#education" style="font-family: 'Afacad'; color: white;">Education</a>
             </div>
             <div class="col-sm-1 col-md-1 col-lg-1 pt-2 text-center">
-                <a href="#experience" style="font-family: 'Afacad'; color: white;">Experience</a>
+                <a class="nav-item" href="#experience" style="font-family: 'Afacad'; color: white;">Experience</a>
             </div>
-            <div class="col-sm-1 col-md-1 col-lg-6 pt-2 text-center text-lg-end">
-                <a href="#Sub-footer" style="font-family: 'Afacad'; color: white;">Contact Me</a>
+            <div class="col-sm-1 col-md-1 col-lg-5 pt-2 text-center text-lg-end">
+                <a class="nav-item" href="#Sub-footer" style="font-family: 'Afacad'; color: white;">Contact Me</a>
             </div>
         </div>
     </header>
@@ -861,11 +982,11 @@
                     <div class="responsive-name" style="font-family: 'WindSong'; font-weight: bold">
                         <p>Sandra Nguyen</p>
                     </div>
-                    <p class="resposnvie-sub" style="margin-top: 500px; font-style: italic; font-size: 0.8em; margin-bottom: 5px;">
+                    <p class="resposnvie-sub" onclick="window.open('https://www.reddit.com/', '_blank');" style="cursor: pointer; margin-top: 500px; font-style: italic; font-size: 0.8em; margin-bottom: 5px;">
                         Information Security Engineer @&nbsp;
                         <i class="fa-brands fa-reddit-alien" style="color: #ff4500; font-size: 1.1em; vertical-align: middle;"></i>
                     </p>
-                    <p class="resposnvie-sub" style="font-style: italic; font-size: 0.8em;">
+                    <p class="resposnvie-sub" onclick="window.open('https://omscs.gatech.edu/', '_blank');" style="cursor: pointer; font-style: italic; font-size: 0.8em;">
                         Georgia Tech OMSCS '27</p>
                 </div>
             </div>
@@ -933,8 +1054,8 @@
                     <p>By day, I'm an Information Security Engineer building user trust and defense systems — off the clock, you'll find me tending to my fish and chasing candid photos of real life.</p>
                     <p>I'm a recent graduate from Cal State Fullerton, where I dedicated myself to Computer Science and faculty-led research that challenged the complex issues of today.</p>
                     <p>As an Asian American woman in tech, I'm driven to inspire and mentor my peers to pursue their ambitions fearlessly.</p>
-                    <div class="pt-2">
-                        <a class="btn outline-orange btn-sm" href="pdfs/Sandra_Nguyen_Resume_2025.pdf" role="button" style="font-family: 'Afacad'; color: white; font-size: 1rem; width: 6rem;" target="_blank">Resume</a>
+                    <div class="resume" style="padding-top: 25px;">
+                        <a class="glass-btn" href="pdfs/Sandra_Nguyen_Resume_2025.pdf" role="button" style="font-family: 'Afacad'; color: white; font-size: 1rem; width: 6rem;" target="_blank">Resume</a>
                     </div>
                 </div>
             </div>
@@ -2053,7 +2174,23 @@
         <div class="row py-2 mx-0 pb-4 text-center justify-content-center responsive-sub " style="color: white;">
             Designed & made with ♡ by Sandra Nguyen @2025
         </div>
-    </div>    
+    </div>
+    
+    <!-- Dropdown menu -->
+    <script>
+        const dropdownToggle = document.getElementById('dropdownToggle');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+        const dropdownWrapper = document.getElementById('customDropdown');
+
+        dropdownToggle.addEventListener('click', () => {
+            dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Close menu when mouse leaves the area
+        dropdownWrapper.addEventListener('mouseleave', () => {
+            dropdownMenu.style.display = 'none';
+        });
+    </script>
 
     <!-- Hover synchronization -->
     <script>
