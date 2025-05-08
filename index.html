@@ -130,6 +130,7 @@
         /* Video scope */
         #Sub-header,
         #projects,
+        #experience,
         #Sub-footer {
             position: relative;
             overflow: hidden;       /* prevents video from leaking outside */
@@ -595,16 +596,16 @@
         @media (min-width: 992px) {
             #click-fish {
                 position: absolute;
-                width: 400px;
+                width: 350px;  /* Fish size */
                 bottom: 70%;
-                left: -300px;
+                left: -30px;
             }
         }
 
         @media (max-width: 991px) {
             #click-fish {
                 position: absolute;
-                width: 300px;
+                width: 400px;
                 bottom: 80%;
                 left: -300px;
             }
@@ -681,6 +682,34 @@
         @media (max-width: 575px) {
             .responsive-card-exp {
                width: 100%;
+            }
+        }
+
+        /* Click Jellyfish Video */
+        @media (min-width: 992px) {
+            #click-jelly {
+                position: absolute;
+                width: 200px;  /* Jelly size */
+                bottom: 10%;
+                left: 1100px;
+            }
+        }
+
+        @media (max-width: 991px) {
+            #click-jelly {
+                position: absolute;
+                width: 400px;
+                bottom: 80%;
+                left: 1100px;
+            }
+        }
+
+        @media (max-width: 575px) {
+            #click-jelly {
+                position: absolute;
+                width: 100%;
+                bottom: 70%;
+                left: 1100px;
             }
         }
     </style>
@@ -1062,6 +1091,23 @@
                 <source src="movies/gold-1.mp4" type="video/mp4">
                 Sorry, the fish are in hiding! (your browser does not support the video tag)
             </video>
+
+            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
+                <source src="movies/jellyfish-2-1.mp4" type="video/mp4">
+                Sorry, the fish are in hiding! (your browser does not support the video tag)
+            </video>
+            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
+                <source src="movies/jellyfish-2-2.mp4" type="video/mp4">
+                Sorry, the fish are in hiding! (your browser does not support the video tag)
+            </video>
+            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
+                <source src="movies/jellyfish-2-3.mp4" type="video/mp4">
+                Sorry, the fish are in hiding! (your browser does not support the video tag)
+            </video>
+            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
+                <source src="movies/jellyfish-2-4.mp4" type="video/mp4">
+                Sorry, the fish are in hiding! (your browser does not support the video tag)
+            </video>
         </div>
     </section>
 
@@ -1089,7 +1135,7 @@
     </section>
  
     <!-- Education -->
-    <section id="education" class="snap-section" style="position: relative; z-index: 5;">
+    <section id="education" class="snap-section">
         <div class="container-fluid section-float-in" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
             <div class="row section-header" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
                 <p>Education</p>
@@ -1393,9 +1439,10 @@
             </div>
         </div>
 
-        <!-- Fish -->
+        <!-- Click fish -->
         <video id="click-fish" playsinline autoplay muted preload="auto" style="
             position: absolute;
+            display: none;
             transition: transform 4s ease-in-out;
             pointer-events: auto;
             cursor: pointer;
@@ -1606,6 +1653,19 @@
                 </div>
             </div>
         </div>
+
+        <!-- Click jelly -->
+        <video id="click-jelly" playsinline autoplay muted preload="auto" style="
+            position: absolute;
+            display: none;
+            transition: transform 4s ease-in-out;
+            pointer-events: auto;
+            cursor: pointer;
+            z-index: 5;
+        ">      
+            <source src="movies/jellyfish-1.mp4" type="video/mp4">
+            Sorry, the fish are in hiding! (your browser does not support the video tag)
+        </video>
     </section>
 
     <!-- Research -->
@@ -2178,6 +2238,22 @@
                 <source src="movies/gold-1.mp4" type="video/mp4">
                 Sorry, the fish are in hiding! (your browser does not support the video tag)
             </video>
+
+            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
+                <source src="movies/jellyfish-2-1.mp4" type="video/mp4">
+                Sorry, the fish are in hiding! (your browser does not support the video tag)
+            </video>
+            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
+                <source src="movies/jellyfish-2-2.mp4" type="video/mp4">
+                Sorry, the fish are in hiding! (your browser does not support the video tag)
+            </video>
+            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
+                <source src="movies/jellyfish-2-3.mp4" type="video/mp4">
+                Sorry, the fish are in hiding! (your browser does not support the video tag)
+            </video>
+            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
+                <source src="movies/jellyfish-2-4.mp4" type="video/mp4">
+                Sorry, the fish are in hiding! (your browser does not support the video tag)
         </div>
     </section>
             
@@ -2419,9 +2495,8 @@
     <!-- Click fish -->
     <script>
         const fish = document.getElementById("click-fish");
-        const targetCards = [document.getElementById("experience")];
+        const targetCards = [document.getElementById("projects")];
         let fadeTimeout;
-        let hasAnimated = false;
 
         function startFishVideoClean() {
             fish.pause();               // Make sure it’s stopped
@@ -2455,11 +2530,15 @@
             startFishVideoClean();
             
             // Reset & show fish
+            fish.style.display = "block";
             fish.style.transition = "none";
             fish.style.transform = "translateX(0)";
             fish.style.opacity = 1;
             void fish.offsetWidth; // force reflow
 
+            fish.style.opacity = 0;
+            void fish.offsetWidth;
+            fish.style.opacity = 1;
             fish.style.transition = "transform 4s ease-in-out, opacity 1s ease-out";
             fish.style.transform = "translateX(1000px)";
 
@@ -2476,6 +2555,80 @@
         }, { threshold: 0.5 });
 
         targetCards.forEach(card => observer3.observe(card));
+    </script>
+
+    <!-- Click jelly -->
+    <script>
+        const jelly = document.getElementById("click-jelly");
+        const targetCards2 = [document.getElementById("experience")];
+        let fadeTimeout2;
+
+        function startJellyVideoClean() {
+            jelly.pause();               // Make sure it’s stopped
+            jelly.currentTime = 0;       // Jump to start
+            jelly.load();                // Optional: ensures frame gets flushed
+            void jelly.offsetWidth;      // Force reflow for good measure
+            jelly.play();                // Now play cleanly
+        }
+
+        function scheduleFadeOut3(duration = 8) {
+            clearTimeout(fadeTimeout2);
+            
+            // Step 1: Fade out just before the video ends
+            fadeTimeout2 = setTimeout(() => {
+                jelly.style.opacity = 0;
+
+                // Step 2: After fade is fully done, reset position *while invisible*
+                setTimeout(() => {
+                    jelly.style.transition = "none"; // temporarily disable transition
+                    jelly.style.transform = "translateX(0) translateY(0) scale(1)";
+                    void jelly.offsetWidth; // force reflow
+                    jelly.style.transition = "transform 1s ease-in-out, opacity 1s ease-out"; // re-enable
+                }, 1000); // after opacity transition ends (1s)
+            }, 1500);
+        }
+
+        // Trigger fish swim
+        function animateClickJelly() {
+            // Cancel any previous reset
+            clearTimeout(fadeTimeout2);
+            startJellyVideoClean();
+            
+            // Reset & show fish
+            jelly.style.display = "block";
+            jelly.style.transition = "none";
+            jelly.style.transform = "translateX(0)";
+            jelly.style.opacity = 1;
+            void jelly.offsetWidth; // force reflow
+
+            jelly.style.opacity = 0;
+            void jelly.offsetWidth;
+            jelly.style.opacity = 1;
+            jelly.style.transition = "transform 12s cubic-bezier(0.25, 1, 0.5, 1), opacity 1s ease-out";
+            jelly.style.transform = "translate(60px, -80vh)";
+
+            jelly.addEventListener("loadedmetadata", () => {
+                scheduleFadeOut3(jelly.duration || 8);
+            }, { once: true });
+        }
+
+        // Scroll observer
+        const observer5 = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateClickJelly();
+                } else {
+                    // If the section is no longer in view, hide the jelly
+                    jelly.style.opacity = 0;
+                    jelly.style.transition = "opacity 0.5s ease-out";
+                    setTimeout(() => {
+                        jelly.style.display = "none";
+                    }, 500);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        targetCards2.forEach(card => observer5.observe(card));
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
