@@ -1862,6 +1862,1159 @@
             transform: translateY(0);
         }
     </style> 
+
+    <!-- Aquarium redesign system -->
+    <style>
+        :root {
+            --aqua-glass: rgba(9, 15, 27, 0.58);
+            --aqua-glass-soft: rgba(255, 255, 255, 0.055);
+            --aqua-border: rgba(218, 236, 255, 0.22);
+            --aqua-border-strong: rgba(242, 249, 255, 0.46);
+            --aqua-text: rgba(255, 255, 255, 0.94);
+            --aqua-muted: rgba(210, 225, 245, 0.62);
+            --aqua-blue: rgba(113, 176, 255, 0.7);
+            --aqua-orange: rgba(246, 149, 56, 0.92);
+            --aqua-gold: rgb(242, 187, 28);
+            --aqua-shadow: 0 30px 74px rgba(0, 0, 0, 0.48), 0 0 80px rgba(103, 164, 255, 0.18);
+            --aqua-fish-glow: blur(28px) saturate(170%) contrast(110%) brightness(118%);
+        }
+
+        .snap-section:not(#Sub-header)::before {
+            content: "";
+            position: absolute;
+            inset: 8% 4%;
+            z-index: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(42rem 26rem at 12% 26%, rgba(70, 140, 255, 0.1), transparent 70%),
+                radial-gradient(34rem 24rem at 88% 78%, rgba(246, 149, 56, 0.08), transparent 76%);
+            filter: blur(18px);
+            opacity: 0.9;
+        }
+
+        #Sub-header .hero-ambient-video,
+        #Sub-footer .fish-container {
+            filter: var(--aqua-fish-glow);
+        }
+
+        #Sub-header .hero-ambient-video.is-visible {
+            opacity: 0.29;
+        }
+
+        .section-shell {
+            position: relative;
+            z-index: 3;
+            width: min(1180px, calc(100vw - 3rem));
+            margin: 0 auto;
+            color: var(--aqua-text);
+            font-family: 'Afacad', sans-serif;
+        }
+
+        #education .section-story-content > :not(.redesign-shell),
+        #experience .section-story-content > :not(.redesign-shell),
+        #projects .section-story-content > :not(.redesign-shell),
+        #hackathons .section-story-content > :not(.redesign-shell),
+        #research .section-story-content > :not(.redesign-shell),
+        #publications .section-story-content > :not(.redesign-shell),
+        #awards .section-story-content > :not(.redesign-shell),
+        #Sub-footer > .empty-space,
+        #Sub-footer > .container-fluid:not(.footer-thanks) {
+            display: none !important;
+        }
+
+        .redesign-shell {
+            width: 100%;
+            padding: 0 clamp(0.75rem, 2vw, 1.5rem);
+        }
+
+        .section-kicker {
+            color: var(--aqua-orange);
+            font-size: 0.82rem;
+            letter-spacing: 0.18em;
+            margin-bottom: 0.4rem;
+            text-transform: uppercase;
+        }
+
+        .section-title-line {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 1.5rem;
+            margin-bottom: clamp(1.25rem, 3vh, 2.25rem);
+        }
+
+        .section-title-line h2 {
+            margin: 0;
+            font-size: clamp(1.7rem, 3.2vw, 3.3rem);
+            line-height: 0.95;
+        }
+
+        .section-title-line p {
+            max-width: 30rem;
+            margin: 0;
+            color: var(--aqua-muted);
+            font-size: 1rem;
+            line-height: 1.45;
+        }
+
+        .aqua-panel {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--aqua-border);
+            border-radius: 32px;
+            background:
+                linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(110, 143, 184, 0.055) 48%, rgba(6, 12, 24, 0.2)),
+                var(--aqua-glass);
+            box-shadow: var(--aqua-shadow);
+            backdrop-filter: blur(24px) saturate(165%);
+            -webkit-backdrop-filter: blur(24px) saturate(165%);
+        }
+
+        .aqua-panel::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background:
+                linear-gradient(112deg, rgba(255, 255, 255, 0.18), transparent 34%),
+                radial-gradient(28rem 12rem at 12% 0%, rgba(164, 206, 255, 0.13), transparent 70%);
+            opacity: 0.82;
+        }
+
+        .aqua-panel > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+        }
+
+        .aqua-tag {
+            border: 1px solid rgba(246, 149, 56, 0.54);
+            border-radius: 999px;
+            color: var(--aqua-text);
+            background: rgba(246, 149, 56, 0.075);
+            font-size: 0.78rem;
+            padding: 0.2rem 0.65rem 0.28rem;
+            white-space: nowrap;
+        }
+
+        .aqua-link {
+            color: var(--aqua-text);
+            border: 1px solid var(--aqua-border);
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.35rem;
+            padding: 0.48rem 0.9rem 0.58rem;
+            background: rgba(255, 255, 255, 0.055);
+            transition: transform 220ms ease, border-color 220ms ease, background 220ms ease;
+        }
+
+        .aqua-link:hover,
+        .aqua-link:focus-visible {
+            transform: translateY(-2px);
+            border-color: var(--aqua-orange);
+            background: rgba(246, 149, 56, 0.12);
+            color: white;
+        }
+
+        .credential-current {
+            display: grid;
+            grid-template-columns: minmax(190px, 0.38fr) minmax(0, 1fr);
+            gap: clamp(1rem, 3vw, 2rem);
+            min-height: 420px;
+        }
+
+        .credential-rail,
+        .history-rail {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            padding-left: 1rem;
+        }
+
+        .credential-rail::before,
+        .history-rail::before {
+            content: "";
+            position: absolute;
+            left: 0.2rem;
+            top: 0.55rem;
+            bottom: 0.55rem;
+            width: 1px;
+            background: linear-gradient(transparent, var(--aqua-blue), var(--aqua-orange), transparent);
+            opacity: 0.8;
+        }
+
+        .timeline-trigger {
+            position: relative;
+            text-align: left;
+            border: 0;
+            color: var(--aqua-muted);
+            background: transparent;
+            padding: 0.45rem 0.5rem 0.6rem 1.2rem;
+            font-family: 'Afacad', sans-serif;
+            transition: color 220ms ease, transform 220ms ease;
+        }
+
+        .timeline-trigger::before {
+            content: "";
+            position: absolute;
+            left: -1.05rem;
+            top: 0.85rem;
+            width: 0.75rem;
+            height: 0.75rem;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.42);
+            box-shadow: 0 0 0 0.45rem rgba(113, 176, 255, 0.06);
+            transition: background 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+        }
+
+        .timeline-trigger.is-active,
+        .timeline-trigger:hover,
+        .timeline-trigger:focus-visible {
+            color: white;
+            transform: translateX(0.25rem);
+        }
+
+        .timeline-trigger.is-active::before,
+        .timeline-trigger:hover::before,
+        .timeline-trigger:focus-visible::before {
+            background: var(--aqua-orange);
+            box-shadow: 0 0 0 0.5rem rgba(246, 149, 56, 0.16), 0 0 22px rgba(246, 149, 56, 0.6);
+            transform: scale(1.08);
+        }
+
+        .timeline-trigger strong {
+            display: block;
+            color: inherit;
+            font-size: 1.05rem;
+            line-height: 1.05;
+        }
+
+        .timeline-trigger span {
+            display: block;
+            margin-top: 0.2rem;
+            color: var(--aqua-muted);
+            font-size: 0.88rem;
+            line-height: 1.2;
+        }
+
+        .credential-panel,
+        .experience-panel {
+            min-height: 100%;
+            padding: clamp(1.2rem, 3vw, 2rem);
+        }
+
+        .credential-detail,
+        .experience-detail {
+            display: none;
+            opacity: 0;
+            transform: translateY(14px);
+            filter: blur(6px);
+        }
+
+        .credential-detail.is-active,
+        .experience-detail.is-active {
+            display: block;
+            animation: revealPanel 520ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        @keyframes revealPanel {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
+        }
+
+        .credential-detail img,
+        .experience-logo {
+            width: 74px;
+            height: 74px;
+            object-fit: cover;
+            border-radius: 24px;
+            margin-bottom: 1rem;
+            box-shadow: 0 0 28px rgba(113, 176, 255, 0.2);
+        }
+
+        .credential-detail h3,
+        .experience-detail h3 {
+            margin: 0 0 0.4rem;
+            font-size: clamp(1.65rem, 3vw, 2.7rem);
+            line-height: 0.98;
+        }
+
+        .credential-detail .meta,
+        .experience-detail .meta,
+        .publication-meta {
+            color: var(--aqua-muted);
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .experience-layout {
+            display: grid;
+            grid-template-columns: minmax(220px, 0.42fr) minmax(0, 1fr);
+            gap: clamp(1rem, 3vw, 2rem);
+        }
+
+        .experience-bullets {
+            display: grid;
+            gap: 0.75rem;
+            margin: 1rem 0 0;
+            padding: 0;
+            list-style: none;
+            color: rgba(255, 255, 255, 0.88);
+        }
+
+        .experience-bullets li {
+            position: relative;
+            padding-left: 1.35rem;
+            line-height: 1.45;
+        }
+
+        .experience-bullets li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.62rem;
+            width: 0.46rem;
+            height: 0.46rem;
+            border-radius: 50%;
+            background: var(--aqua-orange);
+            box-shadow: 0 0 18px rgba(246, 149, 56, 0.52);
+        }
+
+        .media-rail-shell {
+            position: relative;
+        }
+
+        .media-rail-viewport {
+            overflow: visible;
+            cursor: grab;
+            touch-action: pan-y;
+            user-select: none;
+        }
+
+        .media-rail-viewport.is-dragging {
+            cursor: grabbing;
+        }
+
+        .media-rail {
+            display: flex;
+            gap: clamp(1rem, 2.5vw, 1.5rem);
+            transform: translateX(calc(var(--rail-index, 0) * -1 * (var(--rail-card-width, 300px) + clamp(1rem, 2.5vw, 1.5rem))));
+            transition: transform 620ms cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: transform;
+        }
+
+        .specimen-card {
+            flex: 0 0 var(--rail-card-width, 300px);
+            min-height: 420px;
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            color: var(--aqua-text);
+            cursor: pointer;
+            transition: transform 260ms ease, border-color 260ms ease, opacity 260ms ease;
+        }
+
+        .specimen-card:hover,
+        .specimen-card:focus-visible,
+        .specimen-card.is-focused {
+            transform: translateY(-8px);
+            border-color: var(--aqua-border-strong);
+        }
+
+        .specimen-card img {
+            width: 100%;
+            height: 145px;
+            object-fit: cover;
+            border-radius: 24px;
+            margin-bottom: 1rem;
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .specimen-card h3 {
+            margin: 0 0 0.6rem;
+            font-size: 1.28rem;
+            line-height: 1.1;
+        }
+
+        .specimen-card .date {
+            color: var(--aqua-muted);
+            font-size: 0.86rem;
+            margin-bottom: 0.7rem;
+        }
+
+        .specimen-card .summary {
+            color: rgba(255, 255, 255, 0.84);
+            line-height: 1.42;
+            margin: 0.85rem 0 0;
+        }
+
+        .specimen-detail {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            color: var(--aqua-muted);
+            line-height: 1.35;
+            transition: max-height 320ms ease, opacity 320ms ease, margin-top 320ms ease;
+        }
+
+        .specimen-card:hover .specimen-detail,
+        .specimen-card:focus-within .specimen-detail,
+        .specimen-card.is-focused .specimen-detail {
+            max-height: 8rem;
+            opacity: 1;
+            margin-top: 0.75rem;
+        }
+
+        .rail-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .rail-button {
+            width: 2.55rem;
+            height: 2.55rem;
+            border: 1px solid var(--aqua-border);
+            border-radius: 50%;
+            color: white;
+            background: rgba(255, 255, 255, 0.065);
+            transition: transform 220ms ease, border-color 220ms ease;
+        }
+
+        .rail-button:hover,
+        .rail-button:focus-visible {
+            transform: translateY(-2px);
+            border-color: var(--aqua-orange);
+        }
+
+        .rail-hint {
+            color: var(--aqua-muted);
+            font-size: 0.88rem;
+        }
+
+        .publication-stage {
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.7fr);
+            gap: 1.1rem;
+        }
+
+        .publication-feature {
+            padding: clamp(1.4rem, 3vw, 2.4rem);
+            min-height: 500px;
+        }
+
+        .publication-feature img {
+            width: 92px;
+            height: 92px;
+            object-fit: contain;
+            border-radius: 50%;
+            margin-bottom: 1.2rem;
+            background: rgba(255, 255, 255, 0.88);
+            padding: 0.25rem;
+        }
+
+        .publication-feature h3 {
+            font-size: clamp(2rem, 4vw, 4.3rem);
+            line-height: 0.92;
+            margin: 0 0 1.2rem;
+        }
+
+        .publication-strip-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .publication-strip {
+            padding: 1.15rem;
+            min-height: 0;
+        }
+
+        .publication-strip img {
+            width: 54px;
+            height: 54px;
+            object-fit: contain;
+            border-radius: 16px;
+            margin-bottom: 0.8rem;
+            background: rgba(255, 255, 255, 0.84);
+            padding: 0.2rem;
+        }
+
+        .publication-strip h3 {
+            margin: 0 0 0.6rem;
+            font-size: 1.2rem;
+            line-height: 1.08;
+        }
+
+        .award-shelf {
+            display: grid;
+            gap: 0.7rem;
+            max-height: 62vh;
+            overflow-y: auto;
+            padding-right: 0.35rem;
+        }
+
+        .award-row {
+            display: grid;
+            grid-template-columns: 5.6rem minmax(0, 1fr) auto;
+            gap: 1rem;
+            align-items: center;
+            padding: 0.85rem 1rem;
+            min-height: 0;
+        }
+
+        .award-row img {
+            width: 52px;
+            height: 52px;
+            object-fit: cover;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .award-row h3 {
+            margin: 0;
+            font-size: 1.08rem;
+        }
+
+        .award-row p {
+            max-height: 0;
+            overflow: hidden;
+            margin: 0;
+            color: var(--aqua-muted);
+            opacity: 0;
+            transition: max-height 260ms ease, opacity 260ms ease, margin-top 260ms ease;
+        }
+
+        .award-row:hover p,
+        .award-row:focus-within p {
+            max-height: 3.5rem;
+            opacity: 1;
+            margin-top: 0.25rem;
+        }
+
+        .award-badge {
+            border: 1px solid rgba(246, 149, 56, 0.45);
+            border-radius: 999px;
+            color: var(--aqua-orange);
+            padding: 0.2rem 0.65rem 0.28rem;
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+
+        #Sub-footer .footer-thanks {
+            position: relative;
+            z-index: 3;
+            width: min(880px, calc(100vw - 2rem));
+            padding: clamp(1.4rem, 4vw, 2.4rem);
+            text-align: center;
+            color: var(--aqua-text);
+            font-family: 'Afacad', sans-serif;
+        }
+
+        #Sub-footer .footer-thanks h2 {
+            margin: 0 0 0.7rem;
+            font-size: clamp(2rem, 5.8vw, 5rem);
+            line-height: 0.92;
+        }
+
+        #Sub-footer .footer-thanks p {
+            margin: 0 auto 1.2rem;
+            max-width: 36rem;
+            color: var(--aqua-muted);
+        }
+
+        .footer-actions,
+        .footer-socials {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 0.7rem;
+        }
+
+        .footer-socials {
+            margin-top: 1rem;
+        }
+
+        .footer-credit {
+            margin-top: 1.25rem;
+            color: rgba(210, 225, 245, 0.5);
+            font-size: 0.84rem;
+        }
+
+        .footer-credit a {
+            color: rgba(210, 225, 245, 0.62);
+        }
+
+        #contact-me {
+            display: none !important;
+        }
+
+        @media (min-width: 1180px) {
+            .media-rail-shell {
+                margin-right: calc((100vw - min(1180px, calc(100vw - 3rem))) / -2);
+            }
+        }
+
+        @media (max-width: 991px) {
+            .section-shell {
+                width: min(100% - 1.5rem, 760px);
+            }
+
+            .section-title-line,
+            .credential-current,
+            .experience-layout,
+            .publication-stage {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title-line {
+                display: grid;
+                gap: 0.75rem;
+            }
+
+            .credential-rail,
+            .history-rail {
+                flex-direction: row;
+                overflow-x: auto;
+                padding: 0.35rem 0 0.7rem;
+                scroll-snap-type: x proximity;
+            }
+
+            .credential-rail::before,
+            .history-rail::before {
+                left: 0;
+                right: 0;
+                top: auto;
+                bottom: 0.35rem;
+                width: auto;
+                height: 1px;
+            }
+
+            .timeline-trigger {
+                min-width: 180px;
+                padding: 0.35rem 0.5rem 1rem;
+                scroll-snap-align: start;
+            }
+
+            .timeline-trigger::before {
+                left: 0.25rem;
+                top: auto;
+                bottom: -0.02rem;
+            }
+
+            .media-rail-viewport {
+                overflow-x: hidden;
+            }
+
+            .specimen-card {
+                flex-basis: min(78vw, 330px);
+            }
+
+            .publication-feature {
+                min-height: auto;
+            }
+        }
+
+        @media (max-width: 575px) {
+            .snap-section {
+                min-height: 100svh;
+                height: auto;
+                padding: 5.8rem 0 3rem;
+            }
+
+            #Sub-header,
+            #Sub-footer {
+                height: 100vh;
+                padding: 0;
+            }
+
+            .credential-panel,
+            .experience-panel,
+            .publication-feature {
+                padding: 1rem;
+            }
+
+            .award-row {
+                grid-template-columns: 3.8rem minmax(0, 1fr);
+            }
+
+            .award-badge {
+                grid-column: 2;
+                width: fit-content;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .media-rail,
+            .timeline-trigger,
+            .specimen-card,
+            .aqua-link,
+            .rail-button {
+                transition: none !important;
+            }
+        }
+
+        /* Polish iteration overrides */
+        #bio .responsive-card-bio {
+            max-height: min(78vh, 640px);
+        }
+
+        #bio .bio-breakout-photo {
+            max-height: min(62vh, 520px);
+            object-fit: cover;
+        }
+
+        @media (max-width: 1100px) and (min-width: 768px) {
+            #bio #bioCard.section-story-content.story-visible {
+                transform: translateY(0);
+            }
+
+            #bio .responsive-card-bio {
+                max-height: calc(100svh - var(--fixed-header-height) - 2.4rem);
+                width: min(92vw, 980px);
+                align-items: center;
+            }
+
+            #bio .bio-breakout-photo {
+                max-height: calc(100svh - var(--fixed-header-height) - 6rem);
+                width: 38% !important;
+                transform: translate(-0.4rem, 0) scale(0.98);
+            }
+
+            #bio .responsive-text {
+                font-size: 0.92rem !important;
+                line-height: 1.38 !important;
+                padding: 1.4rem !important;
+            }
+
+            #bio .bio-name {
+                font-size: clamp(3rem, 6vw, 4.8rem) !important;
+                line-height: 0.85 !important;
+            }
+
+            #bio .resume {
+                padding-top: 0.7rem !important;
+            }
+        }
+
+        @media (max-width: 767px) {
+            #bio #bioCard.section-story-content.story-visible {
+                transform: translateY(0);
+                min-height: auto;
+            }
+
+            #bio .responsive-card-bio {
+                width: min(94vw, 520px);
+                max-height: none;
+                padding: 0.8rem 0.4rem 1rem;
+                margin-top: var(--fixed-header-height) !important;
+            }
+
+            #bio .bio-breakout-photo {
+                width: min(76%, 300px) !important;
+                max-height: 34svh;
+                transform: translate(0, 0) scale(1);
+            }
+
+            #bio .responsive-text {
+                padding: 0.8rem 1.05rem !important;
+                font-size: 0.86rem !important;
+                line-height: 1.32 !important;
+            }
+        }
+
+        .redesign-shell {
+            position: relative;
+            isolation: isolate;
+        }
+
+        .redesign-shell::before {
+            content: "";
+            position: absolute;
+            inset: -12vh -4vw;
+            z-index: -1;
+            pointer-events: none;
+            background:
+                radial-gradient(34rem 18rem at 22% 38%, rgba(77, 134, 255, 0.18), transparent 72%),
+                radial-gradient(30rem 18rem at 82% 58%, rgba(68, 185, 255, 0.12), transparent 74%),
+                radial-gradient(26rem 16rem at 52% 80%, rgba(246, 149, 56, 0.08), transparent 76%);
+            filter: var(--aqua-fish-glow);
+            opacity: 0.72;
+            mix-blend-mode: screen;
+            transform: translate3d(0, 0, 0);
+            animation: ambientShadowDrift 14s ease-in-out infinite alternate;
+        }
+
+        @keyframes ambientShadowDrift {
+            from {
+                transform: translate3d(-1rem, 0.2rem, 0) scale(1);
+            }
+            to {
+                transform: translate3d(1.2rem, -0.4rem, 0) scale(1.05);
+            }
+        }
+
+        .section-story-content.story-visible .section-title-line,
+        .section-story-content.story-visible .credential-rail,
+        .section-story-content.story-visible .history-rail,
+        .section-story-content.story-visible .credential-panel,
+        .section-story-content.story-visible .experience-panel,
+        .section-story-content.story-visible .media-rail-shell,
+        .section-story-content.story-visible .publication-stage,
+        .section-story-content.story-visible .award-cluster,
+        #Sub-footer .footer-thanks.visible {
+            animation: delayedSectionPop 720ms cubic-bezier(0.22, 1, 0.36, 1) both;
+            animation-delay: var(--pop-delay, 0ms);
+        }
+
+        .section-story-content.story-visible .credential-rail,
+        .section-story-content.story-visible .history-rail {
+            --pop-delay: 120ms;
+        }
+
+        .section-story-content.story-visible .credential-panel,
+        .section-story-content.story-visible .experience-panel,
+        .section-story-content.story-visible .media-rail-shell,
+        .section-story-content.story-visible .publication-stage,
+        .section-story-content.story-visible .award-cluster {
+            --pop-delay: 260ms;
+        }
+
+        @keyframes delayedSectionPop {
+            from {
+                opacity: 0;
+                transform: translateY(22px) scale(0.985);
+                filter: blur(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                filter: blur(0);
+            }
+        }
+
+        .aqua-panel,
+        .timeline-trigger,
+        .specimen-card,
+        .publication-feature,
+        .publication-strip,
+        .award-tile {
+            transition:
+                transform 360ms cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 360ms ease,
+                box-shadow 360ms ease,
+                background 360ms ease,
+                filter 360ms ease;
+        }
+
+        .aqua-panel:hover,
+        .aqua-panel:focus-within {
+            transform: translateY(-5px);
+            border-color: var(--aqua-border-strong);
+            box-shadow:
+                0 34px 80px rgba(0, 0, 0, 0.54),
+                0 0 92px rgba(116, 179, 255, 0.24);
+        }
+
+        .experience-panel {
+            max-width: 760px;
+        }
+
+        .experience-detail {
+            max-width: 640px;
+        }
+
+        .experience-logo {
+            width: 58px;
+            height: 58px;
+            border-radius: 18px;
+            margin-bottom: 0.75rem;
+        }
+
+        .experience-bullets {
+            max-width: 620px;
+            gap: 0.55rem;
+        }
+
+        .education-current,
+        .education-thread,
+        .publication-detail-line {
+            display: grid;
+            gap: 0.65rem;
+            color: rgba(255, 255, 255, 0.86);
+            line-height: 1.45;
+        }
+
+        .education-current strong,
+        .education-thread strong,
+        .publication-detail-line strong {
+            color: white;
+        }
+
+        .constellation-notes {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0.8rem;
+            margin-top: 1.2rem;
+        }
+
+        .constellation-notes span {
+            min-height: 5rem;
+            border-left: 1px solid rgba(246, 149, 56, 0.52);
+            padding: 0.2rem 0 0.2rem 0.75rem;
+            color: var(--aqua-muted);
+        }
+
+        .constellation-notes b {
+            display: block;
+            color: white;
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .specimen-card .tag-row,
+        .specimen-card .aqua-link {
+            display: none;
+        }
+
+        .specimen-card {
+            flex: 0 0 var(--rail-card-width, min(360px, 36vw));
+            min-height: 390px;
+            padding: 1.05rem;
+        }
+
+        .specimen-card::after {
+            content: "Click to open";
+            margin-top: auto;
+            color: rgba(210, 225, 245, 0.52);
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .specimen-card .date {
+            color: rgba(246, 149, 56, 0.82);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .specimen-detail {
+            max-height: none;
+            opacity: 0.72;
+            margin-top: 0.55rem;
+        }
+
+        .specimen-card:hover .specimen-detail,
+        .specimen-card:focus-within .specimen-detail,
+        .specimen-card.is-focused .specimen-detail {
+            opacity: 1;
+            margin-top: 0.55rem;
+        }
+
+        .media-rail-shell {
+            width: min(100%, 980px);
+            margin-inline: auto;
+        }
+
+        .media-rail-viewport {
+            overflow: hidden;
+            padding: 1rem 0;
+            -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 16%, #000 76%, transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0, #000 16%, #000 76%, transparent 100%);
+        }
+
+        .media-rail {
+            --rail-gap: clamp(1rem, 2.2vw, 1.6rem);
+            gap: var(--rail-gap);
+            transform: translateX(calc(var(--rail-offset, 0px) - (var(--rail-index, 0) * (var(--rail-card-width, 340px) + var(--rail-gap)))));
+            transition: transform 760ms cubic-bezier(0.2, 0.88, 0.18, 1);
+        }
+
+        .media-rail.is-resetting {
+            transition: none !important;
+        }
+
+        .rail-controls {
+            justify-content: flex-end;
+        }
+
+        .rail-controls [data-rail-prev],
+        .rail-hint {
+            display: none;
+        }
+
+        .rail-button {
+            width: 3rem;
+            height: 3rem;
+            font-size: 1.8rem;
+        }
+
+        .publication-feature,
+        .publication-strip,
+        .award-tile {
+            color: var(--aqua-text);
+        }
+
+        .publication-feature:hover,
+        .publication-strip:hover {
+            color: var(--aqua-text);
+        }
+
+        .publication-stage {
+            align-items: stretch;
+        }
+
+        .publication-feature {
+            min-height: 430px;
+        }
+
+        .publication-feature h3 {
+            font-size: clamp(1.75rem, 3.6vw, 3.45rem);
+            line-height: 0.98;
+        }
+
+        .publication-meta {
+            color: rgba(255, 255, 255, 0.72);
+        }
+
+        .publication-stage .tag-row {
+            display: none;
+        }
+
+        .publication-strip-list {
+            align-content: center;
+        }
+
+        .publication-strip {
+            transform: translateY(var(--float-y, 0));
+        }
+
+        .publication-strip:nth-child(1) {
+            --float-y: 1.2rem;
+        }
+
+        .publication-strip:nth-child(2) {
+            --float-y: -0.4rem;
+        }
+
+        .award-cluster {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0.85rem;
+        }
+
+        .award-shelf {
+            display: none;
+        }
+
+        .award-tile {
+            min-height: 128px;
+            padding: 0.95rem;
+            color: var(--aqua-text);
+        }
+
+        .award-tile h3 {
+            margin: 0 0 0.35rem;
+            font-size: 1rem;
+            line-height: 1.1;
+        }
+
+        .award-tile .award-source {
+            color: var(--aqua-muted);
+            font-size: 0.86rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .award-tile p {
+            max-height: 0;
+            overflow: hidden;
+            margin: 0;
+            opacity: 0;
+            color: rgba(255, 255, 255, 0.72);
+            transition: max-height 260ms ease, opacity 260ms ease;
+        }
+
+        .award-tile:hover p,
+        .award-tile:focus-within p {
+            max-height: 4rem;
+            opacity: 1;
+        }
+
+        #Sub-footer .footer-thanks {
+            width: min(900px, calc(100vw - 3rem));
+            min-height: min(58vh, 520px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        #Sub-footer .footer-thanks h2 {
+            font-size: clamp(2.1rem, 4.8vw, 4.4rem);
+        }
+
+        #Sub-footer .footer-thanks p {
+            max-width: 30rem;
+        }
+
+        #Sub-footer .footer-socials,
+        #Sub-footer .footer-credit {
+            margin-top: 0.8rem;
+        }
+
+        @media (min-width: 1180px) {
+            .media-rail-shell {
+                margin-right: auto;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .constellation-notes {
+                grid-template-columns: 1fr;
+            }
+
+            .media-rail-viewport {
+                -webkit-mask-image: linear-gradient(90deg, #000 0, #000 82%, transparent 100%);
+                mask-image: linear-gradient(90deg, #000 0, #000 82%, transparent 100%);
+            }
+
+            .award-cluster {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 575px) {
+            .specimen-card {
+                flex-basis: min(78vw, 320px);
+            }
+
+            .publication-strip:nth-child(n) {
+                --float-y: 0;
+            }
+
+            .award-cluster {
+                grid-template-columns: 1fr;
+            }
+
+            #Sub-footer .footer-thanks {
+                width: min(94vw, 520px);
+                min-height: 62vh;
+                padding: 1.2rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -2037,6 +3190,81 @@
             <p>Storyline placeholder: from roots to rigor,<br><strong>this chapter is where the foundation formed.</strong></p>
         </div>
         <div class="section-story-content">
+        <div class="redesign-shell section-float-in">
+            <div class="section-shell">
+                <div class="section-title-line">
+                    <div>
+                        <div class="section-kicker">Currents</div>
+                        <h2>Education</h2>
+                    </div>
+                    <p>Less transcript, more tide map: the places that shaped how I think, build, teach, and keep following hard questions.</p>
+                </div>
+
+                <div class="credential-current">
+                    <div class="credential-rail" role="tablist" aria-label="Education timeline">
+                        <button class="timeline-trigger is-active" type="button" role="tab" aria-selected="true" data-panel-target="edu-gt">
+                            <strong>Georgia Tech</strong>
+                            <span>OMSCS, 2027</span>
+                        </button>
+                        <button class="timeline-trigger" type="button" role="tab" aria-selected="false" data-panel-target="edu-csuf">
+                            <strong>CSU Fullerton</strong>
+                            <span>Computer Science B.S.</span>
+                        </button>
+                        <button class="timeline-trigger" type="button" role="tab" aria-selected="false" data-panel-target="edu-fvhs">
+                            <strong>Fountain Valley</strong>
+                            <span>Magna Cum Laude</span>
+                        </button>
+                    </div>
+
+                    <div class="credential-panel aqua-panel">
+                        <article id="edu-gt" class="credential-detail is-active">
+                            <div class="section-kicker">Current current</div>
+                            <h3>Georgia Tech OMSCS</h3>
+                            <p class="meta">Master of Science in Computer Science, expected 2027</p>
+                            <div class="education-current">
+                                <p><strong>After-hours graduate mode.</strong> I am studying the machinery behind intelligent systems while building production software during the day.</p>
+                                <p>The thread I keep pulling: how to make AI systems useful, legible, and accountable without losing the human texture around them.</p>
+                            </div>
+                            <div class="constellation-notes" aria-label="Georgia Tech focus notes">
+                                <span><b>AI systems</b>Models, agents, and the guardrails around them.</span>
+                                <span><b>Engineering depth</b>Distributed thinking, reliability, and practical tradeoffs.</span>
+                                <span><b>Trust lens</b>Readable behavior over black-box spectacle.</span>
+                            </div>
+                        </article>
+
+                        <article id="edu-csuf" class="credential-detail">
+                            <img src="images/csuf.jpg" alt="California State University, Fullerton campus">
+                            <h3>California State University, Fullerton</h3>
+                            <p class="meta">Bachelor of Science in Computer Science</p>
+                            <div class="education-thread">
+                                <p><strong>Where research started feeling like home.</strong> CSUF gave me the room to build projects, mentor peers, present research, and learn how technical work can serve a community.</p>
+                                <p>My coursework moved between intelligence, data, security, algorithms, databases, and statistics. The pattern that stuck was learning how systems behave when people actually depend on them.</p>
+                            </div>
+                            <div class="constellation-notes" aria-label="CSUF study currents">
+                                <span><b>Build</b>Algorithms, data structures, databases, and file systems.</span>
+                                <span><b>Interpret</b>Machine learning, big data, statistics, and experimentation.</span>
+                                <span><b>Protect</b>Cybersecurity foundations and adversarial thinking.</span>
+                            </div>
+                        </article>
+
+                        <article id="edu-fvhs" class="credential-detail">
+                            <img src="images/fv.jpg" alt="Fountain Valley High School campus">
+                            <h3>Fountain Valley High School</h3>
+                            <p class="meta">Graduated Magna Cum Laude</p>
+                            <div class="education-thread">
+                                <p><strong>The origin pool.</strong> This is where computer science first became more than a class and where calculus and writing taught me two different ways to be precise.</p>
+                                <p>AP Computer Science A, AP Calculus BC, and AP English Literature became a strange but useful trio: code, structure, and story.</p>
+                            </div>
+                            <div class="constellation-notes" aria-label="High school origin notes">
+                                <span><b>Code</b>First durable programming patterns.</span>
+                                <span><b>Shape</b>Math as a way to see structure.</span>
+                                <span><b>Voice</b>Writing as a way to make meaning clear.</span>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="container-fluid section-float-in section-padding-wide" style="margin-top: 1%;">
             <div class="row section-header" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
                 <p>Education</p>
@@ -2091,6 +3319,122 @@
             <p>Storyline placeholder: lessons became practice,<br><strong>and practice became impact.</strong></p>
         </div>
         <div class="section-story-content">
+        <div class="redesign-shell section-float-in">
+            <div class="section-shell">
+                <div class="section-title-line">
+                    <div>
+                        <div class="section-kicker">Impact current</div>
+                        <h2>Experience</h2>
+                    </div>
+                    <p>Work history as a living current: recent impact first, with each role surfacing only the signal.</p>
+                </div>
+
+                <div class="experience-layout">
+                    <div class="history-rail" role="tablist" aria-label="Experience timeline">
+                        <button class="timeline-trigger is-active" type="button" role="tab" aria-selected="true" data-panel-target="exp-reddit-se">
+                            <strong>Reddit</strong>
+                            <span>Software Engineer</span>
+                        </button>
+                        <button class="timeline-trigger" type="button" role="tab" aria-selected="false" data-panel-target="exp-reddit-intern">
+                            <strong>Reddit</strong>
+                            <span>Security Intern</span>
+                        </button>
+                        <button class="timeline-trigger" type="button" role="tab" aria-selected="false" data-panel-target="exp-wicse">
+                            <strong>WiCSE</strong>
+                            <span>Community Tutor</span>
+                        </button>
+                        <button class="timeline-trigger" type="button" role="tab" aria-selected="false" data-panel-target="exp-percentage">
+                            <strong>Percentage Project</strong>
+                            <span>Campus Director</span>
+                        </button>
+                        <button class="timeline-trigger" type="button" role="tab" aria-selected="false" data-panel-target="exp-cic">
+                            <strong>SoCal Data Science</strong>
+                            <span>Peer Mentor</span>
+                        </button>
+                        <button class="timeline-trigger" type="button" role="tab" aria-selected="false" data-panel-target="exp-uroc">
+                            <strong>UROC</strong>
+                            <span>Research Assistant</span>
+                        </button>
+                        <button class="timeline-trigger" type="button" role="tab" aria-selected="false" data-panel-target="exp-nsf">
+                            <strong>NSF HDR</strong>
+                            <span>Research Fellow</span>
+                        </button>
+                    </div>
+
+                    <div class="experience-panel aqua-panel">
+                        <article id="exp-reddit-se" class="experience-detail is-active">
+                            <img class="experience-logo" src="images/reddit.png" alt="Reddit logo">
+                            <h3>Software Engineer</h3>
+                            <p class="meta">February 2025 - Present</p>
+                            <ul class="experience-bullets">
+                                <li>Build product and platform work around user trust, safety, and AI guardrails.</li>
+                                <li>Turn ambiguous system behavior into clearer, safer user-facing experiences.</li>
+                            </ul>
+                        </article>
+
+                        <article id="exp-reddit-intern" class="experience-detail">
+                            <img class="experience-logo" src="images/reddit.png" alt="Reddit logo">
+                            <h3>Information Security Engineering Intern</h3>
+                            <p class="meta">May 2024 - August 2024</p>
+                            <ul class="experience-bullets">
+                                <li>Built a prototype that scraped, fingerprinted, and scored suspicious URLs in real time.</li>
+                                <li>Used Airflow, AWS EC2, PostgreSQL, Pyppeteer, and Scikit-Learn to investigate ad cloaking and redirect behavior.</li>
+                            </ul>
+                        </article>
+
+                        <article id="exp-wicse" class="experience-detail">
+                            <img class="experience-logo" src="images/wicse.png" alt="WiCSE logo">
+                            <h3>Community Tutor & Student Assistant</h3>
+                            <p class="meta">August 2022 - December 2024</p>
+                            <ul class="experience-bullets">
+                                <li>Co-organized workshops, panels, socials, and leadership events for 1500+ women in CS and engineering.</li>
+                                <li>Built web experiences for ECS leadership programming and tutored intro CS/math structures students.</li>
+                            </ul>
+                        </article>
+
+                        <article id="exp-percentage" class="experience-detail">
+                            <img class="experience-logo" src="images/percentage.jpg" alt="Percentage Project logo">
+                            <h3>Campus Director & Associate Program Lead</h3>
+                            <p class="meta">August 2022 - May 2024</p>
+                            <ul class="experience-bullets">
+                                <li>Coordinated anonymous student culture and belonging data collection across six CS/engineering departments.</li>
+                                <li>Worked with 12+ campus directors nationwide on data-driven advocacy.</li>
+                            </ul>
+                        </article>
+
+                        <article id="exp-cic" class="experience-detail">
+                            <img class="experience-logo" src="images/cic.jpg" alt="SoCal Data Science logo">
+                            <h3>Peer Mentor</h3>
+                            <p class="meta">June 2023 - December 2024</p>
+                            <ul class="experience-bullets">
+                                <li>Advised 100+ students on data science and pairs-trading research projects.</li>
+                                <li>Mentored freshmen and transfer students through goals, problem solving, and professional development.</li>
+                            </ul>
+                        </article>
+
+                        <article id="exp-uroc" class="experience-detail">
+                            <img class="experience-logo" src="images/uroc.jpg" alt="UROC logo">
+                            <h3>Research Assistant</h3>
+                            <p class="meta">January 2024 - May 2024</p>
+                            <ul class="experience-bullets">
+                                <li>Selected for a semester-long research fellowship under faculty mentorship.</li>
+                                <li>Built a Unity learning analytics pilot study with 80 participants.</li>
+                            </ul>
+                        </article>
+
+                        <article id="exp-nsf" class="experience-detail">
+                            <img class="experience-logo" src="images/nsf.png" alt="NSF program logo">
+                            <h3>Research Fellow</h3>
+                            <p class="meta">January 2023 - August 2023</p>
+                            <ul class="experience-bullets">
+                                <li>Selected for the NSF-funded Harnessing the Data Revolution Data Science Corps program.</li>
+                                <li>Analyzed neuronal activity with statistical tests and multinomial logistic regression.</li>
+                            </ul>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="container-fluid pt-5 section-float-in section-padding-wide" style="margin-top: 1%;">
             <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
                 <p>Experience</p>
@@ -2265,6 +3609,56 @@
             <p>Storyline placeholder: experiments became prototypes,<br><strong>and prototypes became products.</strong></p>
         </div>
         <div class="section-story-content">
+        <div class="redesign-shell section-float-in">
+            <div class="section-shell">
+                <div class="section-title-line">
+                    <div>
+                        <div class="section-kicker">Specimen rail</div>
+                        <h2>Projects</h2>
+                    </div>
+                    <p>The first pieces stay in view while the rest drift in from off-screen. Hover or tap to focus one specimen.</p>
+                </div>
+
+                <div class="media-rail-shell" data-media-rail data-auto-rotate="5600">
+                    <div class="media-rail-viewport" tabindex="0" aria-label="Project rail">
+                        <div class="media-rail">
+                            <article class="specimen-card aqua-panel" tabindex="0">
+                                <img src="images/mlf.png" alt="Malicious Link Fingerprint preview">
+                                <p class="date">May 2024 - August 2024</p>
+                                <h3>Malicious Link Fingerprint</h3>
+                                <div class="tag-row">
+                                    <span class="aqua-tag">Apache Airflow</span>
+                                    <span class="aqua-tag">PostgreSQL</span>
+                                    <span class="aqua-tag">AWS EC2</span>
+                                </div>
+                                <p class="summary">Real-time detection and scoring of malicious links for Reddit Ads.</p>
+                                <p class="specimen-detail">Novel fingerprinting methodology for dynamic content, cloaking, and ad threat detection.</p>
+                                <a class="aqua-link mt-auto" href="pdfs/Malicious-Link-Fingerprint.png" target="_blank" rel="noopener noreferrer">Open project</a>
+                            </article>
+
+                            <article class="specimen-card aqua-panel" tabindex="0">
+                                <img src="images/rc.png" alt="Lightning MuQueen RC car preview">
+                                <p class="date">February 2024 - May 2024</p>
+                                <h3>Lightning MuQueen Remote-Controlled Car</h3>
+                                <div class="tag-row">
+                                    <span class="aqua-tag">Arduino Uno</span>
+                                    <span class="aqua-tag">Bluetooth</span>
+                                    <span class="aqua-tag">Motors</span>
+                                </div>
+                                <p class="summary">Arduino-powered RC car with steering, speed, and Bluetooth control.</p>
+                                <p class="specimen-detail">Motor management, communication, and mechanical assembly in a compact systems project.</p>
+                                <a class="aqua-link mt-auto" href="https://github.com/alpacaJin/mu-rc-car" target="_blank" rel="noopener noreferrer">Open project</a>
+                            </article>
+                        </div>
+                    </div>
+                    <div class="rail-controls">
+                        <button class="rail-button" type="button" data-rail-prev aria-label="Previous project">‹</button>
+                        <span class="rail-hint">Auto-drifts every 18 seconds. Drag, hover, or focus to pause.</span>
+                        <button class="rail-button" type="button" data-rail-next aria-label="Next project">›</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="container-fluid pt-5 section-float-in" style="padding-left: 18%; padding-right: 10%; margin-top: 1%; z-index: 3;">
             <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
                 <p>Projects</p>
@@ -2368,6 +3762,78 @@
             <p>Storyline placeholder: under pressure and short timelines,<br><strong>collaboration sharpened creativity.</strong></p>
         </div>
         <div class="section-story-content">
+        <div class="redesign-shell section-float-in">
+            <div class="section-shell">
+                <div class="section-title-line">
+                    <div>
+                        <div class="section-kicker">Fast builds</div>
+                        <h2>Hackathons</h2>
+                    </div>
+                    <p>A horizontal shelf for quick-read projects, with winner notes surfacing on focus instead of empty filler cards.</p>
+                </div>
+
+                <div class="media-rail-shell" data-media-rail data-auto-rotate="4200">
+                    <div class="media-rail-viewport" tabindex="0" aria-label="Hackathon rail">
+                        <div class="media-rail">
+                            <article class="specimen-card aqua-panel" tabindex="0">
+                                <img src="images/lumi.png" alt="Lumi's Quest preview">
+                                <p class="date">February 24-25, 2024</p>
+                                <h3>Lumi's Quest: Revival</h3>
+                                <div class="tag-row"><span class="aqua-tag">C#</span><span class="aqua-tag">Unity</span><span class="aqua-tag">WebGL</span></div>
+                                <p class="summary">Coral reef conservation through a 2D adventure and quiz game.</p>
+                                <p class="specimen-detail">Winner of Cool Game Project at FullyHacks.</p>
+                                <a class="aqua-link mt-auto" href="https://github.com/alpacaJin/lumi-s-quest" target="_blank" rel="noopener noreferrer">Open project</a>
+                            </article>
+
+                            <article class="specimen-card aqua-panel" tabindex="0">
+                                <img src="images/evergreen.png" alt="Evergreen preview">
+                                <p class="date">February 16-18, 2024</p>
+                                <h3>Evergreen</h3>
+                                <div class="tag-row"><span class="aqua-tag">FastAPI</span><span class="aqua-tag">Node.js</span><span class="aqua-tag">SQLite</span></div>
+                                <p class="summary">Gamified, AI-guided access to CS education.</p>
+                                <p class="specimen-detail">TreeHacks build centered on equitable customized learning paths.</p>
+                                <a class="aqua-link mt-auto" href="https://devpost.com/software/evergreen-13zy87" target="_blank" rel="noopener noreferrer">Open project</a>
+                            </article>
+
+                            <article class="specimen-card aqua-panel" tabindex="0">
+                                <img src="images/rheia.png" alt="Rheia preview">
+                                <p class="date">June 22-23, 2023</p>
+                                <h3>Rheia</h3>
+                                <div class="tag-row"><span class="aqua-tag">Python</span><span class="aqua-tag">Scikit-learn</span><span class="aqua-tag">Flask</span></div>
+                                <p class="summary">Data-driven STI early intervention and contact tracing.</p>
+                                <p class="specimen-detail">Built for Tech Solutions to Reduce Sexually Transmitted Infections.</p>
+                                <a class="aqua-link mt-auto" href="https://deepnote.com/workspace/dtw-599cab8f-9ce0-4077-9ff1-ca65f303664e/project/DTW-f5f0b150-de2c-4cc7-9b95-d4778c8e2160/notebook/ML%20Proj-6128f0b892ff4aa0b7652f124a20bac2" target="_blank" rel="noopener noreferrer">Open project</a>
+                            </article>
+
+                            <article class="specimen-card aqua-panel" tabindex="0">
+                                <img src="images/montreal.png" alt="Mischief in Montreal preview">
+                                <p class="date">April 15-16, 2023</p>
+                                <h3>Mischief in Montreal</h3>
+                                <div class="tag-row"><span class="aqua-tag">Keras</span><span class="aqua-tag">Scikit-learn</span><span class="aqua-tag">TensorFlow</span></div>
+                                <p class="summary">ML analysis for policy in Montreal's criminal landscape.</p>
+                                <p class="specimen-detail">Winner of Best Overall and People's Choice at Embark Datathon.</p>
+                                <a class="aqua-link mt-auto" href="https://devpost.com/software/mischief-in-montreal" target="_blank" rel="noopener noreferrer">Open project</a>
+                            </article>
+
+                            <article class="specimen-card aqua-panel" tabindex="0">
+                                <img src="images/green.png" alt="Fully Green preview">
+                                <p class="date">April 8-9, 2023</p>
+                                <h3>Fully Green</h3>
+                                <div class="tag-row"><span class="aqua-tag">Java</span><span class="aqua-tag">Android Studio</span><span class="aqua-tag">Scikit-learn</span></div>
+                                <p class="summary">AI-powered image recognition for recycling assistance.</p>
+                                <p class="specimen-detail">Winner of Best Mobile App at FullyHacks.</p>
+                                <a class="aqua-link mt-auto" href="https://github.com/fooledyouonce/FH_2023_TECS" target="_blank" rel="noopener noreferrer">Open project</a>
+                            </article>
+                        </div>
+                    </div>
+                    <div class="rail-controls">
+                        <button class="rail-button" type="button" data-rail-prev aria-label="Previous hackathon">‹</button>
+                        <span class="rail-hint">Drag or tap. The shelf keeps moving only when you are not interacting.</span>
+                        <button class="rail-button" type="button" data-rail-next aria-label="Next hackathon">›</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="container-fluid pt-5 section-float-in section-padding-wide" style="margin-top: 1%;">
             <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
                 <p>Hackathons</p>
@@ -2588,6 +4054,78 @@
             <p>Storyline placeholder: questions turned into methods,<br><strong>and methods turned into evidence.</strong></p>
         </div>
         <div class="section-story-content">
+        <div class="redesign-shell section-float-in">
+            <div class="section-shell">
+                <div class="section-title-line">
+                    <div>
+                        <div class="section-kicker">Research current</div>
+                        <h2>Research</h2>
+                    </div>
+                    <p>Research stays browsable with the same off-screen rail language as projects, but with mentor and method details tucked into focus states.</p>
+                </div>
+
+                <div class="media-rail-shell" data-media-rail data-auto-rotate="4500">
+                    <div class="media-rail-viewport" tabindex="0" aria-label="Research rail">
+                        <div class="media-rail">
+                            <article class="specimen-card aqua-panel" tabindex="0">
+                                <img src="images/lightbox.png" alt="LightBox XAI preview">
+                                <p class="date">January 2024 - December 2024</p>
+                                <h3>LightBox XAI</h3>
+                                <div class="tag-row"><span class="aqua-tag">SHAP</span><span class="aqua-tag">LIME</span><span class="aqua-tag">GPT-3</span></div>
+                                <p class="summary">Explanatory AI initiative for model decisions and real-time LLM explanations.</p>
+                                <p class="specimen-detail">Mentored by Marc Velasco; senior capstone project at CSUF.</p>
+                                <a class="aqua-link mt-auto" href="pdfs/Capstone.pdf" target="_blank" rel="noopener noreferrer">Open work</a>
+                            </article>
+
+                            <article class="specimen-card aqua-panel" tabindex="0">
+                                <img src="images/pho.png" alt="Phocrastination preview">
+                                <p class="date">March 2023 - May 2024</p>
+                                <h3>Phocrastination</h3>
+                                <div class="tag-row"><span class="aqua-tag">C#</span><span class="aqua-tag">Unity</span><span class="aqua-tag">SVM</span></div>
+                                <p class="summary">Game-based assessment and classification of academic procrastination.</p>
+                                <p class="specimen-detail">Mentored by Dr. Doina Bein and Dr. June Ahn through Digital Learning Lab.</p>
+                                <a class="aqua-link mt-auto" href="https://www.canva.com/design/DAF0YChll3g/wlt1i57FaB1lEia5-O_0OA/view?utm_content=DAF0YChll3g&utm_campaign=designshare&utm_medium=link&utm_source=editor" target="_blank" rel="noopener noreferrer">Open work</a>
+                            </article>
+
+                            <article class="specimen-card aqua-panel" tabindex="0">
+                                <img src="images/rat.png" alt="Hippocampal ensembles preview">
+                                <p class="date">June 2023 - August 2023</p>
+                                <h3>Hippocampal Ensembles</h3>
+                                <div class="tag-row"><span class="aqua-tag">Python</span><span class="aqua-tag">Bootstrapping</span><span class="aqua-tag">Regression</span></div>
+                                <p class="summary">Statistical analysis of neuronal activity in temporal event organization.</p>
+                                <p class="specimen-detail">SoCal Data Science Program at UCI with Dr. Babak Shahbaba.</p>
+                                <a class="aqua-link mt-auto" href="pdfs/Rat-Poster.pdf" target="_blank" rel="noopener noreferrer">Open work</a>
+                            </article>
+
+                            <article class="specimen-card aqua-panel" tabindex="0">
+                                <img src="images/ad.png" alt="Malicious ads research preview">
+                                <p class="date">August 2022 - May 2023</p>
+                                <h3>Malicious Ads Analysis</h3>
+                                <div class="tag-row"><span class="aqua-tag">BeautifulSoup</span><span class="aqua-tag">Random Forest</span><span class="aqua-tag">Streamlit</span></div>
+                                <p class="summary">Automating malicious content analysis to protect users from ad fraud.</p>
+                                <p class="specimen-detail">ASSURE-US research with Dr. Doina Bein.</p>
+                                <a class="aqua-link mt-auto" href="pdfs/Ad-Poster.pdf" target="_blank" rel="noopener noreferrer">Open work</a>
+                            </article>
+
+                            <article class="specimen-card aqua-panel" tabindex="0">
+                                <img src="images/job.png" alt="Real and fake job postings analysis preview">
+                                <p class="date">May 2022 - July 2022</p>
+                                <h3>Real/Fake Job Postings</h3>
+                                <div class="tag-row"><span class="aqua-tag">Pandas</span><span class="aqua-tag">Gaussian Mixture</span><span class="aqua-tag">Silhouette</span></div>
+                                <p class="summary">End-to-end Scikit-learn workflow on 18k job postings.</p>
+                                <p class="specimen-detail">ASSURE-US research with Dr. Doina Bein.</p>
+                                <a class="aqua-link mt-auto" href="https://docs.google.com/presentation/d/e/2PACX-1vTnE7UZyXSipadZj8svvPqye-VYFhrQzS0CD64-_STG9TZyR7ApPPs-XeJh8kkoVHpkdheNgWaljkoE/pub?start=false&loop=false&delayms=3000" target="_blank" rel="noopener noreferrer">Open work</a>
+                            </article>
+                        </div>
+                    </div>
+                    <div class="rail-controls">
+                        <button class="rail-button" type="button" data-rail-prev aria-label="Previous research">‹</button>
+                        <span class="rail-hint">Focus mode keeps details quiet until someone asks for them.</span>
+                        <button class="rail-button" type="button" data-rail-next aria-label="Next research">›</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="container-fluid pt-5 section-float-in section-padding-wide" style="margin-top: 1%;">
             <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
                 <p>Research</p>
@@ -2800,6 +4338,65 @@
             <p>Storyline placeholder: ideas left the lab and reached communities,<br><strong>from posters to proceedings.</strong></p>
         </div>
         <div class="section-story-content">
+        <div class="redesign-shell section-float-in">
+            <div class="section-shell">
+                <div class="section-title-line">
+                    <div>
+                        <div class="section-kicker">Published signals</div>
+                        <h2>Publications</h2>
+                    </div>
+                    <p>One featured stage and two companion notes, with the venue details woven into the cards instead of floating as badges.</p>
+                </div>
+
+                <div class="publication-stage">
+                    <a class="publication-feature aqua-panel" href="https://chi2025.acm.org/" target="_blank" rel="noopener noreferrer">
+                        <img src="images/chi.png" alt="CHI 2025 logo">
+                        <p class="publication-meta">April 2025 / Yokohama, Japan</p>
+                        <h3>Phocrastination: A Game-Based Approach to Assessing and Classifying Academic Procrastination in College Students</h3>
+                        <div class="publication-detail-line">
+                            <p><strong>2025 ACM CHI</strong> / Expected Author & Presenter</p>
+                            <p><strong>Also presented at</strong> NCUR 2024 and SCCUR 2023</p>
+                        </div>
+                        <div class="tag-row">
+                            <span class="aqua-tag">2025 ACM CHI</span>
+                            <span class="aqua-tag">Expected Author & Presenter</span>
+                            <span class="aqua-tag">NCUR Presenter</span>
+                            <span class="aqua-tag">SCCUR Presenter</span>
+                        </div>
+                    </a>
+
+                    <div class="publication-strip-list">
+                        <a class="publication-strip aqua-panel" href="https://openaccess.cms-conferences.org/publications/book/978-1-958651-70-4/article/978-1-958651-70-4_8" target="_blank" rel="noopener noreferrer">
+                            <img src="images/ahfe.png" alt="AHFE logo">
+                            <p class="publication-meta">July 2023 / San Francisco, CA</p>
+                            <h3>Improving Internet Advertising Using Click-Through Rate Prediction</h3>
+                            <div class="publication-detail-line">
+                                <p><strong>AHFE 2023</strong> / Co-Author</p>
+                            </div>
+                            <div class="tag-row">
+                                <span class="aqua-tag">AHFE 2023</span>
+                                <span class="aqua-tag">Co-Author</span>
+                            </div>
+                        </a>
+
+                        <a class="publication-strip aqua-panel" href="https://ieeexplore.ieee.org/document/10099325" target="_blank" rel="noopener noreferrer">
+                            <img src="images/ccwc.png" alt="CCWC logo">
+                            <p class="publication-meta">March 2023 / Las Vegas, NV</p>
+                            <h3>Data Science Analysis of Malicious Ads and Threat Detection Automation for Cybersecurity Progress</h3>
+                            <div class="publication-detail-line">
+                                <p><strong>IEEE CCWC 2023</strong> / Author & Presenter</p>
+                                <p><strong>Also presented at</strong> SCCUR 2022</p>
+                            </div>
+                            <div class="tag-row">
+                                <span class="aqua-tag">IEEE CCWC 2023</span>
+                                <span class="aqua-tag">Author & Presenter</span>
+                                <span class="aqua-tag">SCCUR Presenter</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="container-fluid pt-5 section-float-in section-padding-wide" style="margin-top: 1%;">
             <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
                 <p>Publications</p>
@@ -2921,6 +4518,111 @@
             <p>Storyline placeholder: milestones mark the journey,<br><strong>but they also point forward.</strong></p>
         </div>
         <div class="section-story-content">
+        <div class="redesign-shell section-float-in">
+            <div class="section-shell">
+                <div class="section-title-line">
+                    <div>
+                        <div class="section-kicker">Small bright things</div>
+                        <h2>Awards</h2>
+                    </div>
+                    <p>Quick glints near the end: browse fast, hover only if you want the detail.</p>
+                </div>
+
+                <div class="award-cluster" aria-label="Awards and scholarships">
+                    <a class="award-tile aqua-panel" href="https://www.edwards.com/" target="_blank" rel="noopener noreferrer">
+                        <h3>Edwards Lifesciences Scholar</h3>
+                        <div class="award-source">Leadership / December 2024</div>
+                        <p>Recognition for student leadership in WiCSE.</p>
+                    </a>
+
+                    <a class="award-tile aqua-panel" href="https://www.sccur.org/whitney-travel-award" target="_blank" rel="noopener noreferrer">
+                        <h3>William M. Whitney Travel Award</h3>
+                        <div class="award-source">Travel / March 2024</div>
+                        <p>$500 support for student travel to NCUR.</p>
+                    </a>
+
+                    <a class="award-tile aqua-panel" href="https://cra.org/crn/2024/01/outstanding-undergraduate-research-awards-winners-announcement/" target="_blank" rel="noopener noreferrer">
+                        <h3>Outstanding Undergraduate Researcher</h3>
+                        <div class="award-source">Research / January 2024</div>
+                        <p>Honorable Mention for potential in computing research.</p>
+                    </a>
+
+                    <a class="award-tile aqua-panel" href="https://www.fullerton.edu/uroc/" target="_blank" rel="noopener noreferrer">
+                        <h3>UROC Fellowship Award</h3>
+                        <div class="award-source">Research / November 2023</div>
+                        <p>$5,000 grant to conduct and present research.</p>
+                    </a>
+
+                    <a class="award-tile aqua-panel" href="https://stemadvantage.org/" target="_blank" rel="noopener noreferrer">
+                        <h3>STEM Advantage Scholarship</h3>
+                        <div class="award-source">Scholarship / May 2023</div>
+                        <p>$3,750 grant supporting full-time study.</p>
+                    </a>
+
+                    <a class="award-tile aqua-panel" href="https://awtca.org/2023/06/8268/" target="_blank" rel="noopener noreferrer">
+                        <h3>AWT Scholarship</h3>
+                        <div class="award-source">Scholarship / March 2023</div>
+                        <p>$7,500 grant for education in technology.</p>
+                    </a>
+                </div>
+
+                <div class="award-shelf" aria-label="Awards and scholarships">
+                    <a class="award-row aqua-panel" href="https://www.edwards.com/" target="_blank" rel="noopener noreferrer">
+                        <img src="images/edwards.png" alt="Edwards Lifesciences logo">
+                        <div>
+                            <h3>Edwards Lifesciences Scholar</h3>
+                            <p>Awarded recognition for exceptional student leadership in WiCSE.</p>
+                        </div>
+                        <span class="award-badge">December 2024</span>
+                    </a>
+
+                    <a class="award-row aqua-panel" href="https://www.sccur.org/whitney-travel-award" target="_blank" rel="noopener noreferrer">
+                        <img src="images/whitney.png" alt="Whitney Travel Award logo">
+                        <div>
+                            <h3>William M. Whitney, Ph.D. Travel Award</h3>
+                            <p>Awarded $500 to support student travel to NCUR.</p>
+                        </div>
+                        <span class="award-badge">March 2024</span>
+                    </a>
+
+                    <a class="award-row aqua-panel" href="https://cra.org/crn/2024/01/outstanding-undergraduate-research-awards-winners-announcement/" target="_blank" rel="noopener noreferrer">
+                        <img src="images/cra.png" alt="CRA logo">
+                        <div>
+                            <h3>Outstanding Undergraduate Researcher Award</h3>
+                            <p>Honorable Mention for demonstrating outstanding potential in computing research.</p>
+                        </div>
+                        <span class="award-badge">January 2024</span>
+                    </a>
+
+                    <a class="award-row aqua-panel" href="https://www.fullerton.edu/uroc/" target="_blank" rel="noopener noreferrer">
+                        <img src="images/uroc.jpg" alt="UROC logo">
+                        <div>
+                            <h3>UROC Fellowship Award</h3>
+                            <p>Awarded $5,000 grant to conduct and present research at the annual symposium.</p>
+                        </div>
+                        <span class="award-badge">November 2023</span>
+                    </a>
+
+                    <a class="award-row aqua-panel" href="https://stemadvantage.org/" target="_blank" rel="noopener noreferrer">
+                        <img src="images/adv.jpg" alt="STEM Advantage logo">
+                        <div>
+                            <h3>STEM Advantage Scholarship</h3>
+                            <p>Awarded $3,750 grant to attend classes full-time and graduate with less student debt.</p>
+                        </div>
+                        <span class="award-badge">May 2023</span>
+                    </a>
+
+                    <a class="award-row aqua-panel" href="https://awtca.org/2023/06/8268/" target="_blank" rel="noopener noreferrer">
+                        <img src="images/awt.jpg" alt="AWT logo">
+                        <div>
+                            <h3>AWT Scholarship</h3>
+                            <p>Awarded $7,500 grant to further education in the technology field.</p>
+                        </div>
+                        <span class="award-badge">March 2023</span>
+                    </a>
+                </div>
+            </div>
+        </div>
         <div class="container-fluid pt-5 section-float-in section-padding-wide" style="margin-top: 1%;">
             <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
                 <p>Awards</p>
@@ -3098,6 +4800,33 @@
 
     <!-- Sub Footer -->
     <section id="Sub-footer" class="snap-section">
+        <div class="container-fluid footer-thanks aqua-panel section-float-in">
+            <div class="section-kicker">Surface</div>
+            <h2>Thanks for drifting through.</h2>
+            <p>Keep in touch, read along, or send a small signal back.</p>
+
+            <div class="footer-actions" aria-label="Footer calls to action">
+                <a class="aqua-link" href="https://substack.com/@sandranguyen" target="_blank" rel="noopener noreferrer">Read my Substack</a>
+                <a class="aqua-link" href="mailto:sandra.nguyen9@csu.fullerton.edu">Email me</a>
+                <a class="aqua-link" href="pdfs/Sandra_Nguyen_Resume_2025.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
+                <a class="aqua-link" href="#Sub-header">Back to surface</a>
+            </div>
+
+            <div class="footer-socials" aria-label="Social links">
+                <a class="aqua-link" href="http://www.linkedin.com/in/sandra-nguyen9" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-linkedin" aria-hidden="true"></i> LinkedIn
+                </a>
+                <a class="aqua-link" href="https://github.com/alpacaJin" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub
+                </a>
+            </div>
+
+            <div class="footer-credit">
+                Designed and made by Sandra Nguyen. Stock videos by
+                <a href="https://www.vecteezy.com/members/narit-omd536190" target="_blank" rel="noopener noreferrer">Narit Bualuang on Vecteezy</a>.
+            </div>
+        </div>
+
         <div class="empty-space"><!-- --></div>
 
         <div class="container-fluid section-float-in" style="z-index: 3;">
@@ -3515,6 +5244,201 @@
     
             timelineStep.classList.toggle("hover");
         }
+    </script>
+
+    <!-- Redesign interactions -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const prefersReducedRedesignMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+            function activatePanel(trigger) {
+                const targetId = trigger.dataset.panelTarget;
+                const group = trigger.closest(".credential-current, .experience-layout");
+                const target = targetId ? document.getElementById(targetId) : null;
+                if (!group || !target) return;
+
+                group.querySelectorAll("[data-panel-target]").forEach((item) => {
+                    const isActive = item === trigger;
+                    item.classList.toggle("is-active", isActive);
+                    item.setAttribute("aria-selected", String(isActive));
+                });
+
+                group.querySelectorAll(".credential-detail, .experience-detail").forEach((panel) => {
+                    panel.classList.toggle("is-active", panel === target);
+                });
+            }
+
+            document.querySelectorAll("[data-panel-target]").forEach((trigger) => {
+                trigger.addEventListener("mouseenter", () => activatePanel(trigger));
+                trigger.addEventListener("focus", () => activatePanel(trigger));
+                trigger.addEventListener("click", () => activatePanel(trigger));
+            });
+
+            document.querySelectorAll("[data-media-rail]").forEach((shell) => {
+                const viewport = shell.querySelector(".media-rail-viewport");
+                const rail = shell.querySelector(".media-rail");
+                const next = shell.querySelector("[data-rail-next]");
+                const originalCards = Array.from(shell.querySelectorAll(".specimen-card"));
+                if (!viewport || !rail || originalCards.length === 0) return;
+
+                const cloneCount = Math.min(Math.max(originalCards.length, 2), 4);
+                originalCards.slice(0, cloneCount).forEach((card) => {
+                    const clone = card.cloneNode(true);
+                    clone.setAttribute("aria-hidden", "true");
+                    clone.tabIndex = -1;
+                    rail.appendChild(clone);
+                });
+
+                const cards = Array.from(rail.querySelectorAll(".specimen-card"));
+                let index = 0;
+                let timer = null;
+                let isPaused = false;
+                let pointerStartX = 0;
+                let pointerDeltaX = 0;
+                let isDragging = false;
+                let didDrag = false;
+                const autoRotateMs = Number(shell.dataset.autoRotate || 4800);
+                const logicalCount = originalCards.length;
+
+                function syncCardWidth() {
+                    const cardWidth = originalCards[0]?.getBoundingClientRect().width || 340;
+                    const viewportWidth = viewport.getBoundingClientRect().width || window.innerWidth;
+                    const railOffset = Math.max((viewportWidth - cardWidth) / 2, 0);
+                    rail.style.setProperty("--rail-card-width", `${cardWidth}px`);
+                    rail.style.setProperty("--rail-offset", `${railOffset}px`);
+                    setIndex(index, true);
+                }
+
+                function setIndex(nextIndex, immediate = false) {
+                    index = nextIndex;
+                    rail.classList.toggle("is-resetting", immediate);
+                    rail.style.setProperty("--rail-index", String(index));
+                    cards.forEach((card, cardIndex) => {
+                        card.classList.toggle("is-focused", cardIndex === index);
+                    });
+                    if (immediate) {
+                        void rail.offsetWidth;
+                        rail.classList.remove("is-resetting");
+                    }
+                }
+
+                function advance() {
+                    setIndex(index + 1);
+                    if (index >= logicalCount) {
+                        window.setTimeout(() => {
+                            setIndex(0, true);
+                        }, 790);
+                    }
+                }
+
+                function retreat() {
+                    if (index <= 0) {
+                        setIndex(logicalCount - 1, true);
+                    } else {
+                        setIndex(index - 1);
+                    }
+                }
+
+                function stopTimer() {
+                    window.clearInterval(timer);
+                    timer = null;
+                }
+
+                function startTimer() {
+                    stopTimer();
+                    if (prefersReducedRedesignMotion || isPaused || logicalCount <= 1) return;
+                    timer = window.setInterval(advance, autoRotateMs);
+                }
+
+                function pause() {
+                    isPaused = true;
+                    stopTimer();
+                }
+
+                function resume() {
+                    isPaused = false;
+                    startTimer();
+                }
+
+                next?.addEventListener("click", () => {
+                    pause();
+                    advance();
+                    window.setTimeout(resume, autoRotateMs * 1.5);
+                });
+
+                viewport.addEventListener("focusin", pause);
+                viewport.addEventListener("focusout", (event) => {
+                    if (!viewport.contains(event.relatedTarget)) resume();
+                });
+
+                viewport.addEventListener("keydown", (event) => {
+                    if (event.key === "ArrowRight") {
+                        event.preventDefault();
+                        pause();
+                        advance();
+                    } else if (event.key === "ArrowLeft") {
+                        event.preventDefault();
+                        pause();
+                        retreat();
+                    } else if (event.key === "Enter") {
+                        const card = cards[index];
+                        const href = card?.querySelector("a")?.href;
+                        if (href) window.open(href, "_blank", "noopener,noreferrer");
+                    }
+                });
+
+                viewport.addEventListener("pointerdown", (event) => {
+                    isDragging = true;
+                    didDrag = false;
+                    pointerStartX = event.clientX;
+                    pointerDeltaX = 0;
+                    pause();
+                    viewport.classList.add("is-dragging");
+                    viewport.setPointerCapture?.(event.pointerId);
+                });
+
+                viewport.addEventListener("pointermove", (event) => {
+                    if (!isDragging) return;
+                    pointerDeltaX = event.clientX - pointerStartX;
+                    if (Math.abs(pointerDeltaX) > 8) didDrag = true;
+                });
+
+                viewport.addEventListener("pointerup", (event) => {
+                    if (!isDragging) return;
+                    isDragging = false;
+                    viewport.classList.remove("is-dragging");
+                    viewport.releasePointerCapture?.(event.pointerId);
+
+                    if (Math.abs(pointerDeltaX) > 42) {
+                        pointerDeltaX < 0 ? advance() : retreat();
+                        window.setTimeout(resume, autoRotateMs * 1.5);
+                    } else if (!didDrag) {
+                        const card = event.target.closest(".specimen-card");
+                        const href = card?.querySelector("a")?.href;
+                        if (href) window.open(href, "_blank", "noopener,noreferrer");
+                        resume();
+                    }
+                });
+
+                viewport.addEventListener("pointercancel", () => {
+                    isDragging = false;
+                    viewport.classList.remove("is-dragging");
+                    resume();
+                });
+
+                document.addEventListener("visibilitychange", () => {
+                    if (document.hidden) {
+                        stopTimer();
+                    } else {
+                        startTimer();
+                    }
+                });
+
+                window.addEventListener("resize", syncCardWidth);
+                syncCardWidth();
+                startTimer();
+            });
+        });
     </script>
 
     <!-- Randomize play -->
