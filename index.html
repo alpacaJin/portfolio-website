@@ -3,6 +3,7 @@
 
 <!-- Author: Sandra Nguyen -->
 <!-- Started: January 5th, 2024-->
+<!-- Last Edited: August 28th, 2025-->
 
 <head>
     <meta charset="UTF-8">
@@ -13,17 +14,17 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" 
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
-    <!-- Google Fonts -->
+    <!-- Google Fonts - Non-blocking -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Afacad" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=WindSong" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Afacad&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=WindSong&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 
-    <!-- Google Icons -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+    <!-- Google Icons - Non-blocking -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" media="print" onload="this.media='all'">
 
-    <!-- Font Awesoome Icons -->
-    <script src="https://kit.fontawesome.com/b4d50f2604.js" crossorigin="anonymous"></script>
+    <!-- Font Awesome Icons - Non-blocking -->
+    <script src="https://kit.fontawesome.com/b4d50f2604.js" crossorigin="anonymous" async></script>
 
     <!-- Favicon -->
     <link rel="icon" href="images/betta.png">
@@ -32,6 +33,24 @@
 
     <!-- Background -->
     <style>
+        /* CSS Custom Properties for Responsive Spacing */
+        :root {
+            --section-padding-inline-xl: 8rem;
+            --section-padding-inline-lg: 6rem;
+            --section-padding-inline-md: 4rem;
+            --section-padding-inline-sm: 2rem;
+            --section-padding-inline-xs: 1rem;
+            --fixed-header-height: 72px;
+            --scroll-blue: 0;
+            --scroll-blue-hue: 214;
+            
+            --section-padding-block-xl: 4rem;
+            --section-padding-block-lg: 3rem;
+            --section-padding-block-md: 2.5rem;
+            --section-padding-block-sm: 2rem;
+            --section-padding-block-xs: 1.5rem;
+        }
+
         html,
         body {
             scroll-snap-type: y proximity;
@@ -39,28 +58,107 @@
             scroll-behavior: smooth;
             transition: all 0.8s ease-in-out;
             overflow-y: hidden;
+            overscroll-behavior-y: none;
             margin: 0;
             padding: 0;
             background-color: black;
+            position: relative;
+            isolation: isolate;
         }
 
-        /* Snap scroll */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background:
+                radial-gradient(56rem 46rem at 10% 12%, hsla(calc(var(--scroll-blue-hue) + 9), 92%, 60%, 0.52), rgba(0, 0, 0, 0) 72%),
+                radial-gradient(60rem 50rem at 90% 88%, hsla(calc(var(--scroll-blue-hue) + 2), 86%, 56%, 0.48), rgba(0, 0, 0, 0) 74%),
+                radial-gradient(42rem 34rem at 50% 0%, hsla(calc(var(--scroll-blue-hue) + 14), 88%, 58%, 0.34), rgba(0, 0, 0, 0) 76%);
+            -webkit-mask: radial-gradient(ellipse 72% 62% at 50% 52%, transparent 0 58%, rgba(0, 0, 0, 0.15) 68%, #000 78%);
+            mask: radial-gradient(ellipse 72% 62% at 50% 52%, transparent 0 58%, rgba(0, 0, 0, 0.15) 68%, #000 78%);
+            opacity: calc(0.08 + (var(--scroll-blue) * 0.52));
+            transition: opacity 320ms ease, filter 420ms ease;
+            filter: saturate(108%);
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background:
+                conic-gradient(from 180deg at 50% 50%,
+                    hsla(calc(var(--scroll-blue-hue) + 5), 72%, 26%, 0.22),
+                    hsla(calc(var(--scroll-blue-hue) + 12), 78%, 36%, 0.24),
+                    hsla(calc(var(--scroll-blue-hue) - 4), 70%, 22%, 0.2),
+                    hsla(calc(var(--scroll-blue-hue) + 5), 72%, 26%, 0.22)
+                );
+            -webkit-mask: radial-gradient(ellipse 70% 60% at 50% 52%, transparent 0 56%, rgba(0, 0, 0, 0.16) 66%, #000 76%);
+            mask: radial-gradient(ellipse 70% 60% at 50% 52%, transparent 0 56%, rgba(0, 0, 0, 0.16) 66%, #000 76%);
+            mix-blend-mode: screen;
+            opacity: calc(0.05 + (var(--scroll-blue) * 0.42));
+            transition: opacity 320ms ease;
+        }
+
+        @media (max-width: 991px) {
+            body::before {
+                -webkit-mask: radial-gradient(ellipse 88% 70% at 50% 52%, transparent 0 62%, rgba(0, 0, 0, 0.14) 72%, #000 82%);
+                mask: radial-gradient(ellipse 88% 70% at 50% 52%, transparent 0 62%, rgba(0, 0, 0, 0.14) 72%, #000 82%);
+            }
+
+            body::after {
+                -webkit-mask: radial-gradient(ellipse 86% 68% at 50% 52%, transparent 0 60%, rgba(0, 0, 0, 0.14) 70%, #000 80%);
+                mask: radial-gradient(ellipse 86% 68% at 50% 52%, transparent 0 60%, rgba(0, 0, 0, 0.14) 70%, #000 80%);
+            }
+        }
+
+        /* Snap scroll - Enhanced for widescreen */
         .snap-section {
             height: 100vh;
             padding: 0;
             margin: 0;
             box-sizing: border-box;
             scroll-snap-align: start;
+            scroll-snap-stop: always;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-direction: column;
             overflow: hidden !important;
             z-index: 5;
+            position: relative;
         }
 
-        /* Empty space */
-        @media (min-width: 992px) {
+        /* Widescreen content constraints */
+        @media (min-width: 1600px) {
+            .snap-section .container-fluid {
+                max-width: 1400px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        @media (min-width: 1920px) {
+            .snap-section .container-fluid {
+                max-width: 1600px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        /* Empty space - Standardized breakpoints */
+        @media (min-width: 1400px) {
+            .fish-space {
+                height: 90vh;
+                position: relative;
+                z-index: 1;
+            }
+        }
+
+        @media (min-width: 992px) and (max-width: 1399px) {
             .fish-space {
                 height: 87vh;
                 position: relative;
@@ -68,9 +166,17 @@
             }
         }
 
-        @media (max-width: 991px) {
+        @media (min-width: 768px) and (max-width: 991px) {
             .fish-space {
                 height: 85vh;
+                position: relative;
+                z-index: 1;
+            }
+        }
+
+        @media (min-width: 576px) and (max-width: 767px) {
+            .fish-space {
+                height: 82vh;
                 position: relative;
                 z-index: 1;
             }
@@ -84,8 +190,22 @@
             }
         }
 
-        /* Video */
-        @media (min-width: 992px) {
+        /* Video - Enhanced responsive design */
+        @media (min-width: 1400px) {
+            .fish-container {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 60%;
+                height: 60%;
+                overflow: hidden;
+                z-index: 0;
+                pointer-events: none;
+            }
+        }
+
+        @media (min-width: 992px) and (max-width: 1399px) {
             .fish-container {
                 position: absolute;
                 top: 50%;
@@ -99,21 +219,21 @@
             }
         }
 
-        @media (max-width: 991px) {
+        @media (min-width: 768px) and (max-width: 991px) {
             .fish-container {
                 position: absolute;
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                width: 100%;
-                height: 100%;
+                width: 85%;
+                height: 85%;
                 overflow: hidden;
                 z-index: 0;
                 pointer-events: none;
             }
         }
 
-        @media (max-width: 575px) {
+        @media (max-width: 767px) {
             .fish-container {
                 position: absolute;
                 top: 50%;
@@ -252,21 +372,44 @@
         }
 
         .card-neu {
-            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
-            backdrop-filter: blur(8px);
-            border-radius: 16px;
-            transition: transform 0.3s ease;
-            box-shadow: 
-                inset 4px 4px 15px rgba(0, 0, 0, 0.6),
-                inset -4px -4px 15px rgba(60, 60, 60, 0.1);
+            position: relative;
+            overflow: hidden;
+            background:
+                linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(182, 197, 230, 0.08) 46%, rgba(110, 124, 156, 0.05)),
+                linear-gradient(200deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+            backdrop-filter: blur(28px) saturate(180%);
+            -webkit-backdrop-filter: blur(28px) saturate(180%);
+            border-radius: 18px;
+            border: 1px solid rgba(232, 241, 255, 0.34);
+            transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.42s ease, border-color 0.42s ease, background 0.42s ease;
+            box-shadow:
+                0 26px 56px rgba(0, 0, 0, 0.42),
+                inset 0 1px 0 rgba(255, 255, 255, 0.26),
+                inset 0 -22px 48px rgba(5, 10, 28, 0.22),
+                0 0 58px rgba(152, 193, 255, 0.16);
         }
 
         .card-neu:hover {
-            transform: scale(1.02);
+            transform: translateY(-7px);
+            border-color: rgba(246, 250, 255, 0.5);
+            background:
+                linear-gradient(135deg, rgba(255, 255, 255, 0.24), rgba(190, 207, 242, 0.1) 46%, rgba(118, 136, 171, 0.06)),
+                linear-gradient(200deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015));
             box-shadow:
-                0 8px 24px rgba(0, 0, 0, 0.4),                /* outer soft shadow */
-                inset 0 0 12px rgba(255, 255, 255, 0.08),     /* glow from within */
-                inset 0 0 8px rgba(0, 0, 0, 0.3)
+                0 34px 66px rgba(0, 0, 0, 0.52),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                inset 0 -22px 46px rgba(5, 10, 28, 0.26),
+                0 0 70px rgba(170, 210, 255, 0.24);
+        }
+
+        .card-neu::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            border-radius: inherit;
+            background: linear-gradient(115deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0) 34%);
+            opacity: 0.6;
         }
     </style>
 
@@ -297,15 +440,389 @@
 
     <!-- Header -->
     <style>
-        @media (max-width: 768px) {
-            .nav-item {
-                margin-right: 3rem;
+        #header {
+            top: 0;
+            left: 0;
+            width: 100%;
+            min-height: var(--fixed-header-height);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: transparent;
+            padding-inline: clamp(0.7rem, 2.3vw, 1.8rem);
+            padding-top: 0.55rem;
+            transition: background-color 260ms ease, backdrop-filter 260ms ease, box-shadow 260ms ease;
+        }
+
+        #header.is-scrolled {
+            background: rgba(0, 0, 0, 0.68);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22);
+        }
+
+        .header-shell {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            width: 100%;
+            max-width: 1280px;
+            margin-inline: auto;
+            padding: 0.15rem 0.2rem;
+            position: relative;
+        }
+
+        .header-brand {
+            font-family: 'Afacad';
+            color: white;
+            white-space: nowrap;
+            font-size: 1.2rem;
+            opacity: 0.78;
+            transition: opacity 180ms ease;
+        }
+
+        .header-brand:hover {
+            opacity: 1;
+        }
+
+        .header-nav-desktop {
+            display: flex;
+            align-items: center;
+            gap: clamp(0.75rem, 2vw, 1.4rem);
+            margin-left: auto;
+        }
+
+        .header-nav-desktop .nav-item {
+            font-family: 'Afacad';
+            color: white;
+            white-space: nowrap;
+            font-size: 0.95rem;
+            opacity: 0.78;
+            transition: opacity 180ms ease;
+        }
+
+        .header-nav-desktop .nav-item:hover {
+            opacity: 1;
+        }
+
+        #header .custom-dropdown {
+            margin-right: 0.2rem;
+        }
+
+        #header .dropdown-btn {
+            min-width: auto;
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
+            backdrop-filter: none;
+            padding: 0;
+            margin-top: 0;
+            font-size: 0.95rem;
+            opacity: 0.78;
+            transition: opacity 180ms ease;
+        }
+
+        #header .dropdown-btn:hover {
+            opacity: 1;
+            border: none;
+            box-shadow: none;
+            transform: none;
+            background: transparent;
+        }
+
+        .mobile-nav-toggle {
+            display: none;
+        }
+
+        .mobile-nav-menu {
+            display: none;
+        }
+
+        @media (max-width: 991px) {
+            .header-brand {
+                font-size: 1.05rem;
+            }
+
+            .header-shell {
+                padding: 0.2rem 0.35rem;
+            }
+
+            .header-nav-desktop {
+                display: none;
+            }
+
+            .mobile-nav-toggle {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                min-width: 2.5rem;
+                height: 2.5rem;
+                border-radius: 999px;
+                border: none;
+                background: transparent;
+                color: white;
+                opacity: 0.82;
+                font-size: 1.05rem;
+                line-height: 1;
+            }
+
+            .mobile-nav-menu {
+                position: absolute;
+                top: calc(var(--fixed-header-height) - 0.2rem);
+                right: max(0.6rem, env(safe-area-inset-right));
+                left: auto;
+                transform: none;
+                width: min(72vw, 255px);
+                background: rgba(0, 0, 0, 0.9);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                border-radius: 10px;
+                backdrop-filter: blur(12px);
+                z-index: 20;
+                padding: 0.45rem 0;
+            }
+
+            #header {
+                padding-inline: max(0.6rem, env(safe-area-inset-left)) max(0.6rem, env(safe-area-inset-right));
+            }
+
+            .mobile-nav-menu.mobile-open {
+                display: block;
+            }
+
+            .mobile-nav-menu a {
+                display: block;
+                padding: 0.46rem 0.9rem;
+                font-family: 'Afacad';
+                color: white;
+                font-size: 0.95rem;
+                opacity: 0.86;
+            }
+
+            #header .dropdown-content {
+                min-width: 104px;
+                padding: 0.35rem 0;
+            }
+
+            #header .dropdown-content a {
+                font-size: 0.9rem;
+                padding: 0.3rem 0.65rem;
             }
         }
 
         @media (max-width: 575px) {
-            .nav-item {
-                margin-right: 0.75rem;
+            .mobile-nav-menu {
+                width: min(66vw, 210px);
+            }
+
+            .mobile-nav-menu a {
+                font-size: 0.9rem;
+                padding: 0.42rem 0.78rem;
+            }
+
+            #header .dropdown-content {
+                min-width: 96px;
+            }
+
+            #header .dropdown-content a {
+                font-size: 0.85rem;
+                padding: 0.28rem 0.58rem;
+            }
+        }
+    </style>
+
+    <!-- Hero viewport fit -->
+    <style>
+        #Sub-header {
+            min-height: 100svh;
+            padding-top: var(--fixed-header-height);
+            position: relative;
+            isolation: isolate;
+        }
+
+        #Sub-header .hero-ambient-layer {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 2;
+            overflow: visible;
+        }
+
+        #Sub-header .hero-ambient-video {
+            position: absolute;
+            top: 61%;
+            width: min(30vw, 420px);
+            height: 86%;
+            object-fit: cover;
+            opacity: 0;
+            filter: blur(30px) saturate(165%) contrast(108%) brightness(118%);
+            mix-blend-mode: lighten;
+            transition: opacity 760ms ease, filter 760ms ease;
+            will-change: opacity, filter, transform;
+        }
+
+        #Sub-header .hero-ambient-video.is-visible {
+            opacity: 0.24;
+        }
+
+        #Sub-header .hero-ambient-video.is-betta.is-visible {
+            opacity: 0.31;
+            filter: blur(28px) saturate(185%) contrast(114%) brightness(120%);
+        }
+
+        #Sub-header .hero-ambient-edge {
+            left: 8vw;
+            transform: translateY(-50%) scale(1.06);
+            -webkit-mask-image: radial-gradient(ellipse 84% 62% at 18% 50%, rgba(0, 0, 0, 0.98) 0%, rgba(0, 0, 0, 0.92) 42%, rgba(0, 0, 0, 0.4) 72%, rgba(0, 0, 0, 0) 100%);
+            mask-image: radial-gradient(ellipse 84% 62% at 18% 50%, rgba(0, 0, 0, 0.98) 0%, rgba(0, 0, 0, 0.92) 42%, rgba(0, 0, 0, 0.4) 72%, rgba(0, 0, 0, 0) 100%);
+            animation: heroAmbientDrift 15s ease-in-out infinite alternate;
+        }
+
+        @keyframes heroAmbientDrift {
+            0% {
+                transform: translateY(-50%) translateX(0) scale(1.06);
+            }
+            100% {
+                transform: translateY(-50%) translateX(0.8rem) scale(1.12);
+            }
+        }
+
+        #Sub-header .section-float-in {
+            padding-top: 0 !important;
+        }
+
+        #Sub-header .fish-space {
+            height: calc(100svh - var(--fixed-header-height));
+            min-height: 420px;
+        }
+
+        #Sub-header .fish-container {
+            width: min(92vw, 1100px);
+            height: min(72vh, 760px);
+            top: calc(50% + 1rem);
+        }
+
+        #Sub-header .hero-intro {
+            font-family: 'Afacad';
+            color: white;
+            font-size: 1.5rem;
+            padding-top: clamp(1rem, 10vh, 6rem);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            max-width: min(560px, 46vw);
+            margin-left: clamp(1rem, 8vw, 8rem);
+        }
+
+        #Sub-header .hero-links {
+            margin-top: auto;
+            padding-bottom: clamp(1rem, 8vh, 4rem);
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            width: fit-content;
+            transform: translateY(-0.4rem);
+        }
+
+        #Sub-header .responsive-name {
+            margin-top: 0.55rem;
+        }
+
+        #Sub-header .hero-inline-link {
+            color: inherit;
+            font-style: italic;
+            font-size: 0.8em;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        #Sub-header .hero-inline-link:hover {
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.25);
+        }
+
+        /* Intro word-by-word flow animation */
+        #Sub-header [data-word-flow] .flow-word {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(14px);
+            filter: blur(4px);
+            transition: opacity 760ms ease, transform 860ms ease, filter 860ms ease;
+            will-change: opacity, transform, filter;
+        }
+
+        #Sub-header.hero-animate [data-word-flow] .flow-word {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+        }
+
+        #Sub-header .hero-link-line {
+            opacity: 0;
+            transform: translateY(12px);
+            filter: blur(2px);
+            transition: opacity 620ms ease, transform 700ms ease, filter 700ms ease;
+            transition-delay: var(--line-delay, 1500ms);
+        }
+
+        #Sub-header.hero-animate .hero-link-line {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #Sub-header [data-word-flow] .flow-word,
+            #Sub-header .hero-link-line {
+                opacity: 1;
+                transform: none;
+                filter: none;
+                transition: none;
+            }
+        }
+
+        @media (max-width: 767px) {
+            :root {
+                --fixed-header-height: 64px;
+            }
+
+            #Sub-header .hero-ambient-video {
+                width: min(40vw, 240px);
+                height: 66%;
+                top: 64%;
+                filter: blur(22px) saturate(165%) contrast(108%) brightness(116%);
+            }
+
+            #Sub-header .hero-ambient-video.is-visible {
+                opacity: 0.18;
+            }
+
+            #Sub-header .hero-ambient-edge {
+                left: 4vw;
+            }
+
+            #Sub-header .hero-intro {
+                padding-top: clamp(0.5rem, 5vh, 2rem);
+                max-width: 100%;
+                margin-left: 0;
+            }
+
+            #Sub-header .fish-space {
+                min-height: 360px;
+            }
+
+            #Sub-header .hero-links {
+                padding-bottom: clamp(0.5rem, 4vh, 1.5rem);
+                transform: translateY(-0.2rem);
+            }
+
+            #Sub-header .responsive-name {
+                margin-top: 0.35rem;
+            }
+
+            #Sub-header .fish-container {
+                width: 100%;
+                height: min(68vh, 520px);
             }
         }
     </style>
@@ -347,7 +864,7 @@
 
     <!-- Fish videos -->
     <style>
-        video#fish-video {
+        video.fish-video {
             position: absolute;
             top: 0;
             left: 0;
@@ -357,11 +874,11 @@
             pointer-events: none; /* Don't block clicks */
         }
 
-        #fish-video.active {
+        .fish-video.active {
             opacity: 1;
         }
 
-        #fish-video.inactive {
+        .fish-video.inactive {
             opacity: 0;
         }
     </style>
@@ -373,35 +890,173 @@
             font-size: 1.8rem;
             text-align: center;
             opacity: 0;
-            transition: opacity 1s ease;
-            padding: 15vh 10vw 10vh;
+            transform: translateY(26px);
+            filter: blur(4px);
+            transition: opacity 1.05s cubic-bezier(0.22, 1, 0.36, 1), transform 1.05s cubic-bezier(0.22, 1, 0.36, 1), filter 0.82s ease;
+            padding: 0;
             font-family: 'Afacad';
             text-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
         }
 
+        .section-story-intro {
+            position: absolute;
+            inset: 0;
+            z-index: 8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
+            padding: 0 clamp(1rem, 4vw, 4rem);
+            text-align: center;
+        }
+
         @media (max-width: 575px) {
             .intro-text {
-                font-size: 1.2
+                font-size: 1.2rem;
             }
         }
 
         .fade-in {
             opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
         }
 
         .fade-out {
             opacity: 0;
+            transform: translateY(-10px);
+            filter: blur(2px);
+        }
+
+        .section-story-intro .storyline-word {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(0.55em);
+            filter: blur(4px);
+            transition:
+                opacity 0.56s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.56s cubic-bezier(0.22, 1, 0.36, 1),
+                filter 0.44s ease;
+            will-change: opacity, transform, filter;
+        }
+
+        .section-story-intro .storyline-word.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+        }
+
+        .snap-section[data-story-enabled="true"] .section-story-content {
+            display: block;
+            visibility: hidden;
+            pointer-events: none;
+            opacity: 0;
+            transform: translateY(62px);
+            filter: blur(4px);
+            transition: opacity 1.05s cubic-bezier(0.22, 1, 0.36, 1), transform 1.05s cubic-bezier(0.22, 1, 0.36, 1), filter 0.82s ease;
+        }
+
+        .snap-section[data-story-enabled="true"] .section-story-content.story-visible {
+            visibility: visible;
+            pointer-events: auto;
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+        }
+
+        #bio #bioCard.section-story-content {
+            transform: translateY(84px);
+            transition: opacity 1.24s cubic-bezier(0.22, 1, 0.36, 1), transform 1.24s cubic-bezier(0.22, 1, 0.36, 1), filter 0.9s ease;
+        }
+
+        #bio #bioCard.section-story-content.story-visible {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100%;
+            transform: translateY(-30px);
+        }
+
+        #bio #bioCard {
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+        }
+
+        #bio .responsive-card-bio {
+            align-items: center;
+            position: relative;
+            overflow: visible;
+            isolation: isolate;
+            border-color: rgba(228, 236, 255, 0.16) !important;
+            background:
+                linear-gradient(132deg, rgba(250, 252, 255, 0.16), rgba(168, 185, 220, 0.08) 42%, rgba(110, 127, 158, 0.05)),
+                linear-gradient(210deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.008));
+        }
+
+        #bio .responsive-card-bio::after {
+            content: "";
+            position: absolute;
+            right: 3%;
+            top: 8%;
+            width: 40%;
+            height: 76%;
+            border-radius: 30px;
+            background-image: url("images/pfp.jpg");
+            background-size: cover;
+            background-position: center;
+            opacity: 0.2;
+            filter: blur(30px) saturate(135%);
+            mix-blend-mode: screen;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        #bio .responsive-card-bio > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        #bio .bio-breakout-photo {
+            transform: translate(-1.35rem, -1.1rem) scale(1.04);
+            border-radius: 30px !important;
+            opacity: 0.96 !important;
+            box-shadow:
+                0 26px 52px rgba(0, 0, 0, 0.42),
+                0 0 40px rgba(163, 201, 255, 0.18);
+        }
+
+        #bio .responsive-pfp {
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+        }
+
+        @media (max-width: 991px) {
+            #bio .bio-breakout-photo {
+                transform: translate(0, -0.65rem) scale(1.02);
+            }
+        }
+
+        @media (max-width: 575px) {
+            #bio .responsive-card-bio::after {
+                width: 58%;
+                height: 38%;
+                right: 8%;
+                top: 54%;
+                opacity: 0.14;
+            }
         }
 
         /* Pfp */
         @media (min-width: 576px) {
             .responsive-pfp {
-                width: 40%;
+                width: 36%;
                 height: 100%;
-                max-width: 373px;
-                max-height: 497px;
-                margin-top: 5%;
-                margin-bottom: 5%;
+                max-width: 330px;
+                max-height: 450px;
+                margin-top: 3%;
+                margin-bottom: 3%;
                 padding-left: 0%;
                 padding-right: 0%;
             }
@@ -409,27 +1064,53 @@
 
         @media (max-width: 575px) {
             .responsive-pfp {
-                width: 80%;
-                max-height: 60%;
-                margin-top: 10%;
-                margin-bottom: 5%;
+                width: 72%;
+                max-height: 55%;
+                margin-top: 6%;
+                margin-bottom: 4%;
                 padding-left: 0%;
                 padding-right: 0%;
             }
         }
  
-        /* Text */
-        @media (min-width: 576px) {
+        /* Text - Enhanced typography scaling */
+        @media (min-width: 1400px) {
             .responsive-text {
-                font-size: 1rem;
-                padding: 5%;
+                font-size: 1.125rem;
+                line-height: 1.6;
+                padding: 3rem;
+            }
+        }
+
+        @media (min-width: 992px) and (max-width: 1399px) {
+            .responsive-text {
+                font-size: 0.95rem;
+                line-height: 1.45;
+                padding: 2rem;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 991px) {
+            .responsive-text {
+                font-size: 0.92rem;
+                line-height: 1.45;
+                padding: 1.5rem;
+            }
+        }
+
+        @media (min-width: 576px) and (max-width: 767px) {
+            .responsive-text {
+                font-size: 0.95rem;
+                line-height: 1.4;
+                padding: 1.5rem;
             }
         }
 
         @media (max-width: 575px) {
             .responsive-text {
-                font-size: 1rem;
-                padding: 10%;
+                font-size: 0.84rem;
+                line-height: 1.35;
+                padding: 0.85rem;
             }
         }
 
@@ -446,31 +1127,78 @@
             margin-top: -1rem;
         }
 
-        /* Name */
-        @media (min-width: 576px) {
+        /* Name - Enhanced scaling for better visual hierarchy */
+        @media (min-width: 1400px) {
+            .responsive-name {
+                font-size: 4rem;
+                line-height: 1.1;
+            }
+        }
+
+        @media (min-width: 992px) and (max-width: 1399px) {
+            .responsive-name {
+                font-size: 3.5rem;
+                line-height: 1.1;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 991px) {
             .responsive-name {
                 font-size: 3rem;
+                line-height: 1.2;
+            }
+        }
+
+        @media (min-width: 576px) and (max-width: 767px) {
+            .responsive-name {
+                font-size: 2.75rem;
+                line-height: 1.2;
             }
         }
 
         @media (max-width: 575px) {
             .responsive-name {
-                font-size: 2.5rem;
+                font-size: 2.25rem;
+                line-height: 1.3;
             }
         }
 
-        /* Div */
-        @media (min-width: 576px) {
+        /* Bio card - Enhanced responsive design */
+        @media (min-width: 1400px) {
             .responsive-card-bio {
-                width: 79%;
+                width: 72%;
+                max-width: 1080px;
+            }
+        }
+
+        @media (min-width: 992px) and (max-width: 1399px) {
+            .responsive-card-bio {
+                width: 78%;
+            }
+        }
+
+        @media (min-width: 576px) and (max-width: 991px) {
+            .responsive-card-bio {
+                width: 88%;
             }
         }
 
         @media (max-width: 575px) {
             .responsive-card-bio {
-               width: 100%;
+               width: 94%;
             }
         }
+
+        #bio .bio-name {
+            font-size: clamp(2rem, 6vw, 3.2rem) !important;
+            line-height: 1.1 !important;
+            margin-bottom: 0.9rem;
+        }
+
+        #bio .responsive-text p {
+            margin-bottom: 0.6rem;
+        }
+
     </style>
 
     <!-- Education -->
@@ -504,8 +1232,8 @@
             .campus_div {
                 width: 100%;
                 padding-bottom: 5%;
-                padding-left: 10;
-                padding-right: 10; 
+                padding-left: 10%;
+                padding-right: 10%; 
             }
         }
 
@@ -513,24 +1241,24 @@
             .campus_div {
                 width: 100%;
                 padding-bottom: 5%;
-                padding-left: 10;
-                padding-right: 10; 
+                padding-left: 10%;
+                padding-right: 10%; 
             }
         }
 
         @media (max-width: 991px) {
             .campus_div2 {
                 width: 100%;
-                padding-left: 10;
-                padding-right: 10; 
+                padding-left: 10%;
+                padding-right: 10%; 
             }
         }
 
         @media (max-width: 414px) {
             .campus_div2 {
                 width: 100%;
-                padding-left: 10;
-                padding-right: 10; 
+                padding-left: 10%;
+                padding-right: 10%; 
             }
         }
 
@@ -551,41 +1279,182 @@
             transition: all 0.5s ease;
         }
 
-        /* Text */
-        @media (min-width: 576px) {
+        /* Caption and Title - Improved scaling */
+        @media (min-width: 1400px) {
+            .responsive-caption {
+                font-size: 1.1rem;
+                line-height: 1.5;
+            }
+            .responsive-title {
+                font-size: 1.5rem;
+                line-height: 1.3;
+            }
+        }
+
+        @media (min-width: 992px) and (max-width: 1399px) {
             .responsive-caption {
                 font-size: 1rem;
+                line-height: 1.4;
+            }
+            .responsive-title {
+                font-size: 1.4rem;
+                line-height: 1.3;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 991px) {
+            .responsive-caption {
+                font-size: 0.95rem;
+                line-height: 1.4;
+            }
+            .responsive-title {
+                font-size: 1.3rem;
+                line-height: 1.3;
+            }
+        }
+
+        @media (min-width: 576px) and (max-width: 767px) {
+            .responsive-caption {
+                font-size: 0.9rem;
+                line-height: 1.4;
+            }
+            .responsive-title {
+                font-size: 1.2rem;
+                line-height: 1.3;
             }
         }
 
         @media (max-width: 575px) {
             .responsive-caption {
-                font-size: 1rem;
+                font-size: 0.85rem;
+                line-height: 1.4;
             }
-        }
-
-        @media (min-width: 576px) {
             .responsive-title {
-                font-size: 1.3rem;
+                font-size: 1.1rem;
+                line-height: 1.3;
             }
         }
 
-        @media (max-width: 575px) {
-            .responsive-title {
-                font-size: 1.3rem;
-            }
-        }
-
-        /* Div */
-        @media (min-width: 576px) {
+        /* Education card - Enhanced responsive design */
+        @media (min-width: 1400px) {
             .responsive-card-edu {
-                width: 80%;
+                width: 70%;
+                max-width: 300px;
+            }
+        }
+
+        @media (min-width: 992px) and (max-width: 1399px) {
+            .responsive-card-edu {
+                width: 75%;
+            }
+        }
+
+        @media (min-width: 576px) and (max-width: 991px) {
+            .responsive-card-edu {
+                width: 85%;
             }
         }
 
         @media (max-width: 575px) {
             .responsive-card-edu {
                width: 100%;
+            }
+        }
+
+        /* Responsive Section Padding Classes */
+        .section-padding-wide {
+            padding-left: var(--section-padding-inline-xl);
+            padding-right: var(--section-padding-inline-lg);
+        }
+
+        .section-padding-balanced {
+            padding-left: var(--section-padding-inline-lg);
+            padding-right: var(--section-padding-inline-lg);
+        }
+
+        /* Override for different screen sizes */
+        @media (min-width: 1400px) {
+            .section-padding-wide {
+                padding-left: var(--section-padding-inline-xl);
+                padding-right: var(--section-padding-inline-xl);
+            }
+            .section-padding-balanced {
+                padding-left: var(--section-padding-inline-lg);
+                padding-right: var(--section-padding-inline-lg);
+            }
+        }
+
+        @media (min-width: 992px) and (max-width: 1399px) {
+            .section-padding-wide {
+                padding-left: var(--section-padding-inline-lg);
+                padding-right: var(--section-padding-inline-md);
+            }
+            .section-padding-balanced {
+                padding-left: var(--section-padding-inline-md);
+                padding-right: var(--section-padding-inline-md);
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 991px) {
+            .section-padding-wide {
+                padding-left: var(--section-padding-inline-md);
+                padding-right: var(--section-padding-inline-sm);
+            }
+            .section-padding-balanced {
+                padding-left: var(--section-padding-inline-sm);
+                padding-right: var(--section-padding-inline-sm);
+            }
+        }
+
+        @media (min-width: 576px) and (max-width: 767px) {
+            .section-padding-wide {
+                padding-left: var(--section-padding-inline-sm);
+                padding-right: var(--section-padding-inline-sm);
+            }
+            .section-padding-balanced {
+                padding-left: var(--section-padding-inline-sm);
+                padding-right: var(--section-padding-inline-sm);
+            }
+        }
+
+        @media (max-width: 575px) {
+            .section-padding-wide {
+                padding-left: var(--section-padding-inline-xs);
+                padding-right: var(--section-padding-inline-xs);
+            }
+            .section-padding-balanced {
+                padding-left: var(--section-padding-inline-xs);
+                padding-right: var(--section-padding-inline-xs);
+            }
+        }
+
+        /* Mobile-specific enhancements */
+        @media (max-width: 480px) {
+            .snap-section {
+                min-height: 100vh;
+                height: auto;
+                padding-bottom: 2rem;
+            }
+            
+            .responsive-name {
+                font-size: 2rem !important;
+                line-height: 1.2 !important;
+            }
+            
+            .responsive-text {
+                font-size: 0.85rem !important;
+                line-height: 1.3 !important;
+            }
+        }
+
+        /* Very small mobile screens */
+        @media (max-width: 360px) {
+            :root {
+                --section-padding-inline-xs: 0.75rem;
+            }
+            
+            .responsive-name {
+                font-size: 1.75rem !important;
             }
         }
     </style>
@@ -965,7 +1834,7 @@
         /* Initial hidden state */
         #contact-me.section-float-in {
             opacity: 0;
-            transform: translateY(80px);
+            transform: translateY(46px);
             pointer-events: none;
             transition: none;
         }
@@ -975,7 +1844,7 @@
             opacity: 1;
             transform: translateY(0);
             pointer-events: auto;
-            transition: opacity 0.8s ease, transform 0.8s ease; /* Only apply on enter */
+            transition: opacity 0.95s cubic-bezier(0.22, 1, 0.36, 1), transform 0.95s cubic-bezier(0.22, 1, 0.36, 1); /* Only apply on enter */
         }
     </style>
 
@@ -983,8 +1852,8 @@
     <style>
         .section-float-in {
             opacity: 0;
-            transform: translateY(80px);
-            transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+            transform: translateY(46px);
+            transition: opacity 0.95s cubic-bezier(0.22, 1, 0.36, 1), transform 0.95s cubic-bezier(0.22, 1, 0.36, 1);
             will-change: opacity, transform;
         }
 
@@ -998,134 +1867,162 @@
 <body>
     <!-- Header -->
     <header id="header" class="container-fluid px-3 mx-0 pt-2" style="position: fixed; z-index: 5;">
-        <div class="row responsive-sub justify-content-evenly" style="font-family: 'Afacad'; color: white;">
-            <div class="col-sm-1 col-md-1 col-lg-2 pt-2 text-center text-md-start">
-                <a href="#Sub-header" style="font-family: 'Afacad'; color: white;">Sandra Nguyen</a>
-            </div>
+        <div class="header-shell responsive-sub" style="font-family: 'Afacad'; color: white;">
+            <a href="#Sub-header" class="header-brand">Sandra Nguyen</a>
 
-            <div id="customDropdown" class="custom-dropdown col-sm-1 col-md-1 col-lg-2 pt-2 text-center">
-                <button id="dropdownToggle" class="dropdown-btn">
-                    Projects <span style="margin-left: 4px;">▾</span>
-                <ul id="dropdownMenu" class="dropdown-content responsive-content">
-                    <li><a href="#hackathons">Hackathons</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#research">Research</a></li>
-                    <li><a href="#publications">Publications</a></li>
-                    <li><a href="#awards">Awards</a></li>
-                </ul>
-            </div>
+            <nav class="header-nav-desktop">
+                <div id="customDropdown" class="custom-dropdown">
+                    <button id="dropdownToggle" class="dropdown-btn">
+                        Projects <span style="margin-left: 4px;">▾</span>
+                    </button>
+                    <ul id="dropdownMenu" class="dropdown-content responsive-content">
+                        <li><a href="#hackathons">Hackathons</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#research">Research</a></li>
+                        <li><a href="#publications">Publications</a></li>
+                        <li><a href="#awards">Awards</a></li>
+                    </ul>
+                </div>
 
-            <div class="col-sm-1 col-md-1 col-lg-1 pt-2 text-center">
-                <a class="nav-item" href="#education" style="font-family: 'Afacad'; color: white;">Education</a>
-            </div>
-            <div class="col-sm-1 col-md-1 col-lg-1 pt-2 text-center">
-                <a class="nav-item" href="#experience" style="font-family: 'Afacad'; color: white;">Experience</a>
-            </div>
-            <div class="col-sm-1 col-md-1 col-lg-5 pt-2 text-center text-lg-end">
-                <a class="nav-item" href="#Sub-footer" style="font-family: 'Afacad'; color: white;">Contact Me</a>
-            </div>
+                <a class="nav-item" href="#education">Education</a>
+                <a class="nav-item" href="#experience">Experience</a>
+                <a class="nav-item" href="#Sub-footer">Contact Me</a>
+            </nav>
+
+            <button id="mobileNavToggle" class="mobile-nav-toggle" aria-label="Toggle navigation menu">
+                ☰
+            </button>
         </div>
+
+        <nav id="mobileNavMenu" class="mobile-nav-menu">
+            <a href="#education">Education</a>
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#hackathons">Hackathons</a>
+            <a href="#research">Research</a>
+            <a href="#publications">Publications</a>
+            <a href="#awards">Awards</a>
+            <a href="#Sub-footer">Contact Me</a>
+        </nav>
     </header>
 
     <!-- Sub Header -->
     <section id="Sub-header" class="snap-section">
-        <div class="container-fluid px-3 mx-0 pt-5 section-float-in" style="z-index: 3;">
-            <div class="row responsive-sub-row fish-space" style="padding-left: 18%; padding-right: 10%;">
-                <div class="col-md-12 col-lg-12 text-start text-lg-start" style="font-family: 'Afacad'; color: white; font-size: 1.5rem; padding-top: 20%;">
-                    <p class="resposnvie-sub">Hello I'm</p>
+        <div class="container-fluid px-3 mx-0 section-float-in" style="z-index: 3;">
+            <div class="row responsive-sub-row fish-space section-padding-wide">
+                <div class="col-md-12 col-lg-12 text-start text-lg-start hero-intro">
+                    <p class="responsive-sub" data-word-flow>Hello I'm</p>
                     <div class="responsive-name" style="font-family: 'WindSong'; font-weight: bold">
-                        <p>Sandra Nguyen</p>
+                        <p data-word-flow>Sandra Nguyen</p>
                     </div>
-                    <p class="resposnvie-sub" onclick="window.open('https://www.reddit.com/', '_blank');" style="cursor: pointer; margin-top: 500px; font-style: italic; font-size: 0.8em; margin-bottom: 5px;">
-                        Information Security Engineer @&nbsp;
-                        <i class="fa-brands fa-reddit-alien" style="color: #ff4500; font-size: 1.1em; vertical-align: middle;"></i>
-                    </p>
-                    <p class="resposnvie-sub" onclick="window.open('https://omscs.gatech.edu/', '_blank');" style="cursor: pointer; font-style: italic; font-size: 0.8em;">
-                        Georgia Tech OMSCS '27</p>
+                    <div class="hero-links">
+                        <p class="responsive-sub hero-link-line" style="margin-bottom: 5px;">
+                            <a class="hero-inline-link" href="https://www.reddit.com/" target="_blank" rel="noopener noreferrer">
+                                Software Engineer @&nbsp;
+                                <i class="fa-brands fa-reddit-alien" style="color: #ff4500; font-size: 1.1em; vertical-align: middle;"></i>
+                            </a>
+                        </p>
+                        <p class="responsive-sub hero-link-line" style="margin-bottom: 5px;">
+                            <a class="hero-inline-link" href="https://www.fullerton.edu/engineering-computer-science/computer-science/" target="_blank" rel="noopener noreferrer">
+                                CSU Fullerton CS B.S. '24
+                            </a>
+                        </p>
+                        <p class="responsive-sub hero-link-line">
+                            <a class="hero-inline-link" href="https://omscs.gatech.edu/" target="_blank" rel="noopener noreferrer">
+                                Georgia Tech OMSCS '27
+                            </a>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
 
+        <div class="hero-ambient-layer" aria-hidden="true">
+            <video id="heroAmbientEdge" class="hero-ambient-video hero-ambient-edge" playsinline muted preload="none"></video>
+        </div>
+
         <!-- Fish -->
         <div class="fish-container" style="position: absolute; z-index: 0">
-            <video id="fish-video" class="inctive" playsinline autoplay muted preload="auto" width="100%" height="100%">
-                <source src="movies/betta-1-1.mp4" type="video/mp4">
+            <video class="fish-video active" playsinline autoplay muted preload="auto" width="100%" height="100%">
+                <source src="movies/movies_fast/jellyfish-2-4.mp4" type="video/mp4">
                 Sorry, the fish are in hiding! (your browser does not support the video tag)
             </video>
-            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
-                <source src="movies/betta-1-2.mp4" type="video/mp4">
+            <video class="fish-video inactive" playsinline muted preload="none" width="100%" height="100%">
+                <source src="movies/movies_fast/betta-1-2.mp4" type="video/mp4">
                 Sorry, the fish are in hiding! (your browser does not support the video tag)
             </video>
-            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
-                <source src="movies/betta-1-3.mp4" type="video/mp4">
+            <video class="fish-video inactive" playsinline muted preload="none" width="100%" height="100%">
+                <source src="movies/movies_fast/betta-1-3.mp4" type="video/mp4">
                 Sorry, the fish are in hiding! (your browser does not support the video tag)
             </video>
             
-            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
-                <source src="movies/betta-2-1.mp4" type="video/mp4">
+            <video class="fish-video inactive" playsinline muted preload="none" width="100%" height="100%">
+                <source src="movies/movies_fast/betta-2-1.mp4" type="video/mp4">
                 Sorry, the fish are in hiding! (your browser does not support the video tag)
             </video>
-            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
-                <source src="movies/betta-2-2.mp4" type="video/mp4">
+            <video class="fish-video inactive" playsinline muted preload="none" width="100%" height="100%">
+                <source src="movies/movies_fast/betta-2-2.mp4" type="video/mp4">
                 Sorry, the fish are in hiding! (your browser does not support the video tag)
             </video>
-            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
-                <source src="movies/betta-2-3.mp4" type="video/mp4">
-                Sorry, the fish are in hiding! (your browser does not support the video tag)
-            </video>
-
-            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
-                <source src="movies/betta-3-1.mp4" type="video/mp4">
-                Sorry, the fish are in hiding! (your browser does not support the video tag)
-            </video>
-            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
-                <source src="movies/betta-3-2.mp4" type="video/mp4">
-                Sorry, the fish are in hiding! (your browser does not support the video tag)
-            </video>
-            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
-                <source src="movies/betta-3-3.mp4" type="video/mp4">
+            <video class="fish-video inactive" playsinline muted preload="none" width="100%" height="100%">
+                <source src="movies/movies_fast/betta-2-3.mp4" type="video/mp4">
                 Sorry, the fish are in hiding! (your browser does not support the video tag)
             </video>
 
-            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
-                <source src="movies/gold-1.mp4" type="video/mp4">
+            <video class="fish-video inactive" playsinline muted preload="none" width="100%" height="100%">
+                <source src="movies/movies_fast/betta-3-1.mp4" type="video/mp4">
+                Sorry, the fish are in hiding! (your browser does not support the video tag)
+            </video>
+            <video class="fish-video inactive" playsinline muted preload="none" width="100%" height="100%">
+                <source src="movies/movies_fast/betta-3-2.mp4" type="video/mp4">
+                Sorry, the fish are in hiding! (your browser does not support the video tag)
+            </video>
+            <video class="fish-video inactive" playsinline muted preload="none" width="100%" height="100%">
+                <source src="movies/movies_fast/betta-3-3.mp4" type="video/mp4">
                 Sorry, the fish are in hiding! (your browser does not support the video tag)
             </video>
 
-            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
-                <source src="movies/jellyfish-2-1.mp4" type="video/mp4">
+            <video class="fish-video inactive" playsinline muted preload="none" width="100%" height="100%">
+                <source src="movies/movies_fast/gold-1.mp4" type="video/mp4">
                 Sorry, the fish are in hiding! (your browser does not support the video tag)
             </video>
-            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
-                <source src="movies/jellyfish-2-2.mp4" type="video/mp4">
+
+            <video class="fish-video inactive" playsinline muted preload="none" width="100%" height="100%">
+                <source src="movies/movies_fast/jellyfish-2-1.mp4" type="video/mp4">
                 Sorry, the fish are in hiding! (your browser does not support the video tag)
             </video>
-            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
-                <source src="movies/jellyfish-2-3.mp4" type="video/mp4">
+            <video class="fish-video inactive" playsinline muted preload="none" width="100%" height="100%">
+                <source src="movies/movies_fast/jellyfish-2-2.mp4" type="video/mp4">
                 Sorry, the fish are in hiding! (your browser does not support the video tag)
             </video>
-            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
-                <source src="movies/jellyfish-2-4.mp4" type="video/mp4">
+            <video class="fish-video inactive" playsinline muted preload="none" width="100%" height="100%">
+                <source src="movies/movies_fast/jellyfish-2-3.mp4" type="video/mp4">
+                Sorry, the fish are in hiding! (your browser does not support the video tag)
+            </video>
+            <video class="fish-video inactive" playsinline muted preload="none" width="100%" height="100%">
+                <source src="movies/movies_fast/jellyfish-2-4.mp4" type="video/mp4">
                 Sorry, the fish are in hiding! (your browser does not support the video tag)
             </video>
         </div>
     </section>
 
     <!-- Bio -->
-    <section id="bio" class="snap-section">
-        <div id="introText" class="intro-text section-float-in">Like a betta drawn by curiosity, I find my way — welcome to my story.</div>
-        <div id="bioCard" class="container-fluid section-float-in" style="display: none; padding-left: 10%; padding-right: 10%;">
+    <section id="bio" class="snap-section" data-story-enabled="true" data-story-delay="3000">
+        <div class="intro-text section-story-intro">
+            <p>Like a betta stirred by <i>curiosity</i>,<br>I find my way — <strong>welcome to my story.</strong></p>
+        </div>
+        <div id="bioCard" class="container-fluid section-padding-balanced section-story-content">
             <div class="row justify-content-center responsive-card-bio card-neu" style="border-radius: 30px; margin: auto;">
-                <img class="img-fluid responsive-pfp col-sm-5 col-md-5 col-lg-4" src="images/pfp2.jpeg" style="border-radius: 30px; opacity: 0.8">
+                <img class="img-fluid responsive-pfp bio-breakout-photo col-sm-5 col-md-5 col-lg-4" src="images/pfp.jpg" style="border-radius: 30px; opacity: 0.92">
 
                 <div class="col-sm-6 col-md-6 col-lg-6 responsive-text" style="font-family: 'Afacad'; color: white;">
                     <p>Hello I'm</p>
-                    <div class="responsive-name" style="font-family: 'WindSong'; font-weight: bold">
+                    <div class="responsive-name bio-name" style="font-family: 'WindSong'; font-weight: bold">
                         <p>Sandra Nguyen</p>
                     </div>
-                    <p>By day, I'm an Information Security Engineer building user trust and defense systems — off the clock, you'll find me tending to my fish and chasing candid photos of real life.</p>
-                    <p>I'm a recent graduate from Cal State Fullerton, where I dedicated myself to Computer Science and faculty-led research that challenged the nuanced issues of malvertising and academic procrastination.</p>
-                    <p>As an Asian American woman in tech, I'm driven to inspire and mentor my peers to pursue their ambitions fearlessly.</p>
+                    <p>By day, I'm a software engineer building user trust and guardrails for AI systems; by night, I'm a part-time student absorbing artificial intelligence like caffiene. Off the clock, you'll find me feeding my chubby fish and chasing candid photos.</p>
+                    <p>In undergrad, my mentors gave me the fire to innovate, my peers the courage to mentor, and my sister the partnership of a lifetime.</p>
+                    <p>As an Asian American woman in tech, I lead with that identity — proudly.</p>
                     <div class="resume" style="padding-top: 25px;">
                         <a class="glass-btn" href="pdfs/Sandra_Nguyen_Resume_2025.pdf" role="button" style="font-family: 'Afacad'; color: white; font-size: 1rem; width: 6rem;" target="_blank">Resume</a>
                     </div>
@@ -1135,13 +2032,14 @@
     </section>
  
     <!-- Education -->
-    <section id="education" class="snap-section">
-        <div class="container-fluid section-float-in" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
+    <section id="education" class="snap-section" data-story-enabled="true" data-story-delay="3000">
+        <div class="intro-text section-story-intro">
+            <p>Storyline placeholder: from roots to rigor,<br><strong>this chapter is where the foundation formed.</strong></p>
+        </div>
+        <div class="section-story-content">
+        <div class="container-fluid section-float-in section-padding-wide" style="margin-top: 1%;">
             <div class="row section-header" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
                 <p>Education</p>
-            </div>
-            <div class="row section-subline responsive-caption" style="font-family: 'Afacad'; color: white">
-                <p>Every journey begins with deep discovery</p>
             </div>
         </div>
     
@@ -1184,11 +2082,16 @@
                 </div>
             </div>
         </div>
+        </div>
     </section>
 
     <!-- Experience -->
-    <section id="experience" class="snap-section">
-        <div class="container-fluid pt-5 section-float-in" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
+    <section id="experience" class="snap-section" data-story-enabled="true" data-story-delay="3000">
+        <div class="intro-text section-story-intro">
+            <p>Storyline placeholder: lessons became practice,<br><strong>and practice became impact.</strong></p>
+        </div>
+        <div class="section-story-content">
+        <div class="container-fluid pt-5 section-float-in section-padding-wide" style="margin-top: 1%;">
             <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
                 <p>Experience</p>
             </div>
@@ -1353,10 +2256,15 @@
                 </div>
             </div>
         </div>
+        </div>
     </section>
 
     <!-- Projects -->
-    <section id="projects" class="snap-section">
+    <section id="projects" class="snap-section" data-story-enabled="true" data-story-delay="3000">
+        <div class="intro-text section-story-intro">
+            <p>Storyline placeholder: experiments became prototypes,<br><strong>and prototypes became products.</strong></p>
+        </div>
+        <div class="section-story-content">
         <div class="container-fluid pt-5 section-float-in" style="padding-left: 18%; padding-right: 10%; margin-top: 1%; z-index: 3;">
             <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
                 <p>Projects</p>
@@ -1440,7 +2348,7 @@
         </div>
 
         <!-- Click fish -->
-        <video id="click-fish" playsinline autoplay muted preload="auto" style="
+        <video id="click-fish" playsinline autoplay muted preload="none" style="
             position: absolute;
             display: none;
             transition: transform 4s ease-in-out;
@@ -1451,11 +2359,16 @@
             <source src="movies/gold-1.webm" type="video/webm">
             Sorry, the fish are in hiding! (your browser does not support the video tag)
         </video>
+        </div>
     </section>   
 
     <!-- Hackathons -->
-    <section id="hackathons" class="snap-section">
-        <div class="container-fluid pt-5 section-float-in" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
+    <section id="hackathons" class="snap-section" data-story-enabled="true" data-story-delay="3000">
+        <div class="intro-text section-story-intro">
+            <p>Storyline placeholder: under pressure and short timelines,<br><strong>collaboration sharpened creativity.</strong></p>
+        </div>
+        <div class="section-story-content">
+        <div class="container-fluid pt-5 section-float-in section-padding-wide" style="margin-top: 1%;">
             <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
                 <p>Hackathons</p>
             </div>
@@ -1655,7 +2568,7 @@
         </div>
 
         <!-- Click jelly -->
-        <video id="click-jelly" playsinline autoplay muted preload="auto" style="
+        <video id="click-jelly" playsinline autoplay muted preload="none" style="
             position: absolute;
             display: none;
             transition: transform 4s ease-in-out;
@@ -1663,14 +2576,19 @@
             cursor: pointer;
             z-index: 5;
         ">      
-            <source src="movies/jellyfish-1.mp4" type="video/mp4">
+            <source src="movies/movies_fast/jellyfish-1.mp4" type="video/mp4">
             Sorry, the fish are in hiding! (your browser does not support the video tag)
         </video>
+        </div>
     </section>
 
     <!-- Research -->
-    <section id="research" class="snap-section">
-        <div class="container-fluid pt-5 section-float-in" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
+    <section id="research" class="snap-section" data-story-enabled="true" data-story-delay="3000">
+        <div class="intro-text section-story-intro">
+            <p>Storyline placeholder: questions turned into methods,<br><strong>and methods turned into evidence.</strong></p>
+        </div>
+        <div class="section-story-content">
+        <div class="container-fluid pt-5 section-float-in section-padding-wide" style="margin-top: 1%;">
             <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
                 <p>Research</p>
             </div>
@@ -1873,11 +2791,16 @@
                 </div>
             </div>
         </div>
+        </div>
     </section>
 
     <!-- Publications -->
-    <section id="publications" class="snap-section">
-        <div class="container-fluid pt-5 section-float-in" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
+    <section id="publications" class="snap-section" data-story-enabled="true" data-story-delay="3000">
+        <div class="intro-text section-story-intro">
+            <p>Storyline placeholder: ideas left the lab and reached communities,<br><strong>from posters to proceedings.</strong></p>
+        </div>
+        <div class="section-story-content">
+        <div class="container-fluid pt-5 section-float-in section-padding-wide" style="margin-top: 1%;">
             <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
                 <p>Publications</p>
             </div>
@@ -1989,11 +2912,16 @@
                 </div>
             </div>
         </div>
+        </div>
     </section>
 
     <!-- Awards -->
-    <section id="awards" class="snap-section">
-        <div class="container-fluid pt-5 section-float-in" style="padding-left: 18%; padding-right: 10%; margin-top: 1%;">
+    <section id="awards" class="snap-section" data-story-enabled="true" data-story-delay="3000">
+        <div class="intro-text section-story-intro">
+            <p>Storyline placeholder: milestones mark the journey,<br><strong>but they also point forward.</strong></p>
+        </div>
+        <div class="section-story-content">
+        <div class="container-fluid pt-5 section-float-in section-padding-wide" style="margin-top: 1%;">
             <div class="row" style="font-family: 'Afacad'; color: white; font-size: 1.5rem">
                 <p>Awards</p>
             </div>
@@ -2165,6 +3093,7 @@
                 </div>
             </div>
         </div>
+        </div>
     </section>
 
     <!-- Sub Footer -->
@@ -2195,64 +3124,64 @@
         
         <!-- Fish -->
         <div class="fish-container" style="position: absolute; z-index: 0">
-            <video id="fish-video" class="inctive" playsinline autoplay muted preload="auto" width="100%" height="100%">
-                <source src="movies/betta-1-1.mp4" type="video/mp4">
+            <video class="fish-video active" playsinline autoplay muted preload="auto" width="100%" height="100%">
+                <source src="movies/movies_fast/jellyfish-2-4.mp4" type="video/mp4">
                 Sorry, the fish are in hiding! (your browser does not support the video tag)
             </video>
-            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
-                <source src="movies/betta-1-2.mp4" type="video/mp4">
+            <video class="fish-video inactive" playsinline muted preload="none" width="100%" height="100%">
+                <source src="movies/movies_fast/betta-1-2.mp4" type="video/mp4">
                 Sorry, the fish are in hiding! (your browser does not support the video tag)
             </video>
-            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
-                <source src="movies/betta-1-3.mp4" type="video/mp4">
+            <video class="fish-video inactive" playsinline muted preload="none" width="100%" height="100%">
+                <source src="movies/movies_fast/betta-1-3.mp4" type="video/mp4">
                 Sorry, the fish are in hiding! (your browser does not support the video tag)
             </video>
             
-            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
-                <source src="movies/betta-2-1.mp4" type="video/mp4">
+            <video class="fish-video inactive" playsinline muted preload="none" width="100%" height="100%">
+                <source src="movies/movies_fast/betta-2-1.mp4" type="video/mp4">
                 Sorry, the fish are in hiding! (your browser does not support the video tag)
             </video>
-            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
-                <source src="movies/betta-2-2.mp4" type="video/mp4">
+            <video class="fish-video inactive" playsinline muted preload="none" width="100%" height="100%">
+                <source src="movies/movies_fast/betta-2-2.mp4" type="video/mp4">
                 Sorry, the fish are in hiding! (your browser does not support the video tag)
             </video>
-            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
-                <source src="movies/betta-2-3.mp4" type="video/mp4">
-                Sorry, the fish are in hiding! (your browser does not support the video tag)
-            </video>
-
-            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
-                <source src="movies/betta-3-1.mp4" type="video/mp4">
-                Sorry, the fish are in hiding! (your browser does not support the video tag)
-            </video>
-            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
-                <source src="movies/betta-3-2.mp4" type="video/mp4">
-                Sorry, the fish are in hiding! (your browser does not support the video tag)
-            </video>
-            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
-                <source src="movies/betta-3-3.mp4" type="video/mp4">
+            <video class="fish-video inactive" playsinline muted preload="none" width="100%" height="100%">
+                <source src="movies/movies_fast/betta-2-3.mp4" type="video/mp4">
                 Sorry, the fish are in hiding! (your browser does not support the video tag)
             </video>
 
-            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
-                <source src="movies/gold-1.mp4" type="video/mp4">
+            <video class="fish-video inactive" playsinline muted preload="none" width="100%" height="100%">
+                <source src="movies/movies_fast/betta-3-1.mp4" type="video/mp4">
+                Sorry, the fish are in hiding! (your browser does not support the video tag)
+            </video>
+            <video class="fish-video inactive" playsinline muted preload="none" width="100%" height="100%">
+                <source src="movies/movies_fast/betta-3-2.mp4" type="video/mp4">
+                Sorry, the fish are in hiding! (your browser does not support the video tag)
+            </video>
+            <video class="fish-video inactive" playsinline muted preload="none" width="100%" height="100%">
+                <source src="movies/movies_fast/betta-3-3.mp4" type="video/mp4">
                 Sorry, the fish are in hiding! (your browser does not support the video tag)
             </video>
 
-            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
-                <source src="movies/jellyfish-2-1.mp4" type="video/mp4">
+            <video class="fish-video inactive" playsinline muted preload="none" width="100%" height="100%">
+                <source src="movies/movies_fast/gold-1.mp4" type="video/mp4">
                 Sorry, the fish are in hiding! (your browser does not support the video tag)
             </video>
-            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
-                <source src="movies/jellyfish-2-2.mp4" type="video/mp4">
+
+            <video class="fish-video inactive" playsinline muted preload="none" width="100%" height="100%">
+                <source src="movies/movies_fast/jellyfish-2-1.mp4" type="video/mp4">
                 Sorry, the fish are in hiding! (your browser does not support the video tag)
             </video>
-            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
-                <source src="movies/jellyfish-2-3.mp4" type="video/mp4">
+            <video class="fish-video inactive" playsinline muted preload="none" width="100%" height="100%">
+                <source src="movies/movies_fast/jellyfish-2-2.mp4" type="video/mp4">
                 Sorry, the fish are in hiding! (your browser does not support the video tag)
             </video>
-            <video id="fish-video" class="inactive" playsinline muted preload="auto" width="100%" height="100%">
-                <source src="movies/jellyfish-2-4.mp4" type="video/mp4">
+            <video class="fish-video inactive" playsinline muted preload="none" width="100%" height="100%">
+                <source src="movies/movies_fast/jellyfish-2-3.mp4" type="video/mp4">
+                Sorry, the fish are in hiding! (your browser does not support the video tag)
+            </video>
+            <video class="fish-video inactive" playsinline muted preload="none" width="100%" height="100%">
+                <source src="movies/movies_fast/jellyfish-2-4.mp4" type="video/mp4">
                 Sorry, the fish are in hiding! (your browser does not support the video tag)
         </div>
     </section>
@@ -2262,13 +3191,13 @@
         <div class="row">
             <div class="btn-toolbar justify-content-center" role="toolbar">
                 <a href="mailto:sandra.nguyen9@csu.fullerton.edu" target="_blank">
-                    <em class="responsive-logo fa-solid fa-envelope mx-2" style="color: white;"></em> 
+                    <i class="responsive-logo fa-solid fa-envelope mx-2" style="color: white;"></i> 
                 </a>
                 <a href="http://www.linkedin.com/in/sandra-nguyen9" target="_blank"> 
-                    <em class="responsive-logo fa-brands fa-linkedin mx-2" style="color: white;"></em>
+                    <i class="responsive-logo fa-brands fa-linkedin mx-2" style="color: white;"></i>
                 </a>
                 <a href="https://github.com/alpacaJin" target="_blank">
-                    <em class="responsive-logo fa-brands fa-github mx-2" style="color: white;"></em>
+                    <i class="responsive-logo fa-brands fa-github mx-2" style="color: white;"></i>
                 </a>
             </div>
         </div>
@@ -2280,53 +3209,302 @@
     
     <!-- Dropdown menu -->
     <script>
+        const header = document.getElementById('header');
         const dropdownToggle = document.getElementById('dropdownToggle');
         const dropdownMenu = document.getElementById('dropdownMenu');
         const dropdownWrapper = document.getElementById('customDropdown');
+        const mobileNavToggle = document.getElementById('mobileNavToggle');
+        const mobileNavMenu = document.getElementById('mobileNavMenu');
 
-        dropdownToggle.addEventListener('click', () => {
+        dropdownToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
             dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
         });
 
-        // Close menu when mouse leaves the area
         dropdownWrapper.addEventListener('mouseleave', () => {
             dropdownMenu.style.display = 'none';
         });
+
+        mobileNavToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            mobileNavMenu.classList.toggle('mobile-open');
+        });
+
+        mobileNavMenu.querySelectorAll('a').forEach((link) => {
+            link.addEventListener('click', () => {
+                mobileNavMenu.classList.remove('mobile-open');
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!dropdownWrapper.contains(e.target)) {
+                dropdownMenu.style.display = 'none';
+            }
+            if (!mobileNavMenu.contains(e.target) && !mobileNavToggle.contains(e.target)) {
+                mobileNavMenu.classList.remove('mobile-open');
+            }
+        });
+
+        function updateHeaderScrollState() {
+            if (window.scrollY > 12) {
+                header.classList.add('is-scrolled');
+            } else {
+                header.classList.remove('is-scrolled');
+            }
+        }
+
+        function updateScrollBlueIntensity() {
+            const bioSection = document.getElementById('bio');
+            const snapSections = Array.from(document.querySelectorAll('.snap-section'));
+            if (!bioSection || snapSections.length === 0) {
+                document.documentElement.style.setProperty('--scroll-blue', '0');
+                document.documentElement.style.setProperty('--scroll-blue-hue', '214');
+                return;
+            }
+
+            const bioStart = bioSection.offsetTop;
+            const finalSection = snapSections[snapSections.length - 1];
+            const rangeEnd = finalSection.offsetTop + (window.innerHeight * 0.58);
+            const rangeSpan = Math.max(rangeEnd - bioStart, 1);
+            const progress = Math.min(Math.max((window.scrollY - bioStart) / rangeSpan, 0), 1);
+            const hue = 212 + (progress * 18);
+
+            document.documentElement.style.setProperty('--scroll-blue', progress.toFixed(3));
+            document.documentElement.style.setProperty('--scroll-blue-hue', hue.toFixed(1));
+        }
+
+        function handleNavAndAmbientOnScroll() {
+            updateHeaderScrollState();
+            updateScrollBlueIntensity();
+        }
+
+        window.addEventListener('scroll', handleNavAndAmbientOnScroll, { passive: true });
+        updateHeaderScrollState();
+        updateScrollBlueIntensity();
     </script>
 
-    <!-- Subline fade-in -->
+    <!-- Hero intro word flow -->
     <script>
-        const intro = document.getElementById('introText');
-        const bio = document.getElementById('bioCard');
-        const bioSection = document.getElementById('bio');
-        let hasPlayed = false;
+        document.addEventListener("DOMContentLoaded", () => {
+            const heroSection = document.getElementById("Sub-header");
+            if (!heroSection) return;
+            const prefersReducedMotionHero = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-        const observer4 = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !hasPlayed) {
-                    hasPlayed = true;
+            const flowTargets = heroSection.querySelectorAll("[data-word-flow]");
+            let cumulativeDelay = 160;
 
-                    // Fade in intro
-                    intro.classList.add('fade-in');
+            flowTargets.forEach((target) => {
+                const text = target.textContent.trim();
+                if (!text) return;
 
-                    // After 2.5s, fade out intro and show bio
-                    setTimeout(() => {
-                        intro.classList.remove('fade-in');
-                        intro.classList.add('fade-out');
+                const words = text.split(/\s+/);
+                target.textContent = "";
 
-                        setTimeout(() => {
-                            intro.style.display = 'none';
-                            bio.style.display = 'block';
-                            requestAnimationFrame(() => bio.classList.add('fade-in'));
-                        }, 1000); // Wait for fade-out
-                    }, 3000);
+                words.forEach((word, index) => {
+                    const span = document.createElement("span");
+                    span.className = "flow-word";
+                    span.textContent = index < words.length - 1 ? `${word}\u00A0` : word;
+                    span.style.transitionDelay = `${cumulativeDelay}ms`;
+                    target.appendChild(span);
+                    cumulativeDelay += 220;
+                });
+            });
+
+            const heroLinkLines = heroSection.querySelectorAll(".hero-link-line");
+            const heroLinesStart = cumulativeDelay + 120;
+            heroLinkLines.forEach((line, index) => {
+                line.style.setProperty("--line-delay", `${heroLinesStart + (index * 240)}ms`);
+            });
+
+            function replayHeroIntroFlow() {
+                if (prefersReducedMotionHero) {
+                    heroSection.classList.add("hero-animate");
+                    return;
+                }
+                heroSection.classList.remove("hero-animate");
+                void heroSection.offsetWidth;
+                requestAnimationFrame(() => {
+                    heroSection.classList.add("hero-animate");
+                });
+            }
+
+            let heroWasInView = false;
+            const heroObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        if (!heroWasInView) {
+                            replayHeroIntroFlow();
+                            heroWasInView = true;
+                        }
+                    } else {
+                        heroWasInView = false;
+                        if (!prefersReducedMotionHero) {
+                            heroSection.classList.remove("hero-animate");
+                        }
+                    }
+                });
+            }, {
+                threshold: 0.62
+            });
+
+            heroObserver.observe(heroSection);
+        });
+    </script>
+
+    <!-- Storyline fade-in -->
+    <script>
+        const storySections = document.querySelectorAll('.snap-section[data-story-enabled="true"]');
+        const storySectionState = new WeakMap();
+
+        function splitTextNodeIntoStoryWords(textNode) {
+            const text = textNode.textContent || '';
+            if (!text.trim()) return;
+
+            const fragment = document.createDocumentFragment();
+            const parts = text.split(/(\s+)/);
+
+            parts.forEach((part) => {
+                if (!part) return;
+                if (/^\s+$/.test(part)) {
+                    fragment.appendChild(document.createTextNode(part));
+                    return;
+                }
+
+                const word = document.createElement('span');
+                word.className = 'storyline-word';
+                word.textContent = part;
+                fragment.appendChild(word);
+            });
+
+            textNode.parentNode.replaceChild(fragment, textNode);
+        }
+
+        function prepareStoryTyping(intro) {
+            const introText = intro.querySelector('p');
+            if (!introText) return 0;
+
+            if (!introText.dataset.originalHtml) {
+                introText.dataset.originalHtml = introText.innerHTML;
+            }
+
+            introText.innerHTML = introText.dataset.originalHtml;
+            const walker = document.createTreeWalker(introText, NodeFilter.SHOW_TEXT);
+            const textNodes = [];
+            let currentNode = walker.nextNode();
+            while (currentNode) {
+                textNodes.push(currentNode);
+                currentNode = walker.nextNode();
+            }
+
+            textNodes.forEach((node) => splitTextNodeIntoStoryWords(node));
+
+            const words = introText.querySelectorAll('.storyline-word');
+            words.forEach((word) => {
+                word.classList.remove('is-visible');
+            });
+
+            return words.length;
+        }
+
+        function clearStoryTimers(section) {
+            const state = storySectionState.get(section);
+            if (!state) return;
+            state.timers.forEach((timerId) => clearTimeout(timerId));
+            state.timers = [];
+        }
+
+        function resetStorySection(section) {
+            const intro = section.querySelector('.section-story-intro');
+            const content = section.querySelector('.section-story-content');
+            if (!intro || !content) return;
+
+            clearStoryTimers(section);
+            intro.style.display = 'flex';
+            intro.classList.remove('fade-in', 'fade-out');
+            content.classList.remove('story-visible');
+
+            const introText = intro.querySelector('p');
+            if (introText?.dataset.originalHtml) {
+                introText.innerHTML = introText.dataset.originalHtml;
+            }
+
+            const state = storySectionState.get(section) || { active: false, timers: [] };
+            state.active = false;
+            storySectionState.set(section, state);
+        }
+
+        function playStorySection(section) {
+            const intro = section.querySelector('.section-story-intro');
+            const content = section.querySelector('.section-story-content');
+            if (!intro || !content) return;
+
+            const state = storySectionState.get(section) || { active: false, hasPlayed: false, timers: [] };
+            if (state.active || state.hasPlayed) return;
+            state.active = true;
+            state.hasPlayed = true;
+            storySectionState.set(section, state);
+
+            clearStoryTimers(section);
+            intro.style.display = 'flex';
+            intro.classList.remove('fade-in', 'fade-out');
+            content.classList.remove('story-visible');
+
+            const totalWords = prepareStoryTyping(intro);
+
+            requestAnimationFrame(() => {
+                intro.classList.add('fade-in');
+            });
+
+            const revealStepMs = 110;
+            const revealStartMs = 160;
+            const words = intro.querySelectorAll('.storyline-word');
+            words.forEach((word, index) => {
+                const timerId = setTimeout(() => {
+                    word.classList.add('is-visible');
+                }, revealStartMs + (index * revealStepMs));
+                state.timers.push(timerId);
+            });
+
+            const baseDuration = Math.max(Number(section.dataset.storyDelay || 3000), 1000);
+            const typingDuration = revealStartMs + (totalWords * revealStepMs);
+            const introDuration = Math.max(baseDuration, typingDuration + 360);
+
+            const hideIntroTimer = setTimeout(() => {
+                intro.classList.remove('fade-in');
+                intro.classList.add('fade-out');
+
+                const showContentTimer = setTimeout(() => {
+                    intro.style.display = 'none';
+                    requestAnimationFrame(() => content.classList.add('story-visible'));
+                    state.active = false;
+                }, 1160);
+
+                state.timers.push(showContentTimer);
+            }, introDuration);
+
+            state.timers.push(hideIntroTimer);
+            storySectionState.set(section, state);
+        }
+
+        const observer4 = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                const section = entry.target;
+                const ratio = entry.intersectionRatio;
+                if (ratio >= 0.55) {
+                    playStorySection(section);
+                    observer4.unobserve(section);
                 }
             });
         }, {
-            threshold: 0.5 // Play when ~50% of bio section is in view
+            threshold: [0, 0.55, 0.82],
+            rootMargin: '0px'
         });
 
-        observer4.observe(bioSection);
+        storySections.forEach((section) => {
+            storySectionState.set(section, { active: false, hasPlayed: false, timers: [] });
+            resetStorySection(section);
+            observer4.observe(section);
+        });
     </script>
 
     <!-- Hover synchronization -->
@@ -2341,67 +3519,166 @@
 
     <!-- Randomize play -->
     <script>
-        const videos = document.querySelectorAll('#fish-video');
-        let current = 0;
-        let hasEndedNaturally = false;
-    
-        function playNextVideo() {
-            // Clean up current
-            videos[current].classList.remove('active');
-            videos[current].classList.add('inactive');
-            videos[current].pause();
-            videos[current].currentTime = 0;
+        (function() {
+            const videos = Array.from(document.querySelectorAll('#Sub-header .fish-video'));
+            const ambientEdge = document.getElementById('heroAmbientEdge');
+            const ambientVideos = [ambientEdge].filter(Boolean);
+            if (videos.length === 0) return;
 
-            // Pick next (not same)
-            let next;
-            do {
-                next = Math.floor(Math.random() * videos.length);
-            } while (next === current);
+            const CROSSFADE_BUFFER_SECONDS = 0.8;
+            const CROSSFADE_MS = 820;
+            let switchTimer = null;
+            let switchInProgress = false;
+            let ambientFadeTimer = null;
 
-            const nextVideo = videos[next];
-            current = next;
-
-            // Activate next
-            nextVideo.classList.remove('inactive');
-            nextVideo.classList.add('active');
-            let hasEndedNaturally = false;
-            nextVideo.play();
-
-            // Schedule fade out if duration known
-            if (nextVideo.duration && !isNaN(nextVideo.duration)) {
-                scheduleFadeOut(nextVideo);
-            } else {
-                nextVideo.addEventListener('loadedmetadata', () => {
-                    scheduleFadeOut(nextVideo);
-                }, { once: true });
-            }
-        }
-
-        function scheduleFadeOut(video) {
-            if (video._fadeTimeout) clearTimeout(video._fadeTimeout);
-
-            const duration = video.duration;
-            if (!duration || isNaN(duration)) return;
-
-            video._fadeTimeout = setTimeout(() => {
-                video.classList.remove('active');
-                video.classList.add('inactive');
-            }, (duration - 0.8) * 1000);
-        }
-
-        // Init
-        videos[current].classList.add('active');
-        videos[current].play();
-        videos[current].addEventListener('loadedmetadata', () => {
-            scheduleFadeOut(videos[current]);
-        }, { once: true });
-
-        // Only allow one call on video end
-        videos.forEach((video, i) => {
-            video.addEventListener('ended', () => {
-                if (i === current) playNextVideo();
+            let current = videos.findIndex((video) => {
+                const src = video.querySelector('source')?.getAttribute('src') || '';
+                return src.includes('/betta-');
             });
-        });
+            if (current < 0) current = 0;
+
+            function setAmbientVisibility(isVisible) {
+                ambientVideos.forEach((videoEl) => {
+                    videoEl.classList.toggle('is-visible', isVisible);
+                });
+            }
+
+            async function syncAmbientToVideo(sourceVideo, immediate = false) {
+                if (!sourceVideo || ambientVideos.length === 0) return;
+                const src = sourceVideo.querySelector('source')?.getAttribute('src') || sourceVideo.currentSrc;
+                if (!src) return;
+                const isBettaClip = src.includes('betta');
+
+                clearTimeout(ambientFadeTimer);
+
+                const loadAndPlayPromises = ambientVideos.map(async (ambientVideo) => {
+                    ambientVideo.classList.toggle('is-betta', isBettaClip);
+                    if (ambientVideo.getAttribute('src') !== src) {
+                        ambientVideo.setAttribute('src', src);
+                        ambientVideo.load();
+                    }
+                    ambientVideo.currentTime = 0;
+                    try {
+                        await ambientVideo.play();
+                    } catch (error) {
+                        // Ignore autoplay hiccups; next transition retries.
+                    }
+                });
+                await Promise.all(loadAndPlayPromises);
+
+                if (!immediate) {
+                    setAmbientVisibility(false);
+                    void ambientVideos[0]?.offsetWidth;
+                }
+                setAmbientVisibility(true);
+
+                if (sourceVideo.duration && !Number.isNaN(sourceVideo.duration)) {
+                    const fadeOutMs = Math.max((sourceVideo.duration - CROSSFADE_BUFFER_SECONDS - 0.5) * 1000, 700);
+                    ambientFadeTimer = setTimeout(() => {
+                        setAmbientVisibility(false);
+                    }, fadeOutMs);
+                }
+            }
+
+            videos.forEach((video, idx) => {
+                video.muted = true;
+                video.playsInline = true;
+                video.preload = 'auto';
+                video.load();
+
+                if (idx === current) {
+                    video.classList.remove('inactive');
+                    video.classList.add('active');
+                } else {
+                    video.classList.remove('active');
+                    video.classList.add('inactive');
+                }
+            });
+            void syncAmbientToVideo(videos[current], true);
+
+            function pickNextIndex() {
+                if (videos.length <= 1) return current;
+                let next = current;
+                while (next === current) {
+                    next = Math.floor(Math.random() * videos.length);
+                }
+                return next;
+            }
+
+            function scheduleSwitchFrom(video) {
+                clearTimeout(switchTimer);
+
+                if (!video.duration || Number.isNaN(video.duration)) {
+                    video.addEventListener('loadedmetadata', () => scheduleSwitchFrom(video), { once: true });
+                    return;
+                }
+
+                const remainingMs = Math.max((video.duration - video.currentTime - CROSSFADE_BUFFER_SECONDS) * 1000, 120);
+                switchTimer = setTimeout(() => {
+                    void transitionTo(pickNextIndex());
+                }, remainingMs);
+            }
+
+            async function transitionTo(nextIndex) {
+                if (switchInProgress || nextIndex === current) return;
+                switchInProgress = true;
+
+                const fromVideo = videos[current];
+                const toVideo = videos[nextIndex];
+
+                try {
+                    toVideo.currentTime = 0;
+                    await toVideo.play();
+                    void syncAmbientToVideo(toVideo, false);
+
+                    // Swap only after next video is already playing
+                    toVideo.classList.remove('inactive');
+                    toVideo.classList.add('active');
+                    fromVideo.classList.remove('active');
+                    fromVideo.classList.add('inactive');
+                    setTimeout(() => {
+                        fromVideo.pause();
+                    }, CROSSFADE_MS);
+
+                    current = nextIndex;
+                    scheduleSwitchFrom(toVideo);
+                } catch (error) {
+                    // Retry quickly to avoid visible dead time
+                    setTimeout(() => {
+                        switchInProgress = false;
+                        void transitionTo(nextIndex);
+                    }, 120);
+                    return;
+                }
+
+                switchInProgress = false;
+            }
+
+            async function startLoop() {
+                try {
+                    const first = videos[current];
+                    await first.play();
+                    void syncAmbientToVideo(first, true);
+                    scheduleSwitchFrom(first);
+                } catch (error) {
+                    setTimeout(startLoop, 120);
+                }
+            }
+
+            videos.forEach((video, idx) => {
+                video.addEventListener('ended', () => {
+                    if (idx === current && !switchInProgress) {
+                        void transitionTo(pickNextIndex());
+                    }
+                });
+            });
+
+            startLoop();
+            window.addEventListener('beforeunload', () => {
+                clearTimeout(switchTimer);
+                clearTimeout(ambientFadeTimer);
+            }, { once: true });
+        })();
     </script>    
 
     <!-- Float in -->
@@ -2432,44 +3709,104 @@
 
     <!-- Scroll controller -->
     <script>
-        let isScrolling = false;
+        const sections = Array.from(document.querySelectorAll(".snap-section"));
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const SCROLL_LOCK_MS = 650;
+        const WHEEL_THRESHOLD = 45;
+        const SWIPE_THRESHOLD = 60;
 
-        function getCurrentSectionIndex(sections) {
-        return Array.from(sections).findIndex((section) => {
-            const rect = section.getBoundingClientRect();
-            return rect.top >= -10 && rect.top < window.innerHeight;
-        });
+        let isScrolling = false;
+        let wheelAccumulator = 0;
+        let touchStartY = null;
+
+        function getCurrentSectionIndex() {
+            let closestIndex = 0;
+            let closestDistance = Number.POSITIVE_INFINITY;
+
+            sections.forEach((section, idx) => {
+                const distance = Math.abs(section.getBoundingClientRect().top);
+                if (distance < closestDistance) {
+                    closestDistance = distance;
+                    closestIndex = idx;
+                }
+            });
+
+            return closestIndex;
+        }
+
+        function releaseScrollLockAfterDelay() {
+            window.setTimeout(() => {
+                isScrolling = false;
+            }, SCROLL_LOCK_MS);
         }
 
         function scrollToSection(direction) {
-        const sections = document.querySelectorAll(".snap-section");
-        const current = getCurrentSectionIndex(sections);
-        if (direction === 'down' && current < sections.length - 1) {
-            sections[current + 1].scrollIntoView({ behavior: "smooth" });
-        } else if (direction === 'up' && current > 0) {
-            sections[current - 1].scrollIntoView({ behavior: "smooth" });
+            const current = getCurrentSectionIndex();
+            const nextIndex = direction === "down" ? current + 1 : current - 1;
+
+            if (nextIndex < 0 || nextIndex >= sections.length) {
+                return;
+            }
+
+            isScrolling = true;
+            sections[nextIndex].scrollIntoView({
+                behavior: prefersReducedMotion ? "auto" : "smooth",
+                block: "start"
+            });
+            releaseScrollLockAfterDelay();
         }
+
+        function isTypingTarget(target) {
+            if (!target) return false;
+            const tag = target.tagName;
+            return target.isContentEditable || tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT";
         }
 
         window.addEventListener("wheel", (e) => {
-        if (isScrolling) return;
-        isScrolling = true;
-        scrollToSection(e.deltaY > 0 ? 'down' : 'up');
-        setTimeout(() => (isScrolling = false), 1000);
-        });
+            if (isScrolling) return;
+
+            wheelAccumulator += e.deltaY;
+            if (Math.abs(wheelAccumulator) < WHEEL_THRESHOLD) return;
+
+            const direction = wheelAccumulator > 0 ? "down" : "up";
+            wheelAccumulator = 0;
+            scrollToSection(direction);
+        }, { passive: true });
 
         window.addEventListener("keydown", (e) => {
-        if (isScrolling) return;
-        if (e.key === "ArrowDown" || e.key === "PageDown") {
-            isScrolling = true;
-            scrollToSection('down');
-            setTimeout(() => (isScrolling = false), 1000);
-        } else if (e.key === "ArrowUp" || e.key === "PageUp") {
-            isScrolling = true;
-            scrollToSection('up');
-            setTimeout(() => (isScrolling = false), 1000);
-        }
+            if (isScrolling || isTypingTarget(e.target)) return;
+
+            if (e.key === "ArrowDown" || e.key === "PageDown" || e.key === " ") {
+                e.preventDefault();
+                scrollToSection("down");
+            } else if (e.key === "ArrowUp" || e.key === "PageUp") {
+                e.preventDefault();
+                scrollToSection("up");
+            } else if (e.key === "Home") {
+                e.preventDefault();
+                sections[0].scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth" });
+            } else if (e.key === "End") {
+                e.preventDefault();
+                sections[sections.length - 1].scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth" });
+            }
         });
+
+        window.addEventListener("touchstart", (e) => {
+            touchStartY = e.touches[0]?.clientY ?? null;
+        }, { passive: true });
+
+        window.addEventListener("touchend", (e) => {
+            if (isScrolling || touchStartY === null) return;
+
+            const touchEndY = e.changedTouches[0]?.clientY;
+            if (typeof touchEndY !== "number") return;
+
+            const deltaY = touchStartY - touchEndY;
+            if (Math.abs(deltaY) < SWIPE_THRESHOLD) return;
+
+            scrollToSection(deltaY > 0 ? "down" : "up");
+            touchStartY = null;
+        }, { passive: true });
     </script>
 
     <!-- Footer visibility -->
