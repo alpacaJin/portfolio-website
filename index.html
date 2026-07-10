@@ -4885,6 +4885,66 @@
             opacity: 0 !important;
         }
 
+        /* iPhone bio: fit one viewport, no nested micro-scroll */
+        @media (max-width: 767px) {
+            #bio.snap-section {
+                height: 100svh;
+                max-height: 100svh;
+                overflow: hidden !important;
+            }
+
+            #bio #bioCard,
+            #bio #bioCard.section-story-content,
+            #bio #bioCard.section-story-content.story-visible {
+                min-height: 0 !important;
+                height: 100% !important;
+                max-height: 100% !important;
+                padding-top: 0 !important;
+                padding-bottom: 0 !important;
+                margin: 0 !important;
+                transform: none !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+            }
+
+            #bio .responsive-card-bio {
+                width: min(92vw, 520px) !important;
+                max-height: calc(100svh - var(--fixed-header-height) - 1.25rem) !important;
+                margin-top: 0 !important;
+                margin-bottom: 0 !important;
+                overflow: hidden !important;
+                overflow-y: hidden !important;
+                padding: 0.55rem 0.35rem 0.7rem !important;
+            }
+
+            #bio .bio-photo-shell {
+                transform: none !important;
+                max-height: 28svh;
+            }
+
+            #bio .bio-breakout-photo {
+                max-height: 28svh !important;
+                width: min(72%, 280px) !important;
+                margin-inline: auto;
+            }
+
+            #bio .responsive-text {
+                padding: 0.45rem 0.85rem !important;
+                font-size: 0.9rem !important;
+                line-height: 1.38 !important;
+            }
+
+            #bio .bio-name {
+                font-size: clamp(2.4rem, 11vw, 3.2rem) !important;
+                line-height: 0.9 !important;
+            }
+
+            #bio .resume {
+                padding-top: 0.55rem !important;
+            }
+        }
+
         #Sub-footer .footer-thanks {
             width: min(780px, calc(100vw - 3rem)) !important;
             min-height: min(54vh, 470px);
@@ -5500,70 +5560,10 @@
             </div>
         </div>
 
-        <!-- Fish -->
+        <!-- Fish: two crossfade slots -->
         <div class="fish-container" style="position: absolute; z-index: 1">
-            <video class="hero-ambient-video hero-ambient-edge inactive" playsinline muted preload="none" aria-hidden="true"></video>
-            <video class="hero-ambient-video hero-ambient-edge inactive" playsinline muted preload="none" aria-hidden="true"></video>
-            <video class="fish-video active" playsinline webkit-playsinline autoplay muted preload="metadata" width="100%" height="100%">
-                <source src="movies/movies_fast/jellyfish-2-4.mp4" type="video/mp4">
-                Sorry, the fish are in hiding! (your browser does not support the video tag)
-            </video>
-            <video class="fish-video inactive" playsinline webkit-playsinline muted preload="none" width="100%" height="100%">
-                <source src="movies/movies_fast/betta-1-2.mp4" type="video/mp4">
-                Sorry, the fish are in hiding! (your browser does not support the video tag)
-            </video>
-            <video class="fish-video inactive" playsinline webkit-playsinline muted preload="none" width="100%" height="100%">
-                <source src="movies/movies_fast/betta-1-3.mp4" type="video/mp4">
-                Sorry, the fish are in hiding! (your browser does not support the video tag)
-            </video>
-
-            <video class="fish-video inactive" playsinline webkit-playsinline muted preload="none" width="100%" height="100%">
-                <source src="movies/movies_fast/betta-2-1.mp4" type="video/mp4">
-                Sorry, the fish are in hiding! (your browser does not support the video tag)
-            </video>
-            <video class="fish-video inactive" playsinline webkit-playsinline muted preload="none" width="100%" height="100%">
-                <source src="movies/movies_fast/betta-2-2.mp4" type="video/mp4">
-                Sorry, the fish are in hiding! (your browser does not support the video tag)
-            </video>
-            <video class="fish-video inactive" playsinline webkit-playsinline muted preload="none" width="100%" height="100%">
-                <source src="movies/movies_fast/betta-2-3.mp4" type="video/mp4">
-                Sorry, the fish are in hiding! (your browser does not support the video tag)
-            </video>
-
-            <video class="fish-video inactive" playsinline webkit-playsinline muted preload="none" width="100%" height="100%">
-                <source src="movies/movies_fast/betta-3-1.mp4" type="video/mp4">
-                Sorry, the fish are in hiding! (your browser does not support the video tag)
-            </video>
-            <video class="fish-video inactive" playsinline webkit-playsinline muted preload="none" width="100%" height="100%">
-                <source src="movies/movies_fast/betta-3-2.mp4" type="video/mp4">
-                Sorry, the fish are in hiding! (your browser does not support the video tag)
-            </video>
-            <video class="fish-video inactive" playsinline webkit-playsinline muted preload="none" width="100%" height="100%">
-                <source src="movies/movies_fast/betta-3-3.mp4" type="video/mp4">
-                Sorry, the fish are in hiding! (your browser does not support the video tag)
-            </video>
-
-            <video class="fish-video inactive" playsinline webkit-playsinline muted preload="none" width="100%" height="100%">
-                <source src="movies/movies_fast/gold-1.mp4" type="video/mp4">
-                Sorry, the fish are in hiding! (your browser does not support the video tag)
-            </video>
-
-            <video class="fish-video inactive" playsinline webkit-playsinline muted preload="none" width="100%" height="100%">
-                <source src="movies/movies_fast/jellyfish-2-1.mp4" type="video/mp4">
-                Sorry, the fish are in hiding! (your browser does not support the video tag)
-            </video>
-            <video class="fish-video inactive" playsinline webkit-playsinline muted preload="none" width="100%" height="100%">
-                <source src="movies/movies_fast/jellyfish-2-2.mp4" type="video/mp4">
-                Sorry, the fish are in hiding! (your browser does not support the video tag)
-            </video>
-            <video class="fish-video inactive" playsinline webkit-playsinline muted preload="none" width="100%" height="100%">
-                <source src="movies/movies_fast/jellyfish-2-3.mp4" type="video/mp4">
-                Sorry, the fish are in hiding! (your browser does not support the video tag)
-            </video>
-            <video class="fish-video inactive" playsinline webkit-playsinline muted preload="none" width="100%" height="100%">
-                <source src="movies/movies_fast/jellyfish-2-4.mp4" type="video/mp4">
-                Sorry, the fish are in hiding! (your browser does not support the video tag)
-            </video>
+            <video class="fish-video active" playsinline webkit-playsinline muted preload="metadata" width="100%" height="100%"></video>
+            <video class="fish-video inactive" playsinline webkit-playsinline muted preload="none" width="100%" height="100%"></video>
         </div>
     </section>
 
@@ -8208,284 +8208,108 @@
     <!-- Randomize play -->
     <script>
         (function() {
-            const videos = Array.from(document.querySelectorAll('#Sub-header .fish-video'));
-            const ambientEdges = Array.from(document.querySelectorAll('#Sub-header .hero-ambient-edge'));
+            const slots = Array.from(document.querySelectorAll('#Sub-header .fish-video'));
             const heroSection = document.getElementById('Sub-header');
-            if (videos.length === 0 || ambientEdges.length < 2 || !heroSection) return;
+            if (slots.length < 2 || !heroSection) return;
 
             const CROSSFADE_BUFFER_SECONDS = 0.8;
             const CROSSFADE_MS = 820;
             const isCoarsePointer = window.matchMedia('(hover: none), (pointer: coarse)').matches;
             const isNarrowViewport = window.matchMedia('(max-width: 991px)').matches;
             const isMemorySensitive = isCoarsePointer || isNarrowViewport;
-            // Ambient doubles decode cost; skip on phones to avoid Safari OOM kills.
-            const useAmbient = !isMemorySensitive;
+
+            const FULL_PLAYLIST = [
+                'movies/movies_fast/jellyfish-2-4.mp4',
+                'movies/movies_fast/betta-1-2.mp4',
+                'movies/movies_fast/betta-1-3.mp4',
+                'movies/movies_fast/betta-2-1.mp4',
+                'movies/movies_fast/betta-2-2.mp4',
+                'movies/movies_fast/betta-2-3.mp4',
+                'movies/movies_fast/betta-3-1.mp4',
+                'movies/movies_fast/betta-3-2.mp4',
+                'movies/movies_fast/betta-3-3.mp4',
+                'movies/movies_fast/gold-1.mp4',
+                'movies/movies_fast/jellyfish-2-1.mp4',
+                'movies/movies_fast/jellyfish-2-2.mp4',
+                'movies/movies_fast/jellyfish-2-3.mp4'
+            ];
+            const MOBILE_PLAYLIST = [
+                'movies/movies_fast/jellyfish-2-4.mp4',
+                'movies/movies_fast/jellyfish-2-1.mp4',
+                'movies/movies_fast/jellyfish-2-2.mp4',
+                'movies/movies_fast/jellyfish-2-3.mp4',
+                'movies/movies_fast/betta-2-3.mp4'
+            ];
+            const playlist = isMemorySensitive ? MOBILE_PLAYLIST : FULL_PLAYLIST;
+
             let switchTimer = null;
             let switchInProgress = false;
-            let ambientCurrent = 0;
+            let activeSlot = 0;
+            let playlistIndex = 0;
             let heroInView = true;
             let playbackSuspended = false;
             let transitionFailures = 0;
+            let startAttempts = 0;
+            let playbackUnlocked = false;
+
             const paletteByFamily = {
                 betta: {
                     a: 'rgba(255, 105, 56, 0.2)',
                     b: 'rgba(255, 177, 79, 0.14)',
-                    c: 'rgba(85, 151, 255, 0.12)',
-                    shadowX: '5%',
-                    shadowY: '4%',
-                    shadowScale: '0.92'
+                    c: 'rgba(85, 151, 255, 0.12)'
                 },
                 jellyfish: {
                     a: 'rgba(101, 154, 255, 0.2)',
                     b: 'rgba(128, 92, 255, 0.12)',
-                    c: 'rgba(82, 214, 255, 0.14)',
-                    shadowX: '1%',
-                    shadowY: '6%',
-                    shadowScale: '0.84'
+                    c: 'rgba(82, 214, 255, 0.14)'
                 },
                 gold: {
                     a: 'rgba(255, 187, 70, 0.2)',
                     b: 'rgba(255, 119, 64, 0.13)',
-                    c: 'rgba(75, 172, 255, 0.11)',
-                    shadowX: '4%',
-                    shadowY: '3%',
-                    shadowScale: '0.88'
+                    c: 'rgba(75, 172, 255, 0.11)'
                 }
             };
 
-            let current = videos.findIndex((video) => {
-                const src = video.querySelector('source')?.getAttribute('src') || '';
-                return src.includes('/betta-');
-            });
-            if (current < 0) current = 0;
-
-            function getActiveAmbient() {
-                return ambientEdges[ambientCurrent];
+            function familyFromSrc(src) {
+                if ((src || '').includes('jellyfish')) return 'jellyfish';
+                if ((src || '').includes('gold')) return 'gold';
+                return 'betta';
             }
 
-            function getInactiveAmbient() {
-                return ambientEdges[1 - ambientCurrent];
+            function setActivePalette(src) {
+                const palette = paletteByFamily[familyFromSrc(src)];
+                const root = document.documentElement;
+                root.style.setProperty('--fish-palette-a', palette.a);
+                root.style.setProperty('--fish-palette-b', palette.b);
+                root.style.setProperty('--fish-palette-c', palette.c);
             }
 
-            function getVideoSrc(video) {
-                const source = video?.querySelector('source');
-                return source?.dataset?.src || source?.getAttribute('src') || video?.currentSrc || '';
-            }
-
-            function rememberSource(video) {
-                video.querySelectorAll('source').forEach((source) => {
-                    const src = source.getAttribute('src');
-                    if (src) source.dataset.src = src;
-                });
-            }
-
-            function unloadFishVideo(video) {
+            function clearVideo(video) {
                 if (!video) return;
                 video.pause();
-                rememberSource(video);
-                video.querySelectorAll('source').forEach((source) => source.removeAttribute('src'));
                 video.removeAttribute('src');
+                video.removeAttribute('data-src');
+                while (video.firstChild) video.removeChild(video.firstChild);
                 video.preload = 'none';
                 try { video.load(); } catch (error) { /* ignore */ }
             }
 
-            function restoreFishVideo(video) {
-                if (!video) return;
-                video.querySelectorAll('source').forEach((source) => {
-                    if (!source.getAttribute('src') && source.dataset.src) {
-                        source.setAttribute('src', source.dataset.src);
-                    }
-                });
-            }
-
-            function unloadAmbient(ambientVideo) {
-                if (!ambientVideo) return;
-                ambientVideo.pause();
-                ambientVideo.removeAttribute('src');
-                ambientVideo.classList.remove('active', 'is-betta');
-                ambientVideo.classList.add('inactive');
-                try { ambientVideo.load(); } catch (error) { /* ignore */ }
-            }
-
-            function waitForAmbientReady(ambientVideo, timeoutMs = 500) {
-                if (ambientVideo.readyState >= 2) return Promise.resolve(true);
-
-                return new Promise((resolve) => {
-                    let settled = false;
-                    const finish = (isReady) => {
-                        if (settled) return;
-                        settled = true;
-                        ambientVideo.removeEventListener('loadeddata', onReady);
-                        ambientVideo.removeEventListener('canplay', onReady);
-                        resolve(isReady);
-                    };
-                    const onReady = () => finish(ambientVideo.readyState >= 2);
-
-                    ambientVideo.addEventListener('loadeddata', onReady, { once: true });
-                    ambientVideo.addEventListener('canplay', onReady, { once: true });
-                    setTimeout(() => finish(ambientVideo.readyState >= 2), timeoutMs);
-                });
-            }
-
-            async function prepareAmbientBuffer(ambientVideo, sourceVideo) {
-                if (!useAmbient || !sourceVideo) return false;
-                const src = getVideoSrc(sourceVideo);
-                if (!src) return false;
-
-                ambientVideo.classList.toggle('is-betta', src.includes('betta'));
-
-                if (ambientVideo.getAttribute('src') !== src) {
-                    ambientVideo.setAttribute('src', src);
-                    ambientVideo.load();
-                }
-
-                const isReady = await waitForAmbientReady(ambientVideo);
-                if (!isReady) return false;
-
-                ambientVideo.currentTime = sourceVideo.currentTime;
-                try {
-                    await ambientVideo.play();
-                    return true;
-                } catch (error) {
-                    return false;
-                }
-            }
-
-            function crossfadeAmbientLayers(incomingAmbient, outgoingAmbient) {
-                incomingAmbient.classList.remove('inactive');
-                incomingAmbient.classList.add('active');
-                outgoingAmbient.classList.remove('active');
-                outgoingAmbient.classList.add('inactive');
-                ambientCurrent = ambientEdges.indexOf(incomingAmbient);
-                window.setTimeout(() => {
-                    outgoingAmbient.pause();
-                    if (isMemorySensitive) unloadAmbient(outgoingAmbient);
-                }, CROSSFADE_MS);
-            }
-
-            function fadeOutAmbient(ambientVideo) {
-                if (!ambientVideo.classList.contains('active')) return;
-                ambientVideo.classList.remove('active');
-                ambientVideo.classList.add('inactive');
-                window.setTimeout(() => {
-                    ambientVideo.pause();
-                    if (isMemorySensitive) unloadAmbient(ambientVideo);
-                }, CROSSFADE_MS);
-            }
-
-            function fadeInAmbient(ambientVideo) {
-                ambientVideo.classList.remove('inactive');
-                ambientVideo.classList.add('active');
-                ambientCurrent = ambientEdges.indexOf(ambientVideo);
-            }
-
-            async function syncAmbientToVideo(sourceVideo) {
-                if (!useAmbient || !sourceVideo) return;
-                setActivePalette(sourceVideo);
-
-                const activeAmbient = getActiveAmbient();
-                const hasActiveAmbient = activeAmbient.classList.contains('active');
-
-                if (!hasActiveAmbient) {
-                    const ready = await prepareAmbientBuffer(activeAmbient, sourceVideo);
-                    if (!ready) return;
-                    activeAmbient.classList.remove('inactive');
-                    activeAmbient.classList.add('active');
-                    return;
-                }
-
-                const incomingAmbient = getInactiveAmbient();
-                const ready = await prepareAmbientBuffer(incomingAmbient, sourceVideo);
-                if (!ready) return;
-                crossfadeAmbientLayers(incomingAmbient, activeAmbient);
-            }
-
-            function mirrorAmbientTime(sourceVideo) {
-                if (!useAmbient) return;
-                const activeAmbient = getActiveAmbient();
-                if (!sourceVideo || sourceVideo.paused || activeAmbient.readyState < 2) return;
-                if (Math.abs(activeAmbient.currentTime - sourceVideo.currentTime) > 0.12) {
-                    activeAmbient.currentTime = sourceVideo.currentTime;
-                }
-            }
-
-            function setActivePalette(sourceVideo) {
-                const src = getVideoSrc(sourceVideo);
-                const family = src.includes('jellyfish') ? 'jellyfish' : src.includes('gold') ? 'gold' : 'betta';
-                const palette = paletteByFamily[family];
-                const root = document.documentElement;
-                const fishContainer = document.querySelector('#Sub-header .fish-container');
-
-                root.style.setProperty('--fish-palette-a', palette.a);
-                root.style.setProperty('--fish-palette-b', palette.b);
-                root.style.setProperty('--fish-palette-c', palette.c);
-                fishContainer?.style.setProperty('--hero-shadow-x', palette.shadowX);
-                fishContainer?.style.setProperty('--hero-shadow-y', palette.shadowY);
-                fishContainer?.style.setProperty('--hero-shadow-scale', palette.shadowScale);
-            }
-
-            videos.forEach((video, idx) => {
-                rememberSource(video);
+            function assignSrc(video, src) {
+                clearVideo(video);
+                video.dataset.src = src;
+                video.src = src;
+                video.preload = 'auto';
                 video.muted = true;
                 video.defaultMuted = true;
                 video.playsInline = true;
                 video.setAttribute('playsinline', '');
                 video.setAttribute('webkit-playsinline', '');
                 video.controls = false;
-                video.disablePictureInPicture = true;
-                video.preload = idx === current ? 'metadata' : 'none';
-
-                if (idx === current) {
-                    video.classList.remove('inactive');
-                    video.classList.add('active');
-                } else {
-                    video.classList.remove('active');
-                    video.classList.add('inactive');
-                    if (isMemorySensitive) unloadFishVideo(video);
-                }
-
-                video.addEventListener('timeupdate', () => {
-                    if (video === videos[current] && getActiveAmbient().classList.contains('active')) {
-                        mirrorAmbientTime(video);
-                    }
-                });
-            });
-
-            if (!useAmbient) {
-                ambientEdges.forEach(unloadAmbient);
-            }
-
-            function pickNextIndex() {
-                if (videos.length <= 1) return current;
-                let next = current;
-                while (next === current) {
-                    next = Math.floor(Math.random() * videos.length);
-                }
-                return next;
-            }
-
-            function scheduleSwitchFrom(video) {
-                clearTimeout(switchTimer);
-                if (playbackSuspended) return;
-
-                if (!video.duration || Number.isNaN(video.duration)) {
-                    video.addEventListener('loadedmetadata', () => scheduleSwitchFrom(video), { once: true });
-                    return;
-                }
-
-                const remainingMs = Math.max((video.duration - video.currentTime - CROSSFADE_BUFFER_SECONDS) * 1000, 120);
-                switchTimer = setTimeout(() => {
-                    void transitionTo(pickNextIndex());
-                }, remainingMs);
-            }
-
-            async function ensureVideoReady(video) {
-                restoreFishVideo(video);
-                if (video.readyState >= 2) return true;
-                if (video.preload === 'none') {
-                    video.preload = 'metadata';
-                }
                 try { video.load(); } catch (error) { /* ignore */ }
+            }
+
+            function waitReady(video, timeoutMs = 1800) {
+                if (video.readyState >= 2) return Promise.resolve(true);
                 return new Promise((resolve) => {
                     let settled = false;
                     const finish = (ok) => {
@@ -8498,7 +8322,7 @@
                     const onReady = () => finish(video.readyState >= 2);
                     video.addEventListener('loadeddata', onReady, { once: true });
                     video.addEventListener('canplay', onReady, { once: true });
-                    setTimeout(() => finish(video.readyState >= 2), 1200);
+                    setTimeout(() => finish(video.readyState >= 2), timeoutMs);
                 });
             }
 
@@ -8514,55 +8338,71 @@
                 }
             }
 
-            async function transitionTo(nextIndex) {
-                if (playbackSuspended || switchInProgress || nextIndex === current) return;
+            function pickNextPlaylistIndex() {
+                if (playlist.length <= 1) return playlistIndex;
+                let next = playlistIndex;
+                while (next === playlistIndex) {
+                    next = Math.floor(Math.random() * playlist.length);
+                }
+                return next;
+            }
+
+            function scheduleSwitchFrom(video) {
+                clearTimeout(switchTimer);
+                if (playbackSuspended) return;
+
+                if (!video.duration || Number.isNaN(video.duration)) {
+                    video.addEventListener('loadedmetadata', () => scheduleSwitchFrom(video), { once: true });
+                    return;
+                }
+
+                const remainingMs = Math.max((video.duration - video.currentTime - CROSSFADE_BUFFER_SECONDS) * 1000, 120);
+                switchTimer = setTimeout(() => {
+                    void transitionTo(pickNextPlaylistIndex());
+                }, remainingMs);
+            }
+
+            async function transitionTo(nextPlaylistIndex) {
+                if (playbackSuspended || switchInProgress) return;
+                if (nextPlaylistIndex === playlistIndex && slots[activeSlot].classList.contains('active')) return;
                 switchInProgress = true;
 
-                const fromVideo = videos[current];
-                const toVideo = videos[nextIndex];
+                const fromVideo = slots[activeSlot];
+                const toSlot = 1 - activeSlot;
+                const toVideo = slots[toSlot];
+                const nextSrc = playlist[nextPlaylistIndex];
 
                 try {
-                    const outgoingAmbient = getActiveAmbient();
-                    const incomingAmbient = getInactiveAmbient();
+                    assignSrc(toVideo, nextSrc);
+                    setActivePalette(nextSrc);
+                    const ready = await waitReady(toVideo);
+                    if (!ready || playbackSuspended) throw new Error('next video not ready');
 
-                    await ensureVideoReady(toVideo);
                     toVideo.currentTime = 0;
-                    setActivePalette(toVideo);
-
-                    const preparePromise = useAmbient ? prepareAmbientBuffer(incomingAmbient, toVideo) : Promise.resolve(false);
                     const played = await playMuted(toVideo);
-                    if (!played) {
-                        throw new Error('next video play blocked');
-                    }
+                    if (!played) throw new Error('next video play blocked');
 
                     toVideo.classList.remove('inactive');
                     toVideo.classList.add('active');
                     fromVideo.classList.remove('active');
                     fromVideo.classList.add('inactive');
-                    setTimeout(() => {
-                        fromVideo.pause();
-                        // Free decoder memory so Safari does not OOM mid-scroll.
-                        unloadFishVideo(fromVideo);
-                    }, CROSSFADE_MS);
 
-                    if (useAmbient) {
-                        fadeOutAmbient(outgoingAmbient);
-                        const ambientReady = await preparePromise;
-                        if (ambientReady) {
-                            fadeInAmbient(incomingAmbient);
-                        }
-                    }
+                    window.setTimeout(() => {
+                        clearVideo(fromVideo);
+                    }, CROSSFADE_MS + 40);
 
-                    current = nextIndex;
+                    activeSlot = toSlot;
+                    playlistIndex = nextPlaylistIndex;
                     transitionFailures = 0;
                     scheduleSwitchFrom(toVideo);
                 } catch (error) {
                     transitionFailures += 1;
                     switchInProgress = false;
+                    clearVideo(toVideo);
+                    toVideo.classList.remove('active');
+                    toVideo.classList.add('inactive');
                     if (transitionFailures < 3 && !playbackSuspended) {
-                        setTimeout(() => {
-                            void transitionTo(pickNextIndex());
-                        }, 600);
+                        setTimeout(() => void transitionTo(pickNextPlaylistIndex()), 700);
                     }
                     return;
                 }
@@ -8570,28 +8410,28 @@
                 switchInProgress = false;
             }
 
-            let startAttempts = 0;
-            let playbackUnlocked = false;
-
             async function startLoop() {
                 if (playbackSuspended) return;
-                const first = videos[current];
-                await ensureVideoReady(first);
+                const first = slots[activeSlot];
+                const src = playlist[playlistIndex];
+                assignSrc(first, src);
+                setActivePalette(src);
+                first.classList.add('active');
+                first.classList.remove('inactive');
+                slots[1 - activeSlot].classList.add('inactive');
+                slots[1 - activeSlot].classList.remove('active');
+
+                const ready = await waitReady(first);
                 if (playbackSuspended) return;
                 const played = await playMuted(first);
                 if (playbackSuspended) return;
                 if (!played) {
                     startAttempts += 1;
-                    if (startAttempts < 8) {
-                        setTimeout(startLoop, 180);
-                    }
+                    if (startAttempts < 8) setTimeout(startLoop, 200);
                     return;
                 }
 
                 playbackUnlocked = true;
-                if (useAmbient) await syncAmbientToVideo(first);
-                else setActivePalette(first);
-                if (playbackSuspended) return;
                 scheduleSwitchFrom(first);
             }
 
@@ -8599,29 +8439,18 @@
                 playbackSuspended = true;
                 clearTimeout(switchTimer);
                 switchTimer = null;
-                videos.forEach((video) => {
-                    video.pause();
-                    unloadFishVideo(video);
+                switchInProgress = false;
+                slots.forEach((video) => {
+                    clearVideo(video);
                     video.classList.remove('active');
                     video.classList.add('inactive');
                 });
-                ambientEdges.forEach(unloadAmbient);
             }
 
             async function resumeHeroPlayback() {
-                if (!playbackSuspended && videos[current]?.classList.contains('active')) return;
                 playbackSuspended = false;
                 transitionFailures = 0;
                 startAttempts = 0;
-                videos.forEach((video, idx) => {
-                    if (idx === current) {
-                        video.classList.add('active');
-                        video.classList.remove('inactive');
-                    } else {
-                        video.classList.remove('active');
-                        video.classList.add('inactive');
-                    }
-                });
                 await startLoop();
             }
 
@@ -8631,41 +8460,68 @@
                 void startLoop();
             }
 
+            slots.forEach((video) => {
+                video.muted = true;
+                video.defaultMuted = true;
+                video.playsInline = true;
+                video.setAttribute('playsinline', '');
+                video.setAttribute('webkit-playsinline', '');
+                video.controls = false;
+                video.addEventListener('ended', () => {
+                    if (video === slots[activeSlot] && !switchInProgress && !playbackSuspended) {
+                        void transitionTo(pickNextPlaylistIndex());
+                    }
+                });
+            });
+
             ['pointerdown', 'touchstart', 'click', 'keydown', 'scroll'].forEach((eventName) => {
                 window.addEventListener(eventName, unlockPlaybackFromGesture, { once: true, passive: true });
             });
 
-            videos.forEach((video, idx) => {
-                video.addEventListener('ended', () => {
-                    if (idx === current && !switchInProgress && !playbackSuspended) {
-                        void transitionTo(pickNextIndex());
-                    }
-                });
-            });
-
             const heroVisibilityObserver = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
-                    const nowInView = entry.isIntersecting && entry.intersectionRatio >= 0.2;
+                    const nowInView = entry.isIntersecting && entry.intersectionRatio >= 0.18;
                     if (nowInView === heroInView) return;
                     heroInView = nowInView;
-                    if (nowInView) {
-                        void resumeHeroPlayback();
-                    } else {
-                        suspendHeroPlayback();
-                    }
+                    if (nowInView) void resumeHeroPlayback();
+                    else suspendHeroPlayback();
                 });
-            }, {
-                threshold: [0, 0.2, 0.5, 0.8]
-            });
+            }, { threshold: [0, 0.18, 0.45, 0.75] });
             heroVisibilityObserver.observe(heroSection);
 
             document.addEventListener('visibilitychange', () => {
-                if (document.hidden) {
-                    suspendHeroPlayback();
-                } else if (heroInView) {
-                    void resumeHeroPlayback();
-                }
+                if (document.hidden) suspendHeroPlayback();
+                else if (heroInView) void resumeHeroPlayback();
             });
+
+            document.querySelectorAll([
+                '#education .section-story-content > :not(.redesign-shell) img',
+                '#experience .section-story-content > :not(.redesign-shell) img',
+                '#projects .section-story-content > :not(.redesign-shell) img',
+                '#hackathons .section-story-content > :not(.redesign-shell) img',
+                '#research .section-story-content > :not(.redesign-shell) img',
+                '#publications .section-story-content > :not(.redesign-shell) img',
+                '#awards .section-story-content > :not(.redesign-shell) img'
+            ].join(',')).forEach((img) => {
+                img.removeAttribute('src');
+                img.removeAttribute('srcset');
+                img.setAttribute('data-legacy-stripped', '1');
+            });
+
+            document.querySelectorAll('.media-rail img, .specimen-card img').forEach((img) => {
+                if (!img.hasAttribute('loading')) img.setAttribute('loading', 'lazy');
+                if (!img.hasAttribute('decoding')) img.setAttribute('decoding', 'async');
+            });
+
+            if (isMemorySensitive) {
+                ['click-fish', 'click-jelly'].forEach((id) => {
+                    const el = document.getElementById(id);
+                    if (el) {
+                        clearVideo(el);
+                        el.remove();
+                    }
+                });
+            }
 
             startLoop();
             window.addEventListener('beforeunload', () => {
@@ -8673,7 +8529,7 @@
                 heroVisibilityObserver.disconnect();
             }, { once: true });
         })();
-    </script>    
+    </script>
 
     <!-- Float in -->
     <script>
@@ -8893,9 +8749,10 @@
     <!-- Click fish -->
     <script>
         const fish = document.getElementById("click-fish");
-        const targetCards = [document.getElementById("projects")];
+        const targetCards = [document.getElementById("projects")].filter(Boolean);
         let fadeTimeout;
 
+        if (fish && targetCards.length) {
         function startFishVideoClean() {
             fish.pause();               // Make sure it’s stopped
             fish.currentTime = 0;       // Jump to start
@@ -8953,14 +8810,16 @@
         }, { threshold: 0.5 });
 
         targetCards.forEach(card => observer3.observe(card));
+        }
     </script>
 
     <!-- Click jelly -->
     <script>
         const jelly = document.getElementById("click-jelly");
-        const targetCards2 = [document.getElementById("experience")];
+        const targetCards2 = [document.getElementById("experience")].filter(Boolean);
         let fadeTimeout2;
 
+        if (jelly && targetCards2.length) {
         function startJellyVideoClean() {
             jelly.pause();               // Make sure it’s stopped
             jelly.currentTime = 0;       // Jump to start
@@ -9027,6 +8886,7 @@
         }, { threshold: 0.5 });
 
         targetCards2.forEach(card => observer5.observe(card));
+        }
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
