@@ -894,13 +894,27 @@
         /* Hide iOS's giant native play overlay when autoplay is pending/blocked */
         #Sub-header video::-webkit-media-controls,
         #Sub-header video::-webkit-media-controls-start-playback-button,
-        #Sub-header video::-webkit-media-controls-enclosure {
+        #Sub-header video::-webkit-media-controls-enclosure,
+        #Sub-header video::-webkit-media-controls-panel,
+        #Sub-header video::-webkit-media-controls-overlay-play-button {
             display: none !important;
-            -webkit-appearance: none;
+            -webkit-appearance: none !important;
             opacity: 0 !important;
             pointer-events: none !important;
             width: 0 !important;
             height: 0 !important;
+            max-width: 0 !important;
+            max-height: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        #Sub-header .fish-video,
+        #Sub-header .hero-ambient-edge {
+            pointer-events: none !important;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
         }
     </style>
 
@@ -4763,12 +4777,13 @@
 
         @media (max-width: 767px) {
             #bio .bio-photo-shell {
-                width: min(58%, 230px) !important;
+                width: 100% !important;
             }
 
             #bio .bio-breakout-photo {
-                max-height: min(22svh, 220px) !important;
-                object-position: center 30%;
+                max-height: 20svh !important;
+                object-position: 72% 34%;
+                border-radius: 16px !important;
             }
         }
 
@@ -4920,24 +4935,27 @@
 
             #bio .bio-photo-shell {
                 transform: none !important;
-                max-height: 28svh;
+                max-height: none;
+                width: 100% !important;
             }
 
             #bio .bio-breakout-photo {
-                max-height: 28svh !important;
-                width: min(72%, 280px) !important;
+                max-height: 20svh !important;
+                width: 100% !important;
                 margin-inline: auto;
+                border-radius: 16px !important;
             }
 
             #bio .responsive-text {
-                padding: 0.45rem 0.85rem !important;
-                font-size: 0.9rem !important;
-                line-height: 1.38 !important;
+                padding: 0 !important;
+                font-size: 0.88rem !important;
+                line-height: 1.4 !important;
             }
 
             #bio .bio-name {
-                font-size: clamp(2.4rem, 11vw, 3.2rem) !important;
-                line-height: 0.9 !important;
+                font-size: 1.9rem !important;
+                line-height: 1 !important;
+                margin-bottom: 0.35rem !important;
             }
 
             #bio .resume {
@@ -5089,7 +5107,7 @@
                 max-width: 100%;
                 max-height: calc(100svh - var(--fixed-header-height) - 1.5rem);
                 margin: 0 auto !important;
-                padding: 1.15rem 0.9rem 1rem !important;
+                padding: 0.7rem 0.7rem 0.75rem !important;
                 overflow: hidden;
                 scrollbar-width: none;
                 -ms-overflow-style: none;
@@ -5119,16 +5137,46 @@
 
             #bio .bio-photo-shell {
                 display: flex;
-                justify-content: center;
-                margin: 0.55rem auto 0.45rem !important;
+                justify-content: flex-start;
+                margin: 0 0 0.55rem !important;
                 transform: none !important;
+                max-height: none !important;
+                width: 100% !important;
             }
 
             #bio .bio-breakout-photo {
                 transform: none !important;
-                margin-left: auto !important;
-                margin-right: auto !important;
-                object-position: center 30% !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+                object-position: 72% 34% !important;
+                width: 100% !important;
+                max-height: 20svh !important;
+                border-radius: 16px !important;
+            }
+
+            #bio .responsive-text {
+                padding: 0 !important;
+                font-size: 0.88rem !important;
+                line-height: 1.4 !important;
+            }
+
+            #bio .bio-name {
+                font-size: 1.9rem !important;
+                line-height: 1 !important;
+                margin-bottom: 0.35rem !important;
+            }
+
+            #bio .bio-name p {
+                margin-bottom: 0 !important;
+            }
+
+            #bio .resume {
+                padding-top: 0.45rem !important;
+            }
+
+            #bio .resume .glass-btn,
+            #bio .resume a {
+                font-size: 0.9rem !important;
             }
 
             #projects .section-story-content,
@@ -5470,6 +5518,91 @@
             }
         }
 
+        /* iPhone bio: balanced card (full-width photo, softer radius, content-height) */
+        @media (max-width: 767px) {
+            #bio #bioCard .responsive-card-bio {
+                width: min(92vw, 420px) !important;
+                height: auto !important;
+                min-height: 0 !important;
+                max-height: calc(100svh - var(--fixed-header-height) - 2.25rem) !important;
+                padding: 0.75rem 0.7rem 0.9rem !important;
+                align-items: flex-start !important;
+                align-content: flex-start !important;
+            }
+
+            #bio #bioCard .bio-photo-shell {
+                width: 100% !important;
+                max-width: 100% !important;
+                max-height: none !important;
+                margin: 0 0 0.55rem !important;
+                flex: 0 0 auto !important;
+                display: block !important;
+                border-radius: 16px !important;
+                overflow: hidden !important;
+                transform: none !important;
+            }
+
+            #bio #bioCard .bio-breakout-photo,
+            #bio #bioCard .bio-breakout-photo.responsive-pfp,
+            #bio #bioCard img.responsive-pfp.bio-breakout-photo {
+                width: 100% !important;
+                max-width: 100% !important;
+                height: 22svh !important;
+                max-height: 22svh !important;
+                margin: 0 !important;
+                object-fit: cover !important;
+                /* Pull crop down so face fills frame (less building headspace) */
+                object-position: 72% 34% !important;
+                border-radius: 16px !important;
+                opacity: 0.95 !important;
+            }
+
+            #bio #bioCard .responsive-text {
+                width: 100% !important;
+                padding: 0 0.15rem !important;
+                font-size: 0.88rem !important;
+                line-height: 1.4 !important;
+                text-align: left !important;
+            }
+
+            #bio #bioCard .responsive-text > p {
+                margin-bottom: 0.45rem !important;
+            }
+
+            #bio #bioCard .responsive-text > p:first-child {
+                margin-bottom: 0.15rem !important;
+                font-size: 0.86rem !important;
+            }
+
+            #bio #bioCard .bio-name,
+            #bio #bioCard .bio-name.responsive-name,
+            #bio #bioCard .bio-name.responsive-name p,
+            #bio #bioCard .responsive-name.bio-name,
+            #bio #bioCard .responsive-name.bio-name p {
+                font-size: 1.9rem !important;
+                line-height: 1 !important;
+                margin-bottom: 0.35rem !important;
+            }
+
+            #bio #bioCard .resume {
+                padding-top: 0.55rem !important;
+            }
+
+            #bio #bioCard .resume .glass-btn,
+            #bio #bioCard .resume a.glass-btn {
+                width: auto !important;
+                min-width: 0 !important;
+                font-size: 0.82rem !important;
+                line-height: 1.1 !important;
+                padding: 0.28rem 0.85rem !important;
+                padding-bottom: 0.28rem !important;
+                border-width: 1px !important;
+                border-color: rgba(255, 255, 255, 0.28) !important;
+                border-radius: 999px !important;
+                box-shadow: none !important;
+            }
+        }
+
         @media (hover: none) {
             .award-tile:hover p {
                 max-height: 0;
@@ -5564,8 +5697,8 @@
         <div class="fish-container" style="position: absolute; z-index: 1">
             <video class="hero-ambient-video hero-ambient-edge inactive" playsinline muted preload="none" aria-hidden="true"></video>
             <video class="hero-ambient-video hero-ambient-edge inactive" playsinline muted preload="none" aria-hidden="true"></video>
-            <video class="fish-video active" playsinline webkit-playsinline muted preload="metadata" width="100%" height="100%"></video>
-            <video class="fish-video inactive" playsinline webkit-playsinline muted preload="none" width="100%" height="100%"></video>
+            <video class="fish-video active" playsinline webkit-playsinline muted autoplay preload="auto" width="100%" height="100%" disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"></video>
+            <video class="fish-video inactive" playsinline webkit-playsinline muted preload="none" width="100%" height="100%" disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"></video>
         </div>
     </section>
 
@@ -5599,7 +5732,7 @@
     <!-- Education -->
     <section id="education" class="snap-section" data-story-enabled="true" data-story-hold="1000">
         <div class="intro-text section-story-intro">
-            <p>The world was my <strong>oyster.</strong></p>
+            <p>The world is my <strong>oyster.</strong></p>
         </div>
         <div class="section-story-content">
         <div class="redesign-shell section-float-in">
@@ -5729,7 +5862,7 @@
     <!-- Experience -->
     <section id="experience" class="snap-section" data-story-enabled="true" data-story-delay="3000">
         <div class="intro-text section-story-intro">
-            <p>The currents changed once I started building for <strong>real people.</strong></p>
+            <p>The currents change once I start building for <strong>real people.</strong></p>
         </div>
         <div class="section-story-content">
         <div class="redesign-shell section-float-in">
@@ -6033,7 +6166,7 @@
     <!-- Projects -->
     <section id="projects" class="snap-section" data-story-enabled="true" data-story-delay="3000">
         <div class="intro-text section-story-intro">
-            <p>Ideas kept bubbling up past midnight...</p>
+            <p>Ideas keep bubbling up past midnight...</p>
         </div>
         <div class="section-story-content">
         <div class="redesign-shell section-float-in">
@@ -6186,7 +6319,7 @@
     <!-- Hackathons -->
     <section id="hackathons" class="snap-section" data-story-enabled="true" data-story-delay="3000">
         <div class="intro-text section-story-intro">
-            <p>Along the way, I found friends with the same drive.</p>
+            <p>Along the way, I find friends with the same drive.</p>
         </div>
         <div class="section-story-content">
         <div class="redesign-shell section-float-in">
@@ -6478,7 +6611,7 @@
     <!-- Research -->
     <section id="research" class="snap-section" data-story-enabled="true" data-story-delay="3000">
         <div class="intro-text section-story-intro">
-            <p>Burning questions became answers I built.</p>
+            <p>Burning questions become answers I build.</p>
         </div>
         <div class="section-story-content">
         <div class="redesign-shell section-float-in">
@@ -6762,7 +6895,7 @@
     <!-- Publications -->
     <section id="publications" class="snap-section" data-story-enabled="true" data-story-delay="3000">
         <div class="intro-text section-story-intro">
-            <p>And I finally got a taste of the vast ocean.</p>
+            <p>And I finally get a taste of the vast ocean.</p>
         </div>
         <div class="section-story-content">
         <div class="redesign-shell section-float-in">
@@ -8330,10 +8463,13 @@
                 video.muted = true;
                 video.defaultMuted = true;
                 video.playsInline = true;
+                video.controls = false;
+                video.removeAttribute('controls');
                 video.setAttribute('playsinline', '');
                 video.setAttribute('webkit-playsinline', '');
                 video.setAttribute('autoplay', '');
-                video.controls = false;
+                video.setAttribute('controlslist', 'nodownload nofullscreen noremoteplayback');
+                video.disablePictureInPicture = true;
                 try { video.load(); } catch (error) { /* ignore */ }
             }
 
@@ -8599,11 +8735,20 @@
                 const active = slots[activeSlot];
                 if (!active) return;
 
+                // Prime muted + inline in the same user-gesture turn (required on iOS).
                 active.muted = true;
                 active.defaultMuted = true;
                 active.playsInline = true;
+                active.controls = false;
+                active.removeAttribute('controls');
+                active.setAttribute('playsinline', '');
+                active.setAttribute('webkit-playsinline', '');
+                active.setAttribute('autoplay', '');
 
-                // Must call play() in the gesture turn for iOS.
+                if (!active.dataset.src && playlist[playlistIndex]) {
+                    assignSrc(active, playlist[playlistIndex]);
+                }
+
                 const playAttempt = active.play();
                 if (playAttempt && typeof playAttempt.then === 'function') {
                     playAttempt.then(() => {
@@ -8644,12 +8789,6 @@
                         void transitionTo(pickNextPlaylistIndex());
                     }
                 });
-                video.addEventListener('pause', () => {
-                    // If iOS pauses the active hero clip while visible, nudge it back on next gesture.
-                    if (video === slots[activeSlot] && heroInView && !playbackSuspended) {
-                        playbackUnlocked = false;
-                    }
-                });
             });
 
             if (!useAmbient) {
@@ -8659,8 +8798,10 @@
                 });
             }
 
-            // Keep listening until playback is actually running (iOS often needs a real tap).
-            ['pointerdown', 'touchstart', 'click', 'keydown'].forEach((eventName) => {
+            // Capture-phase touch unlock — scroll alone does not count as a media gesture on iOS.
+            document.addEventListener('touchstart', unlockPlaybackFromGesture, { capture: true, passive: true });
+            document.addEventListener('pointerdown', unlockPlaybackFromGesture, { capture: true, passive: true });
+            ['click', 'keydown'].forEach((eventName) => {
                 window.addEventListener(eventName, unlockPlaybackFromGesture, { passive: true });
             });
 
