@@ -8372,12 +8372,12 @@
                 'movies/movies_fast/jellyfish-2-3.mp4'
             ];
             // iPhone: bettas only, smaller files first.
+            // iPhone: four betta clips only (no jellyfish/gold).
             const MOBILE_PLAYLIST = [
-                'movies/movies_fast/betta-2-3.mp4',
-                'movies/movies_fast/betta-2-1.mp4',
-                'movies/movies_fast/betta-2-2.mp4',
                 'movies/movies_fast/betta-1-1.mp4',
-                'movies/movies_fast/betta-3-3.mp4'
+                'movies/movies_fast/betta-1-2.mp4',
+                'movies/movies_fast/betta-2-1.mp4',
+                'movies/movies_fast/betta-3-1.mp4'
             ];
             const playlist = isMemorySensitive ? MOBILE_PLAYLIST : FULL_PLAYLIST;
 
@@ -8680,10 +8680,14 @@
                 const src = playlist[playlistIndex];
                 assignSrc(first, src);
                 setActivePalette(src);
+                first.loop = false;
                 first.classList.add('active');
                 first.classList.remove('inactive');
                 slots[1 - activeSlot].classList.add('inactive');
                 slots[1 - activeSlot].classList.remove('active');
+                if (isMemorySensitive) {
+                    clearVideo(slots[1 - activeSlot]);
+                }
 
                 const ready = await waitReady(first);
                 if (playbackSuspended) return;
@@ -8710,7 +8714,8 @@
                 slots.forEach((video) => video.pause());
                 ambientEdges.forEach((edge) => edge.pause());
 
-                // Delay hard unload so Safari chrome resize / tiny scroll doesn't kill playback.
+                // On iPhone, free decoders quickly once the hero is gone (Research OOM).
+                const unloadDelay = isMemorySensitive ? 180 : 1600;
                 unloadTimer = window.setTimeout(() => {
                     if (heroInView || !playbackSuspended) return;
                     slots.forEach((video) => {
@@ -8719,7 +8724,7 @@
                         video.classList.add('inactive');
                     });
                     ambientEdges.forEach(unloadAmbient);
-                }, isMemorySensitive ? 900 : 1600);
+                }, unloadDelay);
             }
 
             async function resumeHeroPlayback() {
