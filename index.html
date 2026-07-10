@@ -27,7 +27,9 @@
     <script src="https://kit.fontawesome.com/b4d50f2604.js" crossorigin="anonymous" async></script>
 
     <!-- Favicon -->
-    <link rel="icon" href="images/betta.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/betta.png?v=3">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/betta.png?v=3">
+    <link rel="apple-touch-icon" href="images/betta.png?v=3">
 
     <title>Sandra Nguyen</title>
 
@@ -1042,7 +1044,7 @@
             width: 40%;
             height: 76%;
             border-radius: 30px;
-            background-image: url("images/pfp.jpg");
+            background-image: url("images/pfp.jpg?v=3");
             background-size: cover;
             background-position: center;
             opacity: 0.2;
@@ -5573,7 +5575,7 @@
         <div id="bioCard" class="container-fluid section-padding-balanced section-story-content">
             <div class="row justify-content-center responsive-card-bio card-neu" style="border-radius: 30px; margin: auto;">
                 <div class="bio-photo-shell col-sm-5 col-md-5 col-lg-4">
-                    <img class="img-fluid responsive-pfp bio-breakout-photo" src="images/pfp.jpg" alt="Sandra Nguyen portrait" style="border-radius: 30px; opacity: 0.92">
+                    <img class="img-fluid responsive-pfp bio-breakout-photo" src="images/pfp.jpg?v=3" alt="Sandra Nguyen portrait" style="border-radius: 30px; opacity: 0.92" decoding="async">
                 </div>
 
                 <div class="col-sm-6 col-md-6 col-lg-6 responsive-text" style="font-family: 'Afacad'; color: white;">
@@ -6165,7 +6167,7 @@
         </div>
 
         <!-- Click fish -->
-        <video id="click-fish" playsinline autoplay muted preload="none" style="
+        <video id="click-fish" playsinline muted preload="none" style="
             position: absolute;
             display: none;
             transition: transform 4s ease-in-out;
@@ -6457,7 +6459,7 @@
         </div>
 
         <!-- Click jelly -->
-        <video id="click-jelly" playsinline autoplay muted preload="none" style="
+        <video id="click-jelly" playsinline muted preload="none" style="
             position: absolute;
             display: none;
             transition: transform 4s ease-in-out;
@@ -8208,13 +8210,22 @@
         (function() {
             const videos = Array.from(document.querySelectorAll('#Sub-header .fish-video'));
             const ambientEdges = Array.from(document.querySelectorAll('#Sub-header .hero-ambient-edge'));
-            if (videos.length === 0 || ambientEdges.length < 2) return;
+            const heroSection = document.getElementById('Sub-header');
+            if (videos.length === 0 || ambientEdges.length < 2 || !heroSection) return;
 
             const CROSSFADE_BUFFER_SECONDS = 0.8;
             const CROSSFADE_MS = 820;
+            const isCoarsePointer = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+            const isNarrowViewport = window.matchMedia('(max-width: 991px)').matches;
+            const isMemorySensitive = isCoarsePointer || isNarrowViewport;
+            // Ambient doubles decode cost; skip on phones to avoid Safari OOM kills.
+            const useAmbient = !isMemorySensitive;
             let switchTimer = null;
             let switchInProgress = false;
             let ambientCurrent = 0;
+            let heroInView = true;
+            let playbackSuspended = false;
+            let transitionFailures = 0;
             const paletteByFamily = {
                 betta: {
                     a: 'rgba(255, 105, 56, 0.2)',
@@ -8257,7 +8268,43 @@
             }
 
             function getVideoSrc(video) {
-                return video?.querySelector('source')?.getAttribute('src') || video?.currentSrc || '';
+                const source = video?.querySelector('source');
+                return source?.dataset?.src || source?.getAttribute('src') || video?.currentSrc || '';
+            }
+
+            function rememberSource(video) {
+                video.querySelectorAll('source').forEach((source) => {
+                    const src = source.getAttribute('src');
+                    if (src) source.dataset.src = src;
+                });
+            }
+
+            function unloadFishVideo(video) {
+                if (!video) return;
+                video.pause();
+                rememberSource(video);
+                video.querySelectorAll('source').forEach((source) => source.removeAttribute('src'));
+                video.removeAttribute('src');
+                video.preload = 'none';
+                try { video.load(); } catch (error) { /* ignore */ }
+            }
+
+            function restoreFishVideo(video) {
+                if (!video) return;
+                video.querySelectorAll('source').forEach((source) => {
+                    if (!source.getAttribute('src') && source.dataset.src) {
+                        source.setAttribute('src', source.dataset.src);
+                    }
+                });
+            }
+
+            function unloadAmbient(ambientVideo) {
+                if (!ambientVideo) return;
+                ambientVideo.pause();
+                ambientVideo.removeAttribute('src');
+                ambientVideo.classList.remove('active', 'is-betta');
+                ambientVideo.classList.add('inactive');
+                try { ambientVideo.load(); } catch (error) { /* ignore */ }
             }
 
             function waitForAmbientReady(ambientVideo, timeoutMs = 500) {
@@ -8281,7 +8328,7 @@
             }
 
             async function prepareAmbientBuffer(ambientVideo, sourceVideo) {
-                if (!sourceVideo) return false;
+                if (!useAmbient || !sourceVideo) return false;
                 const src = getVideoSrc(sourceVideo);
                 if (!src) return false;
 
@@ -8312,6 +8359,7 @@
                 ambientCurrent = ambientEdges.indexOf(incomingAmbient);
                 window.setTimeout(() => {
                     outgoingAmbient.pause();
+                    if (isMemorySensitive) unloadAmbient(outgoingAmbient);
                 }, CROSSFADE_MS);
             }
 
@@ -8321,6 +8369,7 @@
                 ambientVideo.classList.add('inactive');
                 window.setTimeout(() => {
                     ambientVideo.pause();
+                    if (isMemorySensitive) unloadAmbient(ambientVideo);
                 }, CROSSFADE_MS);
             }
 
@@ -8331,7 +8380,7 @@
             }
 
             async function syncAmbientToVideo(sourceVideo) {
-                if (!sourceVideo) return;
+                if (!useAmbient || !sourceVideo) return;
                 setActivePalette(sourceVideo);
 
                 const activeAmbient = getActiveAmbient();
@@ -8352,6 +8401,7 @@
             }
 
             function mirrorAmbientTime(sourceVideo) {
+                if (!useAmbient) return;
                 const activeAmbient = getActiveAmbient();
                 if (!sourceVideo || sourceVideo.paused || activeAmbient.readyState < 2) return;
                 if (Math.abs(activeAmbient.currentTime - sourceVideo.currentTime) > 0.12) {
@@ -8360,7 +8410,7 @@
             }
 
             function setActivePalette(sourceVideo) {
-                const src = sourceVideo?.querySelector('source')?.getAttribute('src') || sourceVideo?.currentSrc || '';
+                const src = getVideoSrc(sourceVideo);
                 const family = src.includes('jellyfish') ? 'jellyfish' : src.includes('gold') ? 'gold' : 'betta';
                 const palette = paletteByFamily[family];
                 const root = document.documentElement;
@@ -8375,6 +8425,7 @@
             }
 
             videos.forEach((video, idx) => {
+                rememberSource(video);
                 video.muted = true;
                 video.defaultMuted = true;
                 video.playsInline = true;
@@ -8390,6 +8441,7 @@
                 } else {
                     video.classList.remove('active');
                     video.classList.add('inactive');
+                    if (isMemorySensitive) unloadFishVideo(video);
                 }
 
                 video.addEventListener('timeupdate', () => {
@@ -8398,6 +8450,10 @@
                     }
                 });
             });
+
+            if (!useAmbient) {
+                ambientEdges.forEach(unloadAmbient);
+            }
 
             function pickNextIndex() {
                 if (videos.length <= 1) return current;
@@ -8410,6 +8466,7 @@
 
             function scheduleSwitchFrom(video) {
                 clearTimeout(switchTimer);
+                if (playbackSuspended) return;
 
                 if (!video.duration || Number.isNaN(video.duration)) {
                     video.addEventListener('loadedmetadata', () => scheduleSwitchFrom(video), { once: true });
@@ -8423,11 +8480,12 @@
             }
 
             async function ensureVideoReady(video) {
+                restoreFishVideo(video);
                 if (video.readyState >= 2) return true;
                 if (video.preload === 'none') {
                     video.preload = 'metadata';
-                    video.load();
                 }
+                try { video.load(); } catch (error) { /* ignore */ }
                 return new Promise((resolve) => {
                     let settled = false;
                     const finish = (ok) => {
@@ -8457,7 +8515,7 @@
             }
 
             async function transitionTo(nextIndex) {
-                if (switchInProgress || nextIndex === current) return;
+                if (playbackSuspended || switchInProgress || nextIndex === current) return;
                 switchInProgress = true;
 
                 const fromVideo = videos[current];
@@ -8471,7 +8529,7 @@
                     toVideo.currentTime = 0;
                     setActivePalette(toVideo);
 
-                    const preparePromise = prepareAmbientBuffer(incomingAmbient, toVideo);
+                    const preparePromise = useAmbient ? prepareAmbientBuffer(incomingAmbient, toVideo) : Promise.resolve(false);
                     const played = await playMuted(toVideo);
                     if (!played) {
                         throw new Error('next video play blocked');
@@ -8483,22 +8541,29 @@
                     fromVideo.classList.add('inactive');
                     setTimeout(() => {
                         fromVideo.pause();
+                        // Free decoder memory so Safari does not OOM mid-scroll.
+                        unloadFishVideo(fromVideo);
                     }, CROSSFADE_MS);
 
-                    fadeOutAmbient(outgoingAmbient);
-
-                    const ambientReady = await preparePromise;
-                    if (ambientReady) {
-                        fadeInAmbient(incomingAmbient);
+                    if (useAmbient) {
+                        fadeOutAmbient(outgoingAmbient);
+                        const ambientReady = await preparePromise;
+                        if (ambientReady) {
+                            fadeInAmbient(incomingAmbient);
+                        }
                     }
 
                     current = nextIndex;
+                    transitionFailures = 0;
                     scheduleSwitchFrom(toVideo);
                 } catch (error) {
-                    setTimeout(() => {
-                        switchInProgress = false;
-                        void transitionTo(nextIndex);
-                    }, 250);
+                    transitionFailures += 1;
+                    switchInProgress = false;
+                    if (transitionFailures < 3 && !playbackSuspended) {
+                        setTimeout(() => {
+                            void transitionTo(pickNextIndex());
+                        }, 600);
+                    }
                     return;
                 }
 
@@ -8509,9 +8574,12 @@
             let playbackUnlocked = false;
 
             async function startLoop() {
+                if (playbackSuspended) return;
                 const first = videos[current];
                 await ensureVideoReady(first);
+                if (playbackSuspended) return;
                 const played = await playMuted(first);
+                if (playbackSuspended) return;
                 if (!played) {
                     startAttempts += 1;
                     if (startAttempts < 8) {
@@ -8521,12 +8589,44 @@
                 }
 
                 playbackUnlocked = true;
-                await syncAmbientToVideo(first);
+                if (useAmbient) await syncAmbientToVideo(first);
+                else setActivePalette(first);
+                if (playbackSuspended) return;
                 scheduleSwitchFrom(first);
             }
 
+            function suspendHeroPlayback() {
+                playbackSuspended = true;
+                clearTimeout(switchTimer);
+                switchTimer = null;
+                videos.forEach((video) => {
+                    video.pause();
+                    unloadFishVideo(video);
+                    video.classList.remove('active');
+                    video.classList.add('inactive');
+                });
+                ambientEdges.forEach(unloadAmbient);
+            }
+
+            async function resumeHeroPlayback() {
+                if (!playbackSuspended && videos[current]?.classList.contains('active')) return;
+                playbackSuspended = false;
+                transitionFailures = 0;
+                startAttempts = 0;
+                videos.forEach((video, idx) => {
+                    if (idx === current) {
+                        video.classList.add('active');
+                        video.classList.remove('inactive');
+                    } else {
+                        video.classList.remove('active');
+                        video.classList.add('inactive');
+                    }
+                });
+                await startLoop();
+            }
+
             function unlockPlaybackFromGesture() {
-                if (playbackUnlocked) return;
+                if (playbackUnlocked || playbackSuspended) return;
                 startAttempts = 0;
                 void startLoop();
             }
@@ -8537,15 +8637,40 @@
 
             videos.forEach((video, idx) => {
                 video.addEventListener('ended', () => {
-                    if (idx === current && !switchInProgress) {
+                    if (idx === current && !switchInProgress && !playbackSuspended) {
                         void transitionTo(pickNextIndex());
                     }
                 });
             });
 
+            const heroVisibilityObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    const nowInView = entry.isIntersecting && entry.intersectionRatio >= 0.2;
+                    if (nowInView === heroInView) return;
+                    heroInView = nowInView;
+                    if (nowInView) {
+                        void resumeHeroPlayback();
+                    } else {
+                        suspendHeroPlayback();
+                    }
+                });
+            }, {
+                threshold: [0, 0.2, 0.5, 0.8]
+            });
+            heroVisibilityObserver.observe(heroSection);
+
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    suspendHeroPlayback();
+                } else if (heroInView) {
+                    void resumeHeroPlayback();
+                }
+            });
+
             startLoop();
             window.addEventListener('beforeunload', () => {
                 clearTimeout(switchTimer);
+                heroVisibilityObserver.disconnect();
             }, { once: true });
         })();
     </script>    
